@@ -1,16 +1,12 @@
 import { Routes } from '@angular/router';
-import { LayoutComponent } from './layout/layout.component';
+import { LayoutShellComponent } from './layout/layout-shell.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent,
+    component: LayoutShellComponent,
     children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'users'
-      },
+      { path: '', pathMatch: 'full', redirectTo: 'users' },
       {
         path: 'users',
         loadComponent: () =>
@@ -25,8 +21,5 @@ export const routes: Routes = [
       }
     ]
   },
-  {
-    path: '**',
-    redirectTo: ''
-  }
+  { path: '**', redirectTo: '' }
 ];

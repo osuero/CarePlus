@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { UserResponse } from '../../shared/models/user.model';
 import { UserQueryService } from '../../shared/services/user-query.service';
+import { IconComponent, IconName } from '../../shared/icon/icon.component';
 
 type SortField = 'firstName' | 'lastName' | 'createdAtUtc';
 type SortDirection = 'asc' | 'desc';
@@ -15,9 +16,9 @@ type SortDirection = 'asc' | 'desc';
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule, IconComponent],
   templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.css'
+  styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent {
   private readonly userQueryService = inject(UserQueryService);
@@ -110,6 +111,14 @@ export class UserListComponent {
 
   trackByPageNumber(_: number, pageNumber: number): number {
     return pageNumber;
+  }
+
+  getSortIcon(field: SortField): IconName {
+    if (this.sortField() !== field) {
+      return 'unfold_more';
+    }
+
+    return this.sortDirection() === 'asc' ? 'arrow_upward' : 'arrow_downward';
   }
 
   private fetchUsers(search?: string | null): void {

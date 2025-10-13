@@ -1,0 +1,23 @@
+.layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  min-height: 100vh;
+  background: var(--clr-bg);
+}
+
+.main {
+  display: grid;
+  grid-template-rows: var(--header-h) 1fr;
+  min-height: 100vh;
+}
+
+.content {
+  padding-top: 32px;
+  padding-bottom: 48px;
+}
+
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 0 1fr;
+  }
+}

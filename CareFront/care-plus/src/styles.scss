@@ -1,35 +1,3 @@
-/**======================================================================
-========================================================================
-Template Name: Mantis Angular inspired layout
-=========================================================================
-=================================================================================== */
-
-// main framework
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
-@import 'bootstrap/scss/variables-dark';
-
-@import 'styles/mantis/settings/color-variables';
-@import 'styles/mantis/settings/theme-variables';
-@import 'styles/mantis/settings/bootstrap-variables';
-
-// bootstrap import
-@import 'styles/mantis/bootstrap/bootstrap.scss';
-
-@import 'bootstrap/scss/utilities';
-@import 'bootstrap/scss/utilities/api';
-
-// main framework
-@import 'styles/mantis/themes/generic.scss';
-@import 'styles/mantis/themes/general.scss';
-
-@import 'styles/mantis/themes/components/components.scss';
-
-// theme
-@import 'styles/mantis/themes/layouts/menu/sidebar.scss';
-@import 'styles/mantis/themes/layouts/navbar/navbar.scss';
-@import 'styles/mantis/themes/layouts/pc-common.scss';
-@import 'styles/mantis/themes/layouts/breadcrumb/breadcrumb.scss';
-@import 'styles/mantis/themes/layouts/footer/footer.scss';
-
-@import 'styles/mantis/themes/preset-style.scss';
+@import 'styles/variables';
+@import 'styles/theme';
+@import 'styles/utilities';
