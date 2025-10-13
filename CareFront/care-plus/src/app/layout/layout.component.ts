@@ -16,7 +16,7 @@ interface NavigationItem {
   standalone: true,
   imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, TranslateModule],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.scss'
+  styleUrl: './layout.component.css'
 })
 export class LayoutComponent {
   private readonly translate = inject(TranslateService);

@@ -17,7 +17,7 @@ type SortDirection = 'asc' | 'desc';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule],
   templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.scss'
+  styleUrl: './user-list.component.css'
 })
 export class UserListComponent {
   private readonly userQueryService = inject(UserQueryService);

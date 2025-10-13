@@ -11,12 +11,12 @@
   align-items: center;
   gap: 0.35rem;
   color: inherit;
+}
 
-  &:hover,
-  &:focus-visible {
-    color: var(--bs-primary);
-    outline: none;
-  }
+.table-sort:hover,
+.table-sort:focus-visible {
+  color: var(--bs-primary);
+  outline: none;
 }
 
 .btn-group .btn.active {
