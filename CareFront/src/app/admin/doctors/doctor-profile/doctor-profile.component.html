@@ -1,0 +1,400 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Profile'" [items]="['Doctors']" [active_item]="'Profile'"></app-breadcrumb>
+    </div>
+    <!-- Your content goes here  -->
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12">
+        <mat-card>
+          <div class="doctor-profile-header">
+            <div class="doctor-profile-avatar">
+              <img [src]="doctorProfile?.image" alt="Doctor Profile">
+            </div>
+            <div class="doctor-profile-info">
+              <h2 class="doctor-profile-info-name">{{ doctorProfile?.name }}</h2>
+              <div class="doctor-profile-info-title">{{ doctorProfile?.title }} - {{ doctorProfile?.specialty }}</div>
+              <div class="doctor-profile-info-detail">
+                <div class="info-item">
+                  <mat-icon class="material-icons-outlined col-green">location_on</mat-icon>
+                  <span>{{ doctorProfile?.address }}</span>
+                </div>
+                <div class="info-item">
+                  <mat-icon class="material-icons-outlined col-blue">phone</mat-icon>
+                  <span>{{ doctorProfile?.phone }}</span>
+                </div>
+                <div class="info-item">
+                  <mat-icon class="material-icons-outlined col-red">email</mat-icon>
+                  <span>{{ doctorProfile?.email }}</span>
+                </div>
+              </div>
+              <div class="social-stats">
+                <div class="social-stats-item">
+                  <div class="number">{{ doctorProfile?.socialStats?.following }}</div>
+                  <div class="label">Following</div>
+                </div>
+                <div class="social-stats-item">
+                  <div class="number">{{ doctorProfile?.socialStats?.followers }}</div>
+                  <div class="label">Followers</div>
+                </div>
+                <div class="social-stats-item">
+                  <div class="number">{{ doctorProfile?.socialStats?.posts }}</div>
+                  <div class="label">Posts</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="row clearfix">
+      <!-- Performance Metrics -->
+      <div class="col-lg-12 col-md-12">
+        <div class="row">
+          @for (metric of performanceMetrics; track trackByMetricId($index, metric)) {
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12"
+              >
+              <div class="metric-card">
+                <div class="metric-card-header">
+                  <div>
+                    <div class="metric-card-value">{{ metric.value }}</div>
+                    <div class="metric-card-name">{{ metric.name }}</div>
+                  </div>
+                  <div class="metric-card-icon" [ngClass]="metric.colorClass">
+                    <mat-icon>{{ metric.icon }}</mat-icon>
+                  </div>
+                </div>
+                <div class="metric-card-footer">
+                  <div class="metric-card-trend" [ngClass]="metric.trend">
+                    @if (metric.trend === 'up') {
+                      <mat-icon>trending_up</mat-icon>
+                    }
+                    @if (metric.trend === 'down') {
+                      <mat-icon>trending_down</mat-icon>
+                    }
+                    @if (metric.trend === 'stable') {
+                      <mat-icon>trending_flat</mat-icon>
+                    }
+                    <span>{{ metric.trendValue }}%</span>
+                  </div>
+                  <div class="metric-card-target">Target: {{ metric.target }}</div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Left Column -->
+      <div class="col-lg-4 col-md-12">
+        <!-- About Card -->
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>About</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ doctorProfile?.about }}</p>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Skills Card -->
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Skills</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            @for (skill of doctorProfile?.skills; track trackBySkillName($index, skill)) {
+              <div class="skill-item">
+                <div class="skill-info">
+                  <div class="skill-name">{{ skill.name }}</div>
+                  <div class="skill-percentage">{{ skill.percentage }}%</div>
+                </div>
+                <mat-progress-bar [value]="skill.percentage" [ngClass]="skill.colorClass"></mat-progress-bar>
+              </div>
+            }
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+
+      <!-- Right Column -->
+      <div class="col-lg-8 col-md-12">
+        <mat-card>
+          <mat-card-content>
+            <mat-tab-group>
+              <!-- About Me Tab -->
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon material-icons-outlined">face</mat-icon>
+                  About Me
+                </ng-template>
+                <div class="doctor-profile-tab-content">
+                  <div class="doctor-profile-section">
+                    <h5 class="doctor-profile-section-title">Personal Information</h5>
+                    <div class="row">
+                      <div class="col-md-3 col-6">
+                        <strong>Full Name</strong>
+                        <p>{{ doctorProfile?.name }}</p>
+                      </div>
+                      <div class="col-md-3 col-6">
+                        <strong>Specialty</strong>
+                        <p>{{ doctorProfile?.specialty }}</p>
+                      </div>
+                      <div class="col-md-3 col-6">
+                        <strong>Phone</strong>
+                        <p>{{ doctorProfile?.phone }}</p>
+                      </div>
+                      <div class="col-md-3 col-6">
+                        <strong>Email</strong>
+                        <p>{{ doctorProfile?.email }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="doctor-profile-section">
+                    <h3 class="doctor-profile-section-title">About</h3>
+                    <p>{{ doctorProfile?.about }}</p>
+                  </div>
+                </div>
+              </mat-tab>
+
+              <!-- Education Tab -->
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon material-icons-outlined">school</mat-icon>
+                  Education
+                </ng-template>
+                <div class="doctor-profile-tab-content">
+                  <div class="doctor-profile-section">
+                    <h3 class="doctor-profile-section-title">Education</h3>
+                    @for (education of doctorProfile?.education; track trackByEducation($index, education)) {
+                      <div class="education-item"
+                        >
+                        <div class="education-degree">{{ education.degree }}</div>
+                        <div class="education-institution">{{ education.institution }}</div>
+                        <div class="education-year">{{ education.year }}</div>
+                      </div>
+                    }
+                  </div>
+                </div>
+              </mat-tab>
+
+              <!-- Experience Tab -->
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon material-icons-outlined">business_center</mat-icon>
+                  Experience
+                </ng-template>
+                <div class="doctor-profile-tab-content">
+                  <div class="doctor-profile-section">
+                    <h3 class="doctor-profile-section-title">Work Experience</h3>
+                    @for (experience of doctorProfile?.experience; track trackByExperience($index, experience)) {
+                      <div class="experience-item"
+                        >
+                        <div class="experience-position">{{ experience.position }}</div>
+                        <div class="experience-hospital">{{ experience.hospital }}</div>
+                        <div class="experience-duration">{{ experience.duration }}</div>
+                        @if (experience.description) {
+                          <p>{{ experience.description }}</p>
+                        }
+                      </div>
+                    }
+                  </div>
+                </div>
+              </mat-tab>
+
+              <!-- Certifications Tab -->
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon material-icons-outlined">card_membership</mat-icon>
+                  Certifications
+                </ng-template>
+                <div class="doctor-profile-tab-content">
+                  <div class="doctor-profile-section">
+                    <h3 class="doctor-profile-section-title">Medical Certifications</h3>
+                    @for (certification of doctorProfile?.certifications; track trackByCertification($index, certification)) {
+                      <div class="certification-item"
+                        >
+                        <div class="certification-name">{{ certification.name }}</div>
+                        <div class="certification-issuer">{{ certification.issuer }}</div>
+                        <div class="certification-year">Issued: {{ certification.year }}
+                          @if (certification.expiryDate) {
+                            <span>| Expires: {{ certification.expiryDate }}</span>
+                          }
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </div>
+              </mat-tab>
+
+              <!-- Patient Feedback Tab -->
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon material-icons-outlined">rate_review</mat-icon>
+                  Patient Feedback
+                </ng-template>
+                <div class="doctor-profile-tab-content">
+                  <div class="doctor-profile-section">
+                    <h3 class="doctor-profile-section-title">Patient Reviews</h3>
+                    <table mat-table [dataSource]="patientFeedbacks" class="feedback-table" matSort>
+                      <!-- Patient Column -->
+                      <ng-container matColumnDef="patient">
+                        <th mat-header-cell *matHeaderCellDef>Patient</th>
+                        <td mat-cell *matCellDef="let feedback">
+                          <div class="feedback-patient">
+                            <img [src]="feedback.patientImage" class="feedback-patient-img" alt="Patient">
+                            <span class="feedback-patient-name">{{ feedback.patientName }}</span>
+                          </div>
+                        </td>
+                      </ng-container>
+
+                      <!-- Date Column -->
+                      <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef>Date</th>
+                        <td mat-cell *matCellDef="let feedback">{{ feedback.date }}</td>
+                      </ng-container>
+
+                      <!-- Rating Column -->
+                      <ng-container matColumnDef="rating">
+                        <th mat-header-cell *matHeaderCellDef>Rating</th>
+                        <td mat-cell *matCellDef="let feedback">
+                          <div class="feedback-rating">
+                            @for (star of [1,2,3,4,5]; track trackByStar($index, star)) {
+                              <mat-icon
+                                [ngStyle]="{color: star <= feedback.rating ? '#ffc107' : '#e0e0e0'}">
+                                star
+                              </mat-icon>
+                            }
+                          </div>
+                        </td>
+                      </ng-container>
+
+                      <!-- Comment Column -->
+                      <ng-container matColumnDef="comment">
+                        <th mat-header-cell *matHeaderCellDef>Comment</th>
+                        <td mat-cell *matCellDef="let feedback">
+                          <div class="feedback-comment" matTooltip="{{ feedback.comment }}">
+                            {{ feedback.comment }}
+                          </div>
+                        </td>
+                      </ng-container>
+
+                      <tr mat-header-row *matHeaderRowDef="feedbackColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: feedbackColumns;"></tr>
+                    </table>
+                  </div>
+                </div>
+              </mat-tab>
+
+              <!-- Settings Tab -->
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon material-icons-outlined">settings</mat-icon>
+                  Settings
+                </ng-template>
+                <div class="doctor-profile-tab-content">
+                  <!-- Security Settings -->
+                  <div class="settings-section">
+                    <h3 class="settings-section-title">Security Settings</h3>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Username</mat-label>
+                          <input matInput>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Current Password</mat-label>
+                          <input matInput type="password">
+                          <mat-icon matSuffix>visibility_off</mat-icon>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>New Password</mat-label>
+                          <input matInput type="password">
+                          <mat-icon matSuffix>visibility_off</mat-icon>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <button mat-raised-button color="primary">Update Password</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Account Settings -->
+                  <div class="settings-section">
+                    <h3 class="settings-section-title">Account Settings</h3>
+                    <div class="form-row">
+                      <div class="form-group">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>First Name</mat-label>
+                          <input matInput>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-group">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Last Name</mat-label>
+                          <input matInput>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-group">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Email</mat-label>
+                          <input matInput type="email">
+                        </mat-form-field>
+                      </div>
+                      <div class="form-group">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Phone</mat-label>
+                          <input matInput>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-group">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>City</mat-label>
+                          <input matInput>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-group">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Country</mat-label>
+                          <input matInput>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-group" style="flex: 0 0 100%; max-width: 100%;">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Address</mat-label>
+                          <textarea matInput rows="3"></textarea>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <mat-checkbox color="primary" class="mb-3 d-block">Profile Visibility For
+                        Everyone</mat-checkbox>
+                        <mat-checkbox color="primary" class="mb-3 d-block">New appointment notifications</mat-checkbox>
+                        <mat-checkbox color="primary" class="mb-3 d-block">New patient request
+                        notifications</mat-checkbox>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <button mat-raised-button color="primary">Save Changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>

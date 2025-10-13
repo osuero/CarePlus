@@ -1,0 +1,205 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="avatarDetails">
+      <div class="modalTitle">
+        {{dialogTitle}}
+      </div>
+    </div>
+    <button mat-icon-button mat-dialog-close class="modal-close-button" aria-label="Close dialog" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="incomeForm" (ngSubmit)="submit()">
+      <div class="row">
+        <!-- Patient ID Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Patient ID</mat-label>
+            <input matInput formControlName="patientId" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>badge</mat-icon>
+            @if (incomeForm.get('patientId')?.hasError('required')) {
+            <mat-error>
+              Patient ID is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Patient Name Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Patient Name</mat-label>
+            <input matInput formControlName="patientName" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>face</mat-icon>
+            @if (incomeForm.get('patientName')?.hasError('required')) {
+            <mat-error>
+              Patient Name is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Income Type Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Income Type</mat-label>
+            <input matInput formControlName="incomeType" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>money</mat-icon>
+            @if (incomeForm.get('incomeType')?.hasError('required')) {
+            <mat-error>
+              Income Type is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Service Type Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Service Type</mat-label>
+            <input matInput formControlName="serviceType" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>local_hospital</mat-icon>
+            @if (incomeForm.get('serviceType')?.hasError('required')) {
+            <mat-error>
+              Service Type is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Service Date Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Service Date</mat-label>
+            <input matInput [matDatepicker]="serviceDatePicker" formControlName="serviceDate" required>
+            <mat-datepicker-toggle matSuffix [for]="serviceDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #serviceDatePicker></mat-datepicker>
+            @if (incomeForm.get('serviceDate')?.hasError('required')) {
+            <mat-error>
+              Service Date is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Amount Billed Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Amount Billed</mat-label>
+            <input matInput formControlName="amountBilled" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>attach_money</mat-icon>
+            @if (incomeForm.get('amountBilled')?.hasError('required')) {
+            <mat-error>
+              Amount Billed is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Amount Paid Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Amount Paid</mat-label>
+            <input matInput formControlName="amountPaid" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>payment</mat-icon>
+            @if (incomeForm.get('amountPaid')?.hasError('required')) {
+            <mat-error>
+              Amount Paid is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Payment Method Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Payment Method</mat-label>
+            <input matInput formControlName="paymentMethod">
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>credit_card</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Insurance Amount Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Insurance Amount</mat-label>
+            <input matInput formControlName="insuranceAmount">
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>account_balance_wallet</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <!-- Outstanding Amount Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Outstanding Amount</mat-label>
+            <input matInput formControlName="outstandingAmount">
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>money_off</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Payment Date Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Payment Date</mat-label>
+            <input matInput [matDatepicker]="paymentDatePicker" formControlName="paymentDate">
+            <mat-datepicker-toggle matSuffix [for]="paymentDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #paymentDatePicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <!-- Payment Status Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Payment Status</mat-label>
+            <mat-select formControlName="paymentStatus">
+              <mat-option value="Completed">Completed</mat-option>
+              <mat-option value="Pending">Pending</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Doctor Fee Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Doctor Fee</mat-label>
+            <input matInput formControlName="doctorFee">
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>medical_services</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <!-- Invoice Number Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Invoice Number</mat-label>
+            <input matInput formControlName="invoiceNumber">
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>invoice</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-flat-button class="formSubmitBtn" [disabled]="!incomeForm.valid" type="submit">
+              Save
+            </button>
+            <button mat-flat-button mat-dialog-close class="formCancelBtn" tabindex="-1">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

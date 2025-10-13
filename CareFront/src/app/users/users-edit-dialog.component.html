@@ -1,0 +1,222 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <h2 mat-dialog-title class="d-flex align-items-center gap-2">
+    <mat-icon>edit</mat-icon>
+    {{ 'USERS.EDIT.TITLE' | translate }}
+  </h2>
+
+  <div mat-dialog-content>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label" for="firstName">
+          {{ 'USERS.FORM.FIELDS.FIRST_NAME.LABEL' | translate }} *
+        </label>
+        <input
+          id="firstName"
+          type="text"
+          class="form-control"
+          formControlName="firstName"
+          [placeholder]="
+            'USERS.FORM.FIELDS.FIRST_NAME.PLACEHOLDER' | translate
+          "
+          [class.is-invalid]="
+            form.get('firstName')?.invalid &&
+            (form.get('firstName')?.dirty || form.get('firstName')?.touched)
+          "
+          autocomplete="given-name"
+        />
+        <div class="invalid-feedback d-block" *ngIf="
+            form.get('firstName')?.invalid &&
+            (form.get('firstName')?.dirty || form.get('firstName')?.touched)
+          ">
+          {{ 'USERS.FORM.FIELDS.FIRST_NAME.ERROR' | translate }}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="lastName">
+          {{ 'USERS.FORM.FIELDS.LAST_NAME.LABEL' | translate }} *
+        </label>
+        <input
+          id="lastName"
+          type="text"
+          class="form-control"
+          formControlName="lastName"
+          [placeholder]="
+            'USERS.FORM.FIELDS.LAST_NAME.PLACEHOLDER' | translate
+          "
+          [class.is-invalid]="
+            form.get('lastName')?.invalid &&
+            (form.get('lastName')?.dirty || form.get('lastName')?.touched)
+          "
+          autocomplete="family-name"
+        />
+        <div class="invalid-feedback d-block" *ngIf="
+            form.get('lastName')?.invalid &&
+            (form.get('lastName')?.dirty || form.get('lastName')?.touched)
+          ">
+          {{ 'USERS.FORM.FIELDS.LAST_NAME.ERROR' | translate }}
+        </div>
+      </div>
+      <div class="col-12">
+        <label class="form-label" for="email">
+          {{ 'USERS.FORM.FIELDS.EMAIL.LABEL' | translate }} *
+        </label>
+        <input
+          id="email"
+          type="email"
+          class="form-control"
+          formControlName="email"
+          [placeholder]="
+            'USERS.FORM.FIELDS.EMAIL.PLACEHOLDER' | translate
+          "
+          [class.is-invalid]="
+            form.get('email')?.invalid &&
+            (form.get('email')?.dirty || form.get('email')?.touched)
+          "
+          autocomplete="email"
+        />
+        <div class="invalid-feedback d-block" *ngIf="
+            form.get('email')?.invalid &&
+            (form.get('email')?.dirty || form.get('email')?.touched)
+          ">
+          <ng-container
+            *ngIf="form.get('email')?.hasError('required'); else emailFormat"
+          >
+            {{ 'USERS.FORM.FIELDS.EMAIL.REQUIRED_ERROR' | translate }}
+          </ng-container>
+          <ng-template #emailFormat>
+            {{ 'USERS.FORM.FIELDS.EMAIL.FORMAT_ERROR' | translate }}
+          </ng-template>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="phoneNumber">
+          {{ 'USERS.FORM.FIELDS.PHONE.LABEL' | translate }}
+        </label>
+        <input
+          id="phoneNumber"
+          type="tel"
+          class="form-control"
+          formControlName="phoneNumber"
+          [placeholder]="
+            'USERS.FORM.FIELDS.PHONE.PLACEHOLDER' | translate
+          "
+          autocomplete="tel"
+        />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="identification">
+          {{ 'USERS.FORM.FIELDS.IDENTIFICATION.LABEL' | translate }}
+        </label>
+        <input
+          id="identification"
+          type="text"
+          class="form-control"
+          formControlName="identification"
+          [placeholder]="
+            'USERS.FORM.FIELDS.IDENTIFICATION.PLACEHOLDER' | translate
+          "
+          autocomplete="off"
+        />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="gender">
+          {{ 'USERS.FORM.FIELDS.GENDER.LABEL' | translate }} *
+        </label>
+        <select
+          id="gender"
+          class="form-select"
+          formControlName="gender"
+          [class.is-invalid]="
+            form.get('gender')?.invalid &&
+            (form.get('gender')?.dirty || form.get('gender')?.touched)
+          "
+        >
+          <option value="" disabled>
+            {{ 'USERS.FORM.FIELDS.GENDER.LABEL' | translate }}
+          </option>
+          <option value="Male">
+            {{ getGenderLabel('MALE') }}
+          </option>
+          <option value="Female">
+            {{ getGenderLabel('FEMALE') }}
+          </option>
+          <option value="Other">
+            {{ getGenderLabel('OTHER') }}
+          </option>
+        </select>
+        <div class="invalid-feedback d-block" *ngIf="
+            form.get('gender')?.invalid &&
+            (form.get('gender')?.dirty || form.get('gender')?.touched)
+          ">
+          {{ 'USERS.FORM.FIELDS.GENDER.ERROR' | translate }}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="country">
+          {{ 'USERS.FORM.FIELDS.COUNTRY.LABEL' | translate }}
+        </label>
+        <select
+          id="country"
+          class="form-select"
+          formControlName="country"
+        >
+          <option value="">
+            {{ 'USERS.TABLE.NO_COUNTRY' | translate }}
+          </option>
+          <option
+            *ngFor="let country of countries; trackBy: trackByCountryCode"
+            [value]="country.name"
+          >
+            {{ country.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="dateOfBirth">
+          {{ 'USERS.FORM.FIELDS.DATE_OF_BIRTH.LABEL' | translate }} *
+        </label>
+        <input
+          id="dateOfBirth"
+          type="date"
+          class="form-control"
+          formControlName="dateOfBirth"
+          [class.is-invalid]="
+            form.get('dateOfBirth')?.invalid &&
+            (form.get('dateOfBirth')?.dirty || form.get('dateOfBirth')?.touched)
+          "
+        />
+        <div class="invalid-feedback d-block" *ngIf="
+            form.get('dateOfBirth')?.invalid &&
+            (form.get('dateOfBirth')?.dirty ||
+              form.get('dateOfBirth')?.touched)
+          ">
+          {{ 'USERS.FORM.FIELDS.DATE_OF_BIRTH.ERROR' | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-actions class="d-flex justify-content-end gap-2">
+    <button
+      mat-button
+      type="button"
+      (click)="close()"
+      [disabled]="submitting"
+    >
+      {{ 'USERS.DIALOG.CANCEL' | translate }}
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      [disabled]="submitting"
+    >
+      <span
+        class="spinner-border spinner-border-sm me-2"
+        role="status"
+        *ngIf="submitting"
+      ></span>
+      {{ 'USERS.EDIT.SAVE' | translate }}
+    </button>
+  </div>
+</form>

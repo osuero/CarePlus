@@ -1,0 +1,30 @@
+.section-heading {
+  margin-bottom: 15px;
+
+  .section-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #2196f3;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-title i {
+    font-size: 22px;
+  }
+}
+
+.subtitle {
+  color: #757575;
+  margin-top: 5px;
+}
+
+.text-end {
+  text-align: right;
+}
+
+.me-2 {
+  margin-right: 0.5rem;
+}

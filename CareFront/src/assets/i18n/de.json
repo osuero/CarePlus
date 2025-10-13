@@ -1,0 +1,288 @@
+{
+  "MENUITEMS": {
+    "MAIN": {
+      "TEXT": "Hauptmenü"
+    },
+    "DASHBOARD": {
+      "TEXT": "Dashboard",
+      "LIST": {
+        "DASHBOARD1": "Dashboard 1",
+        "DASHBOARD2": "Dashboard 2",
+        "DOCTOR-DASHBOARD": "Arzt Dashboard",
+        "PATIENT-DASHBOARD": "Patienten Dashboard",
+        "NURSE-DASHBOARD": "Krankenpfleger Dashboard"
+      }
+    },
+    "APPOINTMENTS": {
+      "TEXT": "Termine",
+      "LIST": {
+        "APPOINTMENT-CALENDAR": "Terminkalender",
+        "VIEW-APPOINTMENT": "Termin anzeigen",
+        "BOOK-APPOINTMENT": "Termin buchen",
+        "EDIT-APPOINTMENT": "Termin bearbeiten"
+      }
+    },
+    "DOCTORS": {
+      "TEXT": "Ärzte",
+      "LIST": {
+        "ALL-DOCTOR": "Alle Ärzte",
+        "ADD-DOCTOR": "Arzt hinzufügen",
+        "EDIT-DOCTOR": "Arzt bearbeiten",
+        "ASSIGN-DEPARTMENT": "Abteilung zuweisen",
+        "SHIFT-MANAGEMENT": "Schichtverwaltung",
+        "PROFILE": "Arztprofil"
+      }
+    },
+    "STAFF": {
+      "TEXT": "Personal",
+      "LIST": {
+        "ALL-STAFF": "Alle Mitarbeiter",
+        "ADD-STAFF": "Mitarbeiter hinzufügen",
+        "EDIT-STAFF": "Mitarbeiter bearbeiten",
+        "PROFILE": "Mitarbeiterprofil"
+      }
+    },
+    "PATIENTS": {
+      "TEXT": "Patienten",
+      "LIST": {
+        "ALL-PATIENT": "Alle Patienten",
+        "ADD-PATIENT": "Patient hinzufügen",
+        "EDIT-PATIENT": "Patient bearbeiten",
+        "PATIENT-RECORDS": "Patientenakten",
+        "PROFILE": "Patientenprofil"
+      }
+    },
+    "ROOMS": {
+      "TEXT": "Raumzuweisung",
+      "LIST": {
+        "ALLOTED-ROOMS": "Zugewiesene Räume",
+        "NEW-ALLOTMENT": "Neue Zuweisung",
+        "EDIT-ALLOTMENT": "Zuweisung bearbeiten",
+        "ROOMS-BY-DEPARTMENT": "Räume nach Abteilung",
+        "ADD-ROOM": "Raum hinzufügen"
+      }
+    },
+    "ACCOUNTS": {
+      "TEXT": "Konten",
+      "LIST": {
+        "BILL-LIST": "Rechnungsliste",
+        "ADD-BILL": "Rechnung hinzufügen",
+        "INCOME": "Einkommen",
+        "EXPENSES": "Ausgaben",
+        "INCOME-REPORT": "Einkommensbericht",
+        "INVOICE": "Rechnung"
+      }
+    },
+    "RECORDS": {
+      "TEXT": "Aufzeichnungen",
+      "LIST": {
+        "BIRTH-RECORDS": "Geburtsurkunden",
+        "DEATH-RECORDS": "Sterbeurkunden"
+      }
+    },
+    "AMBULANCE": {
+      "TEXT": "Krankenwagen",
+      "LIST": {
+        "AMBULANCE-CALL-LIST": "Krankenwagen-Rufliste",
+        "AMBULANCE-LIST": "Krankenwagenliste"
+      }
+    },
+    "PHARMACY": {
+      "TEXT": "Apotheke",
+      "LIST": {
+        "MEDICINE-LIST": "Medizinliste",
+        "ADD-MEDICINE": "Medikament hinzufügen"
+      }
+    },
+    "BLOOD-BANK": {
+      "TEXT": "Blutbank",
+      "LIST": {
+        "BLOOD-STOCK": "Blutvorrat",
+        "BLOOD-DONOR": "Blutspender",
+        "BLOOD-ISSUED": "Ausgegebenes Blut"
+      }
+    },
+    "DEPARTMENTS": {
+      "TEXT": "Abteilungen",
+      "LIST": {
+        "DEPARTMENT-LIST": "Abteilungsliste",
+        "ADD-DEPARTMENT": "Abteilung hinzufügen"
+      }
+    },
+    "INVENTORY": {
+      "TEXT": "Inventar",
+      "LIST": {
+        "ITEM-STOCK-LIST": "Bestandsliste",
+        "ISSUED-ITEMS": "Ausgegebene Artikel"
+      }
+    },
+    "HR": {
+      "TEXT": "Personalwesen",
+      "LIST": {
+        "LEAVE-REQUESTS": "Urlaubsanfragen",
+        "LEAVE-BALANCE": "Urlaubsanspruch",
+        "LEAVE-TYPES": "Urlaubstypen",
+        "HOLIDAYS": "Feiertage",
+        "TODAY-ATTENDANCE": "Heutige Anwesenheit",
+        "EMP-ATTENDANCE": "Mitarbeiteranwesenheit",
+        "ATTENDANCE-SHEET": "Anwesenheitsblatt",
+        "EMPLOYEE-SALARY": "Mitarbeitergehalt",
+        "PAYSLIP": "Gehaltsabrechnung"
+      }
+    },
+    "INSURANCE": {
+      "TEXT": "Versicherung",
+      "LIST": {
+        "PATIENT-INSURANCE": "Patientenversicherung",
+        "NEW-CLAIM": "Neuer Anspruch",
+        "CLAIM-STATUS": "Anspruchsstatus",
+        "INSURANCE-PROVIDER": "Versicherungsanbieter"
+      }
+    },
+    "DOCTOR": {
+      "DASHBOARD": "Dashboard",
+      "APPOINTMENTS": "Termine",
+      "DOCTORS": "Ärzte",
+      "PATIENTS": "Patienten",
+      "SETTINGS": "Einstellungen",
+      "CHAT": "Chat"
+    },
+    "PATIENT": {
+      "TEXT": "Patient",
+      "DASHBOARD": "Dashboard",
+      "APPOINTMENTS": {
+        "TEXT": "Termine",
+        "LIST": {
+          "BOOK-APPOINTMENT": "Termin buchen",
+          "TODAY": "Heutige Termine",
+          "UPCOMING": "Kommende Termine",
+          "PAST": "Vergangene Termine"
+        }
+      },
+      "PRESCRIPTIONS": "Rezepte",
+      "MEDICAL-RECORD": "Krankenakte",
+      "BILLING": "Abrechnung",
+      "CHAT": "Chat",
+      "SETTINGS": "Einstellungen"
+    },
+    "APPS": {
+      "TEXT": "-- Apps"
+    },
+    "CALENDAR": {
+      "TEXT": "Kalender"
+    },
+    "TASK": {
+      "TEXT": "Aufgabe"
+    },
+    "CONTACTS": {
+      "TEXT": "Kontakte"
+    },
+    "USERS": {
+      "TEXT": "Benutzer"
+    }
+  },
+  "USERS": {
+    "BREADCRUMB": {
+      "TITLE": "Benutzer",
+      "ACTIVE": "Benutzer"
+    },
+    "TABLE": {
+      "TITLE": "Registrierte Benutzer",
+      "PAGE_SIZE_LABEL": "Anzeigen",
+      "SEARCH_PLACEHOLDER": "Nach Name oder E-Mail suchen",
+      "RANGE": "Zeige {{start}} - {{end}} von {{total}} Eintraegen",
+      "PAGE_INFO": "Seite {{page}} von {{pages}}",
+      "ADD_BUTTON": "Benutzer erstellen",
+      "LOADING": "Wird geladen...",
+      "EMPTY": "Es sind keine Benutzer registriert.",
+      "NO_RESULTS": "Es wurden keine Benutzer fuer die ausgewaehlten Filter gefunden.",
+      "HEADERS": {
+        "USER": "Benutzer",
+        "GENDER": "Geschlecht",
+        "AGE": "Alter",
+        "CONTACT": "Kontakt",
+        "COUNTRY": "Land",
+        "CREATED": "Registriert",
+        "ACTIONS": "Aktionen"
+      },
+      "NO_PHONE": "Keine Telefonnummer",
+      "ID_LABEL": "ID",
+      "NO_COUNTRY": "Nicht angegeben",
+      "PREVIOUS": "Zurueck",
+      "NEXT": "Weiter"
+    },
+    "FORM": {
+      "TITLE": "Benutzer registrieren",
+      "FIELDS": {
+        "FIRST_NAME": {
+          "LABEL": "Vorname",
+          "PLACEHOLDER": "Vorname",
+          "ERROR": "Der Vorname ist erforderlich."
+        },
+        "LAST_NAME": {
+          "LABEL": "Nachname",
+          "PLACEHOLDER": "Nachname",
+          "ERROR": "Der Nachname ist erforderlich."
+        },
+        "EMAIL": {
+          "LABEL": "E-Mail",
+          "PLACEHOLDER": "benutzer@email.com",
+          "REQUIRED_ERROR": "Die E-Mail ist erforderlich.",
+          "FORMAT_ERROR": "Bitte eine gueltige E-Mail angeben."
+        },
+        "PHONE": {
+          "LABEL": "Telefon",
+          "PLACEHOLDER": "+49 0000 000000"
+        },
+        "IDENTIFICATION": {
+          "LABEL": "Ausweis",
+          "PLACEHOLDER": "Dokument"
+        },
+        "GENDER": {
+          "LABEL": "Geschlecht",
+          "ERROR": "Das Geschlecht ist erforderlich."
+        },
+        "COUNTRY": {
+          "LABEL": "Land"
+        },
+        "DATE_OF_BIRTH": {
+          "LABEL": "Geburtsdatum",
+          "ERROR": "Das Geburtsdatum ist erforderlich."
+        }
+      },
+      "GENDER_OPTIONS": {
+        "MALE": "Maennlich",
+        "FEMALE": "Weiblich",
+        "OTHER": "Andere"
+      },
+      "BUTTONS": {
+        "SUBMIT": "Benutzer registrieren",
+        "RESET": "Leeren"
+      }
+    },
+    "MESSAGES": {
+      "SUCCESS_TITLE": "Benutzer registriert",
+      "SUCCESS_BODY": "Der Benutzer wurde erfolgreich registriert.",
+      "ERROR_TITLE": "Registrierungsfehler",
+      "ERROR_BODY": "Der Benutzer konnte nicht registriert werden.",
+      "UPDATE_TITLE": "Benutzer aktualisiert",
+      "UPDATE_BODY": "Der Benutzer wurde erfolgreich aktualisiert.",
+      "DELETE_TITLE": "Benutzer löschen",
+      "DELETE_CONFIRM": "Möchten Sie {{name}} wirklich löschen?",
+      "DELETE_SUCCESS": "Der Benutzer wurde erfolgreich gelöscht.",
+      "DELETE_CANCELLED": "Der Vorgang wurde abgebrochen.",
+      "DELETE_CONFIRM_BUTTON": "Ja, löschen",
+      "DELETE_CANCEL_BUTTON": "Abbrechen",
+      "LOAD_ERROR_TITLE": "Ladefehler",
+      "LOAD_ERROR_BODY": "Die Benutzerliste konnte nicht geladen werden.",
+      "COUNTRIES_WARNING": "Die Laenderliste konnte nicht geladen werden."
+    },
+    "EDIT": {
+      "TITLE": "Benutzer bearbeiten",
+      "SAVE": "Änderungen speichern"
+    },
+    "DIALOG": {
+      "CANCEL": "Abbrechen"
+    }
+  }
+}

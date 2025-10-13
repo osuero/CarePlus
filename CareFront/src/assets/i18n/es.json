@@ -1,0 +1,288 @@
+{
+  "MENUITEMS": {
+    "MAIN": {
+      "TEXT": "Principal"
+    },
+    "DASHBOARD": {
+      "TEXT": "Tablero",
+      "LIST": {
+        "DASHBOARD1": "Tablero 1",
+        "DASHBOARD2": "Tablero 2",
+        "DOCTOR-DASHBOARD": "Tablero del Médico",
+        "PATIENT-DASHBOARD": "Tablero del Paciente",
+        "NURSE-DASHBOARD": "Enfermero Dashboard"
+      }
+    },
+    "APPOINTMENTS": {
+      "TEXT": "Citas",
+      "LIST": {
+        "APPOINTMENT-CALENDAR": "Calendario de Citas",
+        "VIEW-APPOINTMENT": "Ver Cita",
+        "BOOK-APPOINTMENT": "Reservar Cita",
+        "EDIT-APPOINTMENT": "Editar Cita"
+      }
+    },
+    "DOCTORS": {
+      "TEXT": "Médicos",
+      "LIST": {
+        "ALL-DOCTOR": "Todos los Médicos",
+        "ADD-DOCTOR": "Agregar Médico",
+        "EDIT-DOCTOR": "Editar Médico",
+        "ASSIGN-DEPARTMENT": "Asignar Departamento",
+        "SHIFT-MANAGEMENT": "Gestión de Turnos",
+        "PROFILE": "Perfil del Médico"
+      }
+    },
+    "STAFF": {
+      "TEXT": "Personal",
+      "LIST": {
+        "ALL-STAFF": "Todo el Personal",
+        "ADD-STAFF": "Agregar Personal",
+        "EDIT-STAFF": "Editar Personal",
+        "PROFILE": "Perfil del Personal"
+      }
+    },
+    "PATIENTS": {
+      "TEXT": "Pacientes",
+      "LIST": {
+        "ALL-PATIENT": "Todos los Pacientes",
+        "ADD-PATIENT": "Agregar Paciente",
+        "EDIT-PATIENT": "Editar Paciente",
+        "PATIENT-RECORDS": "Registros de Pacientes",
+        "PROFILE": "Perfil del Paciente"
+      }
+    },
+    "ROOMS": {
+      "TEXT": "Asignación de Habitaciones",
+      "LIST": {
+        "ALLOTED-ROOMS": "Habitaciones Asignadas",
+        "NEW-ALLOTMENT": "Nueva Asignación",
+        "EDIT-ALLOTMENT": "Editar Asignación",
+        "ROOMS-BY-DEPARTMENT": "Habitaciones por Departamento",
+        "ADD-ROOM": "Agregar Habitación"
+      }
+    },
+    "ACCOUNTS": {
+      "TEXT": "Cuentas",
+      "LIST": {
+        "BILL-LIST": "Lista de Facturas",
+        "ADD-BILL": "Agregar Factura",
+        "INCOME": "Ingresos",
+        "EXPENSES": "Gastos",
+        "INCOME-REPORT": "Informe de Ingresos",
+        "INVOICE": "Factura"
+      }
+    },
+    "RECORDS": {
+      "TEXT": "Registros",
+      "LIST": {
+        "BIRTH-RECORDS": "Registros de Nacimiento",
+        "DEATH-RECORDS": "Registros de Defunción"
+      }
+    },
+    "AMBULANCE": {
+      "TEXT": "Ambulancia",
+      "LIST": {
+        "AMBULANCE-CALL-LIST": "Lista de Llamadas de Ambulancia",
+        "AMBULANCE-LIST": "Lista de Ambulancias"
+      }
+    },
+    "PHARMACY": {
+      "TEXT": "Farmacia",
+      "LIST": {
+        "MEDICINE-LIST": "Lista de Medicamentos",
+        "ADD-MEDICINE": "Agregar Medicamento"
+      }
+    },
+    "BLOOD-BANK": {
+      "TEXT": "Banco de Sangre",
+      "LIST": {
+        "BLOOD-STOCK": "Stock de Sangre",
+        "BLOOD-DONOR": "Donante de Sangre",
+        "BLOOD-ISSUED": "Sangre Emitida"
+      }
+    },
+    "DEPARTMENTS": {
+      "TEXT": "Departamentos",
+      "LIST": {
+        "DEPARTMENT-LIST": "Lista de Departamentos",
+        "ADD-DEPARTMENT": "Agregar Departamento"
+      }
+    },
+    "INVENTORY": {
+      "TEXT": "Inventario",
+      "LIST": {
+        "ITEM-STOCK-LIST": "Lista de Stock de Artículos",
+        "ISSUED-ITEMS": "Artículos Emitidos"
+      }
+    },
+    "HR": {
+      "TEXT": "Recursos Humanos",
+      "LIST": {
+        "LEAVE-REQUESTS": "Solicitudes de Licencia",
+        "LEAVE-BALANCE": "Saldo de Licencia",
+        "LEAVE-TYPES": "Tipos de Licencia",
+        "HOLIDAYS": "Días Festivos",
+        "TODAY-ATTENDANCE": "Asistencia de Hoy",
+        "EMP-ATTENDANCE": "Asistencia de Empleados",
+        "ATTENDANCE-SHEET": "Hoja de Asistencia",
+        "EMPLOYEE-SALARY": "Salario de Empleados",
+        "PAYSLIP": "Recibo de Salario"
+      }
+    },
+    "INSURANCE": {
+      "TEXT": "Seguro",
+      "LIST": {
+        "PATIENT-INSURANCE": "Seguro de Paciente",
+        "NEW-CLAIM": "Nuevo Reclamo",
+        "CLAIM-STATUS": "Estado del Reclamo",
+        "INSURANCE-PROVIDER": "Proveedor de Seguro"
+      }
+    },
+    "DOCTOR": {
+      "DASHBOARD": "Tablero",
+      "APPOINTMENTS": "Citas",
+      "DOCTORS": "Médicos",
+      "PATIENTS": "Pacientes",
+      "SETTINGS": "Configuraciones",
+      "CHAT": "Chat"
+    },
+    "PATIENT": {
+      "TEXT": "Paciente",
+      "DASHBOARD": "Tablero",
+      "APPOINTMENTS": {
+        "TEXT": "Citas",
+        "LIST": {
+          "BOOK-APPOINTMENT": "Reservar Cita",
+          "TODAY": "Citas de Hoy",
+          "UPCOMING": "Citas Próximas",
+          "PAST": "Citas Pasadas"
+        }
+      },
+      "PRESCRIPTIONS": "Recetas",
+      "MEDICAL-RECORD": "Historial Médico",
+      "BILLING": "Facturación",
+      "CHAT": "Chat",
+      "SETTINGS": "Configuraciones"
+    },
+    "APPS": {
+      "TEXT": "-- Aplicaciones"
+    },
+    "CALENDAR": {
+      "TEXT": "Calendario"
+    },
+    "TASK": {
+      "TEXT": "Tarea"
+    },
+    "CONTACTS": {
+      "TEXT": "Contactos"
+    },
+    "USERS": {
+      "TEXT": "Usuarios"
+    }
+  },
+  "USERS": {
+    "BREADCRUMB": {
+      "TITLE": "Usuarios",
+      "ACTIVE": "Usuarios"
+    },
+    "TABLE": {
+      "TITLE": "Usuarios registrados",
+      "PAGE_SIZE_LABEL": "Mostrar",
+      "SEARCH_PLACEHOLDER": "Buscar por nombre o correo",
+      "RANGE": "Mostrando {{start}} - {{end}} de {{total}} registros",
+      "PAGE_INFO": "Pagina {{page}} de {{pages}}",
+      "ADD_BUTTON": "Crear usuario",
+      "LOADING": "Cargando...",
+      "EMPTY": "No hay usuarios registrados.",
+      "NO_RESULTS": "No se encontraron usuarios para los criterios seleccionados.",
+      "HEADERS": {
+        "USER": "Usuario",
+        "GENDER": "Genero",
+        "AGE": "Edad",
+        "CONTACT": "Contacto",
+        "COUNTRY": "Pais",
+        "CREATED": "Registrado",
+        "ACTIONS": "Acciones"
+      },
+      "NO_PHONE": "Sin telefono",
+      "ID_LABEL": "ID",
+      "NO_COUNTRY": "No definido",
+      "PREVIOUS": "Anterior",
+      "NEXT": "Siguiente"
+    },
+    "FORM": {
+      "TITLE": "Registrar usuario",
+      "FIELDS": {
+        "FIRST_NAME": {
+          "LABEL": "Nombre",
+          "PLACEHOLDER": "Nombre",
+          "ERROR": "El nombre es obligatorio."
+        },
+        "LAST_NAME": {
+          "LABEL": "Apellido",
+          "PLACEHOLDER": "Apellido",
+          "ERROR": "El apellido es obligatorio."
+        },
+        "EMAIL": {
+          "LABEL": "Correo electronico",
+          "PLACEHOLDER": "usuario@correo.com",
+          "REQUIRED_ERROR": "El correo electronico es obligatorio.",
+          "FORMAT_ERROR": "Debes ingresar un correo electronico valido."
+        },
+        "PHONE": {
+          "LABEL": "Telefono",
+          "PLACEHOLDER": "+503 0000 0000"
+        },
+        "IDENTIFICATION": {
+          "LABEL": "Identificacion",
+          "PLACEHOLDER": "Documento"
+        },
+        "GENDER": {
+          "LABEL": "Genero",
+          "ERROR": "El genero es obligatorio."
+        },
+        "COUNTRY": {
+          "LABEL": "Pais"
+        },
+        "DATE_OF_BIRTH": {
+          "LABEL": "Fecha de nacimiento",
+          "ERROR": "La fecha de nacimiento es obligatoria."
+        }
+      },
+      "GENDER_OPTIONS": {
+        "MALE": "Masculino",
+        "FEMALE": "Femenino",
+        "OTHER": "Otro"
+      },
+      "BUTTONS": {
+        "SUBMIT": "Registrar usuario",
+        "RESET": "Limpiar"
+      }
+    },
+    "MESSAGES": {
+      "SUCCESS_TITLE": "Usuario registrado",
+      "SUCCESS_BODY": "El usuario fue registrado correctamente.",
+      "ERROR_TITLE": "Error al registrar",
+      "ERROR_BODY": "No fue posible registrar al usuario.",
+      "UPDATE_TITLE": "Usuario actualizado",
+      "UPDATE_BODY": "El usuario fue actualizado correctamente.",
+      "DELETE_TITLE": "Eliminar usuario",
+      "DELETE_CONFIRM": "¿Seguro que deseas eliminar a {{name}}?",
+      "DELETE_SUCCESS": "El usuario fue eliminado correctamente.",
+      "DELETE_CANCELLED": "La operacion fue cancelada.",
+      "DELETE_CONFIRM_BUTTON": "Si, eliminar",
+      "DELETE_CANCEL_BUTTON": "Cancelar",
+      "LOAD_ERROR_TITLE": "Error al cargar",
+      "LOAD_ERROR_BODY": "No fue posible obtener la lista de usuarios.",
+      "COUNTRIES_WARNING": "No fue posible cargar la lista de paises."
+    },
+    "EDIT": {
+      "TITLE": "Editar usuario",
+      "SAVE": "Guardar cambios"
+    },
+    "DIALOG": {
+      "CANCEL": "Cancelar"
+    }
+  }
+}

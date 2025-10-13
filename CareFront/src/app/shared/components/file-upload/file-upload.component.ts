@@ -1,0 +1,44 @@
+import { Component, ElementRef, HostListener, Input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+@Component({
+  selector: 'app-file-upload',
+  templateUrl: './file-upload.component.html',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: FileUploadComponent,
+      multi: true,
+    },
+  ],
+  styleUrls: ['./file-upload.component.scss'],
+  imports: [MatButtonModule],
+})
+export class FileUploadComponent implements ControlValueAccessor {
+  onChange!: Function;
+  public file: File | null = null;
+
+  @HostListener('change', ['$event'])
+  emitFiles(event: Event): void {
+    const input = event.target as HTMLInputElement | null;
+    const file = input?.files?.item(0) ?? null;
+    this.onChange(file);
+    this.file = file;
+  }
+
+  constructor(private host: ElementRef<HTMLInputElement>) {}
+
+  writeValue(value: null) {
+    // clear file input
+    this.host.nativeElement.value = '';
+    this.file = null;
+  }
+
+  registerOnChange(fn: Function) {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: Function) {
+    // add code here
+  }
+}

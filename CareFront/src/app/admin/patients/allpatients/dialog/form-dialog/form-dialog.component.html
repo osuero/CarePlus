@@ -1,0 +1,160 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="avatarDetails">
+      <label class="hoverable">
+        <img [src]='patient.img' alt="avatar">
+      </label>
+      <div class="modalTitle">
+        {{dialogTitle}}
+      </div>
+    </div>
+    <button mat-icon-button mat-dialog-close class="modal-close-button" aria-label="Close dialog" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="patientForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>face</mat-icon>
+            @if (patientForm.get('name')?.hasError('required')) {
+            <mat-error>
+              Name is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Mobile</mat-label>
+            <input matInput formControlName="mobile" type="number">
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>phone</mat-icon>
+            @if (patientForm.get('mobile')?.hasError('required')) {
+            <mat-error>
+              Mobile is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="m-b-20">
+            <mat-label class="msr-3">Gender:</mat-label>
+            <mat-radio-group aria-label="Select gender" formControlName="gender" required>
+              <mat-radio-button value="male">Male</mat-radio-button>
+              <mat-radio-button value="female">Female</mat-radio-button>
+            </mat-radio-group>
+            @if (patientForm.get('gender')?.hasError('required')) {
+            <mat-error>
+              Select gender
+            </mat-error>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Treatment</mat-label>
+            <textarea matInput formControlName="treatment"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Age</mat-label>
+            <input matInput formControlName="age" type="number" required>
+            @if (patientForm.get('age')?.hasError('required')) {
+            <mat-error>
+              Age is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email" required>
+            @if (patientForm.get('email')?.hasError('required')) {
+            <mat-error>
+              Email is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Admission Date</mat-label>
+            <input matInput [matDatepicker]="admissionPicker" formControlName="admissionDate" required>
+            <mat-datepicker-toggle matSuffix [for]="admissionPicker"></mat-datepicker-toggle>
+            <mat-datepicker #admissionPicker></mat-datepicker>
+            @if (patientForm.get('admissionDate')?.hasError('required')) {
+            <mat-error>
+              Admission date is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Discharge Date</mat-label>
+            <input matInput [matDatepicker]="dischargePicker" formControlName="dischargeDate">
+            <mat-datepicker-toggle matSuffix [for]="dischargePicker"></mat-datepicker-toggle>
+            <mat-datepicker #dischargePicker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Doctor Assigned</mat-label>
+            <input matInput formControlName="doctorAssigned" required>
+            @if (patientForm.get('doctorAssigned')?.hasError('required')) {
+            <mat-error>
+              Doctor assigned is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status" required>
+              <mat-option value="Under Treatment">Under Treatment</mat-option>
+              <mat-option value="Recovered">Recovered</mat-option>
+              <mat-option value="Under Observation">Under Observation</mat-option>
+            </mat-select>
+            @if (patientForm.get('status')?.hasError('required')) {
+            <mat-error>
+              Status is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Address</mat-label>
+            <textarea matInput formControlName="address"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-flat-button class="formSubmitBtn" [disabled]="!patientForm.valid" type="submit">Save</button>
+            <button mat-flat-button mat-dialog-close class="formCancelBtn" tabindex="-1">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

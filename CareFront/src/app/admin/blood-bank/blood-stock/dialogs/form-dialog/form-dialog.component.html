@@ -1,0 +1,201 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="avatarDetails">
+      <div class="modalTitle">
+        {{dialogTitle}}
+      </div>
+    </div>
+    <button mat-icon-button mat-dialog-close class="modal-close-button" aria-label="Close dialog" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="bloodStockForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Blood Product ID</mat-label>
+            <input matInput formControlName="bloodProductID" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>inventory</mat-icon>
+            @if (bloodStockForm.get('bloodProductID')?.hasError('required')) {
+            <mat-error>
+              Blood Product ID is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Blood Type</mat-label>
+            <mat-select formControlName="bloodType" required>
+              <mat-option [value]="'A+'">A+</mat-option>
+              <mat-option [value]="'A-'">A-</mat-option>
+              <mat-option [value]="'B+'">B+</mat-option>
+              <mat-option [value]="'B-'">B-</mat-option>
+              <mat-option [value]="'AB+'">AB+</mat-option>
+              <mat-option [value]="'AB-'">AB-</mat-option>
+              <mat-option [value]="'O+'">O+</mat-option>
+              <mat-option [value]="'O-'">O-</mat-option>
+            </mat-select>
+            @if (bloodStockForm.get('bloodType')?.hasError('required')) {
+            <mat-error>
+              Blood Type is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Component Type</mat-label>
+            <mat-select formControlName="componentType" required>
+              <mat-option [value]="'Whole Blood'">Whole Blood</mat-option>
+              <mat-option [value]="'Red Blood Cells'">Red Blood Cells</mat-option>
+              <mat-option [value]="'Plasma'">Plasma</mat-option>
+              <mat-option [value]="'Platelets'">Platelets</mat-option>
+            </mat-select>
+            @if (bloodStockForm.get('componentType')?.hasError('required')) {
+            <mat-error>
+              Component Type is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Quantity in Stock</mat-label>
+            <input matInput formControlName="quantityInStock" type="number" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>inventory_2</mat-icon>
+            @if (bloodStockForm.get('quantityInStock')?.hasError('required')) {
+            <mat-error>
+              Quantity is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Collection Date</mat-label>
+            <input matInput [matDatepicker]="collectionPicker" formControlName="collectionDate" required>
+            <mat-datepicker-toggle matSuffix [for]="collectionPicker"></mat-datepicker-toggle>
+            <mat-datepicker #collectionPicker></mat-datepicker>
+            @if (bloodStockForm.get('collectionDate')?.hasError('required')) {
+            <mat-error>
+              Collection Date is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Expiry Date</mat-label>
+            <input matInput [matDatepicker]="expiryPicker" formControlName="expiryDate" required>
+            <mat-datepicker-toggle matSuffix [for]="expiryPicker"></mat-datepicker-toggle>
+            <mat-datepicker #expiryPicker></mat-datepicker>
+            @if (bloodStockForm.get('expiryDate')?.hasError('required')) {
+            <mat-error>
+              Expiry Date is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Storage Location</mat-label>
+            <input matInput formControlName="storageLocation" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>place</mat-icon>
+            @if (bloodStockForm.get('storageLocation')?.hasError('required')) {
+            <mat-error>
+              Storage Location is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Donation Status</mat-label>
+            <mat-select formControlName="donationStatus" required>
+              <mat-option [value]="'Fresh'">Fresh</mat-option>
+              <mat-option [value]="'In-Use'">In-Use</mat-option>
+              <mat-option [value]="'Expired'">Expired</mat-option>
+            </mat-select>
+            @if (bloodStockForm.get('donationStatus')?.hasError('required')) {
+            <mat-error>
+              Donation Status is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Batch Number</mat-label>
+            <input matInput formControlName="batchNumber" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>tag</mat-icon>
+            @if (bloodStockForm.get('batchNumber')?.hasError('required')) {
+            <mat-error>
+              Batch Number is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Condition/Quality Status</mat-label>
+            <mat-select formControlName="conditionQualityStatus" required>
+              <mat-option [value]="'Good'">Good</mat-option>
+              <mat-option [value]="'Hemolyzed'">Hemolyzed</mat-option>
+              <mat-option [value]="'Clotted'">Clotted</mat-option>
+            </mat-select>
+            @if (bloodStockForm.get('conditionQualityStatus')?.hasError('required')) {
+            <mat-error>
+              Condition/Quality Status is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Temperature Range</mat-label>
+            <input matInput formControlName="temperatureRange" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>thermostat</mat-icon>
+            @if (bloodStockForm.get('temperatureRange')?.hasError('required')) {
+            <mat-error>
+              Temperature Range is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Date Last Updated</mat-label>
+            <input matInput [matDatepicker]="updatePicker" formControlName="dateLastUpdated" required>
+            <mat-datepicker-toggle matSuffix [for]="updatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #updatePicker></mat-datepicker>
+            @if (bloodStockForm.get('dateLastUpdated')?.hasError('required')) {
+            <mat-error>
+              Last Update Date is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-flat-button class="formSubmitBtn" [disabled]="!bloodStockForm.valid" type="submit">Save</button>
+            <button mat-flat-button mat-dialog-close class="formCancelBtn" tabindex="-1">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,201 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <app-breadcrumb
+        [title]="'USERS.BREADCRUMB.TITLE' | translate"
+        [items]="[]"
+        [active_item]="'USERS.BREADCRUMB.ACTIVE' | translate"
+      ></app-breadcrumb>
+    </div>
+
+    <div class="card">
+      <div class="header row g-2 align-items-center">
+        <div class="col-md">
+          <h2 class="mb-0">{{ 'USERS.TABLE.TITLE' | translate }}</h2>
+        </div>
+        <div
+          class="col-md-auto d-flex flex-wrap align-items-center gap-2 justify-content-md-end"
+        >
+          <button
+            mat-flat-button
+            color="primary"
+            type="button"
+            (click)="openCreateDialog()"
+          >
+            <mat-icon class="me-1">person_add</mat-icon>
+            {{ 'USERS.TABLE.ADD_BUTTON' | translate }}
+          </button>
+          <div class="d-flex align-items-center gap-2">
+            <label for="pageSize" class="mb-0 text-muted small">
+              {{ 'USERS.TABLE.PAGE_SIZE_LABEL' | translate }}
+            </label>
+            <select
+              id="pageSize"
+              class="form-select form-select-sm"
+              [value]="pageSize"
+              (change)="changePageSize($event)"
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="row g-2 align-items-center mb-3">
+          <div class="col-lg-6">
+            <input
+              type="text"
+              class="form-control"
+              [placeholder]="'USERS.TABLE.SEARCH_PLACEHOLDER' | translate"
+              [formControl]="searchControl"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-lg-6 text-lg-end">
+            <ng-container *ngIf="totalCount > 0; else emptyUsers">
+              <small class="text-muted">
+                {{
+                  'USERS.TABLE.RANGE'
+                    | translate
+                      : {
+                          start: rangeStart(),
+                          end: rangeEnd(),
+                          total: totalCount
+                        }
+                }}
+              </small>
+            </ng-container>
+            <ng-template #emptyUsers>
+              <small class="text-muted" *ngIf="!loadingUsers">
+                {{ 'USERS.TABLE.EMPTY' | translate }}
+              </small>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead>
+              <tr>
+                <th>{{ 'USERS.TABLE.HEADERS.USER' | translate }}</th>
+                <th>{{ 'USERS.TABLE.HEADERS.GENDER' | translate }}</th>
+                <th>{{ 'USERS.TABLE.HEADERS.AGE' | translate }}</th>
+                <th>{{ 'USERS.TABLE.HEADERS.CONTACT' | translate }}</th>
+                <th>{{ 'USERS.TABLE.HEADERS.COUNTRY' | translate }}</th>
+                <th>{{ 'USERS.TABLE.HEADERS.CREATED' | translate }}</th>
+                <th class="text-lg-end">
+                  {{ 'USERS.TABLE.HEADERS.ACTIONS' | translate }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="loadingUsers">
+                <td colspan="7" class="text-center py-4">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">
+                      {{ 'USERS.TABLE.LOADING' | translate }}
+                    </span>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="!loadingUsers && users.length === 0">
+                <td colspan="7" class="text-center text-muted py-4">
+                  {{ 'USERS.TABLE.NO_RESULTS' | translate }}
+                </td>
+              </tr>
+              <tr
+                *ngFor="let user of users; trackBy: trackByUserId"
+                class="align-middle"
+              >
+                <td>
+                  <div class="fw-semibold">
+                    {{ user.firstName }} {{ user.lastName }}
+                  </div>
+                  <div class="text-muted small">{{ user.email }}</div>
+                </td>
+                <td>{{ getGenderLabel(user.gender) }}</td>
+                <td>{{ user.age }}</td>
+                <td>
+                  <div>
+                    {{
+                      user.phoneNumber || ('USERS.TABLE.NO_PHONE' | translate)
+                    }}
+                  </div>
+                  <div class="text-muted small" *ngIf="user.identification">
+                    {{ 'USERS.TABLE.ID_LABEL' | translate }}:
+                    {{ user.identification }}
+                  </div>
+                </td>
+                <td>
+                  {{
+                    user.country || ('USERS.TABLE.NO_COUNTRY' | translate)
+                  }}
+                </td>
+                <td>
+                  <div class="text-muted small">
+                    {{ user.createdAtUtc | date: 'dd/MM/yyyy HH:mm' }}
+                  </div>
+                </td>
+                <td class="actions-cell text-lg-end">
+                  <button
+                    mat-icon-button
+                    type="button"
+                    (click)="openEditDialog(user)"
+                    [disabled]="loadingUsers"
+                    [title]="'USERS.EDIT.TITLE' | translate"
+                  >
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button
+                    mat-icon-button
+                    type="button"
+                    color="warn"
+                    (click)="confirmDelete(user)"
+                    [disabled]="loadingUsers"
+                    [title]="'USERS.MESSAGES.DELETE_TITLE' | translate"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 mt-3"
+        >
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="previousPage()"
+            [disabled]="!hasPreviousPage || loadingUsers"
+          >
+            {{ 'USERS.TABLE.PREVIOUS' | translate }}
+          </button>
+          <span class="text-muted small">
+            {{
+              'USERS.TABLE.PAGE_INFO'
+                | translate
+                  : {
+                      page: totalPages === 0 ? 0 : page,
+                      pages: totalPages
+                    }
+            }}
+          </span>
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="nextPage()"
+            [disabled]="!hasNextPage || loadingUsers"
+          >
+            {{ 'USERS.TABLE.NEXT' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

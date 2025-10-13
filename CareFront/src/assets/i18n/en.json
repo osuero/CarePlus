@@ -1,0 +1,288 @@
+{
+  "MENUITEMS": {
+    "MAIN": {
+      "TEXT": "Main"
+    },
+    "DASHBOARD": {
+      "TEXT": "Dashboard",
+      "LIST": {
+        "DASHBOARD1": "Dashboard 1",
+        "DASHBOARD2": "Dashboard 2",
+        "DOCTOR-DASHBOARD": "Doctor Dashboard",
+        "PATIENT-DASHBOARD": "Patient Dashboard",
+        "NURSE-DASHBOARD": "Nurse Dashboard"
+      }
+    },
+    "APPOINTMENTS": {
+      "TEXT": "Appointments",
+      "LIST": {
+        "APPOINTMENT-CALENDAR": "Appointment Calendar",
+        "VIEW-APPOINTMENT": "View Appointment",
+        "BOOK-APPOINTMENT": "Book Appointment",
+        "EDIT-APPOINTMENT": "Edit Appointment"
+      }
+    },
+    "DOCTORS": {
+      "TEXT": "Doctors",
+      "LIST": {
+        "ALL-DOCTOR": "All Doctors",
+        "ADD-DOCTOR": "Add Doctor",
+        "EDIT-DOCTOR": "Edit Doctor",
+        "ASSIGN-DEPARTMENT": "Assign Department",
+        "SHIFT-MANAGEMENT": "Shift Management",
+        "PROFILE": "Doctor Profile"
+      }
+    },
+    "STAFF": {
+      "TEXT": "Staff",
+      "LIST": {
+        "ALL-STAFF": "All Staff",
+        "ADD-STAFF": "Add Staff",
+        "EDIT-STAFF": "Edit Staff",
+        "PROFILE": "Staff Profile"
+      }
+    },
+    "PATIENTS": {
+      "TEXT": "Patients",
+      "LIST": {
+        "ALL-PATIENT": "All Patients",
+        "ADD-PATIENT": "Add Patient",
+        "EDIT-PATIENT": "Edit Patient",
+        "PATIENT-RECORDS": "Patient Records",
+        "PROFILE": "Patient Profile"
+      }
+    },
+    "ROOMS": {
+      "TEXT": "Room Allotment",
+      "LIST": {
+        "ALLOTED-ROOMS": "Alloted Rooms",
+        "NEW-ALLOTMENT": "New Allotment",
+        "EDIT-ALLOTMENT": "Edit Allotment",
+        "ROOMS-BY-DEPARTMENT": "Rooms By Department",
+        "ADD-ROOM": "Add Room"
+      }
+    },
+    "ACCOUNTS": {
+      "TEXT": "Accounts",
+      "LIST": {
+        "BILL-LIST": "Bill List",
+        "ADD-BILL": "Add Bill",
+        "INCOME": "Income",
+        "EXPENSES": "Expenses",
+        "INCOME-REPORT": "Income Report",
+        "INVOICE": "Invoice"
+      }
+    },
+    "RECORDS": {
+      "TEXT": "Records",
+      "LIST": {
+        "BIRTH-RECORDS": "Birth Records",
+        "DEATH-RECORDS": "Death Records"
+      }
+    },
+    "AMBULANCE": {
+      "TEXT": "Ambulance",
+      "LIST": {
+        "AMBULANCE-CALL-LIST": "Ambulance Call List",
+        "AMBULANCE-LIST": "Ambulance List"
+      }
+    },
+    "PHARMACY": {
+      "TEXT": "Pharmacy",
+      "LIST": {
+        "MEDICINE-LIST": "Medicine List",
+        "ADD-MEDICINE": "Add Medicine"
+      }
+    },
+    "BLOOD-BANK": {
+      "TEXT": "Blood Bank",
+      "LIST": {
+        "BLOOD-STOCK": "Blood Stock",
+        "BLOOD-DONOR": "Blood Donor",
+        "BLOOD-ISSUED": "Blood Issued"
+      }
+    },
+    "DEPARTMENTS": {
+      "TEXT": "Departments",
+      "LIST": {
+        "DEPARTMENT-LIST": "Department List",
+        "ADD-DEPARTMENT": "Add Department"
+      }
+    },
+    "INVENTORY": {
+      "TEXT": "Inventory",
+      "LIST": {
+        "ITEM-STOCK-LIST": "Item Stock List",
+        "ISSUED-ITEMS": "Issued Items"
+      }
+    },
+    "HR": {
+      "TEXT": "Human Resources",
+      "LIST": {
+        "LEAVE-REQUESTS": "Leave Requests",
+        "LEAVE-BALANCE": "Leave Balance",
+        "LEAVE-TYPES": "Leave Types",
+        "HOLIDAYS": "Holidays",
+        "TODAY-ATTENDANCE": "Today's Attendance",
+        "EMP-ATTENDANCE": "Employee Attendance",
+        "ATTENDANCE-SHEET": "Attendance Sheet",
+        "EMPLOYEE-SALARY": "Employee Salary",
+        "PAYSLIP": "Payslip"
+      }
+    },
+    "INSURANCE": {
+      "TEXT": "Insurance",
+      "LIST": {
+        "PATIENT-INSURANCE": "Patient Insurance",
+        "NEW-CLAIM": "New Claim",
+        "CLAIM-STATUS": "Claim Status",
+        "INSURANCE-PROVIDER": "Insurance Provider"
+      }
+    },
+    "DOCTOR": {
+      "DASHBOARD": "Dashboard",
+      "APPOINTMENTS": "Appointments",
+      "DOCTORS": "Doctors",
+      "PATIENTS": "Patients",
+      "SETTINGS": "Settings",
+      "CHAT": "Chat"
+    },
+    "PATIENT": {
+      "TEXT": "Patient",
+      "DASHBOARD": "Dashboard",
+      "APPOINTMENTS": {
+        "TEXT": "Appointments",
+        "LIST": {
+          "BOOK-APPOINTMENT": "Book Appointment",
+          "TODAY": "Today Appointments",
+          "UPCOMING": "Upcoming Appointments",
+          "PAST": "Past Appointments"
+        }
+      },
+      "PRESCRIPTIONS": "Prescriptions",
+      "MEDICAL-RECORD": "Medical Record",
+      "BILLING": "Billing",
+      "CHAT": "Chat",
+      "SETTINGS": "Settings"
+    },
+    "APPS": {
+      "TEXT": "-- Apps"
+    },
+    "CALENDAR": {
+      "TEXT": "Calendar"
+    },
+    "TASK": {
+      "TEXT": "Task"
+    },
+    "CONTACTS": {
+      "TEXT": "Contacts"
+    },
+    "USERS": {
+      "TEXT": "Users"
+    }
+  },
+  "USERS": {
+    "BREADCRUMB": {
+      "TITLE": "Users",
+      "ACTIVE": "Users"
+    },
+    "TABLE": {
+      "TITLE": "Registered users",
+      "PAGE_SIZE_LABEL": "Show",
+      "SEARCH_PLACEHOLDER": "Search by name or email",
+      "RANGE": "Showing {{start}} - {{end}} of {{total}} records",
+      "PAGE_INFO": "Page {{page}} of {{pages}}",
+      "ADD_BUTTON": "Create user",
+      "LOADING": "Loading...",
+      "EMPTY": "There are no registered users.",
+      "NO_RESULTS": "No users were found for the selected filters.",
+      "HEADERS": {
+        "USER": "User",
+        "GENDER": "Gender",
+        "AGE": "Age",
+        "CONTACT": "Contact",
+        "COUNTRY": "Country",
+        "CREATED": "Registered",
+        "ACTIONS": "Actions"
+      },
+      "NO_PHONE": "No phone",
+      "ID_LABEL": "ID",
+      "NO_COUNTRY": "Not specified",
+      "PREVIOUS": "Previous",
+      "NEXT": "Next"
+    },
+    "FORM": {
+      "TITLE": "Register user",
+      "FIELDS": {
+        "FIRST_NAME": {
+          "LABEL": "First name",
+          "PLACEHOLDER": "First name",
+          "ERROR": "First name is required."
+        },
+        "LAST_NAME": {
+          "LABEL": "Last name",
+          "PLACEHOLDER": "Last name",
+          "ERROR": "Last name is required."
+        },
+        "EMAIL": {
+          "LABEL": "Email",
+          "PLACEHOLDER": "user@email.com",
+          "REQUIRED_ERROR": "Email is required.",
+          "FORMAT_ERROR": "Please enter a valid email."
+        },
+        "PHONE": {
+          "LABEL": "Phone",
+          "PLACEHOLDER": "+1 000 000 0000"
+        },
+        "IDENTIFICATION": {
+          "LABEL": "Identification",
+          "PLACEHOLDER": "Document"
+        },
+        "GENDER": {
+          "LABEL": "Gender",
+          "ERROR": "Gender is required."
+        },
+        "COUNTRY": {
+          "LABEL": "Country"
+        },
+        "DATE_OF_BIRTH": {
+          "LABEL": "Date of birth",
+          "ERROR": "Date of birth is required."
+        }
+      },
+      "GENDER_OPTIONS": {
+        "MALE": "Male",
+        "FEMALE": "Female",
+        "OTHER": "Other"
+      },
+      "BUTTONS": {
+        "SUBMIT": "Register user",
+        "RESET": "Clear"
+      }
+    },
+    "MESSAGES": {
+      "SUCCESS_TITLE": "User registered",
+      "SUCCESS_BODY": "The user was registered successfully.",
+      "ERROR_TITLE": "Registration error",
+      "ERROR_BODY": "We could not register the user.",
+      "UPDATE_TITLE": "User updated",
+      "UPDATE_BODY": "The user was updated successfully.",
+      "DELETE_TITLE": "Delete user",
+      "DELETE_CONFIRM": "Are you sure you want to delete {{name}}?",
+      "DELETE_SUCCESS": "The user was deleted successfully.",
+      "DELETE_CANCELLED": "The operation was cancelled.",
+      "DELETE_CONFIRM_BUTTON": "Yes, delete",
+      "DELETE_CANCEL_BUTTON": "Cancel",
+      "LOAD_ERROR_TITLE": "Load error",
+      "LOAD_ERROR_BODY": "We could not fetch the user list.",
+      "COUNTRIES_WARNING": "The country list could not be loaded."
+    },
+    "EDIT": {
+      "TITLE": "Edit user",
+      "SAVE": "Save changes"
+    },
+    "DIALOG": {
+      "CANCEL": "Cancel"
+    }
+  }
+}

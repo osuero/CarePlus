@@ -1,0 +1,4 @@
+/* Style the mat-icon to look clickable */
+.file-input + .mat-icon {
+  cursor: pointer; /* Make the icon clickable */
+}

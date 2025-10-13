@@ -1,0 +1,42 @@
+.patient-profile-image {
+  img {
+    border: 3px solid #2196f3;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.mat-mdc-card {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.chart-container {
+  height: 350px;
+  width: 100%;
+}
+
+.mat-mdc-chip {
+  font-weight: 500;
+}
+
+.mat-column-actions {
+  width: 120px;
+  text-align: center;
+}
+
+.mat-mdc-icon-button {
+  margin: 0 4px;
+}
+
+.text-muted {
+  color: #757575 !important;
+}
+
+.mat-mdc-tab-group {
+  margin-top: 16px;
+}
+
+.mat-mdc-table {
+  width: 100%;
+}
