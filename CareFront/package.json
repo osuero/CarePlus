@@ -1,0 +1,11 @@
+{
+  "name": "carefront",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm install --prefix care-plus",
+    "dev": "npm run dev --prefix care-plus",
+    "start": "npm start --prefix care-plus",
+    "build": "npm run build --prefix care-plus",
+    "test": "npm run test --prefix care-plus"
+  }
+}
