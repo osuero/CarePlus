@@ -15,7 +15,7 @@ import { UserService } from '../../shared/services/user.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './user-registration.component.html',
-  styleUrl: './user-registration.component.css'
+  styleUrls: ['./user-registration.component.scss']
 })
 export class UserRegistrationComponent {
   private readonly fb = inject(FormBuilder);

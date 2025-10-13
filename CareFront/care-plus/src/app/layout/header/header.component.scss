@@ -1,0 +1,106 @@
+.header {
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: var(--clr-surface);
+  border-bottom: 1px solid var(--clr-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.breadcrumbs {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.select-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 140px;
+}
+
+.label {
+  font-size: 0.75rem;
+  color: var(--clr-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.profile {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.profile img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  box-shadow: var(--shadow-2);
+  object-fit: cover;
+}
+
+.profile .menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-1);
+  padding: 10px;
+  display: grid;
+  gap: 6px;
+  width: 180px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.icon-btn app-icon {
+  display: inline-flex;
+}
+
+.icon-btn app-icon .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.profile:hover .menu,
+.profile:focus-within .menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+@media (max-width: 960px) {
+  .header {
+    padding: 0 16px;
+    gap: 12px;
+  }
+
+  .actions {
+    gap: 12px;
+  }
+
+  .select-group {
+    display: none;
+  }
+}

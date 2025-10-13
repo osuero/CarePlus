@@ -1,0 +1,33 @@
+/* Brand palette inspired by the Cliniva preview */
+:root {
+  --clr-bg: #f5f7fb;
+  --clr-surface: #ffffff;
+  --clr-text: #1e293b;
+  --clr-text-muted: #6b7280;
+
+  --clr-primary: #3b82f6;
+  --clr-primary-weak: #e8f0ff;
+  --clr-success: #22c55e;
+  --clr-warning: #fb923c;
+  --clr-info: #8b5cf6;
+  --clr-accent: #10b981;
+
+  --clr-border: #e5e7eb;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --shadow-1: 0 10px 25px rgba(2, 6, 23, 0.06);
+  --shadow-2: 0 2px 8px rgba(2, 6, 23, 0.06);
+
+  --sidebar-w: 280px;
+  --header-h: 68px;
+}
+
+html.theme-dark {
+  --clr-bg: #0b1020;
+  --clr-surface: #0f172a;
+  --clr-text: #e2e8f0;
+  --clr-text-muted: #94a3b8;
+  --clr-border: #1f2937;
+  --shadow-1: 0 10px 25px rgba(0, 0, 0, 0.5);
+  --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.4);
+}

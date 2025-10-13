@@ -1,0 +1,40 @@
+<header class="header">
+  <div class="left">
+    <button class="icon-btn" type="button" (click)="toggleSidebar.emit()">
+      <app-icon name="menu"></app-icon>
+    </button>
+    <div class="breadcrumbs">
+      <span class="crumb">{{ pageTitleKey | translate }}</span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="icon-btn" type="button">
+      <app-icon name="notifications"></app-icon>
+    </button>
+
+    <div class="select-group">
+      <label class="label">{{ 'layout.language' | translate }}</label>
+      <select [value]="activeLang()" (change)="changeLang($any($event.target).value)">
+        <option *ngFor="let option of languages" [value]="option.code">{{ option.label }}</option>
+      </select>
+    </div>
+
+    <div class="select-group">
+      <label class="label">{{ 'userRegistration.tenant' | translate }}</label>
+      <select [value]="activeTenant()" (change)="changeTenant($any($event.target).value)">
+        <option *ngFor="let tenant of tenants" [value]="tenant.id">
+          {{ tenant.labelKey | translate }}
+        </option>
+      </select>
+    </div>
+
+    <div class="profile">
+      <img src="assets/avatar-ella.svg" alt="profile avatar" />
+      <div class="menu">
+        <button class="btn ghost" type="button">{{ 'app.name' | translate }}</button>
+        <button class="btn ghost" type="button" (click)="logout()">{{ 'layout.logout' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</header>
