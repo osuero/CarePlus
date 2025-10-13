@@ -1,0 +1,17 @@
+.pc-header {
+  background: var(--bs-body-bg);
+}
+
+.pc-sidebar .logo-text {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.pc-container {
+  min-height: calc(100vh - 120px);
+}
+
+.pc-footer {
+  background: var(--bs-body-bg);
+}
+

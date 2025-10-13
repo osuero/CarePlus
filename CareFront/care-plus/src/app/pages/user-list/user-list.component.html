@@ -1,0 +1,134 @@
+<div class="row g-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2">
+        <div>
+          <h5 class="mb-1">{{ 'users.title' | translate }}</h5>
+          <p class="text-muted mb-0">{{ 'users.description' | translate }}</p>
+        </div>
+        <a class="btn btn-primary" routerLink="/users/register">
+          <i class="ti ti-plus me-2"></i>
+          {{ 'users.registerButton' | translate }}
+        </a>
+      </div>
+
+      <div class="card-body">
+        <div class="row g-3 align-items-center mb-4">
+          <div class="col-md-6">
+            <label class="form-label text-muted small mb-1" for="search">
+              {{ 'users.searchLabel' | translate }}
+            </label>
+            <input
+              id="search"
+              type="search"
+              class="form-control"
+              [formControl]="searchControl"
+              placeholder="{{ 'users.searchPlaceholder' | translate }}"
+            />
+          </div>
+          <div class="col-md-6 text-md-end text-muted small">
+            <span>
+              {{ 'users.totalLabel' | translate:{ total: totalCount() } }}
+            </span>
+          </div>
+        </div>
+
+        <div class="table-responsive position-relative">
+          <table class="table align-middle mb-0">
+            <thead>
+              <tr>
+                <th scope="col">
+                  <button type="button" class="table-sort" (click)="changeSort('firstName')">
+                    {{ 'users.columns.firstName' | translate }}
+                    <i class="ti" [ngClass]="{
+                      'ti-arrows-sort': sortField() !== 'firstName',
+                      'ti-arrow-up': sortField() === 'firstName' && sortDirection() === 'asc',
+                      'ti-arrow-down': sortField() === 'firstName' && sortDirection() === 'desc'
+                    }"></i>
+                  </button>
+                </th>
+                <th scope="col">
+                  <button type="button" class="table-sort" (click)="changeSort('lastName')">
+                    {{ 'users.columns.lastName' | translate }}
+                    <i class="ti" [ngClass]="{
+                      'ti-arrows-sort': sortField() !== 'lastName',
+                      'ti-arrow-up': sortField() === 'lastName' && sortDirection() === 'asc',
+                      'ti-arrow-down': sortField() === 'lastName' && sortDirection() === 'desc'
+                    }"></i>
+                  </button>
+                </th>
+                <th scope="col">{{ 'users.columns.email' | translate }}</th>
+                <th scope="col">{{ 'users.columns.identification' | translate }}</th>
+                <th scope="col">{{ 'users.columns.country' | translate }}</th>
+                <th scope="col">
+                  <button type="button" class="table-sort" (click)="changeSort('createdAtUtc')">
+                    {{ 'users.columns.createdAt' | translate }}
+                    <i class="ti" [ngClass]="{
+                      'ti-arrows-sort': sortField() !== 'createdAtUtc',
+                      'ti-arrow-up': sortField() === 'createdAtUtc' && sortDirection() === 'asc',
+                      'ti-arrow-down': sortField() === 'createdAtUtc' && sortDirection() === 'desc'
+                    }"></i>
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="isLoading()">
+                <td colspan="6" class="text-center py-4">
+                  <span class="spinner-border spinner-border-sm me-2"></span>
+                  {{ 'users.loading' | translate }}
+                </td>
+              </tr>
+              <tr *ngIf="!isLoading() && !hasResults()">
+                <td colspan="6" class="text-center py-4 text-muted">
+                  {{ loadError() || ('users.noResults' | translate) }}
+                </td>
+              </tr>
+              <tr *ngFor="let user of sortedUsers(); trackBy: trackByUserId">
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.identification || ('users.notProvided' | translate) }}</td>
+                <td>{{ user.country || ('users.notProvided' | translate) }}</td>
+                <td>{{ user.createdAtUtc | date:'medium' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="d-flex flex-column flex-md-row align-items-center justify-content-between mt-4 gap-3">
+          <div class="text-muted small">
+            {{ 'users.paginationLabel' | translate:{
+              page: page(),
+              totalPages: totalPages(),
+              pageSize: pageSize(),
+              total: totalCount()
+            } }}
+          </div>
+          <div class="btn-group" role="group" aria-label="pagination">
+            <button type="button" class="btn btn-outline-secondary" [disabled]="page() === 1" (click)="changePage(-1)">
+              <i class="ti ti-chevron-left"></i>
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              *ngFor="let pageNumber of pageNumbers(); trackBy: trackByPageNumber"
+              [class.active]="page() === pageNumber"
+              (click)="goToPage(pageNumber)"
+            >
+              {{ pageNumber }}
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              [disabled]="page() === totalPages()"
+              (click)="changePage(1)"
+            >
+              <i class="ti ti-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

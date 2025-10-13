@@ -1,0 +1,77 @@
+[
+  {
+    "ContainingType": "CarePlus.Api.Endpoints.UserEndpoints",
+    "Method": "SearchCountriesAsync",
+    "RelativePath": "api/users/countries",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "search",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IReadOnlyList\u00601[[CarePlus.Application.DTOs.Countries.CountryResponse, CarePlus.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Users"
+    ],
+    "EndpointName": "SearchCountries"
+  },
+  {
+    "ContainingType": "CarePlus.Api.Endpoints.UserEndpoints",
+    "Method": "RegisterAsync",
+    "RelativePath": "api/users/register",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "CarePlus.Application.DTOs.Users.RegisterUserRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "CarePlus.Application.DTOs.Users.UserResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 201
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Users"
+    ],
+    "EndpointName": "RegisterUser"
+  }
+]

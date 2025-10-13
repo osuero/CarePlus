@@ -1,0 +1,85 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\CarePlus\\CareBack\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4C737B8D-CF51-414A-A8F1-794D2C900310}|CarePlus.Api\\CarePlus.Api.csproj|c:\\careplus\\careback\\careplus.api\\endpoints\\userendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C737B8D-CF51-414A-A8F1-794D2C900310}|CarePlus.Api\\CarePlus.Api.csproj|solutionrelative:careplus.api\\endpoints\\userendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 12,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{0849e941-4665-42e5-8dd0-e4c8da15dbd0}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0849e941-4665-42e5-8dd0-e4c8da15dbd0}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{0849e941-4665-42e5-8dd0-e4c8da15dbd0}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserEndpoints.cs",
+              "DocumentMoniker": "C:\\CarePlus\\CareBack\\CarePlus.Api\\Endpoints\\UserEndpoints.cs",
+              "RelativeDocumentMoniker": "CarePlus.Api\\Endpoints\\UserEndpoints.cs",
+              "ToolTip": "C:\\CarePlus\\CareBack\\CarePlus.Api\\Endpoints\\UserEndpoints.cs",
+              "RelativeToolTip": "CarePlus.Api\\Endpoints\\UserEndpoints.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAA0wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-12T23:37:26.286Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+.card {
+  box-shadow: var(--pc-card-shadow, 0 1rem 3rem rgba(0, 0, 0, 0.175));
+}
+
+.table-sort {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: inherit;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--bs-primary);
+    outline: none;
+  }
+}
+
+.btn-group .btn.active {
+  background-color: var(--bs-primary);
+  color: #fff;
+}
+
+.spinner-border {
+  vertical-align: middle;
+}

@@ -1,0 +1,17 @@
+C:\CarePlus\CareBack\CarePlus.Infrastructure\obj\Debug\net9.0\CarePlus.Infrastructure.csproj.AssemblyReference.cache
+C:\CarePlus\CareBack\CarePlus.Infrastructure\obj\Debug\net9.0\CarePlus.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\CarePlus\CareBack\CarePlus.Infrastructure\obj\Debug\net9.0\CarePlus.Infrastructure.AssemblyInfoInputs.cache
+C:\CarePlus\CareBack\CarePlus.Infrastructure\obj\Debug\net9.0\CarePlus.Infrastructure.AssemblyInfo.cs
+C:\CarePlus\CareBack\CarePlus.Infrastructure\obj\Debug\net9.0\CarePlus.Infrastructure.csproj.CoreCompileInputs.cache
+C:\CarePlus\CareBack\CarePlus.Infrastructure\bin\Debug\net9.0\CarePlus.Infrastructure.deps.json
+C:\CarePlus\CareBack\CarePlus.Infrastructure\bin\Debug\net9.0\CarePlus.Infrastructure.dll
+C:\CarePlus\CareBack\CarePlus.Infrastructure\bin\Debug\net9.0\CarePlus.Infrastructure.pdb
+C:\CarePlus\CareBack\CarePlus.Infrastructure\bin\Debug\net9.0\CarePlus.Application.dll
+C:\CarePlus\CareBack\CarePlus.Infrastructure\bin\Debug\net9.0\CarePlus.Domain.dll
+C:\CarePlus\CareBack\CarePlus.Infrastructure\bin\Debug\net9.0\CarePlus.Application.pdb
+C:\CarePlus\CareBack\CarePlus.Infrastructure\bin\Debug\net9.0\CarePlus.Domain.pdb
+C:\CarePlus\CareBack\CarePlus.Infrastructure\obj\Debug\net9.0\CarePlus.70A4DFC0.Up2Date
+C:\CarePlus\CareBack\CarePlus.Infrastructure\obj\Debug\net9.0\CarePlus.Infrastructure.dll
+C:\CarePlus\CareBack\CarePlus.Infrastructure\obj\Debug\net9.0\refint\CarePlus.Infrastructure.dll
+C:\CarePlus\CareBack\CarePlus.Infrastructure\obj\Debug\net9.0\CarePlus.Infrastructure.pdb
+C:\CarePlus\CareBack\CarePlus.Infrastructure\obj\Debug\net9.0\ref\CarePlus.Infrastructure.dll

@@ -1,0 +1,15 @@
+C:\CarePlus\CareBack\CarePlus.Application\obj\Debug\net9.0\CarePlus.Application.csproj.AssemblyReference.cache
+C:\CarePlus\CareBack\CarePlus.Application\obj\Debug\net9.0\CarePlus.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\CarePlus\CareBack\CarePlus.Application\obj\Debug\net9.0\CarePlus.Application.AssemblyInfoInputs.cache
+C:\CarePlus\CareBack\CarePlus.Application\obj\Debug\net9.0\CarePlus.Application.AssemblyInfo.cs
+C:\CarePlus\CareBack\CarePlus.Application\obj\Debug\net9.0\CarePlus.Application.csproj.CoreCompileInputs.cache
+C:\CarePlus\CareBack\CarePlus.Application\bin\Debug\net9.0\CarePlus.Application.deps.json
+C:\CarePlus\CareBack\CarePlus.Application\bin\Debug\net9.0\CarePlus.Application.dll
+C:\CarePlus\CareBack\CarePlus.Application\bin\Debug\net9.0\CarePlus.Application.pdb
+C:\CarePlus\CareBack\CarePlus.Application\bin\Debug\net9.0\CarePlus.Domain.dll
+C:\CarePlus\CareBack\CarePlus.Application\bin\Debug\net9.0\CarePlus.Domain.pdb
+C:\CarePlus\CareBack\CarePlus.Application\obj\Debug\net9.0\CarePlus.AB089B5B.Up2Date
+C:\CarePlus\CareBack\CarePlus.Application\obj\Debug\net9.0\CarePlus.Application.dll
+C:\CarePlus\CareBack\CarePlus.Application\obj\Debug\net9.0\refint\CarePlus.Application.dll
+C:\CarePlus\CareBack\CarePlus.Application\obj\Debug\net9.0\CarePlus.Application.pdb
+C:\CarePlus\CareBack\CarePlus.Application\obj\Debug\net9.0\ref\CarePlus.Application.dll

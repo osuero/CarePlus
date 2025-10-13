@@ -1,0 +1,73 @@
+{
+  "app": {
+    "name": "CarePlus"
+  },
+  "nav": {
+    "users": "Usuarios",
+    "registerUser": "Registro de usuarios"
+  },
+  "layout": {
+    "language": "Idioma",
+    "logout": "Cerrar sesion"
+  },
+  "users": {
+    "title": "Usuarios",
+    "description": "Consulta y administra los usuarios registrados.",
+    "registerButton": "Registrar usuario",
+    "searchLabel": "Buscar",
+    "searchPlaceholder": "Buscar por nombre, apellido o identificacion",
+    "totalLabel": "Total: {{total}}",
+    "columns": {
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Correo electronico",
+      "identification": "Identificacion",
+      "country": "Pais",
+      "createdAt": "Fecha de registro"
+    },
+    "loading": "Cargando usuarios...",
+    "noResults": "No se encontraron usuarios.",
+    "notProvided": "No disponible",
+    "paginationLabel": "Pagina {{page}} de {{totalPages}} - {{pageSize}} por pagina - {{total}} usuarios",
+    "errorLoading": "No se pudieron cargar los usuarios."
+  },
+  "userRegistration": {
+    "title": "Registro de usuarios",
+    "description": "Crea la cuenta del paciente para acceder a los servicios de CarePlus.",
+    "tenant": "Tenant",
+    "tenantOptions": {
+      "default": "Predeterminado",
+      "clinicA": "Clinica A",
+      "clinicB": "Clinica B"
+    },
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "email": "Correo electronico",
+    "phone": "Telefono",
+    "identification": "Identificacion",
+    "country": "Pais",
+    "countryLoading": "Cargando paises...",
+    "countryNoResults": "No se encontraron paises.",
+    "gender": "Genero",
+    "birthDate": "Fecha de nacimiento",
+    "genderOptions": {
+      "female": "Femenino",
+      "male": "Masculino",
+      "nonBinary": "No binario",
+      "other": "Otro"
+    },
+    "submit": "Registrar",
+    "reset": "Limpiar",
+    "calculatedAge": "Edad calculada: {{age}} anos",
+    "success": "Registro completado exitosamente.",
+    "error": "No se pudo completar el registro."
+  },
+  "validation": {
+    "required": "Este campo es obligatorio.",
+    "email": "Introduce un correo valido.",
+    "futureDate": "La fecha no puede estar en el futuro.",
+    "minDate": "Proporciona una fecha de nacimiento valida.",
+    "invalidDate": "Introduce una fecha valida.",
+    "phone": "Introduce un telefono valido."
+  }
+}
