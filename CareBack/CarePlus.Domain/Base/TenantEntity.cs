@@ -18,5 +18,33 @@ public abstract class TenantEntity
 
     public DateTime UpdatedAtUtc { get; set; } = DateTime.UtcNow;
 
+    public bool IsDeleted { get; private set; }
+
+    public DateTime? DeletedAtUtc { get; private set; }
+
     public void Touch() => UpdatedAtUtc = DateTime.UtcNow;
+
+    public void MarkDeleted()
+    {
+        if (IsDeleted)
+        {
+            return;
+        }
+
+        IsDeleted = true;
+        DeletedAtUtc = DateTime.UtcNow;
+        Touch();
+    }
+
+    public void Restore()
+    {
+        if (!IsDeleted)
+        {
+            return;
+        }
+
+        IsDeleted = false;
+        DeletedAtUtc = null;
+        Touch();
+    }
 }

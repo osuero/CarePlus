@@ -12,7 +12,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.HasKey(user => user.Id);
 
-        builder.HasIndex(user => new { user.TenantId, user.Email }).IsUnique();
+        builder.HasIndex(user => new { user.TenantId, user.Email })
+            .IsUnique()
+            .HasFilter("[IsDeleted] = 0");
 
         builder.Property(user => user.TenantId)
             .HasMaxLength(64)
@@ -46,10 +48,25 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(user => user.DateOfBirth)
             .HasColumnType("date");
 
+        builder.Property(user => user.RoleId);
+
+        builder.HasOne(user => user.Role)
+            .WithMany()
+            .HasForeignKey(user => user.RoleId)
+            .OnDelete(DeleteBehavior.Restrict);
+
         builder.Property(user => user.CreatedAtUtc)
             .HasColumnType("datetime2");
 
         builder.Property(user => user.UpdatedAtUtc)
             .HasColumnType("datetime2");
+
+        builder.Property(user => user.IsDeleted)
+            .HasDefaultValue(false);
+
+        builder.Property(user => user.DeletedAtUtc)
+            .HasColumnType("datetime2");
+
+        builder.HasQueryFilter(user => !user.IsDeleted);
     }
 }

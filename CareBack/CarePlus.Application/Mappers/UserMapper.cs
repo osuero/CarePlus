@@ -20,7 +20,10 @@ internal static class UserMapper
             Gender = user.Gender.ToString(),
             DateOfBirth = user.DateOfBirth,
             Age = user.Age,
-            CreatedAtUtc = user.CreatedAtUtc
+            CreatedAtUtc = user.CreatedAtUtc,
+            UpdatedAtUtc = user.UpdatedAtUtc,
+            RoleId = user.RoleId,
+            RoleName = user.Role?.Name
         };
     }
 }

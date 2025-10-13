@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\CarePlus\\CareBack\\CarePlus.Domain\\CarePlus.Domain.csproj",
+      "projectUniqueName": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Domain\\CarePlus.Domain.csproj",
       "projectName": "CarePlus.Domain",
-      "projectPath": "C:\\CarePlus\\CareBack\\CarePlus.Domain\\CarePlus.Domain.csproj",
+      "projectPath": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Domain\\CarePlus.Domain.csproj",
       "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-      "outputPath": "C:\\CarePlus\\CareBack\\CarePlus.Domain\\obj\\",
+      "outputPath": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cvfc2FVsnaU=",
+  "dgSpecHash": "YeH1KW9ae30=",
   "success": true,
-  "projectFilePath": "C:\\CarePlus\\CareBack\\CarePlus.Domain\\CarePlus.Domain.csproj",
+  "projectFilePath": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Domain\\CarePlus.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HP\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.305\\microsoft.net.sdk.compilers.toolset.9.0.305.nupkg.sha512"
   ],

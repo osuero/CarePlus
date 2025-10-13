@@ -9,3 +9,15 @@ C:\CarePlus\CareBack\CarePlus.Domain\obj\Debug\net9.0\CarePlus.Domain.dll
 C:\CarePlus\CareBack\CarePlus.Domain\obj\Debug\net9.0\refint\CarePlus.Domain.dll
 C:\CarePlus\CareBack\CarePlus.Domain\obj\Debug\net9.0\CarePlus.Domain.pdb
 C:\CarePlus\CareBack\CarePlus.Domain\obj\Debug\net9.0\ref\CarePlus.Domain.dll
+C:\CarePlus\CarePlus\CareBack\CarePlus.Domain\bin\Debug\net9.0\CarePlus.Domain.deps.json
+C:\CarePlus\CarePlus\CareBack\CarePlus.Domain\bin\Debug\net9.0\CarePlus.Domain.dll
+C:\CarePlus\CarePlus\CareBack\CarePlus.Domain\bin\Debug\net9.0\CarePlus.Domain.pdb
+C:\CarePlus\CarePlus\CareBack\CarePlus.Domain\obj\Debug\net9.0\CarePlus.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\CarePlus\CarePlus\CareBack\CarePlus.Domain\obj\Debug\net9.0\CarePlus.Domain.AssemblyInfoInputs.cache
+C:\CarePlus\CarePlus\CareBack\CarePlus.Domain\obj\Debug\net9.0\CarePlus.Domain.AssemblyInfo.cs
+C:\CarePlus\CarePlus\CareBack\CarePlus.Domain\obj\Debug\net9.0\CarePlus.Domain.csproj.CoreCompileInputs.cache
+C:\CarePlus\CarePlus\CareBack\CarePlus.Domain\obj\Debug\net9.0\CarePlus.Domain.sourcelink.json
+C:\CarePlus\CarePlus\CareBack\CarePlus.Domain\obj\Debug\net9.0\CarePlus.Domain.dll
+C:\CarePlus\CarePlus\CareBack\CarePlus.Domain\obj\Debug\net9.0\refint\CarePlus.Domain.dll
+C:\CarePlus\CarePlus\CareBack\CarePlus.Domain\obj\Debug\net9.0\CarePlus.Domain.pdb
+C:\CarePlus\CarePlus\CareBack\CarePlus.Domain\obj\Debug\net9.0\ref\CarePlus.Domain.dll

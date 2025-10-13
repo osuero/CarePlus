@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jL35uYKFMSA=",
+  "dgSpecHash": "0+1EsMM1Euc=",
   "success": true,
-  "projectFilePath": "C:\\CarePlus\\CareBack\\CarePlus.Api\\CarePlus.Api.csproj",
+  "projectFilePath": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\CarePlus.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\HP\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

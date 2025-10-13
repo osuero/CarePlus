@@ -16,4 +16,7 @@ public class UserResponse
     public DateOnly DateOfBirth { get; init; }
     public int Age { get; init; }
     public DateTime CreatedAtUtc { get; init; }
+    public DateTime UpdatedAtUtc { get; init; }
+    public Guid? RoleId { get; init; }
+    public string? RoleName { get; init; }
 }

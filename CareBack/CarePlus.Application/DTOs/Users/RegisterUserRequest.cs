@@ -28,4 +28,9 @@ public class RegisterUserRequest
 
     [Required]
     public DateOnly? DateOfBirth { get; set; }
+
+    [MaxLength(64)]
+    public string? TenantId { get; set; }
+
+    public Guid? RoleId { get; set; }
 }

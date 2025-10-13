@@ -47,7 +47,10 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services
     .AddGraphQLServer()
     .AddQueryType(d => d.Name("Query"))
-    .AddTypeExtension<UserQueries>();
+    .AddTypeExtension<UserQueries>()
+    .AddTypeExtension<RoleQueries>()
+    .AddMutationType(d => d.Name("Mutation"))
+    .AddTypeExtension<RoleMutations>();
 
 var app = builder.Build();
 

@@ -16,6 +16,7 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
     {
         return await _context.Users
             .AsNoTracking()
+            .Include(user => user.Role)
             .FirstOrDefaultAsync(user => user.TenantId == tenantId && user.Email == email, cancellationToken);
     }
 
@@ -23,7 +24,16 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
     {
         return await _context.Users
             .AsNoTracking()
+            .Include(user => user.Role)
             .FirstOrDefaultAsync(user => user.TenantId == tenantId && user.Id == id, cancellationToken);
+    }
+
+    public async Task<User?> GetByIdForUpdateAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        return await _context.Users
+            .IgnoreQueryFilters()
+            .Include(user => user.Role)
+            .FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
     }
 
     public async Task<IReadOnlyList<User>> SearchAsync(string tenantId, string? term, int skip, int take, CancellationToken cancellationToken = default)
@@ -31,6 +41,7 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
         var query = BuildSearchQuery(tenantId, term);
 
         return await query
+            .Include(user => user.Role)
             .OrderByDescending(user => user.CreatedAtUtc)
             .Skip(skip)
             .Take(take)
@@ -50,10 +61,24 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
         return user;
     }
 
+    public async Task<User> UpdateAsync(User user, CancellationToken cancellationToken = default)
+    {
+        _context.Users.Update(user);
+        await _context.SaveChangesAsync(cancellationToken);
+        return user;
+    }
+
+    public async Task DeleteAsync(User user, CancellationToken cancellationToken = default)
+    {
+        _context.Users.Update(user);
+        await _context.SaveChangesAsync(cancellationToken);
+    }
+
     private IQueryable<User> BuildSearchQuery(string tenantId, string? term)
     {
         var query = _context.Users
             .AsNoTracking()
+            .Include(user => user.Role)
             .Where(user => user.TenantId == tenantId);
 
         if (!string.IsNullOrWhiteSpace(term))

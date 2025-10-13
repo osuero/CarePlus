@@ -14,6 +14,8 @@ public class User : TenantEntity
     public string? Country { get; set; }
     public Gender Gender { get; set; } = Gender.Unknown;
     public DateOnly DateOfBirth { get; set; }
+    public Guid? RoleId { get; set; }
+    public Role? Role { get; set; }
 
     public int Age => CalculateAge(DateOfBirth, DateTime.UtcNow.Date);
 
