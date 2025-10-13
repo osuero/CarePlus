@@ -1,0 +1,223 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Add Room'" [items]="['Room']" [active_item]="'Add Room'"></app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Add New Room</h2>
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="roomForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-12">
+                  <h3 class="section-title"><i class="material-icons-outlined">article</i> Room Information</h3>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Room Number</mat-label>
+                    <mat-icon class="material-icons-outlined" matPrefix>tag</mat-icon>
+                    <input matInput formControlName="roomNumber" required>
+                    <mat-hint>Enter a unique room identifier</mat-hint>
+                    @if (roomForm.get('roomNumber')?.hasError('required')) {
+                      <mat-error>
+                        Room Number is required
+                      </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Department Name</mat-label>
+                    <mat-icon class="material-icons-outlined" matPrefix>business</mat-icon>
+                    <input matInput formControlName="departmentName" required>
+                    <mat-hint>Department this room belongs to</mat-hint>
+                    @if (roomForm.get('departmentName')?.hasError('required')) {
+                      <mat-error>
+                        Department Name is required
+                      </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Room Type</mat-label>
+                    <mat-icon class="material-icons-outlined" matPrefix>category</mat-icon>
+                    <mat-select formControlName="roomType" required>
+                      <mat-option [value]="'Single'">Single</mat-option>
+                      <mat-option [value]="'Double'">Double</mat-option>
+                      <mat-option [value]="'ICU'">ICU</mat-option>
+                      <mat-option [value]="'Operating Room'">Operating Room</mat-option>
+                    </mat-select>
+                    <mat-hint>Select the type of room</mat-hint>
+                    @if (roomForm.get('roomType')?.hasError('required')) {
+                      <mat-error>
+                        Room Type is required
+                      </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Floor</mat-label>
+                    <mat-icon class="material-icons-outlined" matPrefix>layers</mat-icon>
+                    <input matInput formControlName="floor" required>
+                    <mat-hint>Floor number where room is located</mat-hint>
+                    @if (roomForm.get('floor')?.hasError('required')) {
+                      <mat-error>
+                        Floor is required
+                      </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Bed Capacity</mat-label>
+                    <mat-icon class="material-icons-outlined" matPrefix>hotel</mat-icon>
+                    <input matInput type="number" formControlName="bedCapacity" required min="1">
+                    <mat-hint>Number of beds in this room</mat-hint>
+                    @if (roomForm.get('bedCapacity')?.hasError('required')) {
+                      <mat-error>
+                        Bed Capacity is required
+                      </mat-error>
+                    }
+                    @if (roomForm.get('bedCapacity')?.hasError('min')) {
+                      <mat-error>
+                        Bed Capacity must be at least 1
+                      </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Room Status</mat-label>
+                    <mat-icon class="material-icons-outlined" matPrefix>info</mat-icon>
+                    <mat-select formControlName="roomStatus" required>
+                      <mat-option [value]="'Available'">Available</mat-option>
+                      <mat-option [value]="'Occupied'">Occupied</mat-option>
+                      <mat-option [value]="'Under Maintenance'">Under Maintenance</mat-option>
+                    </mat-select>
+                    <mat-hint>Current availability status</mat-hint>
+                    @if (roomForm.get('roomStatus')?.hasError('required')) {
+                      <mat-error>
+                        Room Status is required
+                      </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <h3 class="section-title"><i class="material-icons-outlined">card_giftcard</i> Room Facilities</h3>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Room Category</mat-label>
+                    <mat-icon class="material-icons-outlined" matPrefix>class</mat-icon>
+                    <mat-select formControlName="roomCategory" required>
+                      <mat-option [value]="'Critical Care'">Critical Care</mat-option>
+                      <mat-option [value]="'Private'">Private</mat-option>
+                      <mat-option [value]="'General'">General</mat-option>
+                    </mat-select>
+                    <mat-hint>Select the category of room</mat-hint>
+                    @if (roomForm.get('roomCategory')?.hasError('required')) {
+                      <mat-error>
+                        Room Category is required
+                      </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Assigned Staff</mat-label>
+                    <mat-icon class="material-icons-outlined" matPrefix>people</mat-icon>
+                    <input matInput formControlName="assignedStaff" required>
+                    <mat-hint>Staff responsible for this room</mat-hint>
+                    @if (roomForm.get('assignedStaff')?.hasError('required')) {
+                      <mat-error>
+                        Assigned Staff is required
+                      </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Room Features</mat-label>
+                    <mat-icon class="material-icons-outlined" matPrefix>featured_play_list</mat-icon>
+                    <input matInput formControlName="roomFeatures" required>
+                    <mat-hint>List key features (e.g., TV, AC, etc.)</mat-hint>
+                    @if (roomForm.get('roomFeatures')?.hasError('required')) {
+                      <mat-error>
+                        Room Features are required
+                      </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Room Rate</mat-label>
+                    <mat-icon class="material-icons-outlined" matPrefix>attach_money</mat-icon>
+                    <input matInput type="number" formControlName="roomRate" required min="0">
+                    <mat-hint>Daily rate for this room</mat-hint>
+                    @if (roomForm.get('roomRate')?.hasError('required')) {
+                      <mat-error>
+                        Room Rate is required
+                      </mat-error>
+                    }
+                    @if (roomForm.get('roomRate')?.hasError('min')) {
+                      <mat-error>
+                        Room Rate must be a positive number
+                      </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Special Instructions</mat-label>
+                    <mat-icon class="material-icons-outlined" matPrefix>note</mat-icon>
+                    <textarea matInput formControlName="specialInstructions" rows="4"></textarea>
+                    <mat-hint>Any special notes or instructions for this room</mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row mt-4">
+                <div class="col-12">
+                  <button mat-raised-button color="primary" type="submit" [disabled]="!roomForm.valid || isSubmitting"
+                    class="me-2">
+                    @if (isSubmitting) {
+                      <span class="spinner-border spinner-border-sm mr-1"></span>
+                    }
+                    Submit
+                  </button>
+                  <button mat-stroked-button type="button" (click)="resetForm()">
+                    <mat-icon>refresh</mat-icon> Reset
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,247 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="avatarDetails">
+      <div class="modalTitle">
+        {{dialogTitle}}
+      </div>
+    </div>
+    <button mat-icon-button mat-dialog-close class="modal-close-button" aria-label="Close dialog" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="patientInsuranceForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Insurance ID</mat-label>
+            <input matInput formControlName="insurance_id" required>
+            @if (patientInsuranceForm.get('insurance_id')?.hasError('required')) {
+            <mat-error>
+              Insurance ID is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Patient ID</mat-label>
+            <input matInput formControlName="patient_id" required>
+            @if (patientInsuranceForm.get('patient_id')?.hasError('required')) {
+            <mat-error>
+              Patient ID is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Insurance Company Name</mat-label>
+            <input matInput formControlName="insurance_company_name" required>
+            @if (patientInsuranceForm.get('insurance_company_name')?.hasError('required')) {
+            <mat-error>
+              Insurance company name is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Insurance Policy Number</mat-label>
+            <input matInput formControlName="insurance_policy_number" required>
+            @if (patientInsuranceForm.get('insurance_policy_number')?.hasError('required')) {
+            <mat-error>
+              Insurance policy number is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Policy Type</mat-label>
+            <mat-select formControlName="policy_type" required>
+              <mat-option value="Individual">Individual</mat-option>
+              <mat-option value="Family">Family</mat-option>
+              <mat-option value="Corporate">Corporate</mat-option>
+            </mat-select>
+            @if (patientInsuranceForm.get('policy_type')?.hasError('required')) {
+            <mat-error>
+              Policy type is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Coverage Start Date</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="coverage_start_date" required>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+            @if (patientInsuranceForm.get('coverage_start_date')?.hasError('required')) {
+            <mat-error>
+              Coverage start date is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Coverage End Date</mat-label>
+            <input matInput [matDatepicker]="picker2" formControlName="coverage_end_date" required>
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+            @if (patientInsuranceForm.get('coverage_end_date')?.hasError('required')) {
+            <mat-error>
+              Coverage end date is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Coverage Amount</mat-label>
+            <input matInput formControlName="coverage_amount" type="number" required>
+            @if (patientInsuranceForm.get('coverage_amount')?.hasError('required')) {
+            <mat-error>
+              Coverage amount is required
+            </mat-error>
+            }
+            @if (patientInsuranceForm.get('coverage_amount')?.hasError('min')) {
+            <mat-error>
+              Coverage amount must be greater than or equal to 0
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Co-payment</mat-label>
+            <input matInput formControlName="co_payment" type="number" required>
+            @if (patientInsuranceForm.get('co_payment')?.hasError('required')) {
+            <mat-error>
+              Co-payment is required
+            </mat-error>
+            }
+            @if (patientInsuranceForm.get('co_payment')?.hasError('min')) {
+            <mat-error>
+              Co-payment must be greater than or equal to 0
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Policy Holder Name</mat-label>
+            <input matInput formControlName="policy_holder_name" required>
+            @if (patientInsuranceForm.get('policy_holder_name')?.hasError('required')) {
+            <mat-error>
+              Policy holder name is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Plan Type</mat-label>
+            <mat-select formControlName="plan_type" required>
+              <mat-option value="Premium">Premium</mat-option>
+              <mat-option value="Standard">Standard</mat-option>
+              <mat-option value="Basic">Basic</mat-option>
+              <mat-option value="Comprehensive">Comprehensive</mat-option>
+            </mat-select>
+            @if (patientInsuranceForm.get('plan_type')?.hasError('required')) {
+            <mat-error>
+              Plan type is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Benefits</mat-label>
+            <input matInput formControlName="benefits" required>
+            @if (patientInsuranceForm.get('benefits')?.hasError('required')) {
+            <mat-error>
+              Benefits are required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Insurance Status</mat-label>
+            <mat-select formControlName="insurance_status" required>
+              <mat-option [value]="'Active'">Active</mat-option>
+              <mat-option [value]="'Inactive'">Inactive</mat-option>
+            </mat-select>
+            @if (patientInsuranceForm.get('insurance_status')?.hasError('required')) {
+            <mat-error>
+              Insurance status is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Claim Limit</mat-label>
+            <input matInput formControlName="claim_limit" type="number" required>
+            @if (patientInsuranceForm.get('claim_limit')?.hasError('required')) {
+            <mat-error>
+              Claim limit is required
+            </mat-error>
+            }
+            @if (patientInsuranceForm.get('claim_limit')?.hasError('min')) {
+            <mat-error>
+              Claim limit must be greater than or equal to 0
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Remarks</mat-label>
+            <textarea matInput formControlName="remarks"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-flat-button class="formSubmitBtn" [disabled]="!patientInsuranceForm.valid"
+              type="submit">Save</button>
+            <button mat-flat-button mat-dialog-close class="formCancelBtn" tabindex="-1">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

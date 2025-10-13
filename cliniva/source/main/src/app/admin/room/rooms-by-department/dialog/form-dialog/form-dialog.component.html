@@ -1,0 +1,241 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="avatarDetails">
+      <div class="modalTitle">
+        {{ dialogTitle }}
+      </div>
+    </div>
+    <button mat-icon-button mat-dialog-close class="modal-close-button" aria-label="Close dialog" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="roomsByDepartmentForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Room Number</mat-label>
+            <input matInput formControlName="room_number" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>assignment</mat-icon>
+            @if (roomsByDepartmentForm.get('room_number')?.hasError('required')) {
+            <mat-error>
+              Room Number is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Department Name</mat-label>
+            <mat-select formControlName="department_name" required>
+              <mat-option value="ICU">ICU</mat-option>
+              <mat-option value="Pediatrics">Pediatrics</mat-option>
+              <mat-option value="Emergency">Emergency</mat-option>
+              <mat-option value="Surgery">Surgery</mat-option>
+              <mat-option value="Cardiology">Cardiology</mat-option>
+              <mat-option value="Neurology">Neurology</mat-option>
+              <mat-option value="Oncology">Oncology</mat-option>
+              <mat-option value="Orthopedics">Orthopedics</mat-option>
+            </mat-select>
+            @if (roomsByDepartmentForm.get('department_name')?.hasError('required')) {
+            <mat-error>
+              Department Name is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Room Type</mat-label>
+            <mat-select formControlName="room_type" required>
+              <mat-option value="Single">Single</mat-option>
+              <mat-option value="Double">Double</mat-option>
+              <mat-option value="Triage">Triage</mat-option>
+              <mat-option value="Consultation">Consultation</mat-option>
+              <mat-option value="Operating Room">Operating Room</mat-option>
+            </mat-select>
+            @if (roomsByDepartmentForm.get('room_type')?.hasError('required')) {
+            <mat-error>
+              Room Type is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Floor</mat-label>
+            <input matInput formControlName="floor" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>arrow_upward</mat-icon>
+            @if (roomsByDepartmentForm.get('floor')?.hasError('required')) {
+            <mat-error>
+              Floor is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Bed Capacity</mat-label>
+            <input matInput formControlName="bed_capacity" type="number" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>king_bed</mat-icon>
+            @if (roomsByDepartmentForm.get('bed_capacity')?.hasError('required')) {
+            <mat-error>
+              Bed Capacity is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Occupied Beds</mat-label>
+            <input matInput formControlName="occupied_beds" type="number" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>person</mat-icon>
+            @if (roomsByDepartmentForm.get('occupied_beds')?.hasError('required')) {
+            <mat-error>
+              Occupied Beds is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Room Status</mat-label>
+            <mat-select formControlName="room_status" required>
+              <mat-option value="Occupied">Occupied</mat-option>
+              <mat-option value="Available">Available</mat-option>
+            </mat-select>
+            @if (roomsByDepartmentForm.get('room_status')?.hasError('required')) {
+            <mat-error>
+              Room Status is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Assigned Staff</mat-label>
+            <mat-select formControlName="assigned_staff">
+              <mat-option value="Dr. John Smith">Dr. John Smith</mat-option>
+              <mat-option value="Dr. Priya Joshi">Dr. Priya Joshi</mat-option>
+              <mat-option value="Dr. Raju Patel">Dr. Raju Patel</mat-option>
+              <mat-option value="Dr. John Davis">Dr. John Davis</mat-option>
+              <mat-option value="Dr. Liza Turner">Dr. Liza Turner</mat-option>
+              <mat-option value="Dr. Donald Allen">Dr. Donald Allen</mat-option>
+              <mat-option value="Dr. Jaya Black">Dr. Jaya Black</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Admission Date</mat-label>
+            <input matInput [matDatepicker]="admitPicker" formControlName="admission_date" required>
+            <mat-datepicker-toggle matSuffix [for]="admitPicker"></mat-datepicker-toggle>
+            <mat-datepicker #admitPicker></mat-datepicker>
+            @if (roomsByDepartmentForm.get('admission_date')?.hasError('required')) {
+            <mat-error>
+              Admission Date is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Discharge Date</mat-label>
+            <input matInput [matDatepicker]="dischargePicker" formControlName="discharge_date" required>
+            <mat-datepicker-toggle matSuffix [for]="dischargePicker"></mat-datepicker-toggle>
+            <mat-datepicker #dischargePicker></mat-datepicker>
+            @if (roomsByDepartmentForm.get('discharge_date')?.hasError('required')) {
+            <mat-error>
+              Discharge Date is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Room Rate</mat-label>
+            <input matInput formControlName="room_rate" type="number" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>attach_money</mat-icon>
+            @if (roomsByDepartmentForm.get('room_rate')?.hasError('required')) {
+            <mat-error>
+              Room Rate is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Last Cleaned</mat-label>
+            <input matInput [matDatepicker]="cleanedPicker" formControlName="last_cleaned" required>
+            <mat-datepicker-toggle matSuffix [for]="cleanedPicker"></mat-datepicker-toggle>
+            <mat-datepicker #cleanedPicker></mat-datepicker>
+            @if (roomsByDepartmentForm.get('last_cleaned')?.hasError('required')) {
+            <mat-error>
+              Last Cleaned Date is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Room Category</mat-label>
+            <mat-select formControlName="room_category" required>
+              <mat-option value="Critical Care">Critical Care</mat-option>
+              <mat-option value="General ICU">General ICU</mat-option>
+              <mat-option value="Private">Private</mat-option>
+              <mat-option value="General">General</mat-option>
+              <mat-option value="Emergency Care">Emergency Care</mat-option>
+              <mat-option value="Consultation Room">Consultation Room</mat-option>
+              <mat-option value="Surgical">Surgical</mat-option>
+              <mat-option value="Cardiology">Cardiology</mat-option>
+              <mat-option value="Neurology">Neurology</mat-option>
+              <mat-option value="Oncology">Oncology</mat-option>
+              <mat-option value="Orthopedics">Orthopedics</mat-option>
+            </mat-select>
+            @if (roomsByDepartmentForm.get('room_category')?.hasError('required')) {
+            <mat-error>
+              Room Category is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-flat-button class="formSubmitBtn" [disabled]="!roomsByDepartmentForm.valid" type="submit">
+              Save
+            </button>
+            <button mat-flat-button mat-dialog-close class="formCancelBtn" tabindex="-1">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

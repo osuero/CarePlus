@@ -1,0 +1,270 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="avatarDetails">
+      <div class="modalTitle">
+        {{dialogTitle}}
+      </div>
+    </div>
+    <button mat-icon-button mat-dialog-close class="modal-close-button" aria-label="Close dialog" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="expensesForm" (ngSubmit)="submit()">
+      <div class="row">
+        <!-- Date Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="datePicker" formControlName="date" required>
+            <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+            <mat-datepicker #datePicker></mat-datepicker>
+            @if (expensesForm.get('date')?.hasError('required')) {
+            <mat-error>
+              Date is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Invoice No</mat-label>
+            <input matInput formControlName="invoice_number">
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>description</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Category Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category" required>
+              <mat-option value="Medical Supplies">Medical Supplies</mat-option>
+              <mat-option value="Staff Salaries">Staff Salaries</mat-option>
+              <mat-option value="Utilities">Utilities</mat-option>
+              <mat-option value="Pharmaceuticals">Pharmaceuticals</mat-option>
+              <mat-option value="Equipment">Equipment</mat-option>
+              <mat-option value="Administrative">Administrative</mat-option>
+              <mat-option value="Consulting Services">Consulting Services</mat-option>
+              <mat-option value="Maintenance">Maintenance</mat-option>
+            </mat-select>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>category</mat-icon>
+            @if (expensesForm.get('category')?.hasError('required')) {
+            <mat-error>
+              Category is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Description Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="description" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>description</mat-icon>
+            @if (expensesForm.get('description')?.hasError('required')) {
+            <mat-error>
+              Description is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Amount Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Amount</mat-label>
+            <input matInput formControlName="amount" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>attach_money</mat-icon>
+            @if (expensesForm.get('amount')?.hasError('required')) {
+            <mat-error>
+              Amount is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Vendor Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Vendor</mat-label>
+            <input matInput formControlName="vendor" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>store</mat-icon>
+            @if (expensesForm.get('vendor')?.hasError('required')) {
+            <mat-error>
+              Vendor is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Invoice Number Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Invoice Number</mat-label>
+            <input matInput formControlName="invoice_number">
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>receipt_long</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <!-- Payment Method Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Payment Method</mat-label>
+            <input matInput formControlName="payment_method" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>credit_card</mat-icon>
+            @if (expensesForm.get('payment_method')?.hasError('required')) {
+            <mat-error>
+              Payment Method is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Department Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Department</mat-label>
+            <mat-select formControlName="department" required>
+              <mat-option value="ICU">ICU</mat-option>
+              <mat-option value="General Medicine">General Medicine</mat-option>
+              <mat-option value="Facilities">Facilities</mat-option>
+              <mat-option value="Pharmacy">Pharmacy</mat-option>
+              <mat-option value="Radiology">Radiology</mat-option>
+              <mat-option value="Administration">Administration</mat-option>
+              <mat-option value="IT">IT</mat-option>
+              <mat-option value="Surgery">Surgery</mat-option>
+              <mat-option value="Cardiology">Cardiology</mat-option>
+              <mat-option value="Legal">Legal</mat-option>
+            </mat-select>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>business</mat-icon>
+            @if (expensesForm.get('department')?.hasError('required')) {
+            <mat-error>
+              Department is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Budget Code Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Budget Code</mat-label>
+            <input matInput formControlName="budget_code">
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>account_balance_wallet</mat-icon>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Employee Responsible Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Employee Responsible</mat-label>
+            <input matInput formControlName="employee_responsible">
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>person</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <!-- Approval Status Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Approval Status</mat-label>
+            <mat-select formControlName="approval_status" required>
+              <mat-option value="Approved">Approved</mat-option>
+              <mat-option value="Pending">Pending</mat-option>
+            </mat-select>
+            @if (expensesForm.get('approval_status')?.hasError('required')) {
+            <mat-error>
+              Approval Status is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Payment Status Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Payment Status</mat-label>
+            <mat-select formControlName="payment_status" required>
+              <mat-option value="Paid">Paid</mat-option>
+              <mat-option value="Pending">Pending</mat-option>
+              <mat-option value="Partially Paid">Partially Paid</mat-option>
+            </mat-select>
+            @if (expensesForm.get('payment_status')?.hasError('required')) {
+            <mat-error>
+              Payment Status is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Tax Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Tax</mat-label>
+            <input matInput formControlName="tax" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>local_taxi</mat-icon>
+            @if (expensesForm.get('tax')?.hasError('required')) {
+            <mat-error>
+              Tax is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Total Cost Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Total Cost</mat-label>
+            <input matInput formControlName="total_cost" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>money_off</mat-icon>
+            @if (expensesForm.get('total_cost')?.hasError('required')) {
+            <mat-error>
+              Total Cost is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Currency Field -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Currency</mat-label>
+            <input matInput formControlName="currency" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>currency_exchange</mat-icon>
+            @if (expensesForm.get('currency')?.hasError('required')) {
+            <mat-error>
+              Currency is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-flat-button class="formSubmitBtn" [disabled]="!expensesForm.valid" type="submit">
+              Save
+            </button>
+            <button mat-flat-button mat-dialog-close class="formCancelBtn" tabindex="-1">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

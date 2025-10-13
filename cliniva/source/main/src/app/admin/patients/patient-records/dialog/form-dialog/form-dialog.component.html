@@ -1,0 +1,188 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="avatarDetails">
+      <div class="modalTitle">
+        {{dialogTitle}}
+      </div>
+    </div>
+    <button mat-icon-button mat-dialog-close class="modal-close-button" aria-label="Close dialog" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="patientForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Full Name</mat-label>
+            <input matInput formControlName="fullName" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>face</mat-icon>
+            @if (patientForm.get('fullName')?.hasError('required')) {
+            <mat-error>
+              Name is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Mobile</mat-label>
+            <input matInput formControlName="emergencyContact" type="text" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>phone</mat-icon>
+            @if (patientForm.get('emergencyContact')?.hasError('required')) {
+            <mat-error>
+              Mobile is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="m-b-20">
+            <mat-label class="msr-3">Gender:</mat-label>
+            <mat-radio-group aria-label="Select gender" formControlName="gender" required>
+              <mat-radio-button value="Male">Male</mat-radio-button>
+              <mat-radio-button value="Female">Female</mat-radio-button>
+            </mat-radio-group>
+            @if (patientForm.get('gender')?.hasError('required')) {
+            <mat-error>
+              Select gender
+            </mat-error>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Date of Birth</mat-label>
+            <input matInput [matDatepicker]="dobPicker" formControlName="dateOfBirth" required>
+            <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dobPicker></mat-datepicker>
+            @if (patientForm.get('dateOfBirth')?.hasError('required')) {
+            <mat-error>
+              Date of Birth is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Admission Date</mat-label>
+            <input matInput [matDatepicker]="admissionPicker" formControlName="dateOfAdmission" required>
+            <mat-datepicker-toggle matSuffix [for]="admissionPicker"></mat-datepicker-toggle>
+            <mat-datepicker #admissionPicker></mat-datepicker>
+            @if (patientForm.get('dateOfAdmission')?.hasError('required')) {
+            <mat-error>
+              Admission date is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 m-b-30">
+          <mat-label>Lab Reports</mat-label>
+          <input type="file" (change)="onFileSelected($event, 'labReports')" [accept]="'.pdf,.doc,.docx,.jpg,.png'"
+            class="file-input" />
+          @if (patientForm.get('labReports')?.hasError('required')) {
+          <mat-error>
+            Lab report is required
+          </mat-error>
+          }
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 m-b-30">
+          <mat-label>Medications</mat-label>
+          <input type="file" (change)="onFileSelected($event, 'medications')" [accept]="'.pdf,.doc,.docx,.jpg,.png'"
+            class="file-input" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 m-b-30">
+          <mat-label>Medication History</mat-label>
+          <input type="file" (change)="onFileSelected($event, 'medicationHistory')"
+            [accept]="'.pdf,.doc,.docx,.jpg,.png'" class="file-input" />
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Next Follow-up Date</mat-label>
+            <input matInput [matDatepicker]="followupPicker" formControlName="nextFollowUp" required>
+            <mat-datepicker-toggle matSuffix [for]="followupPicker"></mat-datepicker-toggle>
+            <mat-datepicker #followupPicker></mat-datepicker>
+            @if (patientForm.get('nextFollowUp')?.hasError('required')) {
+            <mat-error>
+              Follow-up date is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Diagnosis</mat-label>
+            <textarea matInput formControlName="diagnosis" required></textarea>
+            @if (patientForm.get('diagnosis')?.hasError('required')) {
+            <mat-error>
+              Diagnosis is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Treatment Plan</mat-label>
+            <textarea matInput formControlName="treatmentPlan" required></textarea>
+            @if (patientForm.get('treatmentPlan')?.hasError('required')) {
+            <mat-error>
+              Treatment plan is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Doctor's Notes</mat-label>
+            <textarea matInput formControlName="doctorsNotes"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status" required>
+              <mat-option value="In Treatment">In Treatment</mat-option>
+              <mat-option value="Recovered">Recovered</mat-option>
+              <mat-option value="Observation">Observation</mat-option>
+            </mat-select>
+            @if (patientForm.get('status')?.hasError('required')) {
+            <mat-error>
+              Status is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Insurance Provider</mat-label>
+            <input matInput formControlName="insuranceProvider">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-flat-button class="formSubmitBtn" [disabled]="!patientForm.valid" type="submit">Save</button>
+            <button mat-flat-button mat-dialog-close class="formCancelBtn" tabindex="-1">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

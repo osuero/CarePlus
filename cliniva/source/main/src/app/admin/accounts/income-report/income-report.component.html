@@ -1,0 +1,133 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Income report'" [items]="['Accounts']" [active_item]="'Income report'"></app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <mat-card>
+          <mat-card-header class="header-menu">
+            <mat-card-title>Income Chart</mat-card-title>
+            <mat-form-field appearance="outline" class="header-form-field">
+              <mat-select [(value)]="selectedTimePeriod" (selectionChange)="onTimePeriodChange($event)">
+                <mat-option class="header-select-option" value="Daily">Daily</mat-option>
+                <mat-option class="header-select-option" value="Monthly">Monthly</mat-option>
+                <mat-option class="header-select-option" value="Yearly">Yearly</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-card-header>
+          <mat-card-content>
+            <apx-chart [series]="areaChartOptions.series!" [chart]="areaChartOptions.chart!"
+              [xaxis]="areaChartOptions.xaxis!" [yaxis]="areaChartOptions.yaxis!" [colors]="areaChartOptions.colors!"
+              [stroke]="areaChartOptions.stroke!" [tooltip]="areaChartOptions.tooltip!" [grid]="areaChartOptions.grid!"
+              [dataLabels]="areaChartOptions.dataLabels!"></apx-chart>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <mat-card>
+          <mat-card-header class="header-menu">
+            <mat-card-title>Income table</mat-card-title>
+            <mat-form-field appearance="outline" class="header-form-field">
+              <mat-select [(value)]="selectedYear" (selectionChange)="onYearChange($event)">
+                @for (year of availableYears; track year) {
+                <mat-option [value]="year">
+                  {{year}}
+                </mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="overflow-auto">
+              <div class="responsive_table">
+                <div class="table-scroll">
+                  <table mat-table [dataSource]="dataSource" matSort>
+                    <!-- Department Column -->
+                    <ng-container matColumnDef="department">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Department </th>
+                      <td mat-cell *matCellDef="let row"> {{row.department}} </td>
+                    </ng-container>
+
+                    <!-- Month Columns -->
+                    <ng-container matColumnDef="jan">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Jan </th>
+                      <td mat-cell *matCellDef="let row"> {{formatCurrency(row.jan)}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="feb">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Feb </th>
+                      <td mat-cell *matCellDef="let row"> {{formatCurrency(row.feb)}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="mar">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Mar </th>
+                      <td mat-cell *matCellDef="let row"> {{formatCurrency(row.mar)}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="apr">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Apr </th>
+                      <td mat-cell *matCellDef="let row"> {{formatCurrency(row.apr)}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="may">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> May </th>
+                      <td mat-cell *matCellDef="let row"> {{formatCurrency(row.may)}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="jun">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Jun </th>
+                      <td mat-cell *matCellDef="let row"> {{formatCurrency(row.jun)}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="jul">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Jul </th>
+                      <td mat-cell *matCellDef="let row"> {{formatCurrency(row.jul)}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="aug">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Aug </th>
+                      <td mat-cell *matCellDef="let row"> {{formatCurrency(row.aug)}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="sep">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Sep </th>
+                      <td mat-cell *matCellDef="let row"> {{formatCurrency(row.sep)}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="oct">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Oct </th>
+                      <td mat-cell *matCellDef="let row"> {{formatCurrency(row.oct)}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="nov">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nov </th>
+                      <td mat-cell *matCellDef="let row"> {{formatCurrency(row.nov)}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dec">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Dec </th>
+                      <td mat-cell *matCellDef="let row"> {{formatCurrency(row.dec)}} </td>
+                    </ng-container>
+
+                    <!-- Yearly Total Column -->
+                    <ng-container matColumnDef="yearly">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Yearly </th>
+                      <td mat-cell *matCellDef="let row"> {{formatCurrency(row.yearly)}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>

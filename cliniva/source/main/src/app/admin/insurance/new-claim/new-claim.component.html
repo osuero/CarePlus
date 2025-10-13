@@ -1,0 +1,275 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'New Claim'" [items]="['Insurance']" [active_item]="'New Claim'"></app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>New Claim</h2>
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="insuranceClaimForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Patient Name</mat-label>
+                    <input matInput formControlName="patientName" required>
+                    @if (insuranceClaimForm.get('patientName')?.hasError('required')) {
+                    <mat-error>
+                      Patient name is required
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Patient ID</mat-label>
+                    <input matInput formControlName="patientId" required>
+                    @if (insuranceClaimForm.get('patientId')?.hasError('required')) {
+                    <mat-error>
+                      Patient ID is required
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Date of Birth</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    @if (insuranceClaimForm.get('dateOfBirth')?.hasError('required')) {
+                    <mat-error>
+                      Date of birth is required
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Insurance Provider</mat-label>
+                    <mat-select formControlName="insuranceProvider" required>
+                      <mat-option value="Provider A">Provider A</mat-option>
+                      <mat-option value="Provider B">Provider B</mat-option>
+                      <mat-option value="Provider C">Provider C</mat-option>
+                    </mat-select>
+                    @if (insuranceClaimForm.get('insuranceProvider')?.hasError('required')) {
+                    <mat-error>
+                      Insurance provider is required
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Policy Number</mat-label>
+                    <input matInput formControlName="policyNumber" required>
+                    @if (insuranceClaimForm.get('policyNumber')?.hasError('required')) {
+                    <mat-error>
+                      Policy number is required
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Policy Holder Name</mat-label>
+                    <input matInput formControlName="policyHolderName">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Claim Type</mat-label>
+                    <mat-select formControlName="claimType" required>
+                      <mat-option value="Medical">Medical</mat-option>
+                      <mat-option value="Surgery">Surgery</mat-option>
+                      <mat-option value="Hospitalization">Hospitalization</mat-option>
+                    </mat-select>
+                    @if (insuranceClaimForm.get('claimType')?.hasError('required')) {
+                    <mat-error>
+                      Claim type is required
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Claim Amount</mat-label>
+                    <input matInput formControlName="claimAmount" type="number" required>
+                    @if (insuranceClaimForm.get('claimAmount')?.hasError('required')) {
+                    <mat-error>
+                      Claim amount is required
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Claim Description</mat-label>
+                    <textarea matInput formControlName="claimDescription" required></textarea>
+                    @if (insuranceClaimForm.get('claimDescription')?.hasError('required')) {
+                    <mat-error>
+                      Claim description is required
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Claim Date</mat-label>
+                    <input matInput [matDatepicker]="picker2" formControlName="claimDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                    @if (insuranceClaimForm.get('claimDate')?.hasError('required')) {
+                    <mat-error>
+                      Claim date is required
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Hospital Name</mat-label>
+                    <input matInput formControlName="hospitalName" required>
+                    @if (insuranceClaimForm.get('hospitalName')?.hasError('required')) {
+                    <mat-error>
+                      Hospital name is required
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Admission Date</mat-label>
+                    <input matInput [matDatepicker]="picker3" formControlName="admissionDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <mat-datepicker #picker3></mat-datepicker>
+                    @if (insuranceClaimForm.get('admissionDate')?.hasError('required')) {
+                    <mat-error>
+                      Admission date is required
+                    </mat-error>
+                    }
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Discharge Date</mat-label>
+                    <input matInput [matDatepicker]="picker4" formControlName="dischargeDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                    <mat-datepicker #picker4></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Diagnosis</mat-label>
+                    <input matInput formControlName="diagnosis">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Treatment Provided</mat-label>
+                    <input matInput formControlName="treatmentProvided">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <label>Upload Medical Report</label>
+                  <app-file-upload formControlName="medicalReport"></app-file-upload>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <label>Upload Invoice Receipt</label>
+                  <app-file-upload formControlName="invoiceReceipt"></app-file-upload>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Contact Number</mat-label>
+                    <input matInput formControlName="contactNumber">
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Email Address</mat-label>
+                    <input matInput formControlName="emailAddress">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <mat-checkbox formControlName="consentToProcess" required>
+                    I consent to the processing of my claim
+                  </mat-checkbox>
+                  @if (insuranceClaimForm.get('consentToProcess')?.hasError('required')) {
+                  <mat-error>
+                    You must consent to the processing
+                  </mat-error>
+                  }
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Signature</mat-label>
+                    <input matInput formControlName="signature">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                  <button class="btn-space" [disabled]="!insuranceClaimForm.valid" mat-flat-button color="primary">
+                    Submit
+                  </button>
+                  <button type="button" mat-flat-button class="formCancelBtn">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="'Appointment Calendar'" [items]="['Appointment']"
+                [active_item]="'Calendar'"></app-breadcrumb>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Doctor Appointment Schedule</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <full-calendar [options]="calendarOptions"></full-calendar>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</section>

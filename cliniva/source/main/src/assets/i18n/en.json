@@ -1,0 +1,181 @@
+{
+  "MENUITEMS": {
+    "MAIN": {
+      "TEXT": "Main"
+    },
+    "DASHBOARD": {
+      "TEXT": "Dashboard",
+      "LIST": {
+        "DASHBOARD1": "Dashboard 1",
+        "DASHBOARD2": "Dashboard 2",
+        "DOCTOR-DASHBOARD": "Doctor Dashboard",
+        "PATIENT-DASHBOARD": "Patient Dashboard",
+        "NURSE-DASHBOARD": "Nurse Dashboard"
+      }
+    },
+    "APPOINTMENTS": {
+      "TEXT": "Appointments",
+      "LIST": {
+        "APPOINTMENT-CALENDAR": "Appointment Calendar",
+        "VIEW-APPOINTMENT": "View Appointment",
+        "BOOK-APPOINTMENT": "Book Appointment",
+        "EDIT-APPOINTMENT": "Edit Appointment"
+      }
+    },
+    "DOCTORS": {
+      "TEXT": "Doctors",
+      "LIST": {
+        "ALL-DOCTOR": "All Doctors",
+        "ADD-DOCTOR": "Add Doctor",
+        "EDIT-DOCTOR": "Edit Doctor",
+        "ASSIGN-DEPARTMENT": "Assign Department",
+        "SHIFT-MANAGEMENT": "Shift Management",
+        "PROFILE": "Doctor Profile"
+      }
+    },
+    "STAFF": {
+      "TEXT": "Staff",
+      "LIST": {
+        "ALL-STAFF": "All Staff",
+        "ADD-STAFF": "Add Staff",
+        "EDIT-STAFF": "Edit Staff",
+        "PROFILE": "Staff Profile"
+      }
+    },
+    "PATIENTS": {
+      "TEXT": "Patients",
+      "LIST": {
+        "ALL-PATIENT": "All Patients",
+        "ADD-PATIENT": "Add Patient",
+        "EDIT-PATIENT": "Edit Patient",
+        "PATIENT-RECORDS": "Patient Records",
+        "PROFILE": "Patient Profile"
+      }
+    },
+    "ROOMS": {
+      "TEXT": "Room Allotment",
+      "LIST": {
+        "ALLOTED-ROOMS": "Alloted Rooms",
+        "NEW-ALLOTMENT": "New Allotment",
+        "EDIT-ALLOTMENT": "Edit Allotment",
+        "ROOMS-BY-DEPARTMENT": "Rooms By Department",
+        "ADD-ROOM": "Add Room"
+      }
+    },
+    "ACCOUNTS": {
+      "TEXT": "Accounts",
+      "LIST": {
+        "BILL-LIST": "Bill List",
+        "ADD-BILL": "Add Bill",
+        "INCOME": "Income",
+        "EXPENSES": "Expenses",
+        "INCOME-REPORT": "Income Report",
+        "INVOICE": "Invoice"
+      }
+    },
+    "RECORDS": {
+      "TEXT": "Records",
+      "LIST": {
+        "BIRTH-RECORDS": "Birth Records",
+        "DEATH-RECORDS": "Death Records"
+      }
+    },
+    "AMBULANCE": {
+      "TEXT": "Ambulance",
+      "LIST": {
+        "AMBULANCE-CALL-LIST": "Ambulance Call List",
+        "AMBULANCE-LIST": "Ambulance List"
+      }
+    },
+    "PHARMACY": {
+      "TEXT": "Pharmacy",
+      "LIST": {
+        "MEDICINE-LIST": "Medicine List",
+        "ADD-MEDICINE": "Add Medicine"
+      }
+    },
+    "BLOOD-BANK": {
+      "TEXT": "Blood Bank",
+      "LIST": {
+        "BLOOD-STOCK": "Blood Stock",
+        "BLOOD-DONOR": "Blood Donor",
+        "BLOOD-ISSUED": "Blood Issued"
+      }
+    },
+    "DEPARTMENTS": {
+      "TEXT": "Departments",
+      "LIST": {
+        "DEPARTMENT-LIST": "Department List",
+        "ADD-DEPARTMENT": "Add Department"
+      }
+    },
+    "INVENTORY": {
+      "TEXT": "Inventory",
+      "LIST": {
+        "ITEM-STOCK-LIST": "Item Stock List",
+        "ISSUED-ITEMS": "Issued Items"
+      }
+    },
+    "HR": {
+      "TEXT": "Human Resources",
+      "LIST": {
+        "LEAVE-REQUESTS": "Leave Requests",
+        "LEAVE-BALANCE": "Leave Balance",
+        "LEAVE-TYPES": "Leave Types",
+        "HOLIDAYS": "Holidays",
+        "TODAY-ATTENDANCE": "Today's Attendance",
+        "EMP-ATTENDANCE": "Employee Attendance",
+        "ATTENDANCE-SHEET": "Attendance Sheet",
+        "EMPLOYEE-SALARY": "Employee Salary",
+        "PAYSLIP": "Payslip"
+      }
+    },
+    "INSURANCE": {
+      "TEXT": "Insurance",
+      "LIST": {
+        "PATIENT-INSURANCE": "Patient Insurance",
+        "NEW-CLAIM": "New Claim",
+        "CLAIM-STATUS": "Claim Status",
+        "INSURANCE-PROVIDER": "Insurance Provider"
+      }
+    },
+    "DOCTOR": {
+      "DASHBOARD": "Dashboard",
+      "APPOINTMENTS": "Appointments",
+      "DOCTORS": "Doctors",
+      "PATIENTS": "Patients",
+      "SETTINGS": "Settings",
+      "CHAT": "Chat"
+    },
+    "PATIENT": {
+      "TEXT": "Patient",
+      "DASHBOARD": "Dashboard",
+      "APPOINTMENTS": {
+        "TEXT": "Appointments",
+        "LIST": {
+          "BOOK-APPOINTMENT": "Book Appointment",
+          "TODAY": "Today Appointments",
+          "UPCOMING": "Upcoming Appointments",
+          "PAST": "Past Appointments"
+        }
+      },
+      "PRESCRIPTIONS": "Prescriptions",
+      "MEDICAL-RECORD": "Medical Record",
+      "BILLING": "Billing",
+      "CHAT": "Chat",
+      "SETTINGS": "Settings"
+    },
+    "APPS": {
+      "TEXT": "-- Apps"
+    },
+    "CALENDAR": {
+      "TEXT": "Calendar"
+    },
+    "TASK": {
+      "TEXT": "Task"
+    },
+    "CONTACTS": {
+      "TEXT": "Contacts"
+    }
+  }
+}

@@ -1,0 +1,78 @@
+.section-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #2196f3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title i {
+  font-size: 22px;
+}
+
+.subtitle {
+  color: #757575;
+  margin-top: 5px;
+}
+
+.time-slot-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 20px 30px;
+}
+
+.time-slot-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .mat-button-toggle-appearance-standard {
+    border: none;
+  }
+}
+
+.time-slot-header {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #3f51b5;
+  text-align: center;
+}
+
+.time-slot-label {
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #e0e0e0;
+}
+
+::ng-deep
+  .mat-form-field-appearance-outline.mat-focused
+  .mat-form-field-outline-thick {
+  color: #2196f3;
+}
+
+@media (max-width: 768px) {
+  .section-card {
+    padding: 15px;
+  }
+
+  .time-slot-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  ::ng-deep .mat-button-toggle-group {
+    flex-wrap: wrap;
+  }
+
+  ::ng-deep .mat-button-toggle {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+}

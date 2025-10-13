@@ -1,0 +1,201 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="avatarDetails">
+      <label class="hoverable">
+        <img [src]='shiftManagement.img' alt="avatar">
+      </label>
+      <div class="modalTitle">
+        {{dialogTitle}}
+      </div>
+    </div>
+    <button mat-icon-button mat-dialog-close class="modal-close-button" aria-label="Close dialog" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="shiftForm" (ngSubmit)="submit()">
+
+      <!-- Doctor Name -->
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Doctor Name</mat-label>
+            <input matInput formControlName="doctorName" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>face</mat-icon>
+            @if (shiftForm.get('doctorName')?.hasError('required')) {
+            <mat-error>
+              Doctor Name is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Department -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Department</mat-label>
+            <mat-select formControlName="department" required>
+              <mat-option value="Urology">Urology</mat-option>
+              <mat-option value="Dentist">Dentist</mat-option>
+              <mat-option value="Cardiology">Cardiology</mat-option>
+              <mat-option value="Neurology">Neurology</mat-option>
+              <mat-option value="Pediatrics">Pediatrics</mat-option>
+              <mat-option value="Orthopedics">Orthopedics</mat-option>
+              <mat-option value="Dermatology">Dermatology</mat-option>
+              <mat-option value="Psychiatry">Psychiatry</mat-option>
+              <mat-option value="Ophthalmology">Ophthalmology</mat-option>
+            </mat-select>
+            @if (shiftForm.get('department')?.hasError('required')) {
+            <mat-error>
+              Department is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Specialty -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Specialty</mat-label>
+            <input matInput formControlName="specialty">
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>flag</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <!-- Shift Start Date -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Shift Start Date</mat-label>
+            <input matInput [matDatepicker]="startPicker" formControlName="shiftStartDate" required>
+            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
+            @if (shiftForm.get('shiftStartDate')?.hasError('required')) {
+            <mat-error>
+              Shift Start Date is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Shift End Date -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Shift End Date</mat-label>
+            <input matInput [matDatepicker]="endPicker" formControlName="shiftEndDate" required>
+            <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+            <mat-datepicker #endPicker></mat-datepicker>
+            @if (shiftForm.get('shiftEndDate')?.hasError('required')) {
+            <mat-error>
+              Shift End Date is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Work Days -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Work Days</mat-label>
+            <input matInput formControlName="workDays" required>
+            @if (shiftForm.get('workDays')?.hasError('required')) {
+            <mat-error>
+              Work Days are required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Shift Hours -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Shift Hours</mat-label>
+            <input matInput formControlName="shiftHours" required>
+            @if (shiftForm.get('shiftHours')?.hasError('required')) {
+            <mat-error>
+              Shift Hours are required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Shift Type -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Shift Type</mat-label>
+            <mat-select formControlName="shiftType" required>
+              <mat-option value="Day Shift">Day Shift</mat-option>
+              <mat-option value="Night Shift">Night Shift</mat-option>
+            </mat-select>
+            @if (shiftForm.get('shiftType')?.hasError('required')) {
+            <mat-error>
+              Shift Type is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Availability Status -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Availability Status</mat-label>
+            <mat-select formControlName="availabilityStatus" required>
+              <mat-option value="Available">Available</mat-option>
+              <mat-option value="Unavailable">Unavailable</mat-option>
+              <mat-option value="On Leave">On Leave</mat-option>
+            </mat-select>
+            @if (shiftForm.get('availabilityStatus')?.hasError('required')) {
+            <mat-error>
+              Availability Status is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Overtime Hours -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Overtime Hours</mat-label>
+            <input matInput formControlName="overtimeHours">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Total Hours Per Week -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Total Hours Per Week</mat-label>
+            <input matInput formControlName="totalHoursPerWeek">
+          </mat-form-field>
+        </div>
+
+        <!-- Shift Notes -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Shift Notes</mat-label>
+            <textarea matInput formControlName="shiftNotes"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-flat-button class="formSubmitBtn" [disabled]="!shiftForm.valid" type="submit">Save</button>
+            <button mat-flat-button mat-dialog-close class="formCancelBtn" tabindex="-1">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

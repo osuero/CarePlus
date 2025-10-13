@@ -1,0 +1,263 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="avatarDetails">
+      <div class="modalTitle">
+        {{dialogTitle}}
+      </div>
+    </div>
+    <button mat-icon-button mat-dialog-close class="modal-close-button" aria-label="Close dialog" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form [formGroup]="bloodIssuedForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Issue ID</mat-label>
+            <input matInput formControlName="issueId" required />
+            @if (bloodIssuedForm.get('issueId')?.hasError('required')) {
+            <mat-error>
+              Issue ID is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Patient ID</mat-label>
+            <input matInput formControlName="patientId" required />
+            @if (bloodIssuedForm.get('patientId')?.hasError('required')) {
+            <mat-error>
+              Patient ID is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Patient Name</mat-label>
+            <input matInput formControlName="patientName" required />
+            @if (bloodIssuedForm.get('patientName')?.hasError('required')) {
+            <mat-error>
+              Patient Name is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Patient Age</mat-label>
+            <input matInput type="number" formControlName="patientAge" required />
+            @if (bloodIssuedForm.get('patientAge')?.hasError('required')) {
+            <mat-error>
+              Patient Age is required
+            </mat-error>
+            }
+            @if (bloodIssuedForm.get('patientAge')?.hasError('min')) {
+            <mat-error>
+              Age must be a positive number
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Patient Gender</mat-label>
+            <mat-select formControlName="patientGender" required>
+              <mat-option value="Male">Male</mat-option>
+              <mat-option value="Female">Female</mat-option>
+            </mat-select>
+            @if (bloodIssuedForm.get('patientGender')?.hasError('required')) {
+            <mat-error>
+              Patient Gender is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Blood Product ID</mat-label>
+            <input matInput formControlName="bloodProductId" required />
+            @if (bloodIssuedForm.get('bloodProductId')?.hasError('required')) {
+            <mat-error>
+              Blood Product ID is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Blood Type</mat-label>
+            <mat-select formControlName="bloodType" required>
+              <mat-option value="O+">O+</mat-option>
+              <mat-option value="A-">A-</mat-option>
+              <mat-option value="A+">A+</mat-option>
+              <mat-option value="B+">B+</mat-option>
+              <mat-option value="AB+">AB+</mat-option>
+              <mat-option value="O-">O-</mat-option>
+              <mat-option value="B-">B-</mat-option>
+              <mat-option value="AB-">AB-</mat-option>
+            </mat-select>
+            @if (bloodIssuedForm.get('bloodType')?.hasError('required')) {
+            <mat-error>
+              Blood Type is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Component Type</mat-label>
+            <mat-select formControlName="componentType" required>
+              <mat-option value="Red Blood Cells">Red Blood Cells</mat-option>
+              <mat-option value="Plasma">Plasma</mat-option>
+              <mat-option value="Platelets">Platelets</mat-option>
+              <mat-option value="Whole Blood">Whole Blood</mat-option>
+            </mat-select>
+            @if (bloodIssuedForm.get('componentType')?.hasError('required')) {
+            <mat-error>
+              Component Type is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Quantity Issued (mL)</mat-label>
+            <input matInput type="number" formControlName="quantityIssued" required />
+            @if (bloodIssuedForm.get('quantityIssued')?.hasError('required')) {
+            <mat-error>
+              Quantity Issued is required
+            </mat-error>
+            }
+            @if (bloodIssuedForm.get('quantityIssued')?.hasError('min')) {
+            <mat-error>
+              Quantity must be greater than zero
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Issue Date</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="issueDate" required />
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+            @if (bloodIssuedForm.get('issueDate')?.hasError('required')) {
+            <mat-error>
+              Issue Date is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Batch Number</mat-label>
+            <input matInput formControlName="batchNumber" required />
+            @if (bloodIssuedForm.get('batchNumber')?.hasError('required')) {
+            <mat-error>
+              Batch Number is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Issued By</mat-label>
+            <input matInput formControlName="issuedBy" required />
+            @if (bloodIssuedForm.get('issuedBy')?.hasError('required')) {
+            <mat-error>
+              Issued By is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Issue Reason</mat-label>
+            <input matInput formControlName="issueReason" required />
+            @if (bloodIssuedForm.get('issueReason')?.hasError('required')) {
+            <mat-error>
+              Issue Reason is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Patient Blood Group</mat-label>
+            <mat-select formControlName="patientBloodGroup" required>
+              <mat-option value="O+">O+</mat-option>
+              <mat-option value="A-">A-</mat-option>
+              <mat-option value="A+">A+</mat-option>
+              <mat-option value="B+">B+</mat-option>
+              <mat-option value="AB+">AB+</mat-option>
+              <mat-option value="O-">O-</mat-option>
+              <mat-option value="B-">B-</mat-option>
+              <mat-option value="AB-">AB-</mat-option>
+            </mat-select>
+            @if (bloodIssuedForm.get('patientBloodGroup')?.hasError('required')) {
+            <mat-error>
+              Patient Blood Group is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Doctor ID</mat-label>
+            <input matInput formControlName="doctorId" required />
+            @if (bloodIssuedForm.get('doctorId')?.hasError('required')) {
+            <mat-error>
+              Doctor ID is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Doctor Name</mat-label>
+            <input matInput formControlName="doctorName" required />
+            @if (bloodIssuedForm.get('doctorName')?.hasError('required')) {
+            <mat-error>
+              Doctor Name is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-flat-button class="formSubmitBtn" [disabled]="!bloodIssuedForm.valid"
+              type="submit">Save</button>
+            <button mat-flat-button mat-dialog-close class="formCancelBtn" tabindex="-1">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

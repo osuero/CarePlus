@@ -1,0 +1,194 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="avatarDetails">
+      <label class="hoverable">
+        <img [src]='doctors.img' alt="avatar">
+      </label>
+      <div class="modalTitle">
+        {{dialogTitle}}
+      </div>
+    </div>
+    <button mat-icon-button mat-dialog-close class="modal-close-button" aria-label="Close dialog" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="doctorsForm" (ngSubmit)="submit()">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>face</mat-icon>
+            @if (doctorsForm.get('name')?.hasError('required')) {
+            <mat-error>
+              Name is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Department</mat-label>
+            <mat-select formControlName="department" required>
+              <mat-option [value]="'Urology'">Urology</mat-option>
+              <mat-option [value]="'Dentist'">Dentist</mat-option>
+              <mat-option [value]="'General'">General</mat-option>
+              <mat-option [value]="'Cardiology'">Cardiology</mat-option>
+              <mat-option [value]="'Neurology'">Neurology</mat-option>
+              <mat-option [value]="'Pediatrics'">Pediatrics</mat-option>
+              <mat-option [value]="'Orthopedics'">Orthopedics</mat-option>
+              <mat-option [value]="'Dermatology'">Dermatology</mat-option>
+              <mat-option [value]="'Psychiatry'">Psychiatry</mat-option>
+              <mat-option [value]="'Ophthalmology'">Ophthalmology</mat-option>
+              <mat-option [value]="'ENT'">ENT</mat-option>
+              <mat-option [value]="'Gastroenterology'">Gastroenterology</mat-option>
+              <mat-option [value]="'Pulmonology'">Pulmonology</mat-option>
+              <mat-option [value]="'Nephrology'">Nephrology</mat-option>
+              <mat-option [value]="'Gynecology'">Gynecology</mat-option>
+            </mat-select>
+            @if (doctorsForm.get('department')?.hasError('required')) {
+            <mat-error>
+              Department is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Specialization</mat-label>
+            <input matInput formControlName="specialization" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>flag</mat-icon>
+            @if (doctorsForm.get('specialization')?.hasError('required')) {
+            <mat-error>
+              Specialization is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Degree</mat-label>
+            <input matInput formControlName="degree" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>school</mat-icon>
+            @if (doctorsForm.get('degree')?.hasError('required')) {
+            <mat-error>
+              Degree is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Mobile</mat-label>
+            <input matInput formControlName="mobile" type="tel">
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>phone</mat-icon>
+            @if (doctorsForm.get('mobile')?.hasError('required')) {
+            <mat-error>
+              Mobile is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>email</mat-icon>
+            @if (doctorsForm.get('email')?.hasError('required') || doctorsForm.get('email')?.touched) {
+            <mat-error>
+              Please enter a valid email address
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Joining Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            @if (doctorsForm.get('date')?.hasError('required')) {
+            <mat-error>
+              Please select a date
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Experience (Years)</mat-label>
+            <input matInput formControlName="experienceYears" type="number">
+            @if (doctorsForm.get('experienceYears')?.hasError('required')) {
+            <mat-error>
+              Experience is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Consultation Fee</mat-label>
+            <input matInput formControlName="consultationFee" type="number" required>
+            @if (doctorsForm.get('consultationFee')?.hasError('required')) {
+            <mat-error>
+              Consultation fee is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Availability</mat-label>
+            <input matInput formControlName="availability" required>
+            @if (doctorsForm.get('availability')?.hasError('required')) {
+            <mat-error>
+              Availability is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Rating</mat-label>
+            <input matInput formControlName="rating" type="number" min="0" max="5" step="0.1">
+            @if (doctorsForm.get('rating')?.hasError('required')) {
+            <mat-error>
+              Rating is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Clinic Location</mat-label>
+            <input matInput formControlName="clinicLocation" required>
+            @if (doctorsForm.get('clinicLocation')?.hasError('required')) {
+            <mat-error>
+              Clinic location is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-flat-button class="formSubmitBtn" [disabled]="!doctorsForm.valid" type="submit">Save</button>
+            <button mat-flat-button mat-dialog-close class="formCancelBtn" tabindex="-1">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

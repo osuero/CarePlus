@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Cliniva - Angular 19+ Hospital Admin Dashboar Template </title>
+    <!-- Favicon-->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+    <!-- Plugins Core Css -->
+    <link href="assets/css/app.min.css" rel="stylesheet">
+
+    <!-- Custom Css -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+
+    <link href="assets/css/prism.min.css" rel="stylesheet" />
+
+    <!-- You can choose a theme from css/styles instead of get all themes -->
+    <link href="assets/css/styles/theme-white.css" rel="stylesheet" />
+</head>
+
+<body class="menu_dark theme-white logo-black submenu-closed">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="m-t-30">
+                <img class="loading-img-spin" src="assets/images/loading.png" width="20" height="20" alt="admin">
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Search Bar -->
+    <!-- #END# Search Bar -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="index.html"><img src="assets/images/logo.png" /> <span
+                        class="logo-name">Cliniva</span></a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown user_profile">
+                        <p class="col-blue m-r-20">V 19.0.0</p>
+                    </li>
+                    <li class="dropdown user_profile m-r-20">
+                        <form
+                            action="https://themeforest.net/item/cliniva-angular-8-hospital-admin-dashboard-template/24571066/comments"
+                            method="get" target="_blank">
+                            <button type="submit" class="btn bg-blue waves-effect">Support</button>
+                        </form>
+                    </li>
+                    <li class="dropdown user_profile m-r-20">
+                        <form
+                            action="https://themeforest.net/item/cliniva-angular-8-hospital-admin-dashboard-template/24571066"
+                            method="get" target="_blank">
+                            <button type="submit" class="btn bg-orange waves-effect">Buy
+                                Now</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li>
+                        <a href="index.html">
+                            <i class="material-icons">home</i>
+                            <span>Overview</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="intro.html">
+                            <i class="material-icons">info</i>
+                            <span>Introductions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="install.html">
+                            <i class="material-icons">build</i>
+                            <span>Installation</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="folder-structure.html">
+                            <i class="material-icons">folder</i>
+                            <span>Folder Structure</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="config.html">
+                            <i class="material-icons">perm_data_setting</i>
+                            <span>Configuration</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="multi-lang.html">
+                            <i class="material-icons">translate</i>
+                            <span>Multi Language</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="new-page.html">
+                            <i class="material-icons">select_all</i>
+                            <span>New Page </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onClick="return false;" class="menu-toggle">
+                            <i class="material-icons">people</i>
+                            <span>Role</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="role-info.html">About Role</a>
+                            </li>
+                            <li>
+                                <a href="role-config.html">Role Configurations</a>
+                            </li>
+                            <li>
+                                <a href="new-role.html">Add New Role</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="sidebar-menu.html">
+                            <i class="material-icons">chrome_reader_mode</i>
+                            <span>Sidebar Menu</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onClick="return false;" class="menu-toggle">
+                            <i class="material-icons">web</i>
+                            <span>Form</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="form-elements.html">Form Elements</a>
+                            </li>
+                            <li>
+                                <a href="form-validation.html">Form Validation</a>
+                            </li>
+                            <li>
+                                <a href="form-wizard.html">Form Wizard</a>
+                            </li>
+                            <li>
+                                <a href="editors.html">Editors</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" onClick="return false;" class="menu-toggle">
+                            <i class="material-icons">border_all</i>
+                            <span>Tables</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="bootstrap-table.html">Bootstrap Table</a>
+                            </li>
+                            <li>
+                                <a href="material-table.html">Material Table</a>
+                            </li>
+                            <li>
+                                <a href="ngx-datatable.html">ngx-datatable</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" onClick="return false;" class="menu-toggle">
+                            <i class="material-icons">equalizer</i>
+                            <span>Charts</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="echart.html">Echart Chart</a>
+                            </li>
+
+                            <li>
+                                <a href="apex.html">Apex Chart</a>
+                            </li>
+                            <li>
+                                <a href="chartjs.html">Chart js</a>
+                            </li>
+                            <li>
+                                <a href="gauge-chart.html">Gauge Chart</a>
+                            </li>
+                            <li>
+                                <a href="ngx-chart.html">ngx-chart</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="calendar.html">
+                            <i class="material-icons">event</i>
+                            <span>Calendar</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="utilities.html">
+                            <i class="material-icons">format_paint</i>
+                            <span>Utilities</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="credits.html">
+                            <i class="material-icons">thumb_up</i>
+                            <span>Credits</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="changelog.html">
+                            <i class="material-icons">watch_later</i>
+                            <span>Changelog</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="support.html">
+                            <i class="material-icons">local_phone</i>
+                            <span>Support</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row clearfix" id="line14">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2><strong>Changelog</strong></h2>
+                        </div>
+                        <div class="body">
+                            <div class="card-body">
+                                <strong>Version 19.0.0 <small>- 28 Aug 2025</small></strong>
+                                <pre class=" language-html">
+                                 <code class=" language-html">
+-- Update angular to latest version 20.2
+-- Update all dependency to latest version
+-- calendar event design change
+-- add new dashboard nurse dashboard
+-- main dashboard design change and add new components
+-- doctor dashboard design change and add new components
+-- header notification functionality improvement
+-- setting sidebar design change
+-- sidebar menu design change
+-- remove user small images from assets
+-- remove google map page
+-- doctor profile and staff profile design change
+-- invoice and payslip page design change
+-- Minor bug solve
+                                </code>
+                            </pre>
+                            </div>
+                            <div class="card-body">
+                                <strong>Version 18.0.0 <small>- 17 June 2025</small></strong>
+                                <pre class=" language-html">
+                                 <code class=" language-html">
+-- Update angular version 19 to 20
+-- Angular 20 related updates
+-- Update all dependency to latest version
+-- Authentication pages design changes
+-- Minor bug solve
+                                </code>
+                            </pre>
+                            </div>
+                            <div class="card-body">
+                                <strong>Version 17.0.0 <small>- 02 Dec 2024</small></strong>
+                                <pre class=" language-html">
+                                 <code class=" language-html">
+-- Update angular version 18 to 19
+-- Update all dependency to latest version
+-- Responsive components bug solve
+                                </code>
+                            </pre>
+                            </div>
+                            <div class="card-body">
+                                <strong>Version 16.0.0 <small>- 14 Nov 2024</small></strong>
+                                <pre class=" language-html">
+                                 <code class=" language-html">
+-Dashboard design change
+-Reusabele components
+- Calendar app changes
+- Sidemenu code improvement
+-New Pages added
+    Appointments
+        - Appointment Calendar
+    Doctor
+        - Assign Department
+        - Shift Management
+    Patients
+        - Patients Records
+    Room Allotments
+        - Rooms By Department
+        - Add Rooms
+    Blood Bank
+        - Blood Stock
+        - Blood Donor
+        - Blood Issued
+    Accounts
+        - Income
+        - Expenses
+        - Income Reports
+    Human Resources
+        - Leave Request
+        - Leave Balance
+        - Leave Types
+        - Holidays
+        - Today's Attendance
+        - Employee Attendance
+        - Attendance Sheet
+        - Employee Salary
+        - Payslip
+    Insurance
+        - Patient Insurance
+        - New Claims
+        - Claim Status
+        - Insurance Providers
+                                </code>
+                            </pre>
+                            </div>
+                            <div class="card-body"></div>
+                            <strong>Version 15.0.0 <small>- 03 Oct 2024</small></strong>
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Improvement in table strucure
+-- Update all dependency to latest version
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 14.0.0 <small>- 03 June 2024</small></strong>
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Update angular version 17 to 18
+-- Update Material component to Material 3
+-- Update all dependency to latest version
+-- Ck editor replace with ngx-editor
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 13.0.0 <small>- 11 December 2023</small></strong>
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Update to standalone components                           
+-- Safari browser 17 material icon issue solve
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 12.0.0 <small>- 24 November 2023</small></strong>
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Update angular version 16 to 17                           
+-- Update all dependency to the latest
+-- Migrate components into standalone
+-- Change control flow based on Angular 17
+-- minor bug solve
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 11.0.0 <small>- 15 May 2023</small></strong>
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Update angular version 15 to 16                           
+-- Update all dependency to the latest
+-- remove unsupported libraries
+-- minor bug solve
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 10.0.0 <small>- 22 Feb 2023</small></strong>
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Integrate EsLint                             
+-- Update all dependency to the latest
+-- remove ng-dragula library
+-- minor bug solve
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 9.0.0 <small>- 12 Dec 2022</small></strong>
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Update Angular Version 14 to 15                               
+-- Update all dependency to the latest
+-- Remove ng-bootstrap library
+-- minor bug solve
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 8.0.0 <small>- 27 june 2022</small></strong>
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Update Angular Version 13 to 14                               
+-- Update all dependency to the latest
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 7.1.0 <small>- 08 Feb 2022</small></strong>
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Add new modules like ambulance, department, inventory, pharmacy, records                            
+-- Bug solve & improvements
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 7.0.0 <small>- 01 Jan 2022</small></strong>
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Update Angular Version 12 to 13                               
+-- Update all dependency to the latest
+-- Setting sidebar design changes
+-- Header design changes
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 6.0.0 <small>- 25 May 2021</small></strong>
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Update Angular Version 11 to 12                               
+-- Update Bootstrap 4 to Bootstrap 5
+-- Update all dependency to the latest
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 5.2.0 <small>- 01 Feb 2021</small></strong>
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Multi Language Integration (English, German, Spanish)                                
+-- Update Calendar v4 to v5
+-- Add ltr & rtl switch on button click
+-- Google map bug solve
+-- Update all dependency to the latest
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 5.1.0 <small>- 22 Nov 2020</small></strong>
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Update Angular Version 10 to 11
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 5.0.0 <small>- 12 Nov 2020</small></strong>
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Add New Authentication pages
+-- Sidebar bug solve
+-- Modal Window bug solve
+-- Add new guage chart
+-- Update all dependency to the latest
+-- Minor bug solve
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 4.1.0 <small>- 21 Sep 2020</small></strong>
+
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Remove jQuery and related pages
+-- Calendar responsive issue solve
+-- IE sidebar issue solve
+-- Update all dependency to the latest
+-- Minor bug solve
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 4.0.0 <small>- 5 Sep 2020</small></strong>
+
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Add Role-Based Authentication
+-- Separate Modules For Admin, Doctor & Patient
+-- AuthGuard Authentication
+-- Update all dependency to the latest
+-- Minor bug solve
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 3.1.0 <small>- 4 Aug 2020</small></strong>
+
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Update Angular varsion to latest
+-- Update all dependancy to latest
+-- Add new app contacts
+-- Minor bug solve
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 3.0.0 <small>- 30 June 2020</small></strong>
+
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Update Angular varsion 9 to 10
+-- Update all dependancy to latest
+-- Add new features in calendar application
+-- Add new page task
+-- Dark theme bug solve
+-- Minor bug solve
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 2.0.0 <small>- 15 March 2020</small></strong>
+
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- Update Angular version 8 to Angular 9
+-- Replace materializecss with Angular Material UI
+-- Minor bug solve
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 1.1.0 <small>- Sep 25th, 2019</small></strong>
+
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+-- gulpfile.js browsers warning solve
+-- update all dependency to latest
+-- ng-data table search bug solve
+-- add new pages for edit doctors, patients, staff, appointment, etc.
+							</code>
+						</pre>
+                        </div>
+                        <div class="card-body">
+                            <strong>Version 1.0.0 <small>- Sep 19th, 2019</small></strong>
+
+                            <pre class=" language-html">
+                         	<code class=" language-html">
+Initial Release
+							</code>
+						</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+
+    <script src="assets/js/prism.min.js"></script>
+    <script src="assets/js/app.min.js"></script>
+    <!-- Custom Js -->
+    <script src="assets/js/admin.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Add smooth scrolling to all links
+            $("a").on('click', function (event) {
+
+                // Make sure this.hash has a value before overriding default behavior
+                if (this.hash !== "") {
+                    // Prevent default anchor click behavior
+                    event.preventDefault();
+
+                    // Store hash
+                    var hash = this.hash;
+
+                    // Using jQuery's animate() method to add smooth page scroll
+                    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 800, function () {
+
+                        // Add hash (#) to URL when done scrolling (default click behavior)
+                        window.location.hash = hash;
+                    });
+                } // End if
+            });
+        });
+    </script>
+</body>
+
+</html>

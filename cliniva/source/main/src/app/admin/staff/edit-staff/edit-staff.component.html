@@ -1,0 +1,482 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="'Edit Staff'" [items]="['Staff']" [active_item]="'Edit Staff'"></app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Edit Staff Member</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <form [formGroup]="staffForm" (ngSubmit)="onSubmit()">
+              <div class="staff-stepper">
+                <mat-stepper orientation="horizontal" #stepper class="mb-4">
+                  <!-- Personal Information Step -->
+                  <mat-step label="Personal Information" state="person">
+                    <div class="step-container p-3">
+                      <h5 class="step-title">Personal Information</h5>
+                      <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                          <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>First name</mat-label>
+                            <input matInput formControlName="first" required>
+                            <mat-icon class="material-icons-outlined" matSuffix>person</mat-icon>
+                            @if (staffForm.get('first')?.hasError('required') && staffForm.get('first')?.touched) {
+                              <mat-error>First name is required</mat-error>
+                            } @else if (staffForm.get('first')?.hasError('pattern')) {
+                              <mat-error>Please enter a valid name (letters only)</mat-error>
+                            }
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                          <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Last name</mat-label>
+                            <input matInput formControlName="last" required>
+                            <mat-icon class="material-icons-outlined" matSuffix>person</mat-icon>
+                            @if (staffForm.get('last')?.hasError('required') && staffForm.get('last')?.touched) {
+                              <mat-error>Last name is required</mat-error>
+                            } @else if (staffForm.get('last')?.hasError('pattern')) {
+                              <mat-error>Please enter a valid name (letters only)</mat-error>
+                            }
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                          <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Gender</mat-label>
+                            <mat-select formControlName="gender" required>
+                              <mat-option [value]="'Male'">Male</mat-option>
+                              <mat-option [value]="'Female'">Female</mat-option>
+                              <mat-option [value]="'Other'">Other</mat-option>
+                            </mat-select>
+                            <mat-icon class="material-icons-outlined" matSuffix>wc</mat-icon>
+                            @if (staffForm.get('gender')?.hasError('required') && staffForm.get('gender')?.touched) {
+                              <mat-error>Gender is required</mat-error>
+                            }
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                          <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Date Of Birth</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="dob" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            @if (staffForm.get('dob')?.hasError('required') && staffForm.get('dob')?.touched) {
+                              <mat-error>Date of birth is required</mat-error>
+                            }
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                          <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Blood Group</mat-label>
+                            <mat-select formControlName="bloodGroup">
+                              @for (group of bloodGroups; track group) {
+                                <mat-option [value]="group">{{group}}</mat-option>
+                              }
+                            </mat-select>
+                            <mat-icon class="material-icons-outlined" matSuffix>bloodtype</mat-icon>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                          <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Marital Status</mat-label>
+                            <mat-select formControlName="maritalStatus">
+                              <mat-option value="Single">Single</mat-option>
+                              <mat-option value="Married">Married</mat-option>
+                              <mat-option value="Divorced">Divorced</mat-option>
+                              <mat-option value="Widowed">Widowed</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-3">
+                          <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Nationality</mat-label>
+                            <input matInput formControlName="nationality">
+                            <mat-icon class="material-icons-outlined" matSuffix>flag</mat-icon>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-end">
+                        <button mat-flat-button color="primary" matStepperNext>Next
+                          <mat-icon>arrow_forward</mat-icon></button>
+                        </div>
+                      </div>
+                    </mat-step>
+
+                    <!-- Contact Information Step -->
+                    <mat-step label="Contact Information" state="contact">
+                      <div class="step-container p-3">
+                        <h5 class="step-title">Contact Information</h5>
+                        <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Email</mat-label>
+                              <input matInput formControlName="email" required>
+                              <mat-icon class="material-icons-outlined" matSuffix>email</mat-icon>
+                              @if (staffForm.get('email')?.hasError('required') && staffForm.get('email')?.touched) {
+                                <mat-error>Email is required</mat-error>
+                              } @else if (staffForm.get('email')?.hasError('email')) {
+                                <mat-error>Please enter a valid email address</mat-error>
+                              }
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Mobile</mat-label>
+                              <input matInput formControlName="mobile" type="tel" required>
+                              <mat-icon class="material-icons-outlined" matSuffix>phone</mat-icon>
+                              @if (staffForm.get('mobile')?.hasError('required') && staffForm.get('mobile')?.touched) {
+                                <mat-error>Mobile number is required</mat-error>
+                              } @else if (staffForm.get('mobile')?.hasError('pattern')) {
+                                <mat-error>Please enter a valid mobile number</mat-error>
+                              }
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Emergency Contact Name</mat-label>
+                              <input matInput formControlName="emergencyContactName">
+                              <mat-icon class="material-icons-outlined" matSuffix>contacts</mat-icon>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Emergency Contact Number</mat-label>
+                              <input matInput formControlName="emergencyContactNumber" type="tel">
+                              <mat-icon class="material-icons-outlined" matSuffix>phone</mat-icon>
+                              @if (staffForm.get('emergencyContactNumber')?.hasError('pattern')) {
+                                <mat-error>Please enter a valid phone number</mat-error>
+                              }
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Address</mat-label>
+                              <textarea matInput formControlName="address" required rows="3"></textarea>
+                              <mat-icon class="material-icons-outlined" matSuffix>home</mat-icon>
+                              @if (staffForm.get('address')?.hasError('required') && staffForm.get('address')?.touched) {
+                                <mat-error>Address is required</mat-error>
+                              }
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>City</mat-label>
+                              <input matInput formControlName="city">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>State/Province</mat-label>
+                              <input matInput formControlName="state">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Postal Code</mat-label>
+                              <input matInput formControlName="postalCode">
+                              @if (staffForm.get('postalCode')?.hasError('pattern')) {
+                                <mat-error>Please enter a valid postal code</mat-error>
+                              }
+                            </mat-form-field>
+                          </div>
+                          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-3">
+                            <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <mat-label>Country</mat-label>
+                              <input matInput formControlName="country">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                          <button mat-stroked-button matStepperPrevious><mat-icon>arrow_back</mat-icon> Back</button>
+                          <button mat-flat-button color="primary" matStepperNext>Next
+                            <mat-icon>arrow_forward</mat-icon></button>
+                          </div>
+                        </div>
+                      </mat-step>
+
+                      <!-- Professional Information Step -->
+                      <mat-step label="Professional Details" state="work">
+                        <div class="step-container p-3">
+                          <h5 class="step-title">Professional Information</h5>
+                          <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <mat-label>Staff ID</mat-label>
+                                <input matInput formControlName="staffId" required>
+                                <mat-icon class="material-icons-outlined" matSuffix>badge</mat-icon>
+                                @if (staffForm.get('staffId')?.hasError('required') && staffForm.get('staffId')?.touched) {
+                                  <mat-error>Staff ID is required</mat-error>
+                                }
+                              </mat-form-field>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <mat-label>Join Date</mat-label>
+                                <input matInput [matDatepicker]="joinDatePicker" formControlName="joinDate">
+                                <mat-datepicker-toggle matSuffix [for]="joinDatePicker"></mat-datepicker-toggle>
+                                <mat-datepicker #joinDatePicker></mat-datepicker>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <mat-label>Designation</mat-label>
+                                <input matInput formControlName="designation" required>
+                                <mat-icon class="material-icons-outlined" matSuffix>work</mat-icon>
+                                @if (staffForm.get('designation')?.hasError('required') &&
+                                  staffForm.get('designation')?.touched) {
+                                  <mat-error>Designation is required</mat-error>
+                                }
+                              </mat-form-field>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <mat-label>Select Department</mat-label>
+                                <mat-select formControlName="department" required>
+                                  <mat-option [value]="'1'">Neurology</mat-option>
+                                  <mat-option [value]="'2'">Orthopedics</mat-option>
+                                  <mat-option [value]="'3'">Gynaecology</mat-option>
+                                  <mat-option [value]="'4'">Microbiology</mat-option>
+                                  <mat-option [value]="'5'">Cardiology</mat-option>
+                                  <mat-option [value]="'6'">Radiology</mat-option>
+                                  <mat-option [value]="'7'">Pediatrics</mat-option>
+                                  <mat-option [value]="'8'">Pathology</mat-option>
+                                </mat-select>
+                                <mat-icon class="material-icons-outlined" matSuffix>business</mat-icon>
+                                @if (staffForm.get('department')?.hasError('required') &&
+                                  staffForm.get('department')?.touched) {
+                                  <mat-error>Department is required</mat-error>
+                                }
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <mat-label>Specialization</mat-label>
+                                <input matInput formControlName="specialization">
+                                <mat-icon class="material-icons-outlined" matSuffix>psychology</mat-icon>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <mat-label>Experience (years)</mat-label>
+                                <input matInput formControlName="experience" type="number">
+                                <mat-icon class="material-icons-outlined" matSuffix>timeline</mat-icon>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <mat-label>Employment Type</mat-label>
+                                <mat-select formControlName="employmentType">
+                                  @for (type of employmentTypes; track type) {
+                                    <mat-option [value]="type">{{type}}</mat-option>
+                                  }
+                                </mat-select>
+                                <mat-icon class="material-icons-outlined" matSuffix>assignment</mat-icon>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <mat-label>Shift</mat-label>
+                                <mat-select formControlName="shift">
+                                  @for (shift of shiftTypes; track shift) {
+                                    <mat-option [value]="shift">{{shift}}</mat-option>
+                                  }
+                                </mat-select>
+                                <mat-icon class="material-icons-outlined" matSuffix>schedule</mat-icon>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="d-flex justify-content-between">
+                            <button mat-stroked-button matStepperPrevious><mat-icon>arrow_back</mat-icon> Back</button>
+                            <button mat-flat-button color="primary" matStepperNext>Next
+                              <mat-icon>arrow_forward</mat-icon></button>
+                            </div>
+                          </div>
+                        </mat-step>
+
+                        <!-- Qualifications Step -->
+                        <mat-step label="Qualifications" state="school">
+                          <div class="step-container p-3">
+                            <h5 class="step-title">Qualifications & Certifications</h5>
+                            <div class="row">
+                              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                  <mat-label>Education</mat-label>
+                                  <textarea matInput formControlName="education" required rows="3"></textarea>
+                                  <mat-icon class="material-icons-outlined" matSuffix>school</mat-icon>
+                                  @if (staffForm.get('education')?.hasError('required') &&
+                                    staffForm.get('education')?.touched)
+                                    {
+                                    <mat-error>Education details are required</mat-error>
+                                  }
+                                </mat-form-field>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                  <mat-label>Certifications</mat-label>
+                                  <textarea matInput formControlName="certifications" rows="2"></textarea>
+                                  <mat-icon class="material-icons-outlined" matSuffix>card_membership</mat-icon>
+                                </mat-form-field>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                  <mat-label>Licenses</mat-label>
+                                  <input matInput formControlName="licenses">
+                                  <mat-icon class="material-icons-outlined" matSuffix>verified</mat-icon>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                  <mat-label>License Expiry Date</mat-label>
+                                  <input matInput [matDatepicker]="licenseExpiryPicker" formControlName="licenseExpiryDate">
+                                  <mat-datepicker-toggle matSuffix [for]="licenseExpiryPicker"></mat-datepicker-toggle>
+                                  <mat-datepicker #licenseExpiryPicker></mat-datepicker>
+                                </mat-form-field>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                  <mat-label>Skills</mat-label>
+                                  <textarea matInput formControlName="skills" rows="2"></textarea>
+                                  <mat-icon class="material-icons-outlined" matSuffix>psychology</mat-icon>
+                                </mat-form-field>
+                              </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                              <button mat-stroked-button matStepperPrevious><mat-icon>arrow_back</mat-icon> Back</button>
+                              <button mat-flat-button color="primary" matStepperNext>Next
+                                <mat-icon>arrow_forward</mat-icon></button>
+                              </div>
+                            </div>
+                          </mat-step>
+
+                          <!-- Account Information Step -->
+                          <mat-step label="Account Setup" state="account">
+                            <div class="step-container p-3">
+                              <h5 class="step-title">Account Information</h5>
+                              <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                    <mat-label>Username</mat-label>
+                                    <input matInput formControlName="username" required>
+                                    <mat-icon class="material-icons-outlined" matSuffix>account_circle</mat-icon>
+                                    @if (staffForm.get('username')?.hasError('required') && staffForm.get('username')?.touched)
+                                      {
+                                      <mat-error>Username is required</mat-error>
+                                    } @else if (staffForm.get('username')?.hasError('minlength')) {
+                                      <mat-error>Username must be at least 5 characters</mat-error>
+                                    }
+                                  </mat-form-field>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                    <mat-label>Password</mat-label>
+                                    <input matInput formControlName="password" [type]="hide3 ? 'password' : 'text'" required>
+                                    <button mat-icon-button matSuffix (click)="hide3 = !hide3"
+                                      [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide3">
+                                      <mat-icon>{{hide3 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                    @if (staffForm.get('password')?.hasError('required') && staffForm.get('password')?.touched)
+                                      {
+                                      <mat-error>Password is required</mat-error>
+                                    } @else if (staffForm.get('password')?.hasError('minlength')) {
+                                      <mat-error>Password must be at least 6 characters</mat-error>
+                                    }
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
+                                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                    <mat-label>Confirm Password</mat-label>
+                                    <input matInput formControlName="conformPassword" [type]="hide3 ? 'password' : 'text'"
+                                      required>
+                                      <button mat-icon-button matSuffix (click)="hide3 = !hide3"
+                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide3">
+                                        <mat-icon>{{hide3 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                      </button>
+                                      @if (staffForm.get('conformPassword')?.hasError('required') &&
+                                        staffForm.get('conformPassword')?.touched) {
+                                        <mat-error>Confirm password is required</mat-error>
+                                      } @else if (staffForm.get('conformPassword')?.hasError('passwordMismatch')) {
+                                        <mat-error>Passwords do not match</mat-error>
+                                      }
+                                    </mat-form-field>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
+                                    <label class="mb-2">Profile Photo</label>
+                                    <app-file-upload formControlName="uploadFile"></app-file-upload>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                      <mat-label>Bio</mat-label>
+                                      <textarea matInput formControlName="bio" rows="3"></textarea>
+                                      <mat-icon class="material-icons-outlined" matSuffix>description</mat-icon>
+                                    </mat-form-field>
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <div class="col-md-12 col-sm-12 mb-3">
+                                    <mat-checkbox class="example-margin" formControlName="agreeToc" required>
+                                      I agree to the terms and conditions
+                                    </mat-checkbox>
+                                    @if (staffForm.get('agreeToc')?.hasError('required') && staffForm.get('agreeToc')?.touched) {
+                                      <mat-error
+                                        >
+                                        You must agree to the terms and conditions
+                                      </mat-error>
+                                    }
+                                  </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                  <button mat-stroked-button matStepperPrevious><mat-icon>arrow_back</mat-icon> Back</button>
+                                  <button mat-flat-button color="primary" type="submit" [disabled]="!staffForm.valid">Submit
+                                    <mat-icon>check</mat-icon></button>
+                                  </div>
+                                </div>
+                              </mat-step>
+                            </mat-stepper>
+                          </div>
+                          @if (false) {
+                            <div class="row"> <!-- Hidden as we now use the stepper submit button -->
+                              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
+                                <button class="btn-space" [disabled]="!staffForm.valid" mat-flat-button
+                                color="primary">Submit</button>
+                                <button type="button" mat-flat-button class="formCancelBtn">Cancel</button>
+                              </div>
+                            </div>
+                          }
+                        </form>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                </div>
+              </div>
+            </section>

@@ -1,0 +1,135 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="avatarDetails">
+      <label class="hoverable">
+        <img [src]='assignDepartment.img' alt="avatar">
+      </label>
+      <div class="modalTitle">
+        {{dialogTitle}}
+      </div>
+    </div>
+    <button mat-icon-button mat-dialog-close class="modal-close-button" aria-label="Close dialog" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="doctorsForm" (ngSubmit)="submit()">
+      <div class="row">
+        <!-- Doctor Name -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Doctor Name</mat-label>
+            <input matInput formControlName="doctorName" required>
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>face</mat-icon>
+            @if (doctorsForm.get('doctorName')?.hasError('required')) {
+            <mat-error>
+              Doctor Name is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Department -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Department</mat-label>
+            <mat-select formControlName="department" required>
+              <mat-option value="Urology">Urology</mat-option>
+              <mat-option value="Dentist">Dentist</mat-option>
+              <mat-option value="Cardiology">Cardiology</mat-option>
+              <mat-option value="Neurology">Neurology</mat-option>
+              <mat-option value="Pediatrics">Pediatrics</mat-option>
+              <mat-option value="Orthopedics">Orthopedics</mat-option>
+              <mat-option value="Dermatology">Dermatology</mat-option>
+              <mat-option value="Psychiatry">Psychiatry</mat-option>
+              <mat-option value="Ophthalmology">Ophthalmology</mat-option>
+              <!-- Add other departments as needed -->
+            </mat-select>
+            @if (doctorsForm.get('department')?.hasError('required')) {
+            <mat-error>
+              Department is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Specialty -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Specialty</mat-label>
+            <input matInput formControlName="specialty">
+            <mat-icon class="material-icons-outlined color-icon p-3" matSuffix>flag</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <!-- Assigned Date -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Assigned Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="assignedDate" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            @if (doctorsForm.get('assignedDate')?.hasError('required')) {
+            <mat-error>
+              Assigned date is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Shift Schedule -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Shift Schedule</mat-label>
+            <input matInput formControlName="shiftSchedule">
+          </mat-form-field>
+        </div>
+
+        <!-- Experience Level -->
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Experience Level</mat-label>
+            <mat-select formControlName="experienceLevel">
+              <mat-option value="Junior">Junior</mat-option>
+              <mat-option value="Consultant">Consultant</mat-option>
+              <mat-option value="Senior">Senior</mat-option>
+            </mat-select>
+            @if (doctorsForm.get('experienceLevel')?.hasError('required')) {
+            <mat-error>
+              Experience Level is required
+            </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Current Assignment Status -->
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Current Assignment Status</mat-label>
+            <mat-select formControlName="currentAssignmentStatus">
+              <mat-option value="Active">Active</mat-option>
+              <mat-option value="Pending">Pending</mat-option>
+              <mat-option value="Inactive">Inactive</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-flat-button class="formSubmitBtn" [disabled]="!doctorsForm.valid" type="submit">Save</button>
+            <button mat-flat-button mat-dialog-close class="formCancelBtn" tabindex="-1">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
