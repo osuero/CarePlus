@@ -63,20 +63,8 @@ export class UsersCreateDialogComponent implements OnInit, OnDestroy {
     },
   ];
 
-  readonly tenants = [
-    'main',
-    ...(
-      Array.isArray(environment.tenants) && environment.tenants.length > 0
-        ? environment.tenants
-        : [environment.tenantId]
-    ).filter(
-      (tenant): tenant is string =>
-        typeof tenant === 'string' && tenant.trim().length > 0
-    ),
-  ].filter(
-    (tenant, index, self) => self.indexOf(tenant) === index
-  );
-  readonly defaultTenant = 'main';
+  readonly tenants: string[];
+  readonly defaultTenant: string;
 
   private readonly rolesCache = new Map<string, Role[]>();
   private tenantSubscription?: Subscription;
@@ -90,6 +78,22 @@ export class UsersCreateDialogComponent implements OnInit, OnDestroy {
       UsersCreateDialogResult
     >
   ) {
+    const normalizedDefaultTenant =
+      this.normalizeTenant(environment.tenantId) ?? 'default';
+    const tenantCandidates = Array.isArray(environment.tenants)
+      ? environment.tenants
+      : [environment.tenantId];
+
+    const normalizedTenants = [
+      normalizedDefaultTenant,
+      ...tenantCandidates
+        .map((tenant) => this.normalizeTenant(tenant))
+        .filter((tenant): tenant is string => !!tenant),
+    ].filter((tenant, index, self) => self.indexOf(tenant) === index);
+
+    this.defaultTenant = normalizedDefaultTenant;
+    this.tenants = normalizedTenants;
+
     this.form = this.fb.group({
       firstName: ['', [Validators.required, Validators.maxLength(100)]],
       lastName: ['', [Validators.required, Validators.maxLength(100)]],
@@ -205,7 +209,7 @@ export class UsersCreateDialogComponent implements OnInit, OnDestroy {
       roleId,
     } = this.form.value;
 
-    const selectedTenant = (tenantId ?? '').toString().trim() || this.defaultTenant;
+    const selectedTenant = this.normalizeTenant(tenantId) ?? this.defaultTenant;
     const selectedRole = (roleId ?? '').toString().trim();
 
     return {
@@ -229,13 +233,13 @@ export class UsersCreateDialogComponent implements OnInit, OnDestroy {
     }
 
     this.tenantSubscription = tenantControl.valueChanges.subscribe((value) => {
-      const tenant = (value ?? '').toString().trim() || this.defaultTenant;
+      const tenant = this.normalizeTenant(value) ?? this.defaultTenant;
       this.loadRolesForTenant(tenant);
     });
   }
 
   private loadRolesForTenant(tenantId: string): void {
-    const normalizedTenant = tenantId?.toString().trim() || this.defaultTenant;
+    const normalizedTenant = this.normalizeTenant(tenantId) ?? this.defaultTenant;
 
     if (this.rolesCache.has(normalizedTenant)) {
       this.roles = this.rolesCache.get(normalizedTenant)!;
@@ -302,8 +306,7 @@ export class UsersCreateDialogComponent implements OnInit, OnDestroy {
 
   private getSelectedTenant(): string {
     const tenantControl = this.form.get('tenantId');
-    const value = tenantControl?.value ?? '';
-    return value.toString().trim() || this.defaultTenant;
+    return this.normalizeTenant(tenantControl?.value) ?? this.defaultTenant;
   }
 
   private buildDefaultRoles(tenantId: string): Role[] {
@@ -330,5 +333,14 @@ export class UsersCreateDialogComponent implements OnInit, OnDestroy {
     return Array.from(merged.values()).sort((a, b) =>
       a.name.localeCompare(b.name)
     );
+  }
+
+  private normalizeTenant(value: unknown): string | undefined {
+    if (typeof value !== 'string') {
+      return undefined;
+    }
+
+    const normalized = value.trim();
+    return normalized.length > 0 ? normalized : undefined;
   }
 }
