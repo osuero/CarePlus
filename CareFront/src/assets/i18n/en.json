@@ -242,8 +242,19 @@
           "LABEL": "Gender",
           "ERROR": "Gender is required."
         },
+        "TENANT": {
+          "LABEL": "Tenant",
+          "PLACEHOLDER": "Select a tenant",
+          "ERROR": "Tenant is required."
+        },
         "COUNTRY": {
           "LABEL": "Country"
+        },
+        "ROLE": {
+          "LABEL": "Role",
+          "NONE": "No role assigned",
+          "LOADING": "Loading roles...",
+          "EMPTY": "There are no roles for the selected tenant."
         },
         "DATE_OF_BIRTH": {
           "LABEL": "Date of birth",
@@ -275,7 +286,8 @@
       "DELETE_CANCEL_BUTTON": "Cancel",
       "LOAD_ERROR_TITLE": "Load error",
       "LOAD_ERROR_BODY": "We could not fetch the user list.",
-      "COUNTRIES_WARNING": "The country list could not be loaded."
+      "COUNTRIES_WARNING": "The country list could not be loaded.",
+      "ROLES_LOAD_ERROR": "We could not load the role list."
     },
     "EDIT": {
       "TITLE": "Edit user",

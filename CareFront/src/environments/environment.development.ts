@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:5120',
-  tenantId: 'default',\n  tenants: ['default'],
+  tenantId: 'default',
+  tenants: ['default'],
 };
 
 /*

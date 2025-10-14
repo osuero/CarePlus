@@ -32,7 +32,7 @@ export class UsersService {
   private readonly graphqlUrl = `${this.baseUrl}/graphql`;
   private readonly defaultTenant = environment.tenantId ?? 'default';
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient) { }
 
   getUsers(
     page: number,
@@ -65,6 +65,10 @@ export class UsersService {
       tenantId,
     };
 
+    alert(this.usersUrl)
+    console.log(tenantId)
+    console.log('este es el payload', payload)
+    alert(payload)
     return this.http
       .post<User>(`${this.usersUrl}/register`, payload, {
         headers: this.createHeaders(true, tenantId),
@@ -111,7 +115,9 @@ export class UsersService {
       .pipe(catchError((error) => this.handleError(error)));
   }
 
-  getRoles(includeGlobal = true): Observable<Role[]> {
+  getRoles(tenantId?: string, includeGlobal = true): Observable<Role[]> {
+    const normalizedTenant = tenantId?.toString().trim() || this.defaultTenant;
+
     const query = `
       query GetRoles($includeGlobal: Boolean!) {
         getRoles(page: 1, pageSize: 100, includeGlobal: $includeGlobal) {
@@ -136,7 +142,7 @@ export class UsersService {
           },
         },
         {
-          headers: this.createHeaders(false),
+          headers: this.createHeaders(true, normalizedTenant),
         }
       )
       .pipe(
@@ -158,12 +164,23 @@ export class UsersService {
 
   private handleError(error: unknown): Observable<never> {
     if (error instanceof HttpErrorResponse) {
-      if (error.error) {
-        const apiError = error.error as ApiErrorResponse;
-        const message = apiError.message || apiError.error;
+      const backendPayload = error.error as ApiErrorResponse | { title?: string; detail?: string } | string | null | undefined;
+
+      if (backendPayload && typeof backendPayload === 'object') {
+        const apiError = backendPayload as ApiErrorResponse & { detail?: string; title?: string };
+        const message =
+          apiError.message ||
+          apiError.error ||
+          apiError.detail ||
+          apiError.title;
+
         if (message) {
           return throwError(() => new Error(message));
         }
+      }
+
+      if (typeof backendPayload === 'string' && backendPayload.trim().length > 0) {
+        return throwError(() => new Error(backendPayload));
       }
 
       if (error.message) {

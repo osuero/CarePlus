@@ -152,6 +152,33 @@
         </div>
       </div>
       <div class="col-md-6">
+        <label class="form-label" for="tenantId">
+          {{ 'USERS.FORM.FIELDS.TENANT.LABEL' | translate }} *
+        </label>
+        <select
+          id="tenantId"
+          class="form-select"
+          formControlName="tenantId"
+          [class.is-invalid]="
+            form.get('tenantId')?.invalid &&
+            (form.get('tenantId')?.dirty || form.get('tenantId')?.touched)
+          "
+        >
+          <option value="" disabled>
+            {{ 'USERS.FORM.FIELDS.TENANT.PLACEHOLDER' | translate }}
+          </option>
+          <option *ngFor="let tenant of tenants" [value]="tenant">
+            {{ tenant }}
+          </option>
+        </select>
+        <div class="invalid-feedback d-block" *ngIf="
+            form.get('tenantId')?.invalid &&
+            (form.get('tenantId')?.dirty || form.get('tenantId')?.touched)
+          ">
+          {{ 'USERS.FORM.FIELDS.TENANT.ERROR' | translate }}
+        </div>
+      </div>
+      <div class="col-md-6">
         <label class="form-label" for="country">
           {{ 'USERS.FORM.FIELDS.COUNTRY.LABEL' | translate }}
         </label>
@@ -170,6 +197,39 @@
             {{ country.name }}
           </option>
         </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" for="roleId">
+          {{ 'USERS.FORM.FIELDS.ROLE.LABEL' | translate }}
+        </label>
+        <select
+          id="roleId"
+          class="form-select"
+          formControlName="roleId"
+          [disabled]="rolesLoading"
+        >
+          <option value="">
+            {{ 'USERS.FORM.FIELDS.ROLE.NONE' | translate }}
+          </option>
+          <option
+            *ngFor="let role of roles; trackBy: trackByRoleId"
+            [value]="role.id"
+          >
+            {{ role.name }}
+          </option>
+        </select>
+        <small class="text-muted d-block mt-1" *ngIf="rolesLoading">
+          {{ 'USERS.FORM.FIELDS.ROLE.LOADING' | translate }}
+        </small>
+        <small class="text-danger d-block mt-1" *ngIf="!rolesLoading && rolesError">
+          {{ rolesError }}
+        </small>
+        <small
+          class="text-muted d-block mt-1"
+          *ngIf="!rolesLoading && !rolesError && roles.length === 0"
+        >
+          {{ 'USERS.FORM.FIELDS.ROLE.EMPTY' | translate }}
+        </small>
       </div>
       <div class="col-md-6">
         <label class="form-label" for="dateOfBirth">

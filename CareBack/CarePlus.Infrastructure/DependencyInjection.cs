@@ -17,6 +17,7 @@ public static class DependencyInjection
         AddDatabase(services, configuration);
 
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddSingleton<ICountryService, CountryService>();
 
         return services;

@@ -378,6 +378,16 @@
           "dateOfBirth": {
             "type": "string",
             "format": "date"
+          },
+          "tenantId": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": true
+          },
+          "roleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -432,6 +442,16 @@
           "dateOfBirth": {
             "type": "string",
             "format": "date"
+          },
+          "tenantId": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": true
+          },
+          "roleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -534,6 +554,15 @@
           "updatedAtUtc": {
             "type": "string",
             "format": "date-time"
+          },
+          "roleId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "roleName": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

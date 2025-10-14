@@ -7,7 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
 import Swal from 'sweetalert2';
 import { UsersService } from './users.service';
-import { environment } from '../../environments/environment';\nimport { Role, User } from './users.model';
+import { environment } from '../../environments/environment';
+import { Role, User } from './users.model';
 import { Subject } from 'rxjs';
 import {
   debounceTime,

@@ -12,6 +12,7 @@ namespace CarePlus.Api.GraphQL;
 [ExtendObjectType(OperationTypeNames.Query)]
 public class RoleQueries
 {
+    [GraphQLName("getRoles")]
     public async Task<RoleCollectionPayload> GetRolesAsync(
         int page = 1,
         int pageSize = 20,
@@ -33,6 +34,7 @@ public class RoleQueries
         };
     }
 
+    [GraphQLName("getRole")]
     public async Task<RoleResponse?> GetRoleAsync(
         Guid id,
         bool includeGlobal = true,
