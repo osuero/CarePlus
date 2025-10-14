@@ -64,11 +64,6 @@ export class UsersService {
       ...request,
       tenantId,
     };
-
-    alert(this.usersUrl)
-    console.log(tenantId)
-    console.log('este es el payload', payload)
-    alert(payload)
     return this.http
       .post<User>(`${this.usersUrl}/register`, payload, {
         headers: this.createHeaders(true, tenantId),
