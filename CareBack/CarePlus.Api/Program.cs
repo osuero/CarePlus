@@ -48,6 +48,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services
     .AddGraphQLServer()
     .AddQueryType(d => d.Name("Query"))
+    .AddTypeExtension<PatientQueries>()
     .AddTypeExtension<UserQueries>()
     .AddTypeExtension<RoleQueries>()
     .AddMutationType(d => d.Name("Mutation"))
@@ -73,6 +74,7 @@ app.UseCors(FrontendCorsPolicy);
 
 app.MapControllers();
 app.MapUserEndpoints();
+app.MapPatientEndpoints();
 app.MapGraphQL();
 
 app.Run();

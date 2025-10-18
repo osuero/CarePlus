@@ -40,6 +40,15 @@ export const APP_ROUTE: Route[] = [
           import('./users/users.routes').then((m) => m.USERS_ROUTE),
       },
       {
+        path: 'patients',
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Admin,
+        },
+        loadChildren: () =>
+          import('./patients/patients.routes').then((m) => m.PATIENTS_ROUTE),
+      },
+      {
         path: 'patient',
         canActivate: [AuthGuard],
         data: {

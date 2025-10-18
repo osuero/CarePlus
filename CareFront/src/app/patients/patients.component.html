@@ -1,0 +1,228 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <app-breadcrumb
+        [title]="'PATIENTS.BREADCRUMB.TITLE' | translate"
+        [items]="[]"
+        [active_item]="'PATIENTS.BREADCRUMB.ACTIVE' | translate"
+      ></app-breadcrumb>
+    </div>
+
+    <div class="card">
+      <div class="header row g-2 align-items-center">
+        <div class="col-md">
+          <h2 class="mb-0">{{ 'PATIENTS.TABLE.TITLE' | translate }}</h2>
+        </div>
+        <div
+          class="col-md-auto d-flex flex-wrap align-items-center gap-2 justify-content-md-end"
+        >
+          <button
+            mat-flat-button
+            color="primary"
+            type="button"
+            (click)="openCreateDialog()"
+          >
+            <mat-icon class="me-1">person_add</mat-icon>
+            {{ 'PATIENTS.TABLE.ADD_BUTTON' | translate }}
+          </button>
+          <div class="d-flex align-items-center gap-2">
+            <label for="pageSize" class="mb-0 text-muted small">
+              {{ 'PATIENTS.TABLE.PAGE_SIZE_LABEL' | translate }}
+            </label>
+            <select
+              id="pageSize"
+              class="form-select form-select-sm"
+              [value]="pageSize"
+              (change)="changePageSize($event)"
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <div class="row g-2 align-items-center mb-3">
+          <div class="col-lg-4">
+            <input
+              type="text"
+              class="form-control"
+              [placeholder]="'PATIENTS.TABLE.SEARCH_PLACEHOLDER' | translate"
+              [formControl]="searchControl"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-lg-3">
+            <select class="form-select" [formControl]="genderControl">
+              <option value="ALL">
+                {{ 'PATIENTS.TABLE.GENDER_FILTER.ALL' | translate }}
+              </option>
+              <option value="Male">
+                {{ 'PATIENTS.FORM.GENDER_OPTIONS.MALE' | translate }}
+              </option>
+              <option value="Female">
+                {{ 'PATIENTS.FORM.GENDER_OPTIONS.FEMALE' | translate }}
+              </option>
+              <option value="Other">
+                {{ 'PATIENTS.FORM.GENDER_OPTIONS.OTHER' | translate }}
+              </option>
+            </select>
+          </div>
+          <div class="col-lg-3">
+            <input
+              type="text"
+              class="form-control"
+              [placeholder]="'PATIENTS.TABLE.COUNTRY_FILTER' | translate"
+              [formControl]="countryControl"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-lg-2 text-lg-end">
+            <ng-container *ngIf="totalCount > 0; else emptyPatients">
+              <small class="text-muted">
+                {{
+                  'PATIENTS.TABLE.RANGE'
+                    | translate
+                      : {
+                          start: rangeStart(),
+                          end: rangeEnd(),
+                          total: totalCount
+                        }
+                }}
+              </small>
+            </ng-container>
+            <ng-template #emptyPatients>
+              <small class="text-muted" *ngIf="!loadingPatients">
+                {{ 'PATIENTS.TABLE.EMPTY' | translate }}
+              </small>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead>
+              <tr>
+                <th>{{ 'PATIENTS.TABLE.HEADERS.PATIENT' | translate }}</th>
+                <th>{{ 'PATIENTS.TABLE.HEADERS.GENDER' | translate }}</th>
+                <th>{{ 'PATIENTS.TABLE.HEADERS.AGE' | translate }}</th>
+                <th>{{ 'PATIENTS.TABLE.HEADERS.CONTACT' | translate }}</th>
+                <th>{{ 'PATIENTS.TABLE.HEADERS.COUNTRY' | translate }}</th>
+                <th>{{ 'PATIENTS.TABLE.HEADERS.CREATED' | translate }}</th>
+                <th class="text-lg-end">
+                  {{ 'PATIENTS.TABLE.HEADERS.ACTIONS' | translate }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="loadingPatients">
+                <td colspan="7" class="text-center py-4">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">
+                      {{ 'PATIENTS.TABLE.LOADING' | translate }}
+                    </span>
+                  </div>
+                </td>
+              </tr>
+              <tr *ngIf="!loadingPatients && patients.length === 0">
+                <td colspan="7" class="text-center text-muted py-4">
+                  {{ 'PATIENTS.TABLE.NO_RESULTS' | translate }}
+                </td>
+              </tr>
+              <tr
+                *ngFor="let patient of patients; trackBy: trackByPatientId"
+                class="align-middle"
+              >
+                <td>
+                  <div class="fw-semibold">
+                    {{ patient.firstName }} {{ patient.lastName }}
+                  </div>
+                  <div class="text-muted small">{{ patient.email }}</div>
+                </td>
+                <td>{{ getGenderLabel(patient.gender) }}</td>
+                <td>{{ patient.age }}</td>
+                <td>
+                  <div>
+                    {{
+                      patient.phoneNumber ||
+                        ('PATIENTS.TABLE.NO_PHONE' | translate)
+                    }}
+                  </div>
+                  <div class="text-muted small" *ngIf="patient.identification">
+                    {{ 'PATIENTS.TABLE.ID_LABEL' | translate }}:
+                    {{ patient.identification }}
+                  </div>
+                </td>
+                <td>
+                  {{
+                    patient.country ||
+                      ('PATIENTS.TABLE.NO_COUNTRY' | translate)
+                  }}
+                </td>
+                <td>
+                  <div class="text-muted small">
+                    {{ patient.createdAtUtc | date: 'dd/MM/yyyy HH:mm' }}
+                  </div>
+                </td>
+                <td class="actions-cell text-lg-end">
+                  <button
+                    mat-icon-button
+                    type="button"
+                    (click)="openEditDialog(patient)"
+                    [disabled]="loadingPatients"
+                    [title]="'PATIENTS.EDIT.TITLE' | translate"
+                  >
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button
+                    mat-icon-button
+                    type="button"
+                    color="warn"
+                    (click)="confirmDelete(patient)"
+                    [disabled]="loadingPatients"
+                    [title]="'PATIENTS.MESSAGES.DELETE_TITLE' | translate"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 mt-3"
+        >
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="previousPage()"
+            [disabled]="!hasPreviousPage || loadingPatients"
+          >
+            {{ 'PATIENTS.TABLE.PREVIOUS' | translate }}
+          </button>
+          <span class="text-muted small">
+            {{
+              'PATIENTS.TABLE.PAGE_INFO'
+                | translate
+                  : {
+                      page: totalPages === 0 ? 0 : page,
+                      pages: totalPages
+                    }
+            }}
+          </span>
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="nextPage()"
+            [disabled]="!hasNextPage || loadingPatients"
+          >
+            {{ 'PATIENTS.TABLE.NEXT' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
