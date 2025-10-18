@@ -33,3 +33,5 @@ C:\CarePlus\CarePlus\CareBack\CarePlus.Infrastructure\obj\Debug\net9.0\CarePlus.
 C:\CarePlus\CarePlus\CareBack\CarePlus.Infrastructure\obj\Debug\net9.0\refint\CarePlus.Infrastructure.dll
 C:\CarePlus\CarePlus\CareBack\CarePlus.Infrastructure\obj\Debug\net9.0\CarePlus.Infrastructure.pdb
 C:\CarePlus\CarePlus\CareBack\CarePlus.Infrastructure\obj\Debug\net9.0\ref\CarePlus.Infrastructure.dll
+C:\CarePlus\CarePlus\CareBack\CarePlus.Infrastructure\bin\Debug\net9.0\CarePlus.Infrastructure.runtimeconfig.json
+C:\CarePlus\CarePlus\CareBack\CarePlus.Infrastructure\obj\Debug\net9.0\CarePlus.Infrastructure.genruntimeconfig.cache

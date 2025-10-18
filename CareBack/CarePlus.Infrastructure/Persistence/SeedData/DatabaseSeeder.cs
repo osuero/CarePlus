@@ -23,7 +23,7 @@ public static class DatabaseSeeder
         var loggerFactory = scope.ServiceProvider.GetService<ILoggerFactory>();
         var logger = loggerFactory?.CreateLogger("DatabaseSeeder");
 
-        await context.Database.EnsureCreatedAsync(cancellationToken);
+        await context.Database.MigrateAsync(cancellationToken);
 
         await ResetRolesAsync(context, logger, cancellationToken);
     }
