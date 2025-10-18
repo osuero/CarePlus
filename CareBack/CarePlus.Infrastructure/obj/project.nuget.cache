@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "OPX9SOOlqPo=",
+  "dgSpecHash": "NfWg1D4SyyI=",
   "success": true,
   "projectFilePath": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Infrastructure\\CarePlus.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -59,8 +59,7 @@
     "C:\\Users\\HP\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\system.text.json\\9.0.0\\system.text.json.9.0.0.nupkg.sha512",
     "C:\\Users\\HP\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\HP\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
-    "C:\\Users\\HP\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.305\\microsoft.net.sdk.compilers.toolset.9.0.305.nupkg.sha512"
+    "C:\\Users\\HP\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

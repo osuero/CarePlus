@@ -6,6 +6,7 @@ using CarePlus.Api.Infrastructure.Tenancy;
 using CarePlus.Application;
 using CarePlus.Application.Interfaces;
 using CarePlus.Infrastructure;
+using CarePlus.Infrastructure.Persistence.SeedData;
 
 const string FrontendCorsPolicy = "FrontendCorsPolicy";
 
@@ -55,6 +56,8 @@ builder.Services
 var app = builder.Build();
 
 app.UseExceptionHandler();
+
+await DatabaseSeeder.SeedAsync(app.Services);
 
 if (app.Environment.IsDevelopment())
 {

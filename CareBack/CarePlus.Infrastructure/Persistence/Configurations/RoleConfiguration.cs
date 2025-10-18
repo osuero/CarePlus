@@ -8,10 +8,6 @@ namespace CarePlus.Infrastructure.Persistence.Configurations;
 
 public class RoleConfiguration : IEntityTypeConfiguration<Role>
 {
-    private static readonly Guid AdminRoleId = Guid.Parse("7B65C5F7-8B06-4F97-92F1-9F81E1F66D26");
-    private static readonly Guid DoctorRoleId = Guid.Parse("A2A4F51F-2A7C-4B8E-94E6-4E6E1B4B19D3");
-    private static readonly Guid PatientRoleId = Guid.Parse("B13C7B8E-2E0F-4F6C-B2C5-6BC3E623EAF0");
-
     public void Configure(EntityTypeBuilder<Role> builder)
     {
         builder.ToTable("Roles");
@@ -52,31 +48,31 @@ public class RoleConfiguration : IEntityTypeConfiguration<Role>
         builder.HasData(
             new Role
             {
-                Id = AdminRoleId,
-                TenantId = TenantConstants.GlobalTenantId,
+                Id = RoleConstants.AdministratorRoleId,
+                TenantId = TenantConstants.DefaultTenantId,
                 Name = "Administrator",
                 Description = "Global administrator role",
-                IsGlobal = true,
+                IsGlobal = false,
                 CreatedAtUtc = seedTimestamp,
                 UpdatedAtUtc = seedTimestamp
             },
             new Role
             {
-                Id = DoctorRoleId,
-                TenantId = TenantConstants.GlobalTenantId,
+                Id = RoleConstants.DoctorRoleId,
+                TenantId = TenantConstants.DefaultTenantId,
                 Name = "Doctor",
                 Description = "Global doctor role",
-                IsGlobal = true,
+                IsGlobal = false,
                 CreatedAtUtc = seedTimestamp,
                 UpdatedAtUtc = seedTimestamp
             },
             new Role
             {
-                Id = PatientRoleId,
-                TenantId = TenantConstants.GlobalTenantId,
+                Id = RoleConstants.PatientRoleId,
+                TenantId = TenantConstants.DefaultTenantId,
                 Name = "Patient",
                 Description = "Global patient role",
-                IsGlobal = true,
+                IsGlobal = false,
                 CreatedAtUtc = seedTimestamp,
                 UpdatedAtUtc = seedTimestamp
             });

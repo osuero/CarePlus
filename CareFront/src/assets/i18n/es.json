@@ -232,11 +232,15 @@
         },
         "PHONE": {
           "LABEL": "Telefono",
-          "PLACEHOLDER": "+503 0000 0000"
+          "PLACEHOLDER": "+503 0000 0000",
+          "ERROR": "El telefono es obligatorio.",
+          "MAX_LENGTH_ERROR": "El telefono no puede tener mas de 32 caracteres."
         },
         "IDENTIFICATION": {
           "LABEL": "Identificacion",
-          "PLACEHOLDER": "Documento"
+          "PLACEHOLDER": "Documento",
+          "ERROR": "La identificacion es obligatoria.",
+          "MAX_LENGTH_ERROR": "La identificacion no puede tener mas de 50 caracteres."
         },
         "GENDER": {
           "LABEL": "Genero",
@@ -248,13 +252,17 @@
           "ERROR": "El tenant es obligatorio."
         },
         "COUNTRY": {
-          "LABEL": "Pais"
+          "LABEL": "Pais",
+          "PLACEHOLDER": "Selecciona un pais",
+          "ERROR": "El pais es obligatorio."
         },
         "ROLE": {
           "LABEL": "Rol",
+          "PLACEHOLDER": "Selecciona un rol",
           "NONE": "Sin rol asignado",
           "LOADING": "Cargando roles...",
-          "EMPTY": "No hay roles disponibles para el tenant seleccionado."
+          "EMPTY": "No hay roles disponibles para el tenant seleccionado.",
+          "ERROR": "El rol es obligatorio."
         },
         "DATE_OF_BIRTH": {
           "LABEL": "Fecha de nacimiento",

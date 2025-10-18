@@ -101,16 +101,16 @@ export class UsersCreateDialogComponent implements OnInit, OnDestroy {
         '',
         [Validators.required, Validators.email, Validators.maxLength(256)],
       ],
-      phoneNumber: ['', [Validators.maxLength(32)]],
-      identification: ['', [Validators.maxLength(50)]],
-      country: [''],
+      phoneNumber: ['', [Validators.required, Validators.maxLength(32)]],
+      identification: ['', [Validators.required, Validators.maxLength(50)]],
+      country: ['', [Validators.required]],
       gender: ['', [Validators.required, Validators.maxLength(20)]],
       dateOfBirth: ['', [Validators.required]],
       tenantId: [
         this.defaultTenant,
         [Validators.required, Validators.maxLength(100)],
       ],
-      roleId: [''],
+      roleId: ['', [Validators.required]],
     });
   }
 
@@ -216,13 +216,13 @@ export class UsersCreateDialogComponent implements OnInit, OnDestroy {
       firstName: (firstName ?? '').trim(),
       lastName: (lastName ?? '').trim(),
       email: (email ?? '').trim().toLowerCase(),
-      phoneNumber: phoneNumber?.toString().trim() || undefined,
-      identification: identification?.toString().trim() || undefined,
-      country: country?.toString().trim() || undefined,
+      phoneNumber: (phoneNumber ?? '').toString().trim(),
+      identification: (identification ?? '').toString().trim(),
+      country: (country ?? '').toString().trim(),
       gender: (gender ?? '').trim(),
       dateOfBirth: (dateOfBirth ?? '').toString(),
       tenantId: selectedTenant,
-      roleId: selectedRole || undefined,
+      roleId: selectedRole,
     };
   }
 

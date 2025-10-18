@@ -5,6 +5,7 @@ using CarePlus.Application.DTOs.Roles;
 using CarePlus.Application.Interfaces;
 using CarePlus.Application.Interfaces.Services;
 using HotChocolate;
+using HotChocolate.Execution;
 using HotChocolate.Types;
 
 namespace CarePlus.Api.GraphQL;
@@ -22,16 +23,34 @@ public class RoleQueries
         [Service] IRoleQueryService roleQueryService = default!,
         CancellationToken cancellationToken = default)
     {
-        var tenantId = tenantProvider.GetTenantId();
-        var result = await roleQueryService.SearchAsync(tenantId, page, pageSize, search, includeGlobal, cancellationToken);
-
-        return new RoleCollectionPayload
+        try
         {
-            Nodes = result.Items,
-            TotalCount = result.TotalCount,
-            Page = result.Page,
-            PageSize = result.PageSize
-        };
+            var tenantId = tenantProvider.GetTenantId();
+            var result = await roleQueryService.SearchAsync(tenantId, page, pageSize, search, includeGlobal, cancellationToken);
+
+            if (result.Items.Count == 0)
+            {
+                throw CreateGraphQLError(
+                    "role.notFound",
+                    $"No se encontraron roles configurados para el tenant '{tenantId}'.");
+            }
+
+            return new RoleCollectionPayload
+            {
+                Nodes = result.Items,
+                TotalCount = result.TotalCount,
+                Page = result.Page,
+                PageSize = result.PageSize
+            };
+        }
+        catch (GraphQLException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw CreateGraphQLError("role.fetchFailed", ex.Message);
+        }
     }
 
     [GraphQLName("getRole")]
@@ -42,7 +61,32 @@ public class RoleQueries
         [Service] IRoleQueryService roleQueryService = default!,
         CancellationToken cancellationToken = default)
     {
-        var tenantId = tenantProvider.GetTenantId();
-        return await roleQueryService.GetByIdAsync(tenantId, id, includeGlobal, cancellationToken);
+        try
+        {
+            var tenantId = tenantProvider.GetTenantId();
+            var role = await roleQueryService.GetByIdAsync(tenantId, id, includeGlobal, cancellationToken);
+            if (role is null)
+            {
+                throw CreateGraphQLError("role.notFound", $"El rol solicitado no existe para el tenant '{tenantId}'.");
+            }
+
+            return role;
+        }
+        catch (GraphQLException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw CreateGraphQLError("role.fetchFailed", ex.Message);
+        }
+    }
+
+    private static GraphQLException CreateGraphQLError(string? code, string? message)
+    {
+        return new GraphQLException(ErrorBuilder.New()
+            .SetMessage(message ?? "Ocurrio un error al consultar los roles.")
+            .SetCode(code ?? "role.error")
+            .Build());
     }
 }

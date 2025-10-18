@@ -232,11 +232,15 @@
         },
         "PHONE": {
           "LABEL": "Phone",
-          "PLACEHOLDER": "+1 000 000 0000"
+          "PLACEHOLDER": "+1 000 000 0000",
+          "ERROR": "Phone number is required.",
+          "MAX_LENGTH_ERROR": "Phone number must not exceed 32 characters."
         },
         "IDENTIFICATION": {
           "LABEL": "Identification",
-          "PLACEHOLDER": "Document"
+          "PLACEHOLDER": "Document",
+          "ERROR": "Identification is required.",
+          "MAX_LENGTH_ERROR": "Identification must not exceed 50 characters."
         },
         "GENDER": {
           "LABEL": "Gender",
@@ -248,13 +252,17 @@
           "ERROR": "Tenant is required."
         },
         "COUNTRY": {
-          "LABEL": "Country"
+          "LABEL": "Country",
+          "PLACEHOLDER": "Select a country",
+          "ERROR": "Country is required."
         },
         "ROLE": {
           "LABEL": "Role",
+          "PLACEHOLDER": "Select a role",
           "NONE": "No role assigned",
           "LOADING": "Loading roles...",
-          "EMPTY": "There are no roles for the selected tenant."
+          "EMPTY": "There are no roles for the selected tenant.",
+          "ERROR": "Role is required."
         },
         "DATE_OF_BIRTH": {
           "LABEL": "Date of birth",

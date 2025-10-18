@@ -208,10 +208,10 @@ C:\CarePlus\CarePlus\CareBack\CarePlus.Api\obj\Debug\net9.0\staticwebassets.buil
 C:\CarePlus\CarePlus\CareBack\CarePlus.Api\obj\Debug\net9.0\staticwebassets.build.json.cache
 C:\CarePlus\CarePlus\CareBack\CarePlus.Api\obj\Debug\net9.0\staticwebassets.development.json
 C:\CarePlus\CarePlus\CareBack\CarePlus.Api\obj\Debug\net9.0\staticwebassets.build.endpoints.json
-C:\CarePlus\CarePlus\CareBack\CarePlus.Api\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\CarePlus\CarePlus\CareBack\CarePlus.Api\obj\Debug\net9.0\CarePlus.19A589FA.Up2Date
 C:\CarePlus\CarePlus\CareBack\CarePlus.Api\obj\Debug\net9.0\CarePlus.Api.dll
 C:\CarePlus\CarePlus\CareBack\CarePlus.Api\obj\Debug\net9.0\refint\CarePlus.Api.dll
 C:\CarePlus\CarePlus\CareBack\CarePlus.Api\obj\Debug\net9.0\CarePlus.Api.pdb
 C:\CarePlus\CarePlus\CareBack\CarePlus.Api\obj\Debug\net9.0\CarePlus.Api.genruntimeconfig.cache
 C:\CarePlus\CarePlus\CareBack\CarePlus.Api\obj\Debug\net9.0\ref\CarePlus.Api.dll
+C:\CarePlus\CarePlus\CareBack\CarePlus.Api\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

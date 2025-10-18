@@ -90,7 +90,7 @@
       </div>
       <div class="col-md-6">
         <label class="form-label" for="phoneNumber">
-          {{ 'USERS.FORM.FIELDS.PHONE.LABEL' | translate }}
+          {{ 'USERS.FORM.FIELDS.PHONE.LABEL' | translate }} *
         </label>
         <input
           id="phoneNumber"
@@ -101,11 +101,28 @@
             'USERS.FORM.FIELDS.PHONE.PLACEHOLDER' | translate
           "
           autocomplete="tel"
+          [class.is-invalid]="
+            form.get('phoneNumber')?.invalid &&
+            (form.get('phoneNumber')?.dirty || form.get('phoneNumber')?.touched)
+          "
         />
+        <div class="invalid-feedback d-block" *ngIf="
+            form.get('phoneNumber')?.invalid &&
+            (form.get('phoneNumber')?.dirty || form.get('phoneNumber')?.touched)
+          ">
+          <ng-container
+            *ngIf="form.get('phoneNumber')?.hasError('required'); else phoneMaxLength"
+          >
+            {{ 'USERS.FORM.FIELDS.PHONE.ERROR' | translate }}
+          </ng-container>
+          <ng-template #phoneMaxLength>
+            {{ 'USERS.FORM.FIELDS.PHONE.MAX_LENGTH_ERROR' | translate }}
+          </ng-template>
+        </div>
       </div>
       <div class="col-md-6">
         <label class="form-label" for="identification">
-          {{ 'USERS.FORM.FIELDS.IDENTIFICATION.LABEL' | translate }}
+          {{ 'USERS.FORM.FIELDS.IDENTIFICATION.LABEL' | translate }} *
         </label>
         <input
           id="identification"
@@ -116,7 +133,28 @@
             'USERS.FORM.FIELDS.IDENTIFICATION.PLACEHOLDER' | translate
           "
           autocomplete="off"
+          [class.is-invalid]="
+            form.get('identification')?.invalid &&
+            (form.get('identification')?.dirty ||
+              form.get('identification')?.touched)
+          "
         />
+        <div class="invalid-feedback d-block" *ngIf="
+            form.get('identification')?.invalid &&
+            (form.get('identification')?.dirty ||
+              form.get('identification')?.touched)
+          ">
+          <ng-container
+            *ngIf="form.get('identification')?.hasError('required'); else identificationMaxLength"
+          >
+            {{ 'USERS.FORM.FIELDS.IDENTIFICATION.ERROR' | translate }}
+          </ng-container>
+          <ng-template #identificationMaxLength>
+            {{
+              'USERS.FORM.FIELDS.IDENTIFICATION.MAX_LENGTH_ERROR' | translate
+            }}
+          </ng-template>
+        </div>
       </div>
       <div class="col-md-6">
         <label class="form-label" for="gender">
@@ -180,15 +218,19 @@
       </div>
       <div class="col-md-6">
         <label class="form-label" for="country">
-          {{ 'USERS.FORM.FIELDS.COUNTRY.LABEL' | translate }}
+          {{ 'USERS.FORM.FIELDS.COUNTRY.LABEL' | translate }} *
         </label>
         <select
           id="country"
           class="form-select"
           formControlName="country"
+          [class.is-invalid]="
+            form.get('country')?.invalid &&
+            (form.get('country')?.dirty || form.get('country')?.touched)
+          "
         >
-          <option value="">
-            {{ 'USERS.TABLE.NO_COUNTRY' | translate }}
+          <option value="" disabled>
+            {{ 'USERS.FORM.FIELDS.COUNTRY.PLACEHOLDER' | translate }}
           </option>
           <option
             *ngFor="let country of countries; trackBy: trackByCountryCode"
@@ -197,19 +239,29 @@
             {{ country.name }}
           </option>
         </select>
+        <div class="invalid-feedback d-block" *ngIf="
+            form.get('country')?.invalid &&
+            (form.get('country')?.dirty || form.get('country')?.touched)
+          ">
+          {{ 'USERS.FORM.FIELDS.COUNTRY.ERROR' | translate }}
+        </div>
       </div>
       <div class="col-md-6">
         <label class="form-label" for="roleId">
-          {{ 'USERS.FORM.FIELDS.ROLE.LABEL' | translate }}
+          {{ 'USERS.FORM.FIELDS.ROLE.LABEL' | translate }} *
         </label>
         <select
           id="roleId"
           class="form-select"
           formControlName="roleId"
           [disabled]="rolesLoading"
+          [class.is-invalid]="
+            form.get('roleId')?.invalid &&
+            (form.get('roleId')?.dirty || form.get('roleId')?.touched)
+          "
         >
-          <option value="">
-            {{ 'USERS.FORM.FIELDS.ROLE.NONE' | translate }}
+          <option value="" disabled>
+            {{ 'USERS.FORM.FIELDS.ROLE.PLACEHOLDER' | translate }}
           </option>
           <option
             *ngFor="let role of roles; trackBy: trackByRoleId"
@@ -218,6 +270,12 @@
             {{ role.name }}
           </option>
         </select>
+        <div class="invalid-feedback d-block" *ngIf="
+            form.get('roleId')?.invalid &&
+            (form.get('roleId')?.dirty || form.get('roleId')?.touched)
+          ">
+          {{ 'USERS.FORM.FIELDS.ROLE.ERROR' | translate }}
+        </div>
         <small class="text-muted d-block mt-1" *ngIf="rolesLoading">
           {{ 'USERS.FORM.FIELDS.ROLE.LOADING' | translate }}
         </small>
