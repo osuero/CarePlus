@@ -304,5 +304,123 @@
     "DIALOG": {
       "CANCEL": "Cancelar"
     }
+  },
+  "PATIENTS": {
+    "BREADCRUMB": {
+      "TITLE": "Pacientes",
+      "ACTIVE": "Pacientes"
+    },
+    "TABLE": {
+      "TITLE": "Pacientes registrados",
+      "PAGE_SIZE_LABEL": "Mostrar",
+      "SEARCH_PLACEHOLDER": "Buscar por nombre o correo",
+      "COUNTRY_FILTER": "Filtrar por pais",
+      "GENDER_FILTER": {
+        "ALL": "Todos los generos"
+      },
+      "RANGE": "Mostrando {{start}} - {{end}} de {{total}} registros",
+      "PAGE_INFO": "Pagina {{page}} de {{pages}}",
+      "ADD_BUTTON": "Crear paciente",
+      "LOADING": "Cargando...",
+      "EMPTY": "No hay pacientes registrados.",
+      "NO_RESULTS": "No se encontraron pacientes para los criterios seleccionados.",
+      "HEADERS": {
+        "PATIENT": "Paciente",
+        "GENDER": "Genero",
+        "AGE": "Edad",
+        "CONTACT": "Contacto",
+        "COUNTRY": "Pais",
+        "CREATED": "Registrado",
+        "ACTIONS": "Acciones"
+      },
+      "NO_PHONE": "Sin telefono",
+      "ID_LABEL": "ID",
+      "NO_COUNTRY": "No definido",
+      "PREVIOUS": "Anterior",
+      "NEXT": "Siguiente"
+    },
+    "FORM": {
+      "TITLE": "Registrar paciente",
+      "FIELDS": {
+        "FIRST_NAME": {
+          "LABEL": "Nombre",
+          "PLACEHOLDER": "Nombre",
+          "ERROR": "El nombre es obligatorio."
+        },
+        "LAST_NAME": {
+          "LABEL": "Apellido",
+          "PLACEHOLDER": "Apellido",
+          "ERROR": "El apellido es obligatorio."
+        },
+        "EMAIL": {
+          "LABEL": "Correo electronico",
+          "PLACEHOLDER": "paciente@correo.com",
+          "REQUIRED_ERROR": "El correo electronico es obligatorio.",
+          "FORMAT_ERROR": "Debes ingresar un correo electronico valido."
+        },
+        "PHONE": {
+          "LABEL": "Telefono",
+          "PLACEHOLDER": "+503 0000 0000",
+          "ERROR": "El telefono es obligatorio.",
+          "MAX_LENGTH_ERROR": "El telefono no puede tener mas de 32 caracteres."
+        },
+        "IDENTIFICATION": {
+          "LABEL": "Identificacion",
+          "PLACEHOLDER": "Documento",
+          "ERROR": "La identificacion es obligatoria.",
+          "MAX_LENGTH_ERROR": "La identificacion no puede tener mas de 50 caracteres."
+        },
+        "GENDER": {
+          "LABEL": "Genero",
+          "ERROR": "El genero es obligatorio."
+        },
+        "TENANT": {
+          "LABEL": "Tenant",
+          "PLACEHOLDER": "Selecciona un tenant",
+          "ERROR": "El tenant es obligatorio."
+        },
+        "COUNTRY": {
+          "LABEL": "Pais",
+          "PLACEHOLDER": "Selecciona un pais",
+          "ERROR": "El pais es obligatorio."
+        },
+        "DATE_OF_BIRTH": {
+          "LABEL": "Fecha de nacimiento",
+          "ERROR": "La fecha de nacimiento es obligatoria."
+        }
+      },
+      "GENDER_OPTIONS": {
+        "MALE": "Masculino",
+        "FEMALE": "Femenino",
+        "OTHER": "Otro"
+      },
+      "BUTTONS": {
+        "SUBMIT": "Registrar paciente"
+      }
+    },
+    "MESSAGES": {
+      "SUCCESS_TITLE": "Paciente registrado",
+      "SUCCESS_BODY": "El paciente fue registrado correctamente.",
+      "ERROR_TITLE": "Error al registrar",
+      "ERROR_BODY": "No fue posible registrar al paciente.",
+      "UPDATE_TITLE": "Paciente actualizado",
+      "UPDATE_BODY": "El paciente fue actualizado correctamente.",
+      "DELETE_TITLE": "Eliminar paciente",
+      "DELETE_CONFIRM": "¿Seguro que deseas eliminar a {{name}}?",
+      "DELETE_SUCCESS": "El paciente fue eliminado correctamente.",
+      "DELETE_CANCELLED": "La operacion fue cancelada.",
+      "DELETE_CONFIRM_BUTTON": "Si, eliminar",
+      "DELETE_CANCEL_BUTTON": "Cancelar",
+      "LOAD_ERROR_TITLE": "Error al cargar",
+      "LOAD_ERROR_BODY": "No fue posible obtener la lista de pacientes.",
+      "COUNTRIES_WARNING": "No fue posible cargar la lista de paises."
+    },
+    "EDIT": {
+      "TITLE": "Editar paciente",
+      "SUBMIT": "Guardar cambios"
+    },
+    "DIALOG": {
+      "CANCEL": "Cancelar"
+    }
   }
 }
