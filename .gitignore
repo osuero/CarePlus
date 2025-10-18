@@ -1,0 +1,62 @@
+# Global ignores
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+*.swo
+*.user
+*.userosscache
+*.sln.docstates
+
+# IDE specific
+.vscode/
+.idea/
+.vs/
+
+# Root logs
+dotnet-run.stdout.log
+dotnet-run.stderr.log
+
+# Backend (.NET) artifacts
+CareBack/**/bin/
+CareBack/**/obj/
+CareBack/**/TestResults/
+CareBack/**/*.cache/
+CareBack/**/*.db
+CareBack/**/*.db-shm
+CareBack/**/*.db-wal
+CareBack/**/*.pdb
+CareBack/**/*.mdb
+CareBack/**/*.opendb
+CareBack/**/*.tmp
+CareBack/**/apphost.exe
+
+# EF Core design-time files
+CareBack/**/Migrations/*.Designer.cs~
+
+# Frontend (Angular) artifacts
+CareFront/node_modules/
+CareFront/dist/
+CareFront/.angular/
+CareFront/.nx/
+CareFront/.turbo/
+CareFront/.eslintcache
+CareFront/package-lock.json
+CareFront/yarn.lock
+CareFront/pnpm-lock.yaml
+CareFront/.env
+CareFront/.env.*
+
+# Coverage and reports
+coverage/
+CareFront/coverage/
+CareBack/**/coverage/
+reports/
+
+# Temp folders
+tmp/
+temp/
+CareFront/tmp/
+CareFront/temp/
+
