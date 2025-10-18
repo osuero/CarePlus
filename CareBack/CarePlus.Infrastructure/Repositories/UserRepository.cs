@@ -36,9 +36,15 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
             .FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
     }
 
-    public async Task<IReadOnlyList<User>> SearchAsync(string tenantId, string? term, int skip, int take, CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyList<User>> SearchAsync(
+        string tenantId,
+        string? term,
+        string? role,
+        int skip,
+        int take,
+        CancellationToken cancellationToken = default)
     {
-        var query = BuildSearchQuery(tenantId, term);
+        var query = BuildSearchQuery(tenantId, term, role);
 
         return await query
             .Include(user => user.Role)
@@ -48,9 +54,9 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<int> CountAsync(string tenantId, string? term, CancellationToken cancellationToken = default)
+    public async Task<int> CountAsync(string tenantId, string? term, string? role, CancellationToken cancellationToken = default)
     {
-        var query = BuildSearchQuery(tenantId, term);
+        var query = BuildSearchQuery(tenantId, term, role);
         return await query.CountAsync(cancellationToken);
     }
 
@@ -74,7 +80,7 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
         await _context.SaveChangesAsync(cancellationToken);
     }
 
-    private IQueryable<User> BuildSearchQuery(string tenantId, string? term)
+    private IQueryable<User> BuildSearchQuery(string tenantId, string? term, string? role)
     {
         var query = _context.Users
             .AsNoTracking()
@@ -90,6 +96,13 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
                 user.Identification == filteredTerm ||
                 user.Email == filteredTerm ||
                 user.Id.ToString() == filteredTerm);
+        }
+
+        if (!string.IsNullOrWhiteSpace(role))
+        {
+            var normalizedRole = role.Trim().ToLower();
+            query = query.Where(user =>
+                user.Role != null && user.Role.Name != null && user.Role.Name.ToLower() == normalizedRole);
         }
 
         return query;

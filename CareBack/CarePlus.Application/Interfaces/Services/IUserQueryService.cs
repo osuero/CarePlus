@@ -13,6 +13,7 @@ public interface IUserQueryService
         int page,
         int pageSize,
         string? search,
+        string? role,
         CancellationToken cancellationToken = default);
 
     Task<UserResponse?> GetByIdAsync(string tenantId, Guid id, CancellationToken cancellationToken = default);

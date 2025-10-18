@@ -15,6 +15,9 @@ public class Patient : TenantEntity
     public Gender Gender { get; set; } = Gender.Unknown;
     public DateOnly DateOfBirth { get; set; }
 
+    public Guid? AssignedDoctorId { get; set; }
+    public string? AssignedDoctorName { get; set; }
+
     public int Age => CalculateAge(DateOfBirth, DateTime.UtcNow.Date);
 
     private static int CalculateAge(DateOnly birthDate, DateTime today)

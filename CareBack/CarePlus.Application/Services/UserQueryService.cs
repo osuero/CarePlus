@@ -19,6 +19,7 @@ public class UserQueryService(IUserRepository userRepository) : IUserQueryServic
         int page,
         int pageSize,
         string? search,
+        string? role,
         CancellationToken cancellationToken = default)
     {
         if (page < 1)
@@ -33,8 +34,8 @@ public class UserQueryService(IUserRepository userRepository) : IUserQueryServic
 
         var skip = (page - 1) * pageSize;
 
-        var users = await _userRepository.SearchAsync(tenantId, search, skip, pageSize, cancellationToken);
-        var totalCount = await _userRepository.CountAsync(tenantId, search, cancellationToken);
+        var users = await _userRepository.SearchAsync(tenantId, search, role, skip, pageSize, cancellationToken);
+        var totalCount = await _userRepository.CountAsync(tenantId, search, role, cancellationToken);
 
         return new PagedResult<UserResponse>
         {
@@ -58,7 +59,7 @@ public class UserQueryService(IUserRepository userRepository) : IUserQueryServic
             return await GetByIdAsync(tenantId, id, cancellationToken);
         }
 
-        var paged = await SearchAsync(tenantId, 1, 1, search, cancellationToken);
+        var paged = await SearchAsync(tenantId, 1, 1, search, role: null, cancellationToken);
         return paged.Items.Count > 0 ? paged.Items[0] : null;
     }
 }

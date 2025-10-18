@@ -222,6 +222,41 @@
         </div>
       </div>
       <div class="col-md-6">
+        <label class="form-label" for="assignedDoctorId">
+          {{ 'PATIENTS.FORM.FIELDS.DOCTOR.LABEL' | translate }}
+        </label>
+        <select
+          id="assignedDoctorId"
+          class="form-select"
+          formControlName="assignedDoctorId"
+          [disabled]="loadingDoctors || doctors.length === 0"
+          [class.is-invalid]="
+            form.get('assignedDoctorId')?.invalid &&
+            (form.get('assignedDoctorId')?.dirty ||
+              form.get('assignedDoctorId')?.touched)
+          "
+        >
+          <option value="">
+            {{ 'PATIENTS.FORM.FIELDS.DOCTOR.PLACEHOLDER' | translate }}
+          </option>
+          <option
+            *ngFor="let doctor of doctors; trackBy: trackByDoctorId"
+            [value]="doctor.id"
+          >
+            {{ doctor.fullName }} — {{ doctor.email }}
+          </option>
+        </select>
+        <div class="form-text" *ngIf="loadingDoctors">
+          {{ 'PATIENTS.FORM.FIELDS.DOCTOR.LOADING' | translate }}
+        </div>
+        <div
+          class="form-text text-muted"
+          *ngIf="!loadingDoctors && doctors.length === 0"
+        >
+          {{ 'PATIENTS.FORM.FIELDS.DOCTOR.EMPTY' | translate }}
+        </div>
+      </div>
+      <div class="col-md-6">
         <label class="form-label" for="country">
           {{ 'PATIENTS.FORM.FIELDS.COUNTRY.LABEL' | translate }}
         </label>

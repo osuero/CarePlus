@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import {
   Country,
+  DoctorSummary,
   Patient,
   PatientCollection,
   RegisterPatientRequest,
@@ -24,6 +25,18 @@ interface GraphQLPatientsResponse {
     getPatients: PatientCollection;
   };
   errors?: Array<{ message?: string }>;
+}
+
+interface UserSummary {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  roleName?: string | null;
+}
+
+interface UserCollectionResponse {
+  nodes: UserSummary[];
 }
 
 @Injectable({
@@ -74,6 +87,8 @@ export class PatientsService {
             age
             createdAtUtc
             updatedAtUtc
+            assignedDoctorId
+            assignedDoctorName
           }
           totalCount
           page
@@ -182,6 +197,61 @@ export class PatientsService {
         headers: this.createHeaders(false),
       })
       .pipe(catchError((error) => this.handleError(error)));
+  }
+
+  searchDoctors(
+    tenantId: string = this.defaultTenant,
+    search?: string
+  ): Observable<DoctorSummary[]> {
+    let params = new HttpParams()
+      .set('page', '1')
+      .set('pageSize', '100')
+      .set('role', 'Doctor');
+
+    if (search && search.trim().length > 0) {
+      params = params.set('search', search.trim());
+    }
+
+    return this.http
+      .get<UserCollectionResponse>(`${this.baseUrl}/api/users/`, {
+        params,
+        headers: this.createHeaders(true, tenantId),
+      })
+      .pipe(
+        map((response) => response?.nodes ?? []),
+        map((users) =>
+          users
+            .filter((user) =>
+              (user.roleName ?? '').toLowerCase() === 'doctor'
+            )
+            .map((user) => ({
+              id: user.id,
+              fullName: [user.firstName, user.lastName]
+                .filter((part) => !!part && part.trim().length > 0)
+                .map((part) => part.trim())
+                .join(' '),
+              email: user.email,
+            }))
+        ),
+        map((doctors) => {
+          const unique = new Map<string, DoctorSummary>();
+          doctors.forEach((doctor) => {
+            if (!unique.has(doctor.id)) {
+              unique.set(doctor.id, {
+                ...doctor,
+                fullName:
+                  doctor.fullName.length > 0
+                    ? doctor.fullName
+                    : doctor.email,
+              });
+            }
+          });
+          return Array.from(unique.values()).sort((a, b) =>
+            a.fullName.localeCompare(b.fullName)
+          );
+        }),
+        catchError((error) => this.handleError(error))
+      );
   }
 
   private handleError(error: unknown): Observable<never> {

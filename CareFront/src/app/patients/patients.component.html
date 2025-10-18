@@ -109,6 +109,7 @@
                 <th>{{ 'PATIENTS.TABLE.HEADERS.GENDER' | translate }}</th>
                 <th>{{ 'PATIENTS.TABLE.HEADERS.AGE' | translate }}</th>
                 <th>{{ 'PATIENTS.TABLE.HEADERS.CONTACT' | translate }}</th>
+                <th>{{ 'PATIENTS.TABLE.HEADERS.DOCTOR' | translate }}</th>
                 <th>{{ 'PATIENTS.TABLE.HEADERS.COUNTRY' | translate }}</th>
                 <th>{{ 'PATIENTS.TABLE.HEADERS.CREATED' | translate }}</th>
                 <th class="text-lg-end">
@@ -118,7 +119,7 @@
             </thead>
             <tbody>
               <tr *ngIf="loadingPatients">
-                <td colspan="7" class="text-center py-4">
+                <td colspan="8" class="text-center py-4">
                   <div class="spinner-border text-primary" role="status">
                     <span class="visually-hidden">
                       {{ 'PATIENTS.TABLE.LOADING' | translate }}
@@ -127,7 +128,7 @@
                 </td>
               </tr>
               <tr *ngIf="!loadingPatients && patients.length === 0">
-                <td colspan="7" class="text-center text-muted py-4">
+                <td colspan="8" class="text-center text-muted py-4">
                   {{ 'PATIENTS.TABLE.NO_RESULTS' | translate }}
                 </td>
               </tr>
@@ -154,6 +155,12 @@
                     {{ 'PATIENTS.TABLE.ID_LABEL' | translate }}:
                     {{ patient.identification }}
                   </div>
+                </td>
+                <td>
+                  {{
+                    patient.assignedDoctorName ||
+                      ('PATIENTS.TABLE.NO_DOCTOR' | translate)
+                  }}
                 </td>
                 <td>
                   {{

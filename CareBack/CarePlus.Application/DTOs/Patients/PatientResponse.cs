@@ -17,4 +17,6 @@ public class PatientResponse
     public int Age { get; init; }
     public DateTime CreatedAtUtc { get; init; }
     public DateTime UpdatedAtUtc { get; init; }
+    public Guid? AssignedDoctorId { get; init; }
+    public string? AssignedDoctorName { get; init; }
 }

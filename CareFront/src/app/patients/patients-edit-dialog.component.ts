@@ -16,10 +16,16 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { finalize } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import { finalize, startWith, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { PatientsService } from './patients.service';
-import { Country, Patient, RegisterPatientRequest } from './patients.model';
+import {
+  Country,
+  DoctorSummary,
+  Patient,
+  RegisterPatientRequest,
+} from './patients.model';
 import { environment } from '../../environments/environment';
 
 export interface PatientsEditDialogData {
@@ -49,7 +55,9 @@ export interface PatientsEditDialogResult {
 export class PatientsEditDialogComponent implements OnInit, OnDestroy {
   readonly form: FormGroup;
   countries: Country[] = [];
+  doctors: DoctorSummary[] = [];
   submitting = false;
+  loadingDoctors = false;
 
   readonly tenants = [
     'main',
@@ -65,6 +73,8 @@ export class PatientsEditDialogComponent implements OnInit, OnDestroy {
   readonly defaultTenant = 'main';
 
   private readonly data = inject<PatientsEditDialogData>(MAT_DIALOG_DATA);
+  private readonly destroy$ = new Subject<void>();
+  private doctorsSubscription?: Subscription;
 
   constructor(
     private readonly fb: FormBuilder,
@@ -89,14 +99,20 @@ export class PatientsEditDialogComponent implements OnInit, OnDestroy {
         patient.tenantId ?? this.defaultTenant,
         [Validators.required, Validators.maxLength(100)],
       ],
+      assignedDoctorId: [patient.assignedDoctorId ?? ''],
     });
   }
 
   ngOnInit(): void {
     this.loadCountries();
+    this.setupTenantWatcher();
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.doctorsSubscription?.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   submit(): void {
     if (this.form.invalid) {
@@ -147,6 +163,10 @@ export class PatientsEditDialogComponent implements OnInit, OnDestroy {
     return country.code;
   }
 
+  trackByDoctorId(_: number, doctor: DoctorSummary): string {
+    return doctor.id;
+  }
+
   private loadCountries(): void {
     this.patientsService.searchCountries().subscribe({
       next: (countries) => {
@@ -161,6 +181,54 @@ export class PatientsEditDialogComponent implements OnInit, OnDestroy {
     });
   }
 
+  private setupTenantWatcher(): void {
+    const tenantControl = this.form.get('tenantId');
+    if (!tenantControl) {
+      return;
+    }
+
+    tenantControl.valueChanges
+      .pipe(
+        startWith(tenantControl.value ?? this.defaultTenant),
+        distinctUntilChanged(),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((value) => {
+        const tenant = this.normalizeTenant(value) ?? this.defaultTenant;
+        this.loadDoctors(tenant);
+      });
+  }
+
+  private loadDoctors(tenantId: string): void {
+    this.doctorsSubscription?.unsubscribe();
+    this.loadingDoctors = true;
+    this.doctorsSubscription = this.patientsService
+      .searchDoctors(tenantId)
+      .pipe(
+        finalize(() => {
+          this.loadingDoctors = false;
+        })
+      )
+      .subscribe({
+        next: (doctors) => {
+          this.doctors = doctors;
+          const currentDoctorId = this.normalizeDoctorId(
+            this.form.get('assignedDoctorId')?.value
+          );
+
+          if (currentDoctorId) {
+            const exists = doctors.some((doctor) => doctor.id === currentDoctorId);
+            if (!exists) {
+              this.form.get('assignedDoctorId')?.setValue('');
+            }
+          }
+        },
+        error: () => {
+          this.doctors = [];
+        },
+      });
+  }
+
   private buildRequestPayload(): RegisterPatientRequest {
     const {
       firstName,
@@ -172,9 +240,11 @@ export class PatientsEditDialogComponent implements OnInit, OnDestroy {
       gender,
       dateOfBirth,
       tenantId,
+      assignedDoctorId,
     } = this.form.value;
 
     const selectedTenant = (tenantId ?? '').toString().trim() || this.defaultTenant;
+    const doctorId = this.normalizeDoctorId(assignedDoctorId);
 
     return {
       firstName: (firstName ?? '').trim(),
@@ -186,6 +256,25 @@ export class PatientsEditDialogComponent implements OnInit, OnDestroy {
       gender: (gender ?? '').trim(),
       dateOfBirth: (dateOfBirth ?? '').toString(),
       tenantId: selectedTenant,
+      assignedDoctorId: doctorId,
     };
+  }
+
+  private normalizeTenant(value: unknown): string | undefined {
+    if (typeof value !== 'string') {
+      return undefined;
+    }
+
+    const normalized = value.trim();
+    return normalized.length > 0 ? normalized : undefined;
+  }
+
+  private normalizeDoctorId(value: unknown): string | undefined {
+    if (typeof value !== 'string') {
+      return undefined;
+    }
+
+    const normalized = value.trim();
+    return normalized.length > 0 ? normalized : undefined;
   }
 }

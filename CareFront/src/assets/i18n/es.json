@@ -329,6 +329,7 @@
         "GENDER": "Genero",
         "AGE": "Edad",
         "CONTACT": "Contacto",
+        "DOCTOR": "Doctor asignado",
         "COUNTRY": "Pais",
         "CREATED": "Registrado",
         "ACTIONS": "Acciones"
@@ -336,6 +337,7 @@
       "NO_PHONE": "Sin telefono",
       "ID_LABEL": "ID",
       "NO_COUNTRY": "No definido",
+      "NO_DOCTOR": "Sin doctor asignado",
       "PREVIOUS": "Anterior",
       "NEXT": "Siguiente"
     },
@@ -378,6 +380,12 @@
           "LABEL": "Tenant",
           "PLACEHOLDER": "Selecciona un tenant",
           "ERROR": "El tenant es obligatorio."
+        },
+        "DOCTOR": {
+          "LABEL": "Doctor asignado",
+          "PLACEHOLDER": "Selecciona un doctor (opcional)",
+          "LOADING": "Cargando doctores...",
+          "EMPTY": "No hay doctores disponibles para el tenant seleccionado."
         },
         "COUNTRY": {
           "LABEL": "Pais",

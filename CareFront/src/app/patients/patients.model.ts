@@ -12,6 +12,8 @@ export interface Patient {
   age: number;
   createdAtUtc: string;
   updatedAtUtc: string;
+  assignedDoctorId?: string | null;
+  assignedDoctorName?: string | null;
 }
 
 export interface PatientCollection {
@@ -34,9 +36,16 @@ export interface RegisterPatientRequest {
   gender: string;
   dateOfBirth: string;
   tenantId?: string;
+  assignedDoctorId?: string | null;
 }
 
 export interface Country {
   code: string;
   name: string;
+}
+
+export interface DoctorSummary {
+  id: string;
+  fullName: string;
+  email: string;
 }

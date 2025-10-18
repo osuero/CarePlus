@@ -48,6 +48,11 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
         builder.Property(patient => patient.DateOfBirth)
             .HasColumnType("date");
 
+        builder.Property(patient => patient.AssignedDoctorId);
+
+        builder.Property(patient => patient.AssignedDoctorName)
+            .HasMaxLength(200);
+
         builder.Property(patient => patient.CreatedAtUtc)
             .HasColumnType("datetime2");
 

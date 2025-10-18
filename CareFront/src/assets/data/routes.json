@@ -316,56 +316,8 @@
       "role": ["ADMIN"],
       "submenu": [
         {
-          "path": "/admin/patients/all-patients",
+          "path": "/patients",
           "title": "MENUITEMS.PATIENTS.LIST.ALL-PATIENT",
-          "iconType": "",
-          "icon": "",
-          "class": "ml-menu",
-          "groupTitle": false,
-          "badge": "",
-          "badgeClass": "",
-          "role": [""],
-          "submenu": []
-        },
-        {
-          "path": "/admin/patients/add-patient",
-          "title": "MENUITEMS.PATIENTS.LIST.ADD-PATIENT",
-          "iconType": "",
-          "icon": "",
-          "class": "ml-menu",
-          "groupTitle": false,
-          "badge": "",
-          "badgeClass": "",
-          "role": [""],
-          "submenu": []
-        },
-        {
-          "path": "/admin/patients/edit-patient",
-          "title": "MENUITEMS.PATIENTS.LIST.EDIT-PATIENT",
-          "iconType": "",
-          "icon": "",
-          "class": "ml-menu",
-          "groupTitle": false,
-          "badge": "",
-          "badgeClass": "",
-          "role": [""],
-          "submenu": []
-        },
-        {
-          "path": "/admin/patients/patient-records",
-          "title": "MENUITEMS.PATIENTS.LIST.PATIENT-RECORDS",
-          "iconType": "",
-          "icon": "",
-          "class": "ml-menu",
-          "groupTitle": false,
-          "badge": "",
-          "badgeClass": "",
-          "role": [""],
-          "submenu": []
-        },
-        {
-          "path": "/admin/patients/patient-profile",
-          "title": "MENUITEMS.PATIENTS.LIST.PROFILE",
           "iconType": "",
           "icon": "",
           "class": "ml-menu",
