@@ -82,6 +82,7 @@ public static class UserEndpoints
         [FromQuery] int page,
         [FromQuery] int pageSize,
         [FromQuery] string? search,
+        [FromQuery] string? role,
         ITenantProvider tenantProvider,
         IUserQueryService userQueryService,
         CancellationToken cancellationToken)
@@ -92,6 +93,7 @@ public static class UserEndpoints
             page <= 0 ? 1 : page,
             pageSize <= 0 ? 10 : pageSize,
             search,
+            role,
             cancellationToken);
 
         var payload = new UserCollectionDto

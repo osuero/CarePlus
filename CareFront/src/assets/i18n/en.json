@@ -304,5 +304,131 @@
     "DIALOG": {
       "CANCEL": "Cancel"
     }
+  },
+  "PATIENTS": {
+    "BREADCRUMB": {
+      "TITLE": "Patients",
+      "ACTIVE": "Patients"
+    },
+    "TABLE": {
+      "TITLE": "Registered patients",
+      "PAGE_SIZE_LABEL": "Show",
+      "SEARCH_PLACEHOLDER": "Search by name or email",
+      "COUNTRY_FILTER": "Filter by country",
+      "GENDER_FILTER": {
+        "ALL": "All genders"
+      },
+      "RANGE": "Showing {{start}} - {{end}} of {{total}} records",
+      "PAGE_INFO": "Page {{page}} of {{pages}}",
+      "ADD_BUTTON": "Create patient",
+      "LOADING": "Loading...",
+      "EMPTY": "There are no registered patients.",
+      "NO_RESULTS": "No patients were found for the selected filters.",
+      "HEADERS": {
+        "PATIENT": "Patient",
+        "GENDER": "Gender",
+        "AGE": "Age",
+        "CONTACT": "Contact",
+        "DOCTOR": "Assigned doctor",
+        "COUNTRY": "Country",
+        "CREATED": "Created",
+        "ACTIONS": "Actions"
+      },
+      "NO_PHONE": "No phone",
+      "ID_LABEL": "ID",
+      "NO_COUNTRY": "Not specified",
+      "NO_DOCTOR": "No doctor assigned",
+      "PREVIOUS": "Previous",
+      "NEXT": "Next"
+    },
+    "FORM": {
+      "TITLE": "Register patient",
+      "FIELDS": {
+        "FIRST_NAME": {
+          "LABEL": "First name",
+          "PLACEHOLDER": "First name",
+          "ERROR": "First name is required."
+        },
+        "LAST_NAME": {
+          "LABEL": "Last name",
+          "PLACEHOLDER": "Last name",
+          "ERROR": "Last name is required."
+        },
+        "EMAIL": {
+          "LABEL": "Email",
+          "PLACEHOLDER": "patient@email.com",
+          "REQUIRED_ERROR": "Email is required.",
+          "FORMAT_ERROR": "Please provide a valid email address."
+        },
+        "PHONE": {
+          "LABEL": "Phone",
+          "PLACEHOLDER": "+503 0000 0000",
+          "ERROR": "Phone is required.",
+          "MAX_LENGTH_ERROR": "Phone cannot exceed 32 characters."
+        },
+        "IDENTIFICATION": {
+          "LABEL": "Identification",
+          "PLACEHOLDER": "Document",
+          "ERROR": "Identification is required.",
+          "MAX_LENGTH_ERROR": "Identification cannot exceed 50 characters."
+        },
+        "GENDER": {
+          "LABEL": "Gender",
+          "ERROR": "Gender is required."
+        },
+        "TENANT": {
+          "LABEL": "Tenant",
+          "PLACEHOLDER": "Select a tenant",
+          "ERROR": "Tenant is required."
+        },
+        "DOCTOR": {
+          "LABEL": "Assigned doctor",
+          "PLACEHOLDER": "Select a doctor (optional)",
+          "LOADING": "Loading doctors...",
+          "EMPTY": "No doctors are available for the selected tenant."
+        },
+        "COUNTRY": {
+          "LABEL": "Country",
+          "PLACEHOLDER": "Select a country",
+          "ERROR": "Country is required."
+        },
+        "DATE_OF_BIRTH": {
+          "LABEL": "Date of birth",
+          "ERROR": "Date of birth is required."
+        }
+      },
+      "GENDER_OPTIONS": {
+        "MALE": "Male",
+        "FEMALE": "Female",
+        "OTHER": "Other"
+      },
+      "BUTTONS": {
+        "SUBMIT": "Register patient"
+      }
+    },
+    "MESSAGES": {
+      "SUCCESS_TITLE": "Patient registered",
+      "SUCCESS_BODY": "The patient was registered successfully.",
+      "ERROR_TITLE": "Registration error",
+      "ERROR_BODY": "We could not register the patient.",
+      "UPDATE_TITLE": "Patient updated",
+      "UPDATE_BODY": "The patient was updated successfully.",
+      "DELETE_TITLE": "Delete patient",
+      "DELETE_CONFIRM": "Are you sure you want to delete {{name}}?",
+      "DELETE_SUCCESS": "The patient was deleted successfully.",
+      "DELETE_CANCELLED": "The operation was cancelled.",
+      "DELETE_CONFIRM_BUTTON": "Yes, delete",
+      "DELETE_CANCEL_BUTTON": "Cancel",
+      "LOAD_ERROR_TITLE": "Load error",
+      "LOAD_ERROR_BODY": "We could not fetch the patient list.",
+      "COUNTRIES_WARNING": "The country list could not be loaded."
+    },
+    "EDIT": {
+      "TITLE": "Edit patient",
+      "SUBMIT": "Save changes"
+    },
+    "DIALOG": {
+      "CANCEL": "Cancel"
+    }
   }
 }

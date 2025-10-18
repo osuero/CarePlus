@@ -38,6 +38,13 @@ namespace CarePlus.Infrastructure.Persistence.Migrations
                     b.Property<DateOnly>("DateOfBirth")
                         .HasColumnType("date");
 
+                    b.Property<Guid?>("AssignedDoctorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AssignedDoctorName")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<DateTime?>("DeletedAtUtc")
                         .HasColumnType("datetime2");
 

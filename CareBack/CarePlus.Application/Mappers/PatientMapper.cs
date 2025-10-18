@@ -21,7 +21,9 @@ internal static class PatientMapper
             DateOfBirth = patient.DateOfBirth,
             Age = patient.Age,
             CreatedAtUtc = patient.CreatedAtUtc,
-            UpdatedAtUtc = patient.UpdatedAtUtc
+            UpdatedAtUtc = patient.UpdatedAtUtc,
+            AssignedDoctorId = patient.AssignedDoctorId,
+            AssignedDoctorName = patient.AssignedDoctorName
         };
     }
 }

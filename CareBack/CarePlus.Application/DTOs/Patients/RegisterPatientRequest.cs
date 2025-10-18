@@ -31,4 +31,6 @@ public class RegisterPatientRequest
 
     [MaxLength(64)]
     public string? TenantId { get; set; }
+
+    public Guid? AssignedDoctorId { get; set; }
 }

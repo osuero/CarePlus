@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CarePlus.Application.DTOs.Patients;
@@ -14,10 +15,14 @@ namespace CarePlus.Application.Services;
 public class PatientService : IPatientService
 {
     private readonly IPatientRepository _patientRepository;
+    private readonly IUserQueryService _userQueryService;
 
-    public PatientService(IPatientRepository patientRepository)
+    public PatientService(
+        IPatientRepository patientRepository,
+        IUserQueryService userQueryService)
     {
         _patientRepository = patientRepository;
+        _userQueryService = userQueryService;
     }
 
     public async Task<Result<PatientResponse>> RegisterAsync(
@@ -39,6 +44,18 @@ public class PatientService : IPatientService
             return Result<PatientResponse>.Failure("patient.exists", "Ya existe un paciente registrado con el correo proporcionado.");
         }
 
+        var assignedDoctorResult = await ResolveDoctorAsync(
+            effectiveTenantId,
+            request.AssignedDoctorId,
+            cancellationToken);
+
+        if (!assignedDoctorResult.IsSuccess)
+        {
+            return Result<PatientResponse>.Failure(
+                assignedDoctorResult.ErrorCode!,
+                assignedDoctorResult.ErrorMessage!);
+        }
+
         var patient = new Patient
         {
             TenantId = effectiveTenantId,
@@ -49,7 +66,9 @@ public class PatientService : IPatientService
             Identification = request.Identification?.Trim(),
             Country = request.Country?.Trim(),
             Gender = MapGender(request.Gender!),
-            DateOfBirth = request.DateOfBirth!.Value
+            DateOfBirth = request.DateOfBirth!.Value,
+            AssignedDoctorId = assignedDoctorResult.Value?.DoctorId,
+            AssignedDoctorName = assignedDoctorResult.Value?.DoctorName
         };
 
         patient = await _patientRepository.AddAsync(patient, cancellationToken);
@@ -88,6 +107,18 @@ public class PatientService : IPatientService
             }
         }
 
+        var assignedDoctorResult = await ResolveDoctorAsync(
+            effectiveTenantId,
+            request.AssignedDoctorId,
+            cancellationToken);
+
+        if (!assignedDoctorResult.IsSuccess)
+        {
+            return Result<PatientResponse>.Failure(
+                assignedDoctorResult.ErrorCode!,
+                assignedDoctorResult.ErrorMessage!);
+        }
+
         patient.TenantId = effectiveTenantId;
         patient.FirstName = request.FirstName!.Trim();
         patient.LastName = request.LastName!.Trim();
@@ -97,6 +128,8 @@ public class PatientService : IPatientService
         patient.Country = string.IsNullOrWhiteSpace(request.Country) ? null : request.Country.Trim();
         patient.Gender = MapGender(request.Gender!);
         patient.DateOfBirth = request.DateOfBirth!.Value;
+        patient.AssignedDoctorId = assignedDoctorResult.Value?.DoctorId;
+        patient.AssignedDoctorName = assignedDoctorResult.Value?.DoctorName;
         patient.Touch();
 
         var updatedPatient = await _patientRepository.UpdateAsync(patient, cancellationToken);
@@ -181,5 +214,39 @@ public class PatientService : IPatientService
         return Enum.TryParse<Gender>(gender, true, out var parsed)
             ? parsed
             : Gender.Other;
+    }
+
+    private async Task<Result<(Guid DoctorId, string DoctorName)?>> ResolveDoctorAsync(
+        string tenantId,
+        Guid? doctorId,
+        CancellationToken cancellationToken)
+    {
+        if (doctorId is null || doctorId == Guid.Empty)
+        {
+            return Result<(Guid, string)?>.Success(null);
+        }
+
+        var doctor = await _userQueryService.GetByIdAsync(tenantId, doctorId.Value, cancellationToken);
+        if (doctor is null)
+        {
+            return Result<(Guid, string)?>.Failure(
+                "patient.doctor.notFound",
+                "El doctor seleccionado no existe en el tenant actual.");
+        }
+
+        if (!string.Equals(doctor.RoleName, "Doctor", StringComparison.OrdinalIgnoreCase))
+        {
+            return Result<(Guid, string)?>.Failure(
+                "patient.doctor.invalidRole",
+                "El usuario seleccionado no tiene el rol de doctor.");
+        }
+
+        var fullName = string.Join(
+            " ",
+            new[] { doctor.FirstName, doctor.LastName }
+                .Where(part => !string.IsNullOrWhiteSpace(part))
+                .Select(part => part.Trim()));
+
+        return Result<(Guid, string)?>.Success((doctor.Id, fullName));
     }
 }

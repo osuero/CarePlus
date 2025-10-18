@@ -16,6 +16,7 @@ public class UserQueries
         int page = 1,
         int pageSize = 20,
         string? search = null,
+        string? role = null,
         [Service] ITenantProvider tenantProvider = default!,
         [Service] IUserQueryService userQueryService = default!,
         CancellationToken cancellationToken = default)
@@ -24,7 +25,7 @@ public class UserQueries
         pageSize = Math.Clamp(pageSize, 1, 100);
 
         var tenantId = tenantProvider.GetTenantId();
-        var result = await userQueryService.SearchAsync(tenantId, page, pageSize, search, cancellationToken);
+        var result = await userQueryService.SearchAsync(tenantId, page, pageSize, search, role, cancellationToken);
 
         return new UserCollectionPayload
         {
