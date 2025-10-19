@@ -23,7 +23,15 @@ public static class DatabaseSeeder
         var loggerFactory = scope.ServiceProvider.GetService<ILoggerFactory>();
         var logger = loggerFactory?.CreateLogger("DatabaseSeeder");
 
-        await context.Database.MigrateAsync(cancellationToken);
+        if (context.Database.IsRelational())
+        {
+            await context.Database.MigrateAsync(cancellationToken);
+        }
+        else
+        {
+            await context.Database.EnsureCreatedAsync(cancellationToken);
+            logger?.LogInformation("Using non-relational provider; executed EnsureCreated instead of migrations.");
+        }
 
         await ResetRolesAsync(context, logger, cancellationToken);
     }

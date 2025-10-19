@@ -12,6 +12,7 @@ namespace CarePlus.Api.GraphQL;
 [ExtendObjectType(OperationTypeNames.Query)]
 public class PatientQueries
 {
+    [GraphQLName("getPatients")]
     public async Task<PatientCollectionPayload> GetPatientsAsync(
         int page = 1,
         int pageSize = 20,
@@ -40,10 +41,14 @@ public class PatientQueries
             Nodes = result.Items,
             TotalCount = result.TotalCount,
             Page = result.Page,
-            PageSize = result.PageSize
+            PageSize = result.PageSize,
+            TotalPages = result.TotalPages,
+            HasNextPage = result.HasNextPage,
+            HasPreviousPage = result.HasPreviousPage
         };
     }
 
+    [GraphQLName("getPatient")]
     public async Task<PatientResponse?> GetPatientAsync(
         Guid? id,
         string? search,
