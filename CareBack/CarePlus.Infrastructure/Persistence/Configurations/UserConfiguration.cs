@@ -55,6 +55,21 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasForeignKey(user => user.RoleId)
             .OnDelete(DeleteBehavior.Restrict);
 
+        builder.Property(user => user.PasswordHash)
+            .HasMaxLength(512);
+
+        builder.Property(user => user.IsPasswordConfirmed)
+            .HasDefaultValue(false);
+
+        builder.Property(user => user.PasswordSetupToken)
+            .HasMaxLength(256);
+
+        builder.Property(user => user.PasswordSetupTokenExpiresAtUtc)
+            .HasColumnType("datetime2");
+
+        builder.Property(user => user.PasswordConfirmedAtUtc)
+            .HasColumnType("datetime2");
+
         builder.Property(user => user.CreatedAtUtc)
             .HasColumnType("datetime2");
 

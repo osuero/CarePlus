@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CarePlus.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c3d5aec9c1a213527b2717656103ec802d82aaba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0ca55d38ca25bfc0b403d2d4626906fb237b077")]
 [assembly: System.Reflection.AssemblyProductAttribute("CarePlus.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CarePlus.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

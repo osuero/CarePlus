@@ -17,7 +17,40 @@ public class User : TenantEntity
     public Guid? RoleId { get; set; }
     public Role? Role { get; set; }
 
+    public string? PasswordHash { get; set; }
+    public bool IsPasswordConfirmed { get; set; }
+    public string? PasswordSetupToken { get; set; }
+    public DateTime? PasswordSetupTokenExpiresAtUtc { get; set; }
+    public DateTime? PasswordConfirmedAtUtc { get; set; }
+
     public int Age => CalculateAge(DateOfBirth, DateTime.UtcNow.Date);
+
+    public void AssignPassword(string hashedPassword, bool confirmed = false)
+    {
+        PasswordHash = hashedPassword;
+        IsPasswordConfirmed = confirmed;
+        PasswordConfirmedAtUtc = confirmed ? DateTime.UtcNow : null;
+        if (!confirmed)
+        {
+            PasswordConfirmedAtUtc = null;
+        }
+    }
+
+    public void MarkPasswordSetup(string token, DateTime expiresAtUtc)
+    {
+        PasswordSetupToken = token;
+        PasswordSetupTokenExpiresAtUtc = expiresAtUtc;
+        Touch();
+    }
+
+    public void CompletePasswordSetup()
+    {
+        PasswordSetupToken = null;
+        PasswordSetupTokenExpiresAtUtc = null;
+        IsPasswordConfirmed = true;
+        PasswordConfirmedAtUtc = DateTime.UtcNow;
+        Touch();
+    }
 
     private static int CalculateAge(DateOnly birthDate, DateTime today)
     {

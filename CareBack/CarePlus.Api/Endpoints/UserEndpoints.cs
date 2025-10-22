@@ -15,7 +15,7 @@ public static class UserEndpoints
     public static IEndpointRouteBuilder MapUserEndpoints(this IEndpointRouteBuilder endpoints)
     {
         var group = endpoints.MapGroup("/api/users")
-            .WithTags("Users");
+            .WithTags("Users").RequireAuthorization("AdminOnly");
 
         group.MapPost("/register", RegisterAsync)
             .WithName("RegisterUser")

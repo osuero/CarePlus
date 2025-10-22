@@ -19,6 +19,7 @@ public static class DependencyInjection
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IPatientRepository, PatientRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
+        services.AddScoped<IEmailService, EmailService>();
         services.AddSingleton<ICountryService, CountryService>();
 
         return services;

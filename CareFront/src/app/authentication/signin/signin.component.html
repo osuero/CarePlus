@@ -1,4 +1,4 @@
-<div class="auth-container">
+﻿<div class="auth-container">
   <mat-card class="auth-card">
     <div class="card-content">
       <!-- Left side - Form -->
@@ -7,26 +7,41 @@
           <h2 class="title">Sign in</h2>
           <p class="subtitle">Enter your credentials to log in</p>
 
-          <div class="d-flex justify-content-between lbl-alert m-b-30">
-            <div>
-              <button mat-flat-button class="adminBtn" (click)="adminSet();">Admin</button>
-            </div>
-            <div>
-              <button mat-flat-button class="doctorBtn" (click)="doctorSet();">Doctor</button>
-            </div>
-            <div>
-              <button mat-flat-button class="patientBtn" (click)="patientSet();">Patient</button>
-            </div>
+          <mat-form-field appearance="outline" class="form-field m-b-20">
+            <mat-label>Cuenta de demostracion</mat-label>
+            <mat-select
+              [(value)]="selectedDemoRole"
+              (selectionChange)="onDemoRoleChange($event.value)"
+            >
+              <mat-option *ngFor="let demo of demoAccounts" [value]="demo.role">
+                {{ demo.label }}
+              </mat-option>
+            </mat-select>
+            <mat-hint *ngIf="demoAccounts.length === 0">
+              No hay cuentas preconfiguradas. Ingresa tus credenciales manualmente.
+            </mat-hint>
+            <mat-hint>Selecciona una cuenta preconfigurada o ingresa tus credenciales.</mat-hint>
+          </mat-form-field>
+          <div class="demo-credentials" *ngIf="selectedDemoAccount as account">
+            <small>
+              Correo: <code>{{ account.email }}</code> ·
+              Contrasena: <code>{{ account.password }}</code>
+            </small>
           </div>
 
           <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="auth-form">
             <!-- Username Field -->
             <mat-form-field appearance="outline" class="form-field">
-              <mat-label>Username</mat-label>
-              <input matInput formControlName="username" placeholder="Enter your username" />
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="username" placeholder="Ingresa tu correo" />
               @if (authForm.get('username')?.hasError('required')) {
               <mat-error>
-                Username is required
+                El correo es obligatorio
+              </mat-error>
+              }
+              @if (authForm.get('username')?.hasError('email')) {
+              <mat-error>
+                Debes ingresar un correo valido
               </mat-error>
               }
             </mat-form-field>
@@ -42,7 +57,7 @@
               </button>
               @if (authForm.get('password')?.hasError('required')) {
               <mat-error>
-                Password is required
+                La contrasena es obligatoria
               </mat-error>
               }
             </mat-form-field>

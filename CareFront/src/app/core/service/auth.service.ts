@@ -37,35 +37,36 @@ export class AuthService {
   login(username: string, password: string, rememberMe = false) {
     return this.loginService.login(username, password, rememberMe).pipe(
       switchMap((response) => {
-        const returnValue = JSON.parse(JSON.stringify(response))['token'];
-        this.tokenService.set(returnValue);
-        const roleData: [] = JSON.parse(JSON.stringify(response))['user'][
-          'roles'
-        ];
-        roleData.sort((a: any, b: any) => {
-          const aPri: number = a['priority'];
-          const bPri: number = b['priority'];
+        const tokenPayload = response.token ?? {};
+        this.tokenService.set(tokenPayload);
+
+        const roles = Array.isArray(response.user?.roles)
+          ? [...response.user.roles]
+          : [];
+
+        roles.sort((a: any, b: any) => {
+          const aPri: number = a?.priority ?? 99;
+          const bPri: number = b?.priority ?? 99;
           if (aPri > bPri) return 1;
-          else if (aPri < bPri) return -1;
-          else return 0;
+          if (aPri < bPri) return -1;
+          return 0;
         });
-        this.tokenService.roleArray = roleData;
-        this.tokenService.permissionArray = JSON.parse(
-          JSON.stringify(response)
-        )['user']['permissions'];
 
-        this.user$.next(JSON.parse(JSON.stringify(response))['user']);
-        this.store.set('currentUser', response.user);
+        this.tokenService.roleArray = roles as [];
+        this.tokenService.permissionArray = Array.isArray(
+          response.user?.permissions
+        )
+          ? response.user.permissions
+          : [];
 
-        // Store role names in a new array
-        const roleNames = this.tokenService.roleArray.map(
-          (role: { name: string }) => role.name
-        );
+        this.user$.next(response.user ?? {});
+        this.store.set('currentUser', response.user ?? {});
 
-        const roleNamesJSON = JSON.stringify(roleNames);
+        const roleNames = roles
+          .map((role: { name?: string }) => role?.name)
+          .filter((name): name is string => Boolean(name));
 
-        // Store the JSON string in LocalStorage
-        this.store.set('roleNames', roleNamesJSON);
+        this.store.set('roleNames', JSON.stringify(roleNames));
 
         return of(response); // Return the response to be handled in the component
       })

@@ -23,7 +23,8 @@ internal static class UserMapper
             CreatedAtUtc = user.CreatedAtUtc,
             UpdatedAtUtc = user.UpdatedAtUtc,
             RoleId = user.RoleId,
-            RoleName = user.Role?.Name
+            RoleName = user.Role?.Name,
+            IsPasswordConfirmed = user.IsPasswordConfirmed
         };
     }
 }

@@ -19,4 +19,5 @@ public class UserResponse
     public DateTime UpdatedAtUtc { get; init; }
     public Guid? RoleId { get; init; }
     public string? RoleName { get; init; }
+    public bool IsPasswordConfirmed { get; init; }
 }

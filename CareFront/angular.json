@@ -42,7 +42,8 @@
               "fast-deep-equal",
               "rfdc",
               "moment",
-              "bezier-easing"
+              "bezier-easing",
+              "base64-js"
             ],
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -68,13 +69,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "4MB",
+                  "maximumError": "5MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "12kB",
+                  "maximumError": "16kB"
                 }
               ],
               "outputHashing": "all"

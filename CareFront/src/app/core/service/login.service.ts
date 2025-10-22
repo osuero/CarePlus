@@ -1,117 +1,237 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { User } from '@core/models/interface';
-import { of } from 'rxjs';
 import { LocalStorageService } from '@shared/services';
-import { JWT } from './JWT';
-const jwt = new JWT();
+import { environment } from 'environments/environment';
+import { Role } from '@core/models/role';
+
+export interface LoginResult {
+  user: User;
+  token: {
+    access_token: string;
+    token_type: string;
+    expires_in: number;
+    refresh_token?: string;
+  };
+  status: number;
+}
+
+interface ApiLoginResponse {
+  accessToken: string;
+  expiresAtUtc: string;
+  refreshToken?: string | null;
+  user: ApiUserResponse;
+}
+
+interface ApiUserResponse {
+  id: string;
+  tenantId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber?: string | null;
+  roleId?: string | null;
+  roleName?: string | null;
+  role?: {
+    id: string;
+    name: string;
+    description?: string | null;
+  } | null;
+  isPasswordConfirmed: boolean;
+}
+
+const ROLE_TOKEN_MAP: Record<string, Role> = {
+  admin: Role.Admin,
+  administrator: Role.Admin,
+  administrador: Role.Admin,
+  doctor: Role.Doctor,
+  medico: Role.Doctor,
+  physician: Role.Doctor,
+  patient: Role.Patient,
+  paciente: Role.Patient,
+};
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  private users: User[] = [
-    {
-      id: 1,
-      username: 'clinivaAdmin',
-      password: 'admin@123',
-      name: 'Sarah Smith',
-      email: 'admin@hospital.org',
-      roles: [
-        {
-          name: 'ADMIN',
-          priority: 1,
-        },
-      ],
-      permissions: ['canAdd', 'canDelete', 'canEdit', 'canRead'],
-      avatar: 'admin.jpg',
-    },
-    {
-      id: 2,
-      username: 'doctor',
-      password: 'doctor@123',
-      name: 'Ashton Cox',
-      email: 'doctor@hospital.org',
-      roles: [
-        {
-          name: 'DOCTOR',
-          priority: 2,
-        },
-      ],
-      permissions: ['canAdd', 'canEdit', 'canRead'],
-      avatar: 'doctor.jpg',
-      refresh_token: true,
-    },
-    {
-      id: 3,
-      username: 'patient',
-      password: 'patient@123',
-      name: 'Cara Stevens',
-      email: 'patient@hospital.org',
-      roles: [
-        {
-          name: 'PATIENT',
-          priority: 3,
-        },
-      ],
-      permissions: ['canRead'],
-      avatar: 'patient.jpg',
-      refresh_token: true,
-    },
-  ];
   constructor(protected http: HttpClient, private store: LocalStorageService) {}
 
-  login(username: string, password: string, rememberMe = false) {
-    // Simulate a login API call
-    const user = this.users.find(
-      (u) => u['username'] === username && u['password'] === password
-    );
-    if (!user) {
-      return of({ status: 401, body: {} });
-    }
+  login(username: string, password: string, rememberMe = false): Observable<LoginResult> {
+    const endpoint = `${environment.apiUrl}/api/auth/login`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-Tenant-Id': environment.tenantId ?? 'default',
+    });
 
-    if (user['password'] !== password) {
-      const result = {
-        status: 422,
-        error: {
-          errors: { password: ['The provided password is incorrect.'] },
-        },
-      };
-      return of(Object.assign(result));
-    }
+    const payload = {
+      email: username,
+      password,
+    };
 
-    const currentUser = Object.assign({}, user);
-    delete currentUser['password'];
+    return this.http
+      .post<ApiLoginResponse>(endpoint, payload, { headers })
+      .pipe(
+        map((response) => this.mapToLoginResult(response)),
+        catchError((error: HttpErrorResponse) => {
+          let message = 'Ha ocurrido un error al iniciar sesion.';
 
-    if (user) {
-      const userResponse = {
-        user: currentUser,
-        token: jwt.generate(currentUser),
-        status: 200,
-      };
+          if (error.status === 0) {
+            message = 'No se pudo conectar con el servidor.';
+          } else if (error.status === 401) {
+            message = 'Correo o contrasena incorrectos.';
+          } else if (error.status === 400) {
+            message =
+              (error.error?.message as string) ?? 'Solicitud de inicio invalida.';
+          }
 
-      return of(userResponse);
-    } else {
-      return of({ error: 'Invalid credentials' });
-    }
+          return throwError(() => message);
+        })
+      );
   }
 
   refresh() {
-    const user = Object.assign({}, this.store.get('currentUser'));
+    const currentUser = this.store.get('currentUser');
+    if (!currentUser) {
+      return throwError(() => 'No hay sesion activa');
+    }
 
-    const result = user
-      ? { status: 200, body: jwt.generate(user) }
-      : { status: 401, body: {} };
+    const expiresAtUtc = this.store.get('tokenExpiresAtUtc');
+    if (!expiresAtUtc) {
+      return throwError(() => 'No hay informacion de expiracion del token.');
+    }
 
-    return of(result);
+    return throwError(() => 'La funcion de refresco no esta disponible aun.');
   }
 
   logout() {
     this.store.clear();
-    return of({ success: false });
+    return throwError(() => 'Sesion finalizada localmente.');
   }
 
   user() {
-    return this.http.get<User>('/user');
+    return throwError(() => 'No implementado.');
+  }
+
+  private mapToLoginResult(response: ApiLoginResponse): LoginResult {
+    const {
+      accessToken,
+      expiresAtUtc,
+      refreshToken,
+      user: apiUser,
+    } = response;
+
+    const roleResolution =
+      this.resolveRole(apiUser.roleName) ??
+      this.resolveRole(apiUser.role?.name) ??
+      {
+        name: Role.Admin,
+        displayName: 'Administrador',
+      };
+
+    const mappedUser: User = {
+      id: apiUser.id,
+      tenantId: apiUser.tenantId,
+      email: apiUser.email,
+      firstName: apiUser.firstName,
+      lastName: apiUser.lastName,
+      name: `${apiUser.firstName} ${apiUser.lastName}`.trim(),
+      roles: [
+        {
+          id: apiUser.roleId ?? apiUser.role?.id,
+          name: roleResolution.name,
+          displayName: roleResolution.displayName,
+          priority: this.resolveRolePriority(roleResolution.name),
+        },
+      ],
+      permissions: [],
+      isPasswordConfirmed: apiUser.isPasswordConfirmed,
+      roleId: apiUser.roleId,
+      roleName: roleResolution.displayName,
+    };
+
+    const expiresInSeconds = this.calculateExpiresInSeconds(expiresAtUtc);
+
+    return {
+      user: mappedUser,
+      token: {
+        access_token: accessToken,
+        token_type: 'Bearer',
+        expires_in: expiresInSeconds,
+        refresh_token: refreshToken ?? undefined,
+      },
+      status: 200,
+    };
+  }
+
+  private calculateExpiresInSeconds(expiresAtUtc: string): number {
+    const expiresAt = new Date(expiresAtUtc).getTime();
+    const now = Date.now();
+    const diff = Math.floor((expiresAt - now) / 1000);
+
+    return diff > 0 ? diff : 0;
+  }
+
+  private resolveRole(rawRoleName: string | null | undefined):
+    | { name: Role; displayName: string }
+    | undefined {
+    if (!rawRoleName) {
+      return undefined;
+    }
+
+    const tokens = this.normalizeRoleTokens(rawRoleName);
+    for (const token of tokens) {
+      const mapped = ROLE_TOKEN_MAP[token];
+      if (mapped) {
+        return {
+          name: mapped,
+          displayName: this.toTitleCase(rawRoleName),
+        };
+      }
+    }
+
+    return undefined;
+  }
+
+  private normalizeRoleTokens(rawRoleName: string): string[] {
+    return rawRoleName
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z]/g, ' ')
+      .split(' ')
+      .map((token) => token.trim())
+      .filter((token) => token.length > 0);
+  }
+
+  private toTitleCase(value: string): string {
+    if (!value) {
+      return '';
+    }
+
+    return value
+      .toLowerCase()
+      .split(' ')
+      .filter((word) => word.length > 0)
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
+  private resolveRolePriority(roleName: Role): number {
+    switch (roleName) {
+      case Role.Admin:
+        return 1;
+      case Role.Doctor:
+        return 2;
+      case Role.Patient:
+        return 3;
+      default:
+        return 99;
+    }
   }
 }

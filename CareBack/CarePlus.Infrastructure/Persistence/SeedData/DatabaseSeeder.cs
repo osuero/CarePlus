@@ -9,6 +9,9 @@ using CarePlus.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity;
+using CarePlus.Domain.Enums;
 
 namespace CarePlus.Infrastructure.Persistence.SeedData;
 
@@ -22,6 +25,8 @@ public static class DatabaseSeeder
         var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         var loggerFactory = scope.ServiceProvider.GetService<ILoggerFactory>();
         var logger = loggerFactory?.CreateLogger("DatabaseSeeder");
+        var configuration = scope.ServiceProvider.GetService<IConfiguration>();
+        var passwordHasher = scope.ServiceProvider.GetService<IPasswordHasher<User>>();
 
         if (context.Database.IsRelational())
         {
@@ -34,6 +39,14 @@ public static class DatabaseSeeder
         }
 
         await ResetRolesAsync(context, logger, cancellationToken);
+        if (passwordHasher is not null)
+        {
+            await EnsureDefaultAdministratorAsync(context, configuration, passwordHasher, logger, cancellationToken);
+        }
+        else
+        {
+            logger?.LogWarning("No se encontró un IPasswordHasher<User> registrado; se omitió la creación del administrador por defecto.");
+        }
     }
 
     private static async Task ResetRolesAsync(ApplicationDbContext context, ILogger? logger, CancellationToken cancellationToken)
@@ -101,5 +114,61 @@ public static class DatabaseSeeder
             && !role.IsGlobal
             && string.Equals(role.Name, desired.Name, StringComparison.Ordinal)
             && string.Equals(role.Description ?? string.Empty, desired.Description ?? string.Empty, StringComparison.Ordinal);
+    }
+
+    private static async Task EnsureDefaultAdministratorAsync(
+        ApplicationDbContext context,
+        IConfiguration? configuration,
+        IPasswordHasher<User> passwordHasher,
+        ILogger? logger,
+        CancellationToken cancellationToken)
+    {
+        var hasUsers = await context.Users
+            .IgnoreQueryFilters()
+            .AnyAsync(cancellationToken);
+
+        if (hasUsers)
+        {
+            return;
+        }
+
+        var adminEmail = configuration?["SeedAdmin:Email"] ?? "admin@careplus.local";
+        var adminPassword = configuration?["SeedAdmin:Password"] ?? "ChangeMe!123";
+        var adminFirstName = configuration?["SeedAdmin:FirstName"] ?? "Default";
+        var adminLastName = configuration?["SeedAdmin:LastName"] ?? "Admin";
+
+        var adminRole = await context.Roles
+            .IgnoreQueryFilters()
+            .FirstOrDefaultAsync(role => role.Id == RoleConstants.AdministratorRoleId, cancellationToken);
+
+        if (adminRole is null)
+        {
+            logger?.LogWarning("No se encontró el rol administrador al crear el usuario semilla.");
+            return;
+        }
+
+        var user = new User
+        {
+            TenantId = TenantConstants.DefaultTenantId,
+            FirstName = adminFirstName,
+            LastName = adminLastName,
+            Email = adminEmail.ToLowerInvariant(),
+            Gender = Gender.Other,
+            DateOfBirth = new DateOnly(1990, 1, 1),
+            RoleId = adminRole.Id,
+            CreatedAtUtc = DateTime.UtcNow,
+            UpdatedAtUtc = DateTime.UtcNow
+        };
+
+        user.AssignPassword(passwordHasher.HashPassword(user, adminPassword), confirmed: true);
+        user.PasswordSetupToken = null;
+        user.PasswordSetupTokenExpiresAtUtc = null;
+
+        await context.Users.AddAsync(user, cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
+
+        logger?.LogInformation(
+            "Se creó el usuario administrador por defecto con el correo {Email}. Actualiza la contraseña después del primer inicio de sesión.",
+            adminEmail);
     }
 }

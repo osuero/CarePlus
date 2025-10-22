@@ -1,4 +1,5 @@
 using System;
+using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using CarePlus.Application.DTOs.Users;
@@ -6,8 +7,11 @@ using CarePlus.Application.Interfaces.Repositories;
 using CarePlus.Application.Interfaces.Services;
 using CarePlus.Application.Mappers;
 using CarePlus.Application.Models;
+using CarePlus.Domain.Constants;
 using CarePlus.Domain.Entities;
 using CarePlus.Domain.Enums;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace CarePlus.Application.Services;
 
@@ -15,11 +19,22 @@ public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
     private readonly IRoleRepository _roleRepository;
+    private readonly IEmailService _emailService;
+    private readonly IOptions<AuthSettings> _authSettings;
+    private readonly ILogger<UserService> _logger;
 
-    public UserService(IUserRepository userRepository, IRoleRepository roleRepository)
+    public UserService(
+        IUserRepository userRepository,
+        IRoleRepository roleRepository,
+        IEmailService emailService,
+        IOptions<AuthSettings> authSettings,
+        ILogger<UserService> logger)
     {
         _userRepository = userRepository;
         _roleRepository = roleRepository;
+        _emailService = emailService;
+        _authSettings = authSettings;
+        _logger = logger;
     }
 
     public async Task<Result<UserResponse>> RegisterAsync(
@@ -62,6 +77,15 @@ public class UserService : IUserService
         };
 
         user = await _userRepository.AddAsync(user, cancellationToken);
+
+        if (ShouldSendPasswordSetup(user.RoleId))
+        {
+            var onboardingResult = await TrySendPasswordSetupEmailAsync(user, cancellationToken);
+            if (!onboardingResult.IsSuccess)
+            {
+                return Result<UserResponse>.Failure(onboardingResult.ErrorCode!, onboardingResult.ErrorMessage!);
+            }
+        }
 
         return Result<UserResponse>.Success(UserMapper.ToResponse(user));
     }
@@ -212,5 +236,68 @@ public class UserService : IUserService
         return Enum.TryParse<Gender>(gender, true, out var parsed)
             ? parsed
             : Gender.Other;
+    }
+
+    private bool ShouldSendPasswordSetup(Guid? roleId)
+    {
+        return roleId.HasValue && (roleId.Value == RoleConstants.AdministratorRoleId || roleId.Value == RoleConstants.DoctorRoleId);
+    }
+
+    private async Task<Result> TrySendPasswordSetupEmailAsync(User user, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var token = GenerateSecureToken();
+            var expiresAt = DateTime.UtcNow.AddMinutes(Math.Max(1, _authSettings.Value.PasswordSetupTokenExpiryMinutes));
+
+            user.MarkPasswordSetup(token, expiresAt);
+            await _userRepository.UpdateAsync(user, cancellationToken);
+
+            var passwordSetupLink = BuildPasswordSetupLink(token);
+            var roleLabel = user.Role?.Name ?? (user.RoleId == RoleConstants.DoctorRoleId ? "Doctor" : "Administrador");
+            var message = new EmailMessage
+            {
+                To = new[] { user.Email },
+                Subject = "Completa tu registro en CarePlus",
+                Body = $"""
+                    <p>Hola {user.FirstName},</p>
+                    <p>Se ha creado una cuenta para ti en CarePlus con el rol <strong>{roleLabel}</strong>.</p>
+                    <p>Para comenzar, completa la configuración de tu contraseña haciendo clic en el siguiente enlace:</p>
+                    <p><a href="{passwordSetupLink}" target="_blank" rel="noopener">Configurar contraseña</a></p>
+                    <p>Este enlace expirará el {expiresAt:dd/MM/yyyy HH:mm} UTC.</p>
+                    <p>Si no solicitaste esta cuenta, puedes ignorar este correo.</p>
+                    <p>Equipo CarePlus</p>
+                    """,
+                IsBodyHtml = true
+            };
+
+            await _emailService.SendAsync(message, cancellationToken);
+            return Result.Success();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error al enviar el correo de configuración de contraseña para el usuario {UserId}.", user.Id);
+            return Result.Failure("user.onboarding.emailFailed", "No se pudo enviar el correo de configuración de contraseña.");
+        }
+    }
+
+    private static string GenerateSecureToken()
+    {
+        Span<byte> buffer = stackalloc byte[32];
+        RandomNumberGenerator.Fill(buffer);
+        return Convert.ToBase64String(buffer).TrimEnd('=').Replace('+', '-').Replace('/', '_');
+    }
+
+    private string BuildPasswordSetupLink(string token)
+    {
+        var baseUrl = _authSettings.Value.PasswordSetupUrl?.Trim();
+        if (string.IsNullOrWhiteSpace(baseUrl))
+        {
+            baseUrl = "http://localhost:4200/auth/setup-password";
+        }
+
+        baseUrl = baseUrl.TrimEnd('/');
+        var separator = baseUrl.Contains('?', StringComparison.Ordinal) ? "&" : "?";
+        return $"{baseUrl}{separator}token={Uri.EscapeDataString(token)}";
     }
 }

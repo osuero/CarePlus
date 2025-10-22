@@ -20,6 +20,14 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
             .FirstOrDefaultAsync(user => user.TenantId == tenantId && user.Email == email, cancellationToken);
     }
 
+    public async Task<User?> GetByEmailForAuthenticationAsync(string tenantId, string email, CancellationToken cancellationToken = default)
+    {
+        return await _context.Users
+            .AsNoTracking()
+            .Include(user => user.Role)
+            .FirstOrDefaultAsync(user => user.TenantId == tenantId && user.Email == email, cancellationToken);
+    }
+
     public async Task<User?> GetByIdAsync(string tenantId, Guid id, CancellationToken cancellationToken = default)
     {
         return await _context.Users
@@ -34,6 +42,20 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
             .IgnoreQueryFilters()
             .Include(user => user.Role)
             .FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
+    }
+
+    public async Task<User?> GetByPasswordSetupTokenAsync(string token, CancellationToken cancellationToken = default)
+    {
+        var nowUtc = DateTime.UtcNow;
+        return await _context.Users
+            .IgnoreQueryFilters()
+            .Include(user => user.Role)
+            .FirstOrDefaultAsync(
+                user => user.PasswordSetupToken == token
+                    && user.PasswordSetupTokenExpiresAtUtc != null
+                    && user.PasswordSetupTokenExpiresAtUtc >= nowUtc
+                    && !user.IsDeleted,
+                cancellationToken);
     }
 
     public async Task<IReadOnlyList<User>> SearchAsync(

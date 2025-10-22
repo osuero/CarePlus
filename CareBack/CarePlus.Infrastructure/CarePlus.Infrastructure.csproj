@@ -26,4 +26,8 @@
     <ProjectReference Include="..\CarePlus.Domain\CarePlus.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Services\countries.json" />
+  </ItemGroup>
+
 </Project>
