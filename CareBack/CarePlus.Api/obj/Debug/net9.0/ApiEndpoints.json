@@ -46,6 +46,51 @@
   },
   {
     "ContainingType": "CarePlus.Api.Endpoints.AuthEndpoints",
+    "Method": "GetPasswordSetupInfoAsync",
+    "RelativePath": "api/auth/setup-password",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "CarePlus.Application.DTOs.Auth.PasswordSetupInfoResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Auth"
+    ],
+    "EndpointName": "GetPasswordSetupInfo"
+  },
+  {
+    "ContainingType": "CarePlus.Api.Endpoints.AuthEndpoints",
     "Method": "CompletePasswordSetupAsync",
     "RelativePath": "api/auth/setup-password",
     "HttpMethod": "POST",

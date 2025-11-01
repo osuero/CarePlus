@@ -6,6 +6,9 @@
         <div class="form-content">
           <h2 class="title">Sign in</h2>
           <p class="subtitle">Enter your credentials to log in</p>
+          <div class="info-message" *ngIf="infoMessage">
+            {{ infoMessage }}
+          </div>
 
           <mat-form-field appearance="outline" class="form-field m-b-20">
             <mat-label>Cuenta de demostracion</mat-label>

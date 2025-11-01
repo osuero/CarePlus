@@ -3,24 +3,32 @@
   "WorkspaceRootPath": "C:\\CarePlus\\CarePlus\\CareBack\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A849A470-F9F9-4400-8A7B-08798AA7922F}|CarePlus.Application\\CarePlus.Application.csproj|c:\\careplus\\careplus\\careback\\careplus.application\\dtos\\patients\\patientresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A849A470-F9F9-4400-8A7B-08798AA7922F}|CarePlus.Application\\CarePlus.Application.csproj|solutionrelative:careplus.application\\dtos\\patients\\patientresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C737B8D-CF51-414A-A8F1-794D2C900310}|CarePlus.Api\\CarePlus.Api.csproj|c:\\careplus\\careplus\\careback\\careplus.api\\endpoints\\authendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C737B8D-CF51-414A-A8F1-794D2C900310}|CarePlus.Api\\CarePlus.Api.csproj|solutionrelative:careplus.api\\endpoints\\authendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A849A470-F9F9-4400-8A7B-08798AA7922F}|CarePlus.Application\\CarePlus.Application.csproj|c:\\careplus\\careplus\\careback\\careplus.application\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A849A470-F9F9-4400-8A7B-08798AA7922F}|CarePlus.Application\\CarePlus.Application.csproj|solutionrelative:careplus.application\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C737B8D-CF51-414A-A8F1-794D2C900310}|CarePlus.Api\\CarePlus.Api.csproj|c:\\careplus\\careplus\\careback\\careplus.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{4C737B8D-CF51-414A-A8F1-794D2C900310}|CarePlus.Api\\CarePlus.Api.csproj|solutionrelative:careplus.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{4C737B8D-CF51-414A-A8F1-794D2C900310}|CarePlus.Api\\CarePlus.Api.csproj|c:\\careplus\\careplus\\careback\\careplus.api\\endpoints\\userendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C737B8D-CF51-414A-A8F1-794D2C900310}|CarePlus.Api\\CarePlus.Api.csproj|solutionrelative:careplus.api\\endpoints\\userendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A849A470-F9F9-4400-8A7B-08798AA7922F}|CarePlus.Application\\CarePlus.Application.csproj|c:\\careplus\\careplus\\careback\\careplus.application\\interfaces\\services\\iemailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A849A470-F9F9-4400-8A7B-08798AA7922F}|CarePlus.Application\\CarePlus.Application.csproj|solutionrelative:careplus.application\\interfaces\\services\\iemailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4C737B8D-CF51-414A-A8F1-794D2C900310}|CarePlus.Api\\CarePlus.Api.csproj|c:\\careplus\\careplus\\careback\\careplus.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{4C737B8D-CF51-414A-A8F1-794D2C900310}|CarePlus.Api\\CarePlus.Api.csproj|solutionrelative:careplus.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C737B8D-CF51-414A-A8F1-794D2C900310}|CarePlus.Api\\CarePlus.Api.csproj|c:\\careplus\\careplus\\careback\\careplus.api\\endpoints\\userendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C737B8D-CF51-414A-A8F1-794D2C900310}|CarePlus.Api\\CarePlus.Api.csproj|solutionrelative:careplus.api\\endpoints\\userendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C737B8D-CF51-414A-A8F1-794D2C900310}|CarePlus.Api\\CarePlus.Api.csproj|c:\\careplus\\careplus\\careback\\careplus.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{4C737B8D-CF51-414A-A8F1-794D2C900310}|CarePlus.Api\\CarePlus.Api.csproj|solutionrelative:careplus.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A849A470-F9F9-4400-8A7B-08798AA7922F}|CarePlus.Application\\CarePlus.Application.csproj|c:\\careplus\\careplus\\careback\\careplus.application\\dtos\\patients\\patientresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A849A470-F9F9-4400-8A7B-08798AA7922F}|CarePlus.Application\\CarePlus.Application.csproj|solutionrelative:careplus.application\\dtos\\patients\\patientresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4C737B8D-CF51-414A-A8F1-794D2C900310}|CarePlus.Api\\CarePlus.Api.csproj|c:\\careplus\\careplus\\careback\\careplus.api\\graphql\\userqueries.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -73,39 +81,27 @@
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PatientResponse.cs",
-              "DocumentMoniker": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Application\\DTOs\\Patients\\PatientResponse.cs",
-              "RelativeDocumentMoniker": "CarePlus.Application\\DTOs\\Patients\\PatientResponse.cs",
-              "ToolTip": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Application\\DTOs\\Patients\\PatientResponse.cs",
-              "RelativeToolTip": "CarePlus.Application\\DTOs\\Patients\\PatientResponse.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAIA5wBMAAAAbAAAAAAAAAA==",
+              "Title": "AuthEndpoints.cs",
+              "DocumentMoniker": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\Endpoints\\AuthEndpoints.cs",
+              "RelativeDocumentMoniker": "CarePlus.Api\\Endpoints\\AuthEndpoints.cs",
+              "ToolTip": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\Endpoints\\AuthEndpoints.cs",
+              "RelativeToolTip": "CarePlus.Api\\Endpoints\\AuthEndpoints.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAAADAAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-19T16:53:51.389Z",
+              "WhenOpened": "2025-10-22T09:51:56.682Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\appsettings.json",
               "RelativeDocumentMoniker": "CarePlus.Api\\appsettings.json",
               "ToolTip": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\appsettings.json",
               "RelativeToolTip": "CarePlus.Api\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-10-18T22:21:45.959Z"
             },
@@ -117,14 +113,49 @@
               "RelativeDocumentMoniker": "CarePlus.Application\\Services\\UserService.cs",
               "ToolTip": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Application\\Services\\UserService.cs",
               "RelativeToolTip": "CarePlus.Application\\Services\\UserService.cs",
-              "ViewState": "AgIAADcAAAAAAAAAAAAYwD8AAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAAAAuwDcAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-14T07:59:23.428Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-14T07:59:23.428Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "CarePlus.Api\\appsettings.Development.json",
+              "ToolTip": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\appsettings.Development.json",
+              "RelativeToolTip": "CarePlus.Api\\appsettings.Development.json",
+              "ViewState": "AgIAACAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-18T22:21:51.197Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserEndpoints.cs",
+              "DocumentMoniker": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\Endpoints\\UserEndpoints.cs",
+              "RelativeDocumentMoniker": "CarePlus.Api\\Endpoints\\UserEndpoints.cs",
+              "ToolTip": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\Endpoints\\UserEndpoints.cs",
+              "RelativeToolTip": "CarePlus.Api\\Endpoints\\UserEndpoints.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAowEEAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-12T23:37:26.286Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IEmailService.cs",
+              "DocumentMoniker": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Application\\Interfaces\\Services\\IEmailService.cs",
+              "RelativeDocumentMoniker": "CarePlus.Application\\Interfaces\\Services\\IEmailService.cs",
+              "ToolTip": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Application\\Interfaces\\Services\\IEmailService.cs",
+              "RelativeToolTip": "CarePlus.Application\\Interfaces\\Services\\IEmailService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T09:38:53.532Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "UserQueries.cs",
               "DocumentMoniker": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\GraphQL\\UserQueries.cs",
               "RelativeDocumentMoniker": "CarePlus.Api\\GraphQL\\UserQueries.cs",
@@ -136,27 +167,27 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "appsettings.Development.json",
-              "DocumentMoniker": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\appsettings.Development.json",
-              "RelativeDocumentMoniker": "CarePlus.Api\\appsettings.Development.json",
-              "ToolTip": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\appsettings.Development.json",
-              "RelativeToolTip": "CarePlus.Api\\appsettings.Development.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-18T22:21:51.197Z"
+              "DocumentIndex": 6,
+              "Title": "PatientResponse.cs",
+              "DocumentMoniker": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Application\\DTOs\\Patients\\PatientResponse.cs",
+              "RelativeDocumentMoniker": "CarePlus.Application\\DTOs\\Patients\\PatientResponse.cs",
+              "ToolTip": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Application\\DTOs\\Patients\\PatientResponse.cs",
+              "RelativeToolTip": "CarePlus.Application\\DTOs\\Patients\\PatientResponse.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAIA5wBMAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T16:53:51.389Z"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UserEndpoints.cs",
-              "DocumentMoniker": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\Endpoints\\UserEndpoints.cs",
-              "RelativeDocumentMoniker": "CarePlus.Api\\Endpoints\\UserEndpoints.cs",
-              "ToolTip": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\Endpoints\\UserEndpoints.cs",
-              "RelativeToolTip": "CarePlus.Api\\Endpoints\\UserEndpoints.cs",
-              "ViewState": "AgIAAL8AAAAAAAAAAAAAwMsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-12T23:37:26.286Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             }
           ]
         }

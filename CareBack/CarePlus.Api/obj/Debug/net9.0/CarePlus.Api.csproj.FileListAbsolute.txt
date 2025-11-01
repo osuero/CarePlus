@@ -297,4 +297,5 @@ C:\CarePlus\CarePlus\CareBack\CarePlus.Api\bin\Debug\net9.0\tr\Microsoft.CodeAna
 C:\CarePlus\CarePlus\CareBack\CarePlus.Api\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\CarePlus\CarePlus\CareBack\CarePlus.Api\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\CarePlus\CarePlus\CareBack\CarePlus.Api\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\CarePlus\CarePlus\CareBack\CarePlus.Api\bin\Debug\net9.0\Resend.dll
 C:\CarePlus\CarePlus\CareBack\CarePlus.Api\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

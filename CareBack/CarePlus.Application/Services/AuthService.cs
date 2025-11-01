@@ -82,6 +82,32 @@ public class AuthService : IAuthService
         return Result<LoginResponse>.Success(response);
     }
 
+    public async Task<Result<PasswordSetupInfoResponse>> GetPasswordSetupInfoAsync(string token, CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrWhiteSpace(token))
+        {
+            return Result<PasswordSetupInfoResponse>.Failure("auth.invalidToken", "El token de configuracion de contrasena es requerido.");
+        }
+
+        var trimmedToken = token.Trim();
+        var user = await _userRepository.GetByPasswordSetupTokenAsync(trimmedToken, cancellationToken);
+        if (user is null)
+        {
+            return Result<PasswordSetupInfoResponse>.Failure("auth.invalidToken", "El enlace de configuracion de contrasena no es valido o ha expirado.");
+        }
+
+        var response = new PasswordSetupInfoResponse
+        {
+            UserId = user.Id,
+            Email = user.Email,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            IsPasswordConfirmed = user.IsPasswordConfirmed
+        };
+
+        return Result<PasswordSetupInfoResponse>.Success(response);
+    }
+
     public async Task<Result> CompletePasswordSetupAsync(CompletePasswordSetupRequest request, CancellationToken cancellationToken = default)
     {
         if (request is null || string.IsNullOrWhiteSpace(request.Token) || string.IsNullOrWhiteSpace(request.Password))

@@ -27,22 +27,28 @@
     ],
     "paths": {
       "@core": [
-        "app/core"
+        "app/core/index.ts"
       ],
       "@core/*": [
         "app/core/*"
       ],
       "@shared": [
-        "app/shared"
+        "app/shared/index.ts"
       ],
       "@shared/*": [
         "app/shared/*"
+      ],
+      "@shared/services": [
+        "app/shared/services/index.ts"
       ],
       "@config": [
         "app/config"
       ],
       "@config/*": [
         "app/config/*"
+      ],
+      "environments/*": [
+        "environments/*"
       ]
     }
   },

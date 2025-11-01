@@ -6,5 +6,6 @@ namespace CarePlus.Application.Interfaces.Services;
 public interface IAuthService
 {
     Task<Result<LoginResponse>> LoginAsync(string tenantId, LoginRequest request, CancellationToken cancellationToken = default);
+    Task<Result<PasswordSetupInfoResponse>> GetPasswordSetupInfoAsync(string token, CancellationToken cancellationToken = default);
     Task<Result> CompletePasswordSetupAsync(CompletePasswordSetupRequest request, CancellationToken cancellationToken = default);
 }

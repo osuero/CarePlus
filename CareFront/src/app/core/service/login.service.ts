@@ -5,10 +5,10 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Observable, catchError, map, throwError } from 'rxjs';
-import { User } from '@core/models/interface';
-import { LocalStorageService } from '@shared/services';
-import { environment } from 'environments/environment';
-import { Role } from '@core/models/role';
+import { User } from '../models/interface';
+import { Role } from '../models/role';
+import { LocalStorageService } from '../../shared/services';
+import { environment } from '../../../environments/environment';
 
 export interface LoginResult {
   user: User;

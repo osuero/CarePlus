@@ -10,6 +10,7 @@ import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ErrorInterceptor } from '@core/interceptor/error.interceptor';
+import { AuthInterceptor } from '@core/interceptor/auth.interceptor';
 import { DirectionService, LanguageService } from '@core';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -62,6 +63,11 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(FeatherModule.pick(allIcons)),
     importProvidersFrom(NgxPermissionsModule.forRoot()),
     provideCharts(withDefaultRegisterables()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,

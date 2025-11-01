@@ -1,9 +1,9 @@
 import { Route } from '@angular/router';
 import { MainLayoutComponent } from './layout/app-layout/main-layout/main-layout.component';
-import { AuthGuard } from '@core/guard/auth.guard';
+import { AuthGuard } from './core/guard/auth.guard';
 import { AuthLayoutComponent } from './layout/app-layout/auth-layout/auth-layout.component';
 import { Page404Component } from './authentication/page404/page404.component';
-import { Role } from '@core';
+import { Role } from './core';
 
 export const APP_ROUTE: Route[] = [
   {
@@ -135,6 +135,12 @@ export const APP_ROUTE: Route[] = [
   },
   {
     path: 'authentication',
+    component: AuthLayoutComponent,
+    loadChildren: () =>
+      import('./authentication/auth.routes').then((m) => m.AUTH_ROUTE),
+  },
+  {
+    path: 'auth',
     component: AuthLayoutComponent,
     loadChildren: () =>
       import('./authentication/auth.routes').then((m) => m.AUTH_ROUTE),

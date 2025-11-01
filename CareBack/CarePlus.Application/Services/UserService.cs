@@ -83,6 +83,11 @@ public class UserService : IUserService
             var onboardingResult = await TrySendPasswordSetupEmailAsync(user, cancellationToken);
             if (!onboardingResult.IsSuccess)
             {
+                user.MarkDeleted();
+                await _userRepository.DeleteAsync(user, cancellationToken);
+                _logger.LogWarning(
+                    "El usuario {UserId} fue revertido debido a un fallo al enviar el correo de configuracion de contraseña.",
+                    user.Id);
                 return Result<UserResponse>.Failure(onboardingResult.ErrorCode!, onboardingResult.ErrorMessage!);
             }
         }

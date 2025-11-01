@@ -3,6 +3,7 @@ using CarePlus.Application.DTOs.Auth;
 using CarePlus.Application.Interfaces;
 using CarePlus.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarePlus.Api.Endpoints;
 
@@ -18,6 +19,13 @@ public static class AuthEndpoints
             .Produces<LoginResponse>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status400BadRequest)
             .Produces(StatusCodes.Status401Unauthorized)
+            .ProducesProblem(StatusCodes.Status500InternalServerError);
+
+        group.MapGet("/setup-password", GetPasswordSetupInfoAsync)
+            .WithName("GetPasswordSetupInfo")
+            .Produces<PasswordSetupInfoResponse>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status400BadRequest)
+            .Produces(StatusCodes.Status404NotFound)
             .ProducesProblem(StatusCodes.Status500InternalServerError);
 
         group.MapPost("/setup-password", CompletePasswordSetupAsync)
@@ -48,6 +56,30 @@ public static class AuthEndpoints
             {
                 Status = statusCode,
                 Title = "Autenticacion fallida",
+                Detail = result.ErrorMessage,
+                Extensions = { ["code"] = result.ErrorCode }
+            });
+        }
+
+        return Results.Ok(result.Value);
+    }
+
+    private static async Task<IResult> GetPasswordSetupInfoAsync(
+        [FromQuery] string token,
+        IAuthService authService,
+        CancellationToken cancellationToken)
+    {
+        var result = await authService.GetPasswordSetupInfoAsync(token, cancellationToken);
+        if (!result.IsSuccess)
+        {
+            var status = string.Equals(result.ErrorCode, "auth.invalidToken", StringComparison.OrdinalIgnoreCase)
+                ? StatusCodes.Status404NotFound
+                : StatusCodes.Status400BadRequest;
+
+            return Results.Problem(new()
+            {
+                Status = status,
+                Title = "Token invalido",
                 Detail = result.ErrorMessage,
                 Extensions = { ["code"] = result.ErrorCode }
             });

@@ -1,17 +1,17 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CarePlus.Domain.Constants;
 using CarePlus.Domain.Entities;
+using CarePlus.Domain.Enums;
 using CarePlus.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Identity;
-using CarePlus.Domain.Enums;
 
 namespace CarePlus.Infrastructure.Persistence.SeedData;
 
@@ -39,13 +39,14 @@ public static class DatabaseSeeder
         }
 
         await ResetRolesAsync(context, logger, cancellationToken);
+
         if (passwordHasher is not null)
         {
             await EnsureDefaultAdministratorAsync(context, configuration, passwordHasher, logger, cancellationToken);
         }
         else
         {
-            logger?.LogWarning("No se encontró un IPasswordHasher<User> registrado; se omitió la creación del administrador por defecto.");
+            logger?.LogWarning("No se encontro un IPasswordHasher<User> registrado; se omitio la creacion del administrador por defecto.");
         }
     }
 
@@ -123,15 +124,6 @@ public static class DatabaseSeeder
         ILogger? logger,
         CancellationToken cancellationToken)
     {
-        var hasUsers = await context.Users
-            .IgnoreQueryFilters()
-            .AnyAsync(cancellationToken);
-
-        if (hasUsers)
-        {
-            return;
-        }
-
         var adminEmail = configuration?["SeedAdmin:Email"] ?? "admin@careplus.local";
         var adminPassword = configuration?["SeedAdmin:Password"] ?? "ChangeMe!123";
         var adminFirstName = configuration?["SeedAdmin:FirstName"] ?? "Default";
@@ -143,32 +135,50 @@ public static class DatabaseSeeder
 
         if (adminRole is null)
         {
-            logger?.LogWarning("No se encontró el rol administrador al crear el usuario semilla.");
+            logger?.LogWarning("No se encontro el rol administrador al asegurar el usuario semilla.");
             return;
         }
 
-        var user = new User
+        var normalizedEmail = adminEmail.ToLowerInvariant();
+        var existingUser = await context.Users
+            .IgnoreQueryFilters()
+            .FirstOrDefaultAsync(user => user.Email == normalizedEmail, cancellationToken);
+
+        if (existingUser is null)
         {
-            TenantId = TenantConstants.DefaultTenantId,
-            FirstName = adminFirstName,
-            LastName = adminLastName,
-            Email = adminEmail.ToLowerInvariant(),
-            Gender = Gender.Other,
-            DateOfBirth = new DateOnly(1990, 1, 1),
-            RoleId = adminRole.Id,
-            CreatedAtUtc = DateTime.UtcNow,
-            UpdatedAtUtc = DateTime.UtcNow
-        };
+            existingUser = new User
+            {
+                TenantId = TenantConstants.DefaultTenantId,
+                FirstName = adminFirstName,
+                LastName = adminLastName,
+                Email = normalizedEmail,
+                Gender = Gender.Other,
+                DateOfBirth = new DateOnly(1990, 1, 1),
+                RoleId = adminRole.Id,
+                CreatedAtUtc = DateTime.UtcNow,
+                UpdatedAtUtc = DateTime.UtcNow
+            };
 
-        user.AssignPassword(passwordHasher.HashPassword(user, adminPassword), confirmed: true);
-        user.PasswordSetupToken = null;
-        user.PasswordSetupTokenExpiresAtUtc = null;
+            await context.Users.AddAsync(existingUser, cancellationToken);
+            logger?.LogInformation("Se creo el administrador por defecto con el correo {Email}.", adminEmail);
+        }
+        else
+        {
+            existingUser.FirstName = adminFirstName;
+            existingUser.LastName = adminLastName;
+            existingUser.RoleId = adminRole.Id;
+            existingUser.TenantId = TenantConstants.DefaultTenantId;
+            existingUser.Gender = existingUser.Gender == Gender.Unknown ? Gender.Other : existingUser.Gender;
+            existingUser.Touch();
+        }
 
-        await context.Users.AddAsync(user, cancellationToken);
+        var hashedPassword = passwordHasher.HashPassword(existingUser, adminPassword);
+        existingUser.AssignPassword(hashedPassword, confirmed: true);
+        existingUser.PasswordSetupToken = null;
+        existingUser.PasswordSetupTokenExpiresAtUtc = null;
+
         await context.SaveChangesAsync(cancellationToken);
 
-        logger?.LogInformation(
-            "Se creó el usuario administrador por defecto con el correo {Email}. Actualiza la contraseña después del primer inicio de sesión.",
-            adminEmail);
+        logger?.LogInformation("Administrador por defecto asegurado con el correo {Email}.", adminEmail);
     }
 }
