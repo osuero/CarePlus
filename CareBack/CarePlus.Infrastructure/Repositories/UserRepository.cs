@@ -58,6 +58,21 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
                 cancellationToken);
     }
 
+    public async Task<User?> GetByIdForPasswordSetupAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var nowUtc = DateTime.UtcNow;
+        return await _context.Users
+            .IgnoreQueryFilters()
+            .Include(user => user.Role)
+            .FirstOrDefaultAsync(
+                user => user.Id == id
+                    && user.PasswordSetupToken != null
+                    && user.PasswordSetupTokenExpiresAtUtc != null
+                    && user.PasswordSetupTokenExpiresAtUtc >= nowUtc
+                    && !user.IsDeleted,
+                cancellationToken);
+    }
+
     public async Task<IReadOnlyList<User>> SearchAsync(
         string tenantId,
         string? term,

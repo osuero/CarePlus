@@ -12,7 +12,8 @@ export interface PasswordSetupInfo {
 }
 
 export interface CompletePasswordSetupRequest {
-  token: string;
+  token?: string | null;
+  userId?: string | null;
   password: string;
   confirmPassword: string;
 }
@@ -23,8 +24,17 @@ export interface CompletePasswordSetupRequest {
 export class PasswordSetupService {
   constructor(private readonly http: HttpClient) {}
 
-  getInfo(token: string): Observable<PasswordSetupInfo> {
-    const params = new HttpParams().set('token', token);
+  getInfo(token: string | null, userId: string | null): Observable<PasswordSetupInfo> {
+    let params = new HttpParams();
+
+    if (token) {
+      params = params.set('token', token);
+    }
+
+    if (userId) {
+      params = params.set('userId', userId);
+    }
+
     return this.http.get<PasswordSetupInfo>(
       `${environment.apiUrl}/api/auth/setup-password`,
       { params }

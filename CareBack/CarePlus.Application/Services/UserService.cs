@@ -258,7 +258,7 @@ public class UserService : IUserService
             user.MarkPasswordSetup(token, expiresAt);
             await _userRepository.UpdateAsync(user, cancellationToken);
 
-            var passwordSetupLink = BuildPasswordSetupLink(token);
+            var passwordSetupLink = BuildPasswordSetupLink(user, token);
             var roleLabel = user.Role?.Name ?? (user.RoleId == RoleConstants.DoctorRoleId ? "Doctor" : "Administrador");
             var message = new EmailMessage
             {
@@ -293,7 +293,7 @@ public class UserService : IUserService
         return Convert.ToBase64String(buffer).TrimEnd('=').Replace('+', '-').Replace('/', '_');
     }
 
-    private string BuildPasswordSetupLink(string token)
+    private string BuildPasswordSetupLink(User user, string token)
     {
         var baseUrl = _authSettings.Value.PasswordSetupUrl?.Trim();
         if (string.IsNullOrWhiteSpace(baseUrl))
@@ -303,6 +303,7 @@ public class UserService : IUserService
 
         baseUrl = baseUrl.TrimEnd('/');
         var separator = baseUrl.Contains('?', StringComparison.Ordinal) ? "&" : "?";
-        return $"{baseUrl}{separator}token={Uri.EscapeDataString(token)}";
+        var query = $"token={Uri.EscapeDataString(token)}&userId={Uri.EscapeDataString(user.Id.ToString())}";
+        return $"{baseUrl}{separator}{query}";
     }
 }
