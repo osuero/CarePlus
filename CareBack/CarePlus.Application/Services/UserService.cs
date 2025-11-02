@@ -296,9 +296,9 @@ public class UserService : IUserService
     private string BuildPasswordSetupLink(User user, string token)
     {
         var baseUrl = _authSettings.Value.PasswordSetupUrl?.Trim();
-        if (string.IsNullOrWhiteSpace(baseUrl))
-        {
-            baseUrl = "http://localhost:4200/auth/setup-password";
+          if (string.IsNullOrWhiteSpace(baseUrl))
+          {
+            baseUrl = "http://localhost:4200/#/authentication/setup-password";
         }
 
         baseUrl = baseUrl.TrimEnd('/');

@@ -5,7 +5,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 
-import { LocalStorageService } from '@shared/services';
+import { LocalStorageService } from '../../shared/services';
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +14,16 @@ export class AuthGuard {
   constructor(private router: Router, private store: LocalStorageService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    console.log('[AuthGuard] canActivate invoked for URL:', state.url);
     const normalizedUrl = state.url.startsWith('/')
       ? state.url
       : `/${state.url}`;
     const publicPaths = ['/auth/setup-password', '/authentication/setup-password'];
-    if (publicPaths.some((path) => normalizedUrl.startsWith(path))) {
+    const isPublic = publicPaths.some((path) => normalizedUrl.startsWith(path));
+    debugger
+    console.log('[AuthGuard] Normalized URL:', normalizedUrl, 'Is public:', isPublic);
+    if (isPublic) {
+      console.log('[AuthGuard] Public route detected, allowing access.');
       return true;
     }
 
@@ -27,11 +32,19 @@ export class AuthGuard {
       currentUser &&
       typeof currentUser === 'object' &&
       Object.keys(currentUser).length > 0;
+    console.log('[AuthGuard] Retrieved currentUser:', currentUser, 'Has valid user:', hasValidUser);
 
     if (hasValidUser) {
       const userRole = currentUser.roles?.[0]?.name; // Optional chaining to safely access the role
+      console.log('[AuthGuard] User role detected:', userRole);
       // If no role exists, you might want to handle it (e.g., redirect or show an error)
       if (!userRole) {
+        console.warn('[AuthGuard] User has no role, redirecting to signin.');
+        if (typeof window !== 'undefined') {
+          window.alert(
+            'AuthGuard: El usuario no tiene rol asignado. Redirigiendo a signin.'
+          );
+        }
         this.router.navigate(['/authentication/signin']);
         return false;
       }
@@ -41,14 +54,31 @@ export class AuthGuard {
         route.data['role'] &&
         route.data['role'].indexOf(userRole) === -1
       ) {
+        console.warn(
+          '[AuthGuard] User role does not match route requirements. Redirecting to signin.',
+          'Required roles:',
+          route.data['role']
+        );
+        if (typeof window !== 'undefined') {
+          window.alert(
+            'AuthGuard: El rol del usuario no cumple los requisitos de la ruta. Redirigiendo a signin.'
+          );
+        }
         // If the role does not match, navigate to the signin page
         this.router.navigate(['/authentication/signin']);
         return false;
       }
+      console.log('[AuthGuard] Role validated. Access granted.');
       return true;
     }
 
     // If no current user is found, redirect to signin
+    console.warn('[AuthGuard] No current user found. Redirecting to signin.');
+    if (typeof window !== 'undefined') {
+      window.alert(
+        'AuthGuard: No se encontró usuario autenticado. Redirigiendo a signin.'
+      );
+    }
     this.router.navigate(['/authentication/signin']);
     return false;
   }

@@ -49,9 +49,12 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly formBuilder: FormBuilder,
     private readonly passwordSetupService: PasswordSetupService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    alert('test')
+    console.log('[SetupPasswordComponent] ngOnInit start');
+    debugger
     this.form = this.formBuilder.group({
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
@@ -60,22 +63,60 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
     this.subscription.add(
       combineLatest([this.route.paramMap, this.route.queryParamMap]).subscribe(
         ([paramMap, queryParamMap]) => {
-          const token =
+          const tokenCandidate =
             paramMap.get('token') ??
             queryParamMap.get('token') ??
             queryParamMap.get('id');
-          const userId =
+          const userIdCandidate =
             queryParamMap.get('userId') ??
             paramMap.get('userId') ??
             queryParamMap.get('user');
 
-          if (!token && !userId) {
-            this.router.navigate(['/authentication/signin']);
+          const fallbackToken =
+            tokenCandidate ??
+            this.getQueryParamFromLocation('token') ??
+            this.getQueryParamFromLocation('id');
+          const fallbackUserId =
+            userIdCandidate ??
+            this.getQueryParamFromLocation('userId') ??
+            this.getQueryParamFromLocation('user');
+
+          console.log(
+            '[SetupPasswordComponent] Resolved params',
+            {
+              tokenCandidate,
+              userIdCandidate,
+              fallbackToken,
+              fallbackUserId,
+              fullUrl: this.router.url,
+              locationHref:
+                typeof window !== 'undefined' ? window.location.href : 'N/A',
+            }
+          );
+
+          if (!fallbackToken && !fallbackUserId) {
+            console.warn(
+              '[SetupPasswordComponent] Missing token and userId after fallback. Staying on page and showing error.'
+            );
+            if (typeof window !== 'undefined') {
+              window.alert(
+                'SetupPasswordComponent: No se encontró token ni userId. Revisa la URL del enlace.'
+              );
+            }
+            this.error = 'No se pudo validar el enlace. Verifica que sea correcto.';
+            this.loading = false;
             return;
           }
 
-          this.token = token ?? undefined;
-          this.userId = userId ?? undefined;
+          this.token = fallbackToken ?? undefined;
+          this.userId = fallbackUserId ?? undefined;
+          console.log(
+            '[SetupPasswordComponent] Stored identifiers',
+            'token:',
+            this.token,
+            'userId:',
+            this.userId
+          );
           this.fetchInfo();
         }
       )
@@ -88,33 +129,73 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
 
   private fetchInfo(): void {
     if (!this.token && !this.userId) {
-      this.router.navigate(['/authentication/signin']);
+      console.warn(
+        '[SetupPasswordComponent] fetchInfo called without identifiers even after fallback.'
+      );
+      if (typeof window !== 'undefined') {
+        window.alert(
+          'SetupPasswordComponent: fetchInfo ejecutado sin token ni userId. El flujo se detendrá.'
+        );
+      }
+      this.error =
+        'No se pudo validar el enlace. Verifica que el token o identificador sea correcto.';
+      this.loading = false;
       return;
     }
 
     this.loading = true;
     this.error = undefined;
+    console.log(
+      '[SetupPasswordComponent] Fetching info with',
+      'token:',
+      this.token,
+      'userId:',
+      this.userId
+    );
     this.subscription.add(
       this.passwordSetupService
         .getInfo(this.token ?? null, this.userId ?? null)
         .subscribe({
           next: (info) => {
+            console.log(
+              '[SetupPasswordComponent] Password info loaded successfully',
+              info
+            );
             this.info = info;
             this.loading = false;
-        },
-        error: (err) => {
-          this.error =
-            typeof err === 'string'
-              ? err
-              : 'El enlace no es valido o ha expirado.';
-          this.loading = false;
-        },
-      })
+          },
+          error: (err) => {
+            console.error(
+              '[SetupPasswordComponent] Failed to load password info',
+              err
+            );
+            if (typeof window !== 'undefined') {
+              window.alert(
+                `SetupPasswordComponent: Error al cargar información de contraseña. ${err}`
+              );
+            }
+            this.error =
+              typeof err === 'string'
+                ? err
+                : 'El enlace no es valido o ha expirado.';
+            this.loading = false;
+          },
+        })
     );
   }
 
   submit(): void {
+    console.log('[SetupPasswordComponent] submit called');
     if (this.form.invalid || !this.info) {
+      console.warn(
+        '[SetupPasswordComponent] submit aborted. Form invalid or info missing.',
+        { formValid: this.form.valid, hasInfo: !!this.info }
+      );
+      if (typeof window !== 'undefined') {
+        window.alert(
+          'SetupPasswordComponent: El formulario es inválido o falta información. Revisa los datos antes de continuar.'
+        );
+      }
       this.form.markAllAsTouched();
       return;
     }
@@ -123,12 +204,22 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
     const confirmPassword = this.form.get('confirmPassword')?.value as string;
 
     if (password !== confirmPassword) {
+      console.warn(
+        '[SetupPasswordComponent] submit aborted. Password mismatch.',
+        { passwordLength: password?.length, confirmPasswordLength: confirmPassword?.length }
+      );
+      if (typeof window !== 'undefined') {
+        window.alert(
+          'SetupPasswordComponent: Las contraseñas no coinciden. Corrige antes de continuar.'
+        );
+      }
       this.error = 'Las contrasenas no coinciden.';
       return;
     }
 
     this.submitting = true;
     this.error = undefined;
+    console.log('[SetupPasswordComponent] Submitting password setup request');
 
     this.subscription.add(
       this.passwordSetupService
@@ -140,12 +231,29 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
         })
         .subscribe({
           next: () => {
+            console.log(
+              '[SetupPasswordComponent] Password setup completed. Redirecting to signin.'
+            );
             this.submitting = false;
+            if (typeof window !== 'undefined') {
+              window.alert(
+                'SetupPasswordComponent: Contraseña configurada correctamente. Serás redirigido al inicio de sesión.'
+              );
+            }
             this.router.navigate(['/authentication/signin'], {
               queryParams: { setup: 'success' },
             });
           },
           error: (err) => {
+            console.error(
+              '[SetupPasswordComponent] Password setup failed',
+              err
+            );
+            if (typeof window !== 'undefined') {
+              window.alert(
+                `SetupPasswordComponent: Error al guardar la contraseña. ${err}`
+              );
+            }
             this.error =
               typeof err === 'string'
                 ? err
@@ -155,5 +263,32 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
         })
     );
   }
-}
 
+  private getQueryParamFromLocation(key: string): string | null {
+    if (typeof window === 'undefined') {
+      return null;
+    }
+
+    const candidates: string[] = [];
+    const search = window.location.search;
+    if (search && search.length > 1) {
+      candidates.push(search.substring(1));
+    }
+
+    const hash = window.location.hash ?? '';
+    const hashQueryIndex = hash.indexOf('?');
+    if (hashQueryIndex >= 0 && hashQueryIndex < hash.length - 1) {
+      candidates.push(hash.substring(hashQueryIndex + 1));
+    }
+
+    for (const segment of candidates) {
+      const params = new URLSearchParams(segment);
+      const value = params.get(key);
+      if (value) {
+        return value;
+      }
+    }
+
+    return null;
+  }
+}

@@ -12,6 +12,7 @@ export const APP_ROUTE: Route[] = [
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: '/authentication/signin', pathMatch: 'full' },
+      
       {
         path: 'admin',
         canActivate: [AuthGuard],
