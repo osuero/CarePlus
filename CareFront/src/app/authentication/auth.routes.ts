@@ -25,6 +25,10 @@ export const AUTH_ROUTE: Route[] = [
     component: SetupPasswordComponent,
   },
   {
+    path: "setup-password/:token",
+    component: SetupPasswordComponent,
+  },
+  {
     path: "forgot-password",
     component: ForgotPasswordComponent,
   },

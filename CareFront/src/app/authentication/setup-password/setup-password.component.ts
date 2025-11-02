@@ -16,7 +16,7 @@ import {
   PasswordSetupInfo,
   PasswordSetupService,
 } from '../../core/service/password-setup.service';
-import { Subscription } from 'rxjs';
+import { Subscription, combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-setup-password',
@@ -39,7 +39,8 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
   loading = false;
   submitting = false;
   error?: string;
-  token!: string;
+  token?: string;
+  userId?: string;
   info?: PasswordSetupInfo;
   private subscription = new Subscription();
 
@@ -57,16 +58,27 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
     });
 
     this.subscription.add(
-      this.route.queryParamMap.subscribe((params) => {
-        const token = params.get('token');
-        if (!token) {
-          this.router.navigate(['/authentication/signin']);
-          return;
-        }
+      combineLatest([this.route.paramMap, this.route.queryParamMap]).subscribe(
+        ([paramMap, queryParamMap]) => {
+          const token =
+            paramMap.get('token') ??
+            queryParamMap.get('token') ??
+            queryParamMap.get('id');
+          const userId =
+            queryParamMap.get('userId') ??
+            paramMap.get('userId') ??
+            queryParamMap.get('user');
 
-        this.token = token;
-        this.fetchInfo();
-      })
+          if (!token && !userId) {
+            this.router.navigate(['/authentication/signin']);
+            return;
+          }
+
+          this.token = token ?? undefined;
+          this.userId = userId ?? undefined;
+          this.fetchInfo();
+        }
+      )
     );
   }
 
@@ -75,13 +87,20 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
   }
 
   private fetchInfo(): void {
+    if (!this.token && !this.userId) {
+      this.router.navigate(['/authentication/signin']);
+      return;
+    }
+
     this.loading = true;
     this.error = undefined;
     this.subscription.add(
-      this.passwordSetupService.getInfo(this.token).subscribe({
-        next: (info) => {
-          this.info = info;
-          this.loading = false;
+      this.passwordSetupService
+        .getInfo(this.token ?? null, this.userId ?? null)
+        .subscribe({
+          next: (info) => {
+            this.info = info;
+            this.loading = false;
         },
         error: (err) => {
           this.error =
@@ -113,7 +132,12 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.passwordSetupService
-        .complete({ token: this.token, password, confirmPassword })
+        .complete({
+          token: this.token ?? null,
+          userId: this.userId ?? null,
+          password,
+          confirmPassword,
+        })
         .subscribe({
           next: () => {
             this.submitting = false;

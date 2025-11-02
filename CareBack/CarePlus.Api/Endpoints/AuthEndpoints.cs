@@ -65,11 +65,12 @@ public static class AuthEndpoints
     }
 
     private static async Task<IResult> GetPasswordSetupInfoAsync(
-        [FromQuery] string token,
+        [FromQuery] string? token,
+        [FromQuery] Guid? userId,
         IAuthService authService,
         CancellationToken cancellationToken)
     {
-        var result = await authService.GetPasswordSetupInfoAsync(token, cancellationToken);
+        var result = await authService.GetPasswordSetupInfoAsync(token, userId, cancellationToken);
         if (!result.IsSuccess)
         {
             var status = string.Equals(result.ErrorCode, "auth.invalidToken", StringComparison.OrdinalIgnoreCase)

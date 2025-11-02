@@ -82,16 +82,38 @@ public class AuthService : IAuthService
         return Result<LoginResponse>.Success(response);
     }
 
-    public async Task<Result<PasswordSetupInfoResponse>> GetPasswordSetupInfoAsync(string token, CancellationToken cancellationToken = default)
+    public async Task<Result<PasswordSetupInfoResponse>> GetPasswordSetupInfoAsync(string? token, Guid? userId, CancellationToken cancellationToken = default)
     {
-        if (string.IsNullOrWhiteSpace(token))
+        if (string.IsNullOrWhiteSpace(token) && !userId.HasValue)
         {
-            return Result<PasswordSetupInfoResponse>.Failure("auth.invalidToken", "El token de configuracion de contrasena es requerido.");
+            return Result<PasswordSetupInfoResponse>.Failure("auth.invalidToken", "El enlace de configuracion de contrasena no es valido o ha expirado.");
         }
 
-        var trimmedToken = token.Trim();
-        var user = await _userRepository.GetByPasswordSetupTokenAsync(trimmedToken, cancellationToken);
+        string? trimmedToken = null;
+        var user = default(User?);
+
+        if (!string.IsNullOrWhiteSpace(token))
+        {
+            trimmedToken = token.Trim();
+            user = await _userRepository.GetByPasswordSetupTokenAsync(trimmedToken, cancellationToken);
+        }
+
+        if (user is null && userId.HasValue)
+        {
+            user = await _userRepository.GetByIdForPasswordSetupAsync(userId.Value, cancellationToken);
+        }
+
         if (user is null)
+        {
+            return Result<PasswordSetupInfoResponse>.Failure("auth.invalidToken", "El enlace de configuracion de contrasena no es valido o ha expirado.");
+        }
+
+        if (userId.HasValue && user.Id != userId.Value)
+        {
+            return Result<PasswordSetupInfoResponse>.Failure("auth.invalidToken", "El enlace de configuracion de contrasena no es valido o ha expirado.");
+        }
+
+        if (!string.IsNullOrWhiteSpace(trimmedToken) && !string.Equals(user.PasswordSetupToken, trimmedToken, StringComparison.Ordinal))
         {
             return Result<PasswordSetupInfoResponse>.Failure("auth.invalidToken", "El enlace de configuracion de contrasena no es valido o ha expirado.");
         }
@@ -110,14 +132,40 @@ public class AuthService : IAuthService
 
     public async Task<Result> CompletePasswordSetupAsync(CompletePasswordSetupRequest request, CancellationToken cancellationToken = default)
     {
-        if (request is null || string.IsNullOrWhiteSpace(request.Token) || string.IsNullOrWhiteSpace(request.Password))
+        if (request is null || string.IsNullOrWhiteSpace(request.Password))
         {
             return Result.Failure("auth.invalidToken", "El token proporcionado no es válido.");
         }
 
-        var trimmedToken = request.Token.Trim();
-        var user = await _userRepository.GetByPasswordSetupTokenAsync(trimmedToken, cancellationToken);
+        if (string.IsNullOrWhiteSpace(request.Token) && !request.UserId.HasValue)
+        {
+            return Result.Failure("auth.invalidToken", "El token proporcionado no es válido.");
+        }
+
+        var trimmedToken = request.Token?.Trim();
+        var user = default(User?);
+
+        if (!string.IsNullOrWhiteSpace(trimmedToken))
+        {
+            user = await _userRepository.GetByPasswordSetupTokenAsync(trimmedToken, cancellationToken);
+        }
+
+        if (user is null && request.UserId.HasValue)
+        {
+            user = await _userRepository.GetByIdForPasswordSetupAsync(request.UserId.Value, cancellationToken);
+        }
+
         if (user is null)
+        {
+            return Result.Failure("auth.invalidToken", "El enlace de configuración de contraseña no es válido o ha expirado.");
+        }
+
+        if (request.UserId.HasValue && user.Id != request.UserId.Value)
+        {
+            return Result.Failure("auth.invalidToken", "El enlace de configuración de contraseña no es válido o ha expirado.");
+        }
+
+        if (!string.IsNullOrWhiteSpace(trimmedToken) && !string.Equals(user.PasswordSetupToken, trimmedToken, StringComparison.Ordinal))
         {
             return Result.Failure("auth.invalidToken", "El enlace de configuración de contraseña no es válido o ha expirado.");
         }
