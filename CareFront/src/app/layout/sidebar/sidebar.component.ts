@@ -101,7 +101,10 @@ export class SidebarComponent
       this.subs.sink = this.sidebarService
         .getRouteInfo()
         .subscribe((routes: RouteInfo[]) => {
-          this.sidebarItems = routes;
+          this.sidebarItems =
+            userRole === Role.Doctor
+              ? this.filterRoutesForDoctor(routes)
+              : routes;
         });
 
       if (userRole === Role.Admin) {
@@ -162,5 +165,36 @@ export class SidebarComponent
         this.router.navigate(['/authentication/signin']);
       }
     });
+  }
+
+  private filterRoutesForDoctor(routes: RouteInfo[]): RouteInfo[] {
+    const allowedPaths = new Set([
+      '/doctor/appointments',
+      '/doctor/patient-registration',
+    ]);
+
+    const filterRecursive = (items: RouteInfo[]): RouteInfo[] =>
+      items
+        .map((item) => {
+          const filteredChildren = filterRecursive(item.submenu || []);
+          const isMainGroupTitle =
+            item.groupTitle && item.title === 'MENUITEMS.MAIN.TEXT';
+          const shouldInclude =
+            isMainGroupTitle ||
+            allowedPaths.has(item.path) ||
+            filteredChildren.length > 0;
+
+          if (!shouldInclude) {
+            return null;
+          }
+
+          return {
+            ...item,
+            submenu: filteredChildren,
+          };
+        })
+        .filter((item): item is RouteInfo => item !== null);
+
+    return filterRecursive(routes);
   }
 }
