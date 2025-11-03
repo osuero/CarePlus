@@ -931,6 +931,18 @@
       "submenu": []
     },
     {
+      "path": "/doctor/patient-registration",
+      "title": "MENUITEMS.PATIENTS.LIST.ADD-PATIENT",
+      "iconType": "material-icons-outlined",
+      "icon": "person_add",
+      "class": "",
+      "groupTitle": false,
+      "badge": "",
+      "badgeClass": "",
+      "role": ["DOCTOR"],
+      "submenu": []
+    },
+    {
       "path": "/doctor/doctors",
       "title": "MENUITEMS.DOCTOR.DOCTORS",
       "iconType": "material-icons-outlined",
