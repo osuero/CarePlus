@@ -52,9 +52,7 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    alert('test')
     console.log('[SetupPasswordComponent] ngOnInit start');
-    debugger
     this.form = this.formBuilder.group({
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
