@@ -296,5 +296,103 @@
     "DIALOG": {
       "CANCEL": "Abbrechen"
     }
+  },
+  "APPOINTMENTS": {
+    "BREADCRUMB": {
+      "TITLE": "Termine",
+      "ITEMS": {
+        "DASHBOARD": "Dashboard"
+      },
+      "ACTIVE": "Termine"
+    },
+    "CALENDAR": {
+      "BREADCRUMB": {
+        "TITLE": "Termine",
+        "ACTIVE": "Kalender"
+      }
+    },
+    "FILTERS": {
+      "SEARCH": "Termine suchen",
+      "STATUS": "Status",
+      "TENANT": "Mandant"
+    },
+    "ACTIONS": {
+      "NEW": "Neuer Termin",
+      "CALENDAR": "Kalenderansicht",
+      "CLEAR_SEARCH": "Suche zurücksetzen",
+      "MENU": "Terminaktionen",
+      "VIEW": "Details anzeigen",
+      "EDIT": "Termin bearbeiten",
+      "CANCEL": "Termin absagen",
+      "DELETE": "Termin löschen"
+    },
+    "TABLE": {
+      "PATIENT": "Patient",
+      "DOCTOR": "Arzt",
+      "TITLE": "Titel",
+      "START": "Beginn",
+      "END": "Ende",
+      "STATUS": "Status",
+      "ACTIONS": "Aktionen",
+      "NO_DOCTOR": "Nicht zugewiesen",
+      "RANGE": "Zeige {{start}}-{{end}} von {{total}} Terminen"
+    },
+    "STATUS": {
+      "ALL": "Alle Status",
+      "SCHEDULED": "Geplant",
+      "CONFIRMED": "Bestätigt",
+      "COMPLETED": "Abgeschlossen",
+      "CANCELLED": "Abgesagt",
+      "NOSHOW": "Nicht erschienen"
+    },
+    "MESSAGES": {
+      "SUCCESS_TITLE": "Erfolg",
+      "CREATED": "Der Termin wurde erfolgreich erstellt.",
+      "UPDATED": "Der Termin wurde erfolgreich aktualisiert.",
+      "CANCELLED": "Der Termin wurde erfolgreich abgesagt.",
+      "DELETED": "Der Termin wurde erfolgreich gelöscht.",
+      "CANCEL_TITLE": "Termin absagen",
+      "CANCEL_CONFIRM": "Möchtest du \"{{title}}\" absagen?",
+      "CANCEL_CONFIRM_BUTTON": "Ja, absagen",
+      "CANCEL_CANCEL_BUTTON": "Termin behalten",
+      "DELETE_TITLE": "Termin löschen",
+      "DELETE_CONFIRM": "Möchtest du \"{{title}}\" wirklich löschen?",
+      "DELETE_CONFIRM_BUTTON": "Ja, löschen",
+      "DELETE_CANCEL_BUTTON": "Abbrechen",
+      "ERROR_TITLE": "Etwas ist schiefgelaufen",
+      "ERROR_BODY": "Die Anfrage konnte nicht abgeschlossen werden. Bitte versuche es erneut."
+    },
+    "FORM": {
+      "PATIENT": "Patient",
+      "DOCTOR": "Arzt",
+      "TITLE": "Titel",
+      "DESCRIPTION": "Beschreibung",
+      "LOCATION": "Ort",
+      "START": "Startdatum",
+      "END": "Enddatum",
+      "STATUS": "Status",
+      "NOTES": "Notizen",
+      "NO_DOCTOR": "Kein Arzt",
+      "ERRORS": {
+        "PATIENT_REQUIRED": "Der Patient ist erforderlich.",
+        "TITLE_REQUIRED": "Der Titel ist erforderlich.",
+        "START_REQUIRED": "Das Startdatum ist erforderlich.",
+        "END_REQUIRED": "Das Enddatum ist erforderlich."
+      }
+    },
+    "DIALOGS": {
+      "CREATE_TITLE": "Termin planen",
+      "EDIT_TITLE": "Termin bearbeiten",
+      "DETAIL_TITLE": "Termindetails",
+      "CANCEL": "Abbrechen",
+      "CREATE": "Erstellen",
+      "SAVE": "Speichern",
+      "CLOSE": "Schließen",
+      "LOADING": "Informationen werden geladen..."
+    },
+    "EMPTY_STATE": {
+      "TITLE": "Keine Termine",
+      "DESCRIPTION": "Erstelle einen neuen Termin, um zu starten."
+    }
   }
 }

@@ -1,0 +1,124 @@
+.appointments-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.filters mat-form-field {
+  min-width: 220px;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.table-container {
+  background: var(--surface-card, #fff);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 10px 30px rgba(22, 28, 45, 0.05);
+  overflow: auto;
+}
+
+.appointments-table {
+  width: 100%;
+}
+
+.cell-main {
+  font-weight: 600;
+}
+
+.cell-secondary {
+  font-size: 0.85rem;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.status-chip.scheduled {
+  background-color: #0078d4;
+}
+
+.status-chip.confirmed {
+  background-color: #1abc9c;
+}
+
+.status-chip.completed {
+  background-color: #4caf50;
+}
+
+.status-chip.cancelled {
+  background-color: #f44336;
+}
+
+.status-chip.noshow {
+  background-color: #9c27b0;
+}
+
+.range-indicator {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.empty-state {
+  background: var(--surface-card, #fff);
+  border-radius: 12px;
+  padding: 3rem 1.5rem;
+  box-shadow: 0 10px 30px rgba(22, 28, 45, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.empty-state mat-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  color: #5c6bc0;
+}
+
+@media (max-width: 768px) {
+  .actions-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actions {
+    justify-content: flex-start;
+  }
+
+  .filters mat-form-field {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+}

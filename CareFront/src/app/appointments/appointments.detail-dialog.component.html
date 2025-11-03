@@ -1,0 +1,68 @@
+<h2 mat-dialog-title>
+  {{ 'APPOINTMENTS.DIALOGS.DETAIL_TITLE' | translate }}
+</h2>
+
+<mat-dialog-content>
+  <div class="details-grid">
+    <div class="detail-item">
+      <span class="detail-label">{{ 'APPOINTMENTS.TABLE.PATIENT' | translate }}</span>
+      <span class="detail-value">{{ data.appointment.patientName || '-' }}</span>
+      <span class="detail-hint" *ngIf="data.appointment.patientEmail">
+        {{ data.appointment.patientEmail }}
+      </span>
+    </div>
+
+    <div class="detail-item">
+      <span class="detail-label">{{ 'APPOINTMENTS.TABLE.DOCTOR' | translate }}</span>
+      <span class="detail-value">
+        {{
+          data.appointment.doctorName
+            || ('APPOINTMENTS.TABLE.NO_DOCTOR' | translate)
+        }}
+      </span>
+    </div>
+
+    <div class="detail-item">
+      <span class="detail-label">{{ 'APPOINTMENTS.TABLE.TITLE' | translate }}</span>
+      <span class="detail-value">{{ data.appointment.title }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="detail-label">{{ 'APPOINTMENTS.TABLE.START' | translate }}</span>
+      <span class="detail-value">{{ data.appointment.startsAtUtc | date: 'full' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="detail-label">{{ 'APPOINTMENTS.TABLE.END' | translate }}</span>
+      <span class="detail-value">{{ data.appointment.endsAtUtc | date: 'full' }}</span>
+    </div>
+
+    <div class="detail-item">
+      <span class="detail-label">{{ 'APPOINTMENTS.TABLE.STATUS' | translate }}</span>
+      <span class="detail-chip">
+        {{ ('APPOINTMENTS.STATUS.' + data.appointment.status) | translate }}
+      </span>
+    </div>
+
+    <div class="detail-item" *ngIf="data.appointment.description">
+      <span class="detail-label">{{ 'APPOINTMENTS.FORM.DESCRIPTION' | translate }}</span>
+      <span class="detail-value">{{ data.appointment.description }}</span>
+    </div>
+
+    <div class="detail-item" *ngIf="data.appointment.location">
+      <span class="detail-label">{{ 'APPOINTMENTS.FORM.LOCATION' | translate }}</span>
+      <span class="detail-value">{{ data.appointment.location }}</span>
+    </div>
+
+    <div class="detail-item" *ngIf="data.appointment.notes">
+      <span class="detail-label">{{ 'APPOINTMENTS.FORM.NOTES' | translate }}</span>
+      <span class="detail-value">{{ data.appointment.notes }}</span>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>
+    {{ 'APPOINTMENTS.DIALOGS.CLOSE' | translate }}
+  </button>
+</mat-dialog-actions>

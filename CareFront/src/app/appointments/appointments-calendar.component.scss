@@ -1,0 +1,17 @@
+.calendar-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.calendar-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+full-calendar {
+  background: var(--surface-card, #fff);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 10px 30px rgba(22, 28, 45, 0.05);
+}

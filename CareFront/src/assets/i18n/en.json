@@ -430,5 +430,103 @@
     "DIALOG": {
       "CANCEL": "Cancel"
     }
+  },
+  "APPOINTMENTS": {
+    "BREADCRUMB": {
+      "TITLE": "Appointments",
+      "ITEMS": {
+        "DASHBOARD": "Dashboard"
+      },
+      "ACTIVE": "Appointments"
+    },
+    "CALENDAR": {
+      "BREADCRUMB": {
+        "TITLE": "Appointments",
+        "ACTIVE": "Calendar"
+      }
+    },
+    "FILTERS": {
+      "SEARCH": "Search appointments",
+      "STATUS": "Status",
+      "TENANT": "Tenant"
+    },
+    "ACTIONS": {
+      "NEW": "New appointment",
+      "CALENDAR": "Calendar view",
+      "CLEAR_SEARCH": "Clear search",
+      "MENU": "Appointment actions",
+      "VIEW": "View details",
+      "EDIT": "Edit appointment",
+      "CANCEL": "Cancel appointment",
+      "DELETE": "Delete appointment"
+    },
+    "TABLE": {
+      "PATIENT": "Patient",
+      "DOCTOR": "Doctor",
+      "TITLE": "Title",
+      "START": "Starts",
+      "END": "Ends",
+      "STATUS": "Status",
+      "ACTIONS": "Actions",
+      "NO_DOCTOR": "Unassigned",
+      "RANGE": "Showing {{start}}-{{end}} of {{total}} appointments"
+    },
+    "STATUS": {
+      "ALL": "All statuses",
+      "SCHEDULED": "Scheduled",
+      "CONFIRMED": "Confirmed",
+      "COMPLETED": "Completed",
+      "CANCELLED": "Cancelled",
+      "NOSHOW": "No show"
+    },
+    "MESSAGES": {
+      "SUCCESS_TITLE": "Success",
+      "CREATED": "The appointment was created successfully.",
+      "UPDATED": "The appointment was updated successfully.",
+      "CANCELLED": "The appointment was cancelled successfully.",
+      "DELETED": "The appointment was deleted successfully.",
+      "CANCEL_TITLE": "Cancel appointment",
+      "CANCEL_CONFIRM": "Do you want to cancel \"{{title}}\"?",
+      "CANCEL_CONFIRM_BUTTON": "Yes, cancel",
+      "CANCEL_CANCEL_BUTTON": "Keep appointment",
+      "DELETE_TITLE": "Delete appointment",
+      "DELETE_CONFIRM": "Are you sure you want to delete \"{{title}}\"?",
+      "DELETE_CONFIRM_BUTTON": "Yes, delete",
+      "DELETE_CANCEL_BUTTON": "Cancel",
+      "ERROR_TITLE": "Something went wrong",
+      "ERROR_BODY": "We couldn't complete the request. Please try again."
+    },
+    "FORM": {
+      "PATIENT": "Patient",
+      "DOCTOR": "Doctor",
+      "TITLE": "Title",
+      "DESCRIPTION": "Description",
+      "LOCATION": "Location",
+      "START": "Start date",
+      "END": "End date",
+      "STATUS": "Status",
+      "NOTES": "Notes",
+      "NO_DOCTOR": "No doctor",
+      "ERRORS": {
+        "PATIENT_REQUIRED": "Patient is required.",
+        "TITLE_REQUIRED": "Title is required.",
+        "START_REQUIRED": "Start date is required.",
+        "END_REQUIRED": "End date is required."
+      }
+    },
+    "DIALOGS": {
+      "CREATE_TITLE": "Schedule appointment",
+      "EDIT_TITLE": "Edit appointment",
+      "DETAIL_TITLE": "Appointment details",
+      "CANCEL": "Cancel",
+      "CREATE": "Create",
+      "SAVE": "Save",
+      "CLOSE": "Close",
+      "LOADING": "Loading information..."
+    },
+    "EMPTY_STATE": {
+      "TITLE": "No appointments",
+      "DESCRIPTION": "Create a new appointment to get started."
+    }
   }
 }
