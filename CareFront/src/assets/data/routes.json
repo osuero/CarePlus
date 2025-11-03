@@ -330,6 +330,18 @@
       ]
     },
     {
+      "path": "/appointments",
+      "title": "MENUITEMS.APPOINTMENTS.TEXT",
+      "iconType": "material-icons-outlined",
+      "icon": "event",
+      "class": "",
+      "groupTitle": false,
+      "badge": "",
+      "badgeClass": "",
+      "role": ["ADMIN", "DOCTOR"],
+      "submenu": []
+    },
+    {
       "path": "",
       "title": "MENUITEMS.ROOMS.TEXT",
       "iconType": "material-icons-outlined",

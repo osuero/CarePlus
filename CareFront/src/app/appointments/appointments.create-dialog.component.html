@@ -1,0 +1,145 @@
+<h2 mat-dialog-title>
+  {{
+    isEditMode
+      ? 'APPOINTMENTS.DIALOGS.EDIT_TITLE' | translate
+      : 'APPOINTMENTS.DIALOGS.CREATE_TITLE' | translate
+  }}
+</h2>
+
+<mat-dialog-content>
+  <div class="dialog-content" *ngIf="!loadingMetadata(); else loading">
+    <form [formGroup]="form" class="appointment-form">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'APPOINTMENTS.FORM.PATIENT' | translate }}</mat-label>
+        <mat-select formControlName="patientId" [disabled]="saving()">
+          <mat-option
+            *ngFor="let patient of metadata?.patients || []; trackBy: trackParticipantById"
+            [value]="patient.id"
+          >
+            {{ patient.name }}
+            <span class="option-email" *ngIf="patient.email">{{ patient.email }}</span>
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls.patientId.hasError('required')">
+          {{ 'APPOINTMENTS.FORM.ERRORS.PATIENT_REQUIRED' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'APPOINTMENTS.FORM.DOCTOR' | translate }}</mat-label>
+        <mat-select formControlName="doctorId" [disabled]="saving()">
+          <mat-option value="">{{ 'APPOINTMENTS.FORM.NO_DOCTOR' | translate }}</mat-option>
+          <mat-option
+            *ngFor="let doctor of metadata?.doctors || []; trackBy: trackParticipantById"
+            [value]="doctor.id"
+          >
+            {{ doctor.name }}
+            <span class="option-email" *ngIf="doctor.email">{{ doctor.email }}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'APPOINTMENTS.FORM.TITLE' | translate }}</mat-label>
+        <input matInput formControlName="title" [disabled]="saving()" />
+        <mat-error *ngIf="form.controls.title.hasError('required')">
+          {{ 'APPOINTMENTS.FORM.ERRORS.TITLE_REQUIRED' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'APPOINTMENTS.FORM.DESCRIPTION' | translate }}</mat-label>
+        <textarea matInput rows="3" formControlName="description" [disabled]="saving()"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'APPOINTMENTS.FORM.LOCATION' | translate }}</mat-label>
+        <input matInput formControlName="location" [disabled]="saving()" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'APPOINTMENTS.FORM.START' | translate }}</mat-label>
+        <input
+          matInput
+          type="datetime-local"
+          formControlName="startsAtUtc"
+          [disabled]="saving()"
+        />
+        <mat-error *ngIf="form.controls.startsAtUtc.hasError('required')">
+          {{ 'APPOINTMENTS.FORM.ERRORS.START_REQUIRED' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'APPOINTMENTS.FORM.END' | translate }}</mat-label>
+        <input
+          matInput
+          type="datetime-local"
+          formControlName="endsAtUtc"
+          [disabled]="saving()"
+        />
+        <mat-error *ngIf="form.controls.endsAtUtc.hasError('required')">
+          {{ 'APPOINTMENTS.FORM.ERRORS.END_REQUIRED' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'APPOINTMENTS.FORM.STATUS' | translate }}</mat-label>
+        <mat-select formControlName="status" [disabled]="saving()">
+          <mat-option value="Scheduled">
+            {{ 'APPOINTMENTS.STATUS.SCHEDULED' | translate }}
+          </mat-option>
+          <mat-option value="Confirmed">
+            {{ 'APPOINTMENTS.STATUS.CONFIRMED' | translate }}
+          </mat-option>
+          <mat-option value="Completed">
+            {{ 'APPOINTMENTS.STATUS.COMPLETED' | translate }}
+          </mat-option>
+          <mat-option value="Cancelled">
+            {{ 'APPOINTMENTS.STATUS.CANCELLED' | translate }}
+          </mat-option>
+          <mat-option value="NoShow">
+            {{ 'APPOINTMENTS.STATUS.NOSHOW' | translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'APPOINTMENTS.FORM.NOTES' | translate }}</mat-label>
+        <textarea matInput rows="3" formControlName="notes" [disabled]="saving()"></textarea>
+      </mat-form-field>
+    </form>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()" [disabled]="saving()">
+    {{ 'APPOINTMENTS.DIALOGS.CANCEL' | translate }}
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="submit()"
+    [disabled]="saving()"
+  >
+    <mat-progress-spinner
+      *ngIf="saving()"
+      diameter="18"
+      mode="indeterminate"
+    ></mat-progress-spinner>
+    <span *ngIf="!saving()">
+      {{
+        isEditMode
+          ? 'APPOINTMENTS.DIALOGS.SAVE' | translate
+          : 'APPOINTMENTS.DIALOGS.CREATE' | translate
+      }}
+    </span>
+  </button>
+</mat-dialog-actions>
+
+<ng-template #loading>
+  <div class="loading-state">
+    <mat-progress-spinner diameter="48" mode="indeterminate"></mat-progress-spinner>
+    <p>{{ 'APPOINTMENTS.DIALOGS.LOADING' | translate }}</p>
+  </div>
+</ng-template>

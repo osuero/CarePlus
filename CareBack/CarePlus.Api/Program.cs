@@ -110,6 +110,7 @@ app.MapControllers();
 app.MapAuthEndpoints();
 app.MapUserEndpoints();
 app.MapPatientEndpoints();
+app.MapAppointmentEndpoints();
 app.MapGraphQL();
 
 app.Run();

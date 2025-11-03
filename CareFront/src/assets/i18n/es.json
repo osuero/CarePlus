@@ -430,5 +430,103 @@
     "DIALOG": {
       "CANCEL": "Cancelar"
     }
+  },
+  "APPOINTMENTS": {
+    "BREADCRUMB": {
+      "TITLE": "Citas",
+      "ITEMS": {
+        "DASHBOARD": "Tablero"
+      },
+      "ACTIVE": "Citas"
+    },
+    "CALENDAR": {
+      "BREADCRUMB": {
+        "TITLE": "Citas",
+        "ACTIVE": "Calendario"
+      }
+    },
+    "FILTERS": {
+      "SEARCH": "Buscar citas",
+      "STATUS": "Estado",
+      "TENANT": "Tenant"
+    },
+    "ACTIONS": {
+      "NEW": "Nueva cita",
+      "CALENDAR": "Ver calendario",
+      "CLEAR_SEARCH": "Limpiar búsqueda",
+      "MENU": "Acciones de la cita",
+      "VIEW": "Ver detalles",
+      "EDIT": "Editar cita",
+      "CANCEL": "Cancelar cita",
+      "DELETE": "Eliminar cita"
+    },
+    "TABLE": {
+      "PATIENT": "Paciente",
+      "DOCTOR": "Médico",
+      "TITLE": "Título",
+      "START": "Inicio",
+      "END": "Fin",
+      "STATUS": "Estado",
+      "ACTIONS": "Acciones",
+      "NO_DOCTOR": "Sin asignar",
+      "RANGE": "Mostrando {{start}}-{{end}} de {{total}} citas"
+    },
+    "STATUS": {
+      "ALL": "Todos los estados",
+      "SCHEDULED": "Programada",
+      "CONFIRMED": "Confirmada",
+      "COMPLETED": "Completada",
+      "CANCELLED": "Cancelada",
+      "NOSHOW": "No asistió"
+    },
+    "MESSAGES": {
+      "SUCCESS_TITLE": "Éxito",
+      "CREATED": "La cita se creó correctamente.",
+      "UPDATED": "La cita se actualizó correctamente.",
+      "CANCELLED": "La cita se canceló correctamente.",
+      "DELETED": "La cita se eliminó correctamente.",
+      "CANCEL_TITLE": "Cancelar cita",
+      "CANCEL_CONFIRM": "¿Deseas cancelar \"{{title}}\"?",
+      "CANCEL_CONFIRM_BUTTON": "Sí, cancelar",
+      "CANCEL_CANCEL_BUTTON": "Mantener cita",
+      "DELETE_TITLE": "Eliminar cita",
+      "DELETE_CONFIRM": "¿Seguro que deseas eliminar \"{{title}}\"?",
+      "DELETE_CONFIRM_BUTTON": "Sí, eliminar",
+      "DELETE_CANCEL_BUTTON": "Cancelar",
+      "ERROR_TITLE": "Ocurrió un error",
+      "ERROR_BODY": "No pudimos completar la solicitud. Intenta nuevamente."
+    },
+    "FORM": {
+      "PATIENT": "Paciente",
+      "DOCTOR": "Médico",
+      "TITLE": "Título",
+      "DESCRIPTION": "Descripción",
+      "LOCATION": "Ubicación",
+      "START": "Fecha de inicio",
+      "END": "Fecha de fin",
+      "STATUS": "Estado",
+      "NOTES": "Notas",
+      "NO_DOCTOR": "Sin médico",
+      "ERRORS": {
+        "PATIENT_REQUIRED": "El paciente es obligatorio.",
+        "TITLE_REQUIRED": "El título es obligatorio.",
+        "START_REQUIRED": "La fecha de inicio es obligatoria.",
+        "END_REQUIRED": "La fecha de fin es obligatoria."
+      }
+    },
+    "DIALOGS": {
+      "CREATE_TITLE": "Programar cita",
+      "EDIT_TITLE": "Editar cita",
+      "DETAIL_TITLE": "Detalles de la cita",
+      "CANCEL": "Cancelar",
+      "CREATE": "Crear",
+      "SAVE": "Guardar",
+      "CLOSE": "Cerrar",
+      "LOADING": "Cargando información..."
+    },
+    "EMPTY_STATE": {
+      "TITLE": "No hay citas",
+      "DESCRIPTION": "Crea una nueva cita para comenzar."
+    }
   }
 }

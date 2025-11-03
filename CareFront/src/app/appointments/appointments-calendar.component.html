@@ -1,0 +1,16 @@
+<app-breadcrumb
+  [title]="'APPOINTMENTS.CALENDAR.BREADCRUMB.TITLE' | translate"
+  [items]="['APPOINTMENTS.BREADCRUMB.ITEMS.DASHBOARD' | translate]"
+  [active_item]="'APPOINTMENTS.CALENDAR.BREADCRUMB.ACTIVE' | translate"
+></app-breadcrumb>
+
+<div class="calendar-page">
+  <div class="calendar-actions">
+    <button mat-flat-button color="primary" (click)="openCreateDialog()">
+      <mat-icon>add</mat-icon>
+      {{ 'APPOINTMENTS.ACTIONS.NEW' | translate }}
+    </button>
+  </div>
+
+  <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+</div>
