@@ -33,8 +33,7 @@ export class PayslipComponent {
   downloadPdf(): void {
     // In a real implementation, you would use a library like jsPDF or call a backend service
     // This is a placeholder to demonstrate the functionality
-    alert('PDF download functionality would be implemented here.');
-    
+    console.info('PDF download functionality would be implemented here.');
     // Example implementation with jsPDF would be:
     // 1. Import jsPDF
     // 2. Create a new jsPDF instance

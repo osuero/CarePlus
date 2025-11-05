@@ -20,7 +20,6 @@ export class AuthGuard {
       : `/${state.url}`;
     const publicPaths = ['/auth/setup-password', '/authentication/setup-password'];
     const isPublic = publicPaths.some((path) => normalizedUrl.startsWith(path));
-    debugger
     console.log('[AuthGuard] Normalized URL:', normalizedUrl, 'Is public:', isPublic);
     if (isPublic) {
       console.log('[AuthGuard] Public route detected, allowing access.');
@@ -40,11 +39,6 @@ export class AuthGuard {
       // If no role exists, you might want to handle it (e.g., redirect or show an error)
       if (!userRole) {
         console.warn('[AuthGuard] User has no role, redirecting to signin.');
-        if (typeof window !== 'undefined') {
-          window.alert(
-            'AuthGuard: El usuario no tiene rol asignado. Redirigiendo a signin.'
-          );
-        }
         this.router.navigate(['/authentication/signin']);
         return false;
       }
@@ -59,11 +53,6 @@ export class AuthGuard {
           'Required roles:',
           route.data['role']
         );
-        if (typeof window !== 'undefined') {
-          window.alert(
-            'AuthGuard: El rol del usuario no cumple los requisitos de la ruta. Redirigiendo a signin.'
-          );
-        }
         // If the role does not match, navigate to the signin page
         this.router.navigate(['/authentication/signin']);
         return false;
@@ -74,11 +63,6 @@ export class AuthGuard {
 
     // If no current user is found, redirect to signin
     console.warn('[AuthGuard] No current user found. Redirecting to signin.');
-    if (typeof window !== 'undefined') {
-      window.alert(
-        'AuthGuard: No se encontró usuario autenticado. Redirigiendo a signin.'
-      );
-    }
     this.router.navigate(['/authentication/signin']);
     return false;
   }

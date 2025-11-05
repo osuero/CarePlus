@@ -182,7 +182,7 @@ export class HeaderComponent
   }
 
   onReadAllNotifications() {
-    alert('Navigating to notifications page to read all'); // Replace with router if needed
+    console.info('Navigating to notifications page to read all'); // Replace with router if needed
   }
 
   onRemoveNotification(notification: Notifications) {

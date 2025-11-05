@@ -23,6 +23,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
@@ -60,6 +62,8 @@ export interface AppointmentsCreateDialogResult {
     MatIconModule,
     MatProgressSpinnerModule,
     TranslateModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
 })
 export class AppointmentsCreateDialogComponent implements OnInit, OnDestroy {
@@ -115,6 +119,14 @@ export class AppointmentsCreateDialogComponent implements OnInit, OnDestroy {
     }
 
     const value = this.form.getRawValue();
+    const startsAtUtc = this.combineDateAndTime(value.startsAtDate, value.startsAtTime);
+    const endsAtUtc = this.combineDateAndTime(value.endsAtDate, value.endsAtTime);
+
+    if (!startsAtUtc || !endsAtUtc) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
     const request: SaveAppointmentRequest = {
       tenantId: this.data.tenantId,
       patientId: value.patientId,
@@ -122,8 +134,8 @@ export class AppointmentsCreateDialogComponent implements OnInit, OnDestroy {
       title: value.title.trim(),
       description: value.description?.trim() || null,
       location: value.location?.trim() || null,
-      startsAtUtc: this.toIsoString(value.startsAtUtc),
-      endsAtUtc: this.toIsoString(value.endsAtUtc),
+      startsAtUtc,
+      endsAtUtc,
       status: value.status,
       notes: value.notes?.trim() || null,
     };
@@ -153,20 +165,21 @@ export class AppointmentsCreateDialogComponent implements OnInit, OnDestroy {
   }
 
   private buildForm(appointment?: Appointment): FormGroup {
+    const startsAtDate = appointment ? this.toLocalDate(appointment.startsAtUtc) : null;
+    const startsAtTime = appointment ? this.toTimeString(appointment.startsAtUtc) : '';
+    const endsAtDate = appointment ? this.toLocalDate(appointment.endsAtUtc) : null;
+    const endsAtTime = appointment ? this.toTimeString(appointment.endsAtUtc) : '';
+
     return this.fb.group({
       patientId: [appointment?.patientId ?? null, [Validators.required]],
       doctorId: [appointment?.doctorId ?? null],
       title: [appointment?.title ?? '', [Validators.required, Validators.maxLength(200)]],
       description: [appointment?.description ?? '', [Validators.maxLength(1000)]],
       location: [appointment?.location ?? '', [Validators.maxLength(200)]],
-      startsAtUtc: [
-        appointment ? this.toDateTimeLocal(appointment.startsAtUtc) : '',
-        [Validators.required],
-      ],
-      endsAtUtc: [
-        appointment ? this.toDateTimeLocal(appointment.endsAtUtc) : '',
-        [Validators.required],
-      ],
+      startsAtDate: [startsAtDate, [Validators.required]],
+      startsAtTime: [startsAtTime, [Validators.required]],
+      endsAtDate: [endsAtDate, [Validators.required]],
+      endsAtTime: [endsAtTime, [Validators.required]],
       status: [appointment?.status ?? 'Scheduled', [Validators.required]],
       notes: [appointment?.notes ?? '', [Validators.maxLength(2000)]],
     });
@@ -181,16 +194,34 @@ export class AppointmentsCreateDialogComponent implements OnInit, OnDestroy {
     }
   }
 
-  private toIsoString(value: string): string {
-    const date = new Date(value);
-    return date.toISOString();
+  private combineDateAndTime(date: Date | null, time: string | null): string | null {
+    if (!date || !time) {
+      return null;
+    }
+
+    const [hoursStr, minutesStr] = time.split(':');
+    const hours = Number(hoursStr);
+    const minutes = Number(minutesStr);
+
+    if (Number.isNaN(hours) || Number.isNaN(minutes)) {
+      return null;
+    }
+
+    const combined = new Date(date);
+    combined.setHours(hours, minutes, 0, 0);
+    return combined.toISOString();
   }
 
-  private toDateTimeLocal(value: string): string {
+  private toLocalDate(value: string): Date {
     const date = new Date(value);
-    const tzOffset = date.getTimezoneOffset();
-    const localDate = new Date(date.getTime() - tzOffset * 60 * 1000);
-    return localDate.toISOString().slice(0, 16);
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  }
+
+  private toTimeString(value: string): string {
+    const date = new Date(value);
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
   }
 
   private handleError(error: Error): void {

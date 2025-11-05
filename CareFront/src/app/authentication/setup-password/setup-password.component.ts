@@ -79,28 +79,20 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
             this.getQueryParamFromLocation('userId') ??
             this.getQueryParamFromLocation('user');
 
-          console.log(
-            '[SetupPasswordComponent] Resolved params',
-            {
-              tokenCandidate,
-              userIdCandidate,
-              fallbackToken,
-              fallbackUserId,
-              fullUrl: this.router.url,
-              locationHref:
-                typeof window !== 'undefined' ? window.location.href : 'N/A',
-            }
-          );
+          console.log('[SetupPasswordComponent] Resolved params', {
+            tokenCandidate,
+            userIdCandidate,
+            fallbackToken,
+            fallbackUserId,
+            fullUrl: this.router.url,
+            locationHref:
+              typeof window !== 'undefined' ? window.location.href : 'N/A',
+          });
 
           if (!fallbackToken && !fallbackUserId) {
             console.warn(
               '[SetupPasswordComponent] Missing token and userId after fallback. Staying on page and showing error.'
             );
-            if (typeof window !== 'undefined') {
-              window.alert(
-                'SetupPasswordComponent: No se encontró token ni userId. Revisa la URL del enlace.'
-              );
-            }
             this.error = 'No se pudo validar el enlace. Verifica que sea correcto.';
             this.loading = false;
             return;
@@ -130,11 +122,6 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
       console.warn(
         '[SetupPasswordComponent] fetchInfo called without identifiers even after fallback.'
       );
-      if (typeof window !== 'undefined') {
-        window.alert(
-          'SetupPasswordComponent: fetchInfo ejecutado sin token ni userId. El flujo se detendrá.'
-        );
-      }
       this.error =
         'No se pudo validar el enlace. Verifica que el token o identificador sea correcto.';
       this.loading = false;
@@ -167,11 +154,6 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
               '[SetupPasswordComponent] Failed to load password info',
               err
             );
-            if (typeof window !== 'undefined') {
-              window.alert(
-                `SetupPasswordComponent: Error al cargar información de contraseña. ${err}`
-              );
-            }
             this.error =
               typeof err === 'string'
                 ? err
@@ -189,11 +171,6 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
         '[SetupPasswordComponent] submit aborted. Form invalid or info missing.',
         { formValid: this.form.valid, hasInfo: !!this.info }
       );
-      if (typeof window !== 'undefined') {
-        window.alert(
-          'SetupPasswordComponent: El formulario es inválido o falta información. Revisa los datos antes de continuar.'
-        );
-      }
       this.form.markAllAsTouched();
       return;
     }
@@ -206,11 +183,6 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
         '[SetupPasswordComponent] submit aborted. Password mismatch.',
         { passwordLength: password?.length, confirmPasswordLength: confirmPassword?.length }
       );
-      if (typeof window !== 'undefined') {
-        window.alert(
-          'SetupPasswordComponent: Las contraseñas no coinciden. Corrige antes de continuar.'
-        );
-      }
       this.error = 'Las contrasenas no coinciden.';
       return;
     }
@@ -233,11 +205,6 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
               '[SetupPasswordComponent] Password setup completed. Redirecting to signin.'
             );
             this.submitting = false;
-            if (typeof window !== 'undefined') {
-              window.alert(
-                'SetupPasswordComponent: Contraseña configurada correctamente. Serás redirigido al inicio de sesión.'
-              );
-            }
             this.router.navigate(['/authentication/signin'], {
               queryParams: { setup: 'success' },
             });
@@ -247,11 +214,6 @@ export class SetupPasswordComponent implements OnInit, OnDestroy {
               '[SetupPasswordComponent] Password setup failed',
               err
             );
-            if (typeof window !== 'undefined') {
-              window.alert(
-                `SetupPasswordComponent: Error al guardar la contraseña. ${err}`
-              );
-            }
             this.error =
               typeof err === 'string'
                 ? err

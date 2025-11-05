@@ -1,178 +1,182 @@
-<app-breadcrumb
-  [title]="'APPOINTMENTS.BREADCRUMB.TITLE' | translate"
-  [items]="['APPOINTMENTS.BREADCRUMB.ITEMS.DASHBOARD' | translate]"
-  [active_item]="'APPOINTMENTS.BREADCRUMB.ACTIVE' | translate"
-></app-breadcrumb>
-
-<div class="appointments-page">
-  <div class="actions-row">
-    <div class="filters">
-      <mat-form-field appearance="outline">
-        <mat-label>{{ 'APPOINTMENTS.FILTERS.SEARCH' | translate }}</mat-label>
-        <input matInput [formControl]="searchControl" />
-        <button
-          mat-icon-button
-          matSuffix
-          *ngIf="searchControl.value"
-          (click)="searchControl.setValue('')"
-          aria-label="{{ 'APPOINTMENTS.ACTIONS.CLEAR_SEARCH' | translate }}"
-        >
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>{{ 'APPOINTMENTS.FILTERS.STATUS' | translate }}</mat-label>
-        <mat-select [formControl]="statusControl">
-          <mat-option
-            *ngFor="let option of statusOptions"
-            [value]="option.value"
-          >
-            {{ option.label | translate }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field
-        *ngIf="tenants && tenants.length > 1"
-        appearance="outline"
-      >
-        <mat-label>{{ 'APPOINTMENTS.FILTERS.TENANT' | translate }}</mat-label>
-        <mat-select [formControl]="tenantControl">
-          <mat-option *ngFor="let tenant of tenants" [value]="tenant">
-            {{ tenant }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+<section class="content">
+  <div class="content-block">
+    <div class="block-header">
+      <app-breadcrumb
+        [title]="'APPOINTMENTS.BREADCRUMB.TITLE' | translate"
+        [items]="['APPOINTMENTS.BREADCRUMB.ITEMS.DASHBOARD' | translate]"
+        [active_item]="'APPOINTMENTS.BREADCRUMB.ACTIVE' | translate"
+      ></app-breadcrumb>
     </div>
 
-    <div class="actions">
-      <button mat-flat-button color="primary" (click)="openCreateDialog()">
-        <mat-icon>add</mat-icon>
-        {{ 'APPOINTMENTS.ACTIONS.NEW' | translate }}
-      </button>
-      <a mat-stroked-button color="primary" routerLink="calendar">
-        <mat-icon>event</mat-icon>
-        {{ 'APPOINTMENTS.ACTIONS.CALENDAR' | translate }}
-      </a>
-    </div>
-  </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="appointments-page">
+          <div class="actions-row">
+            <div class="filters">
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'APPOINTMENTS.FILTERS.SEARCH' | translate }}</mat-label>
+                <input matInput [formControl]="searchControl" />
+                <button
+                  mat-icon-button
+                  matSuffix
+                  *ngIf="searchControl.value"
+                  (click)="searchControl.setValue('')"
+                  aria-label="{{ 'APPOINTMENTS.ACTIONS.CLEAR_SEARCH' | translate }}"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
 
-  <div class="table-container" *ngIf="appointments().length; else emptyState">
-    <table mat-table [dataSource]="appointments()" class="appointments-table">
-      <ng-container matColumnDef="patient">
-        <th mat-header-cell *matHeaderCellDef>
-          {{ 'APPOINTMENTS.TABLE.PATIENT' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let appointment">
-          <div class="cell-main">{{ appointment.patientName || '-' }}</div>
-          <div class="cell-secondary" *ngIf="appointment.patientEmail">
-            {{ appointment.patientEmail }}
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'APPOINTMENTS.FILTERS.STATUS' | translate }}</mat-label>
+                <mat-select [formControl]="statusControl">
+                  <mat-option *ngFor="let option of statusOptions" [value]="option.value">
+                    {{ option.label | translate }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field *ngIf="tenants && tenants.length > 1" appearance="outline">
+                <mat-label>{{ 'APPOINTMENTS.FILTERS.TENANT' | translate }}</mat-label>
+                <mat-select [formControl]="tenantControl">
+                  <mat-option *ngFor="let tenant of tenants" [value]="tenant">
+                    {{ tenant }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="actions">
+              <button mat-flat-button color="primary" (click)="openCreateDialog()">
+                <mat-icon>add</mat-icon>
+                {{ 'APPOINTMENTS.ACTIONS.NEW' | translate }}
+              </button>
+              <a mat-stroked-button color="primary" routerLink="calendar">
+                <mat-icon>event</mat-icon>
+                {{ 'APPOINTMENTS.ACTIONS.CALENDAR' | translate }}
+              </a>
+            </div>
           </div>
-        </td>
-      </ng-container>
 
-      <ng-container matColumnDef="doctor">
-        <th mat-header-cell *matHeaderCellDef>
-          {{ 'APPOINTMENTS.TABLE.DOCTOR' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let appointment">
-          {{ appointment.doctorName || ('APPOINTMENTS.TABLE.NO_DOCTOR' | translate) }}
-        </td>
-      </ng-container>
+          <div class="table-container" *ngIf="appointments().length; else emptyState">
+            <table mat-table [dataSource]="appointments()" class="appointments-table">
+              <ng-container matColumnDef="patient">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ 'APPOINTMENTS.TABLE.PATIENT' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let appointment">
+                  <div class="cell-main">{{ appointment.patientName || '-' }}</div>
+                  <div class="cell-secondary" *ngIf="appointment.patientEmail">
+                    {{ appointment.patientEmail }}
+                  </div>
+                </td>
+              </ng-container>
 
-      <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef>
-          {{ 'APPOINTMENTS.TABLE.TITLE' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let appointment">
-          {{ appointment.title }}
-        </td>
-      </ng-container>
+              <ng-container matColumnDef="doctor">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ 'APPOINTMENTS.TABLE.DOCTOR' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let appointment">
+                  {{ appointment.doctorName || ('APPOINTMENTS.TABLE.NO_DOCTOR' | translate) }}
+                </td>
+              </ng-container>
 
-      <ng-container matColumnDef="start">
-        <th mat-header-cell *matHeaderCellDef>
-          {{ 'APPOINTMENTS.TABLE.START' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let appointment">
-          {{ appointment.startsAtUtc | date: 'medium' }}
-        </td>
-      </ng-container>
+              <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ 'APPOINTMENTS.TABLE.TITLE' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let appointment">
+                  {{ appointment.title }}
+                </td>
+              </ng-container>
 
-      <ng-container matColumnDef="end">
-        <th mat-header-cell *matHeaderCellDef>
-          {{ 'APPOINTMENTS.TABLE.END' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let appointment">
-          {{ appointment.endsAtUtc | date: 'medium' }}
-        </td>
-      </ng-container>
+              <ng-container matColumnDef="start">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ 'APPOINTMENTS.TABLE.START' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let appointment">
+                  {{ appointment.startsAtUtc | date: 'medium' }}
+                </td>
+              </ng-container>
 
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef>
-          {{ 'APPOINTMENTS.TABLE.STATUS' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let appointment">
-          <span class="status-chip" [class]="appointment.status | lowercase">
-            {{ ('APPOINTMENTS.STATUS.' + appointment.status) | translate }}
-          </span>
-        </td>
-      </ng-container>
+              <ng-container matColumnDef="end">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ 'APPOINTMENTS.TABLE.END' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let appointment">
+                  {{ appointment.endsAtUtc | date: 'medium' }}
+                </td>
+              </ng-container>
 
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>
-          {{ 'APPOINTMENTS.TABLE.ACTIONS' | translate }}
-        </th>
-        <td mat-cell *matCellDef="let appointment">
-          <button
-            mat-icon-button
-            [matMenuTriggerFor]="menu"
-            aria-label="{{ 'APPOINTMENTS.ACTIONS.MENU' | translate }}"
-          >
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="openDetailsDialog(appointment)">
-              <mat-icon>visibility</mat-icon>
-              {{ 'APPOINTMENTS.ACTIONS.VIEW' | translate }}
-            </button>
-            <button mat-menu-item (click)="openEditDialog(appointment)">
-              <mat-icon>edit</mat-icon>
-              {{ 'APPOINTMENTS.ACTIONS.EDIT' | translate }}
-            </button>
-            <button mat-menu-item (click)="confirmCancel(appointment)">
-              <mat-icon>event_busy</mat-icon>
-              {{ 'APPOINTMENTS.ACTIONS.CANCEL' | translate }}
-            </button>
-            <button mat-menu-item (click)="confirmDelete(appointment)">
-              <mat-icon>delete</mat-icon>
-              {{ 'APPOINTMENTS.ACTIONS.DELETE' | translate }}
-            </button>
-          </mat-menu>
-        </td>
-      </ng-container>
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ 'APPOINTMENTS.TABLE.STATUS' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let appointment">
+                  <span class="status-chip" [class]="appointment.status | lowercase">
+                    {{ ('APPOINTMENTS.STATUS.' + appointment.status) | translate }}
+                  </span>
+                </td>
+              </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ 'APPOINTMENTS.TABLE.ACTIONS' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let appointment">
+                  <button
+                    mat-icon-button
+                    [matMenuTriggerFor]="menu"
+                    aria-label="{{ 'APPOINTMENTS.ACTIONS.MENU' | translate }}"
+                  >
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="openDetailsDialog(appointment)">
+                      <mat-icon>visibility</mat-icon>
+                      {{ 'APPOINTMENTS.ACTIONS.VIEW' | translate }}
+                    </button>
+                    <button mat-menu-item (click)="openEditDialog(appointment)">
+                      <mat-icon>edit</mat-icon>
+                      {{ 'APPOINTMENTS.ACTIONS.EDIT' | translate }}
+                    </button>
+                    <button mat-menu-item (click)="confirmCancel(appointment)">
+                      <mat-icon>event_busy</mat-icon>
+                      {{ 'APPOINTMENTS.ACTIONS.CANCEL' | translate }}
+                    </button>
+                    <button mat-menu-item (click)="confirmDelete(appointment)">
+                      <mat-icon>delete</mat-icon>
+                      {{ 'APPOINTMENTS.ACTIONS.DELETE' | translate }}
+                    </button>
+                  </mat-menu>
+                </td>
+              </ng-container>
 
-    <mat-paginator
-      [length]="totalCount()"
-      [pageSize]="pageSize()"
-      [pageIndex]="page() - 1"
-      [pageSizeOptions]="[5, 10, 20, 50]"
-      (page)="onPageChange($event)"
-    ></mat-paginator>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
 
-    <div class="range-indicator" *ngIf="totalCount() > 0">
-      {{ 'APPOINTMENTS.TABLE.RANGE' | translate:{
-        start: rangeStart(),
-        end: rangeEnd(),
-        total: totalCount()
-      } }}
+            <mat-paginator
+              [length]="totalCount()"
+              [pageSize]="pageSize()"
+              [pageIndex]="page() - 1"
+              [pageSizeOptions]="[5, 10, 20, 50]"
+              (page)="onPageChange($event)"
+            ></mat-paginator>
+
+            <div class="range-indicator" *ngIf="totalCount() > 0">
+              {{ 'APPOINTMENTS.TABLE.RANGE' | translate:{
+                start: rangeStart(),
+                end: rangeEnd(),
+                total: totalCount()
+              } }}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
 <ng-template #emptyState>
   <div class="empty-state">

@@ -13,15 +13,15 @@ public static class AppointmentMapper
             TenantId = appointment.TenantId,
             PatientId = appointment.PatientId,
             PatientName = appointment.PatientNameSnapshot ??
-                appointment.Patient is null
+                (appointment.Patient is null
                     ? null
-                    : $"{appointment.Patient.FirstName} {appointment.Patient.LastName}".Trim(),
+                    : $"{appointment.Patient.FirstName} {appointment.Patient.LastName}".Trim()),
             PatientEmail = appointment.Patient?.Email,
             DoctorId = appointment.DoctorId,
             DoctorName = appointment.DoctorNameSnapshot ??
-                appointment.Doctor is null
+                (appointment.Doctor is null
                     ? null
-                    : $"{appointment.Doctor.FirstName} {appointment.Doctor.LastName}".Trim(),
+                    : $"{appointment.Doctor.FirstName} {appointment.Doctor.LastName}".Trim()),
             Title = appointment.Title,
             Description = appointment.Description,
             Location = appointment.Location,

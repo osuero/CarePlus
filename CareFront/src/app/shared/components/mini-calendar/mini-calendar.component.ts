@@ -206,7 +206,7 @@ export class MiniCalendarComponent implements AfterViewInit, AfterViewChecked {
         span.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
-          alert(`${event.label} on ${key} (Day ${day})`);
+          console.info(`${event.label} on ${key} (Day ${day})`);
         });
 
         dotContainer.appendChild(span);
