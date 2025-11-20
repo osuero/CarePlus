@@ -445,9 +445,28 @@
               <!-- Form Actions -->
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3 d-flex justify-content-end">
-                  <button type="button" mat-flat-button class="formCancelBtn btn-space me-2">Cancel</button>
-                  <button class="btn-space" [disabled]="!patientForm.valid" mat-flat-button color="primary">Register
-                    Patient</button>
+                  <button
+                    type="button"
+                    mat-flat-button
+                    class="formCancelBtn btn-space me-2"
+                    [disabled]="submitting"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn-space"
+                    mat-flat-button
+                    color="primary"
+                    [disabled]="patientForm.invalid || submitting"
+                  >
+                    <span
+                      class="spinner-border spinner-border-sm me-2"
+                      role="status"
+                      *ngIf="submitting"
+                    ></span>
+                    Register Patient
+                  </button>
                 </div>
               </div>
             </form>

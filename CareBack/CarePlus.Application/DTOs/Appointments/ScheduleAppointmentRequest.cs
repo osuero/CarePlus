@@ -5,8 +5,12 @@ namespace CarePlus.Application.DTOs.Appointments;
 public class ScheduleAppointmentRequest
 {
     public string? TenantId { get; set; }
-    public Guid PatientId { get; set; }
+    public Guid? PatientId { get; set; }
     public Guid? DoctorId { get; set; }
+    public string? ProspectFirstName { get; set; }
+    public string? ProspectLastName { get; set; }
+    public string? ProspectPhoneNumber { get; set; }
+    public string? ProspectEmail { get; set; }
     public string? Title { get; set; }
     public string? Description { get; set; }
     public string? Location { get; set; }

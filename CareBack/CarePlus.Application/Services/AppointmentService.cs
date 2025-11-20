@@ -40,17 +40,21 @@ public class AppointmentService : IAppointmentService
                 validation.ErrorMessage!);
         }
 
-        var patient = validation.Value!.Patient!;
+        var patient = validation.Value!.Patient;
         var doctor = validation.Value.Doctor;
 
         var appointment = new Appointment
         {
             TenantId = tenantId,
-            PatientId = patient.Id,
-            Patient = patient,
-            PatientNameSnapshot = $"{patient.FirstName} {patient.LastName}".Trim(),
+            PatientId = patient?.Id,
+            PatientNameSnapshot = patient is not null
+                ? $"{patient.FirstName} {patient.LastName}".Trim()
+                : BuildProspectName(request),
+            ProspectFirstName = patient is null ? request.ProspectFirstName?.Trim() : null,
+            ProspectLastName = patient is null ? request.ProspectLastName?.Trim() : null,
+            ProspectPhoneNumber = patient is null ? request.ProspectPhoneNumber?.Trim() : null,
+            ProspectEmail = patient is null ? request.ProspectEmail?.Trim() : patient.Email,
             DoctorId = doctor?.Id,
-            Doctor = doctor,
             DoctorNameSnapshot = doctor is null ? null : $"{doctor.FirstName} {doctor.LastName}".Trim(),
             Title = request.Title!.Trim(),
             Description = string.IsNullOrWhiteSpace(request.Description) ? null : request.Description.Trim(),
@@ -91,14 +95,18 @@ public class AppointmentService : IAppointmentService
                 validation.ErrorMessage!);
         }
 
-        var patient = validation.Value!.Patient!;
+        var patient = validation.Value!.Patient;
         var doctor = validation.Value.Doctor;
 
-        appointment.PatientId = patient.Id;
-        appointment.Patient = patient;
-        appointment.PatientNameSnapshot = $"{patient.FirstName} {patient.LastName}".Trim();
+        appointment.PatientId = patient?.Id;
+        appointment.PatientNameSnapshot = patient is not null
+            ? $"{patient.FirstName} {patient.LastName}".Trim()
+            : BuildProspectName(request);
+        appointment.ProspectFirstName = patient is null ? request.ProspectFirstName?.Trim() : null;
+        appointment.ProspectLastName = patient is null ? request.ProspectLastName?.Trim() : null;
+        appointment.ProspectPhoneNumber = patient is null ? request.ProspectPhoneNumber?.Trim() : null;
+        appointment.ProspectEmail = patient is null ? request.ProspectEmail?.Trim() : patient?.Email;
         appointment.DoctorId = doctor?.Id;
-        appointment.Doctor = doctor;
         appointment.DoctorNameSnapshot = doctor is null ? null : $"{doctor.FirstName} {doctor.LastName}".Trim();
         appointment.Title = request.Title!.Trim();
         appointment.Description = string.IsNullOrWhiteSpace(request.Description) ? null : request.Description.Trim();
@@ -169,40 +177,58 @@ public class AppointmentService : IAppointmentService
         return Result.Success();
     }
 
-    private async Task<Result<(Patient Patient, User? Doctor)>> ValidateAsync(
+    private async Task<Result<(Patient? Patient, User? Doctor)>> ValidateAsync(
         string tenantId,
         ScheduleAppointmentRequest request,
         CancellationToken cancellationToken)
     {
-        if (request.PatientId == Guid.Empty)
+        Patient? patient = null;
+
+        if (request.PatientId.HasValue && request.PatientId.Value != Guid.Empty)
         {
-            return Result<(Patient, User?)>.Failure("validation.patient.required", "El paciente es requerido.");
+            patient = await _patientRepository.GetByIdAsync(tenantId, request.PatientId.Value, cancellationToken);
+            if (patient is null)
+            {
+                return Result<(Patient?, User?)>.Failure("patient.notFound", "El paciente seleccionado no existe.");
+            }
+        }
+
+        if (patient is null)
+        {
+            if (string.IsNullOrWhiteSpace(request.ProspectFirstName))
+            {
+                return Result<(Patient?, User?)>.Failure("validation.prospect.firstName", "El nombre del paciente es requerido.");
+            }
+
+            if (string.IsNullOrWhiteSpace(request.ProspectLastName))
+            {
+                return Result<(Patient?, User?)>.Failure("validation.prospect.lastName", "El apellido del paciente es requerido.");
+            }
+
+            if (string.IsNullOrWhiteSpace(request.ProspectPhoneNumber))
+            {
+                return Result<(Patient?, User?)>.Failure("validation.prospect.phone", "El telefono del paciente es requerido.");
+            }
         }
 
         if (string.IsNullOrWhiteSpace(request.Title))
         {
-            return Result<(Patient, User?)>.Failure("validation.title.required", "El titulo de la cita es requerido.");
+            return Result<(Patient?, User?)>.Failure("validation.title.required", "El titulo de la cita es requerido.");
         }
 
         if (request.StartsAtUtc is null)
         {
-            return Result<(Patient, User?)>.Failure("validation.startsAt.required", "La fecha de inicio es requerida.");
+            return Result<(Patient?, User?)>.Failure("validation.startsAt.required", "La fecha de inicio es requerida.");
         }
 
         if (request.EndsAtUtc is null)
         {
-            return Result<(Patient, User?)>.Failure("validation.endsAt.required", "La fecha de finalizacion es requerida.");
+            return Result<(Patient?, User?)>.Failure("validation.endsAt.required", "La fecha de finalizacion es requerida.");
         }
 
         if (request.EndsAtUtc <= request.StartsAtUtc)
         {
-            return Result<(Patient, User?)>.Failure("validation.endsAt.beforeStart", "La fecha de finalizacion debe ser posterior a la fecha de inicio.");
-        }
-
-        var patient = await _patientRepository.GetByIdAsync(tenantId, request.PatientId, cancellationToken);
-        if (patient is null)
-        {
-            return Result<(Patient, User?)>.Failure("patient.notFound", "El paciente seleccionado no existe.");
+            return Result<(Patient?, User?)>.Failure("validation.endsAt.beforeStart", "La fecha de finalizacion debe ser posterior a la fecha de inicio.");
         }
 
         User? doctor = null;
@@ -211,11 +237,11 @@ public class AppointmentService : IAppointmentService
             doctor = await _userRepository.GetByIdAsync(tenantId, request.DoctorId.Value, cancellationToken);
             if (doctor is null)
             {
-                return Result<(Patient, User?)>.Failure("doctor.notFound", "El doctor seleccionado no existe.");
+                return Result<(Patient?, User?)>.Failure("doctor.notFound", "El doctor seleccionado no existe.");
             }
         }
 
-        return Result<(Patient, User?)>.Success((patient, doctor));
+        return Result<(Patient?, User?)>.Success((patient, doctor));
     }
 
     private static AppointmentStatus MapStatus(string? status)
@@ -228,5 +254,12 @@ public class AppointmentService : IAppointmentService
         return Enum.TryParse<AppointmentStatus>(status, true, out var parsed)
             ? parsed
             : AppointmentStatus.Scheduled;
+    }
+
+    private static string BuildProspectName(ScheduleAppointmentRequest request)
+    {
+        var firstName = request.ProspectFirstName?.Trim() ?? string.Empty;
+        var lastName = request.ProspectLastName?.Trim() ?? string.Empty;
+        return $"{firstName} {lastName}".Trim();
     }
 }

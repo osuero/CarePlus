@@ -93,6 +93,12 @@ export class AppointmentsCreateDialogComponent implements OnInit, OnDestroy {
     const tenantId = this.data.tenantId;
     this.loadingMetadata.set(true);
 
+    this.form
+      .get('patientId')
+      ?.valueChanges.pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.updateProspectValidators());
+    this.updateProspectValidators();
+
     this.appointmentsService
       .getMetadata(tenantId ?? undefined)
       .pipe(finalize(() => this.loadingMetadata.set(false)), takeUntil(this.destroy$))
@@ -119,6 +125,11 @@ export class AppointmentsCreateDialogComponent implements OnInit, OnDestroy {
     }
 
     const value = this.form.getRawValue();
+    if (!value.patientId && !this.ensureProspectInfo()) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
     const startsAtUtc = this.combineDateAndTime(value.startsAtDate, value.startsAtTime);
     const endsAtUtc = this.combineDateAndTime(value.endsAtDate, value.endsAtTime);
 
@@ -129,8 +140,12 @@ export class AppointmentsCreateDialogComponent implements OnInit, OnDestroy {
 
     const request: SaveAppointmentRequest = {
       tenantId: this.data.tenantId,
-      patientId: value.patientId,
+      patientId: value.patientId || null,
       doctorId: value.doctorId || null,
+      prospectFirstName: value.prospectFirstName?.trim() || null,
+      prospectLastName: value.prospectLastName?.trim() || null,
+      prospectPhoneNumber: value.prospectPhoneNumber?.trim() || null,
+      prospectEmail: value.prospectEmail?.trim() || null,
       title: value.title.trim(),
       description: value.description?.trim() || null,
       location: value.location?.trim() || null,
@@ -160,6 +175,10 @@ export class AppointmentsCreateDialogComponent implements OnInit, OnDestroy {
     this.dialogRef.close();
   }
 
+  clearPatientSelection(): void {
+    this.form.patchValue({ patientId: null });
+  }
+
   trackParticipantById(_: number, participant: AppointmentParticipant): string {
     return participant.id;
   }
@@ -171,11 +190,15 @@ export class AppointmentsCreateDialogComponent implements OnInit, OnDestroy {
     const endsAtTime = appointment ? this.toTimeString(appointment.endsAtUtc) : '';
 
     return this.fb.group({
-      patientId: [appointment?.patientId ?? null, [Validators.required]],
+      patientId: [appointment?.patientId ?? null],
       doctorId: [appointment?.doctorId ?? null],
       title: [appointment?.title ?? '', [Validators.required, Validators.maxLength(200)]],
       description: [appointment?.description ?? '', [Validators.maxLength(1000)]],
       location: [appointment?.location ?? '', [Validators.maxLength(200)]],
+      prospectFirstName: [appointment?.prospectFirstName ?? '', [Validators.maxLength(100)]],
+      prospectLastName: [appointment?.prospectLastName ?? '', [Validators.maxLength(100)]],
+      prospectPhoneNumber: [appointment?.prospectPhoneNumber ?? '', [Validators.maxLength(50)]],
+      prospectEmail: [appointment?.prospectEmail ?? '', [Validators.email, Validators.maxLength(150)]],
       startsAtDate: [startsAtDate, [Validators.required]],
       startsAtTime: [startsAtTime, [Validators.required]],
       endsAtDate: [endsAtDate, [Validators.required]],
@@ -186,9 +209,6 @@ export class AppointmentsCreateDialogComponent implements OnInit, OnDestroy {
   }
 
   private prefillDefaults(metadata: AppointmentMetadata): void {
-    if (!this.form.value.patientId && metadata.patients.length > 0) {
-      this.form.patchValue({ patientId: metadata.patients[0].id });
-    }
     if (!this.form.value.doctorId && metadata.doctors.length > 0) {
       this.form.patchValue({ doctorId: metadata.doctors[0].id });
     }
@@ -222,6 +242,61 @@ export class AppointmentsCreateDialogComponent implements OnInit, OnDestroy {
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
     return `${hours}:${minutes}`;
+  }
+
+  private updateProspectValidators(): void {
+    const patientId = this.form.get('patientId')?.value;
+    const firstName = this.form.get('prospectFirstName');
+    const lastName = this.form.get('prospectLastName');
+    const phone = this.form.get('prospectPhoneNumber');
+
+    if (!firstName || !lastName || !phone) {
+      return;
+    }
+
+    const firstValidators = patientId
+      ? [Validators.maxLength(100)]
+      : [Validators.required, Validators.maxLength(100)];
+    const lastValidators = patientId
+      ? [Validators.maxLength(100)]
+      : [Validators.required, Validators.maxLength(100)];
+    const phoneValidators = patientId
+      ? [Validators.maxLength(50)]
+      : [Validators.required, Validators.maxLength(50)];
+
+    firstName.setValidators(firstValidators);
+    lastName.setValidators(lastValidators);
+    phone.setValidators(phoneValidators);
+
+    firstName.updateValueAndValidity({ emitEvent: false });
+    lastName.updateValueAndValidity({ emitEvent: false });
+    phone.updateValueAndValidity({ emitEvent: false });
+  }
+
+  private ensureProspectInfo(): boolean {
+    if (this.form.get('patientId')?.value) {
+      return true;
+    }
+
+    const firstNameControl = this.form.get('prospectFirstName');
+    const lastNameControl = this.form.get('prospectLastName');
+    const phoneControl = this.form.get('prospectPhoneNumber');
+
+    const firstNameValid = !!firstNameControl?.value?.trim();
+    const lastNameValid = !!lastNameControl?.value?.trim();
+    const phoneValid = !!phoneControl?.value?.trim();
+
+    if (!firstNameValid) {
+      firstNameControl?.setErrors({ required: true });
+    }
+    if (!lastNameValid) {
+      lastNameControl?.setErrors({ required: true });
+    }
+    if (!phoneValid) {
+      phoneControl?.setErrors({ required: true });
+    }
+
+    return firstNameValid && lastNameValid && phoneValid;
   }
 
   private handleError(error: Error): void {

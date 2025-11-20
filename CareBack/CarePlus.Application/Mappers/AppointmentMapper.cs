@@ -17,6 +17,10 @@ public static class AppointmentMapper
                     ? null
                     : $"{appointment.Patient.FirstName} {appointment.Patient.LastName}".Trim()),
             PatientEmail = appointment.Patient?.Email,
+            ProspectFirstName = appointment.ProspectFirstName,
+            ProspectLastName = appointment.ProspectLastName,
+            ProspectPhoneNumber = appointment.ProspectPhoneNumber,
+            ProspectEmail = appointment.ProspectEmail,
             DoctorId = appointment.DoctorId,
             DoctorName = appointment.DoctorNameSnapshot ??
                 (appointment.Doctor is null

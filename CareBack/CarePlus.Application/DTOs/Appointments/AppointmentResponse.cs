@@ -7,9 +7,13 @@ public class AppointmentResponse
 {
     public Guid Id { get; init; }
     public string TenantId { get; init; } = default!;
-    public Guid PatientId { get; init; }
+    public Guid? PatientId { get; init; }
     public string? PatientName { get; init; }
     public string? PatientEmail { get; init; }
+    public string? ProspectFirstName { get; init; }
+    public string? ProspectLastName { get; init; }
+    public string? ProspectPhoneNumber { get; init; }
+    public string? ProspectEmail { get; init; }
     public Guid? DoctorId { get; init; }
     public string? DoctorName { get; init; }
     public string Title { get; init; } = default!;

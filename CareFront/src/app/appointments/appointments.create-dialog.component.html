@@ -9,21 +9,65 @@
 <mat-dialog-content>
   <div class="dialog-content" *ngIf="!loadingMetadata(); else loading">
     <form [formGroup]="form" class="appointment-form">
-      <mat-form-field appearance="outline">
-        <mat-label>{{ 'APPOINTMENTS.FORM.PATIENT' | translate }}</mat-label>
-        <mat-select formControlName="patientId" [disabled]="saving()">
-          <mat-option
-            *ngFor="let patient of metadata?.patients || []; trackBy: trackParticipantById"
-            [value]="patient.id"
-          >
-            {{ patient.name }}
-            <span class="option-email" *ngIf="patient.email">{{ patient.email }}</span>
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="form.controls['patientId']?.hasError('required')">
-          {{ 'APPOINTMENTS.FORM.ERRORS.PATIENT_REQUIRED' | translate }}
-        </mat-error>
-      </mat-form-field>
+      <div class="patient-selection">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'APPOINTMENTS.FORM.PATIENT' | translate }}</mat-label>
+          <mat-select formControlName="patientId" [disabled]="saving()">
+            <mat-option value="">{{ 'APPOINTMENTS.FORM.NEW_PATIENT_OPTION' | translate }}</mat-option>
+            <mat-option
+              *ngFor="let patient of metadata?.patients || []; trackBy: trackParticipantById"
+              [value]="patient.id"
+            >
+              {{ patient.name }}
+              <span class="option-email" *ngIf="patient.email">{{ patient.email }}</span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button
+          mat-stroked-button
+          type="button"
+          class="link-button"
+          (click)="clearPatientSelection()"
+          *ngIf="form.value.patientId"
+        >
+          {{ 'APPOINTMENTS.FORM.CREATE_FOR_NEW_PATIENT' | translate }}
+        </button>
+      </div>
+
+      <div class="prospect-fields" *ngIf="!form.value.patientId">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'APPOINTMENTS.FORM.PROSPECT_FIRST_NAME' | translate }}</mat-label>
+          <input matInput formControlName="prospectFirstName" [disabled]="saving()" />
+          <mat-error *ngIf="form.controls['prospectFirstName']?.hasError('required')">
+            {{ 'APPOINTMENTS.FORM.ERRORS.PROSPECT_FIRST_NAME_REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'APPOINTMENTS.FORM.PROSPECT_LAST_NAME' | translate }}</mat-label>
+          <input matInput formControlName="prospectLastName" [disabled]="saving()" />
+          <mat-error *ngIf="form.controls['prospectLastName']?.hasError('required')">
+            {{ 'APPOINTMENTS.FORM.ERRORS.PROSPECT_LAST_NAME_REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'APPOINTMENTS.FORM.PROSPECT_PHONE' | translate }}</mat-label>
+          <input matInput formControlName="prospectPhoneNumber" [disabled]="saving()" />
+          <mat-error *ngIf="form.controls['prospectPhoneNumber']?.hasError('required')">
+            {{ 'APPOINTMENTS.FORM.ERRORS.PROSPECT_PHONE_REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'APPOINTMENTS.FORM.PROSPECT_EMAIL' | translate }}</mat-label>
+          <input matInput formControlName="prospectEmail" [disabled]="saving()" />
+          <mat-error *ngIf="form.controls['prospectEmail']?.hasError('email')">
+            {{ 'APPOINTMENTS.FORM.ERRORS.PROSPECT_EMAIL_INVALID' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
 
       <mat-form-field appearance="outline">
         <mat-label>{{ 'APPOINTMENTS.FORM.DOCTOR' | translate }}</mat-label>

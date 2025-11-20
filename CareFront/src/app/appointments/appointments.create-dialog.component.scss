@@ -14,6 +14,22 @@
   width: 100%;
 }
 
+.patient-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .link-button {
+    align-self: flex-start;
+  }
+}
+
+.prospect-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem 1.5rem;
+}
+
 .date-time-group {
   display: contents;
 }

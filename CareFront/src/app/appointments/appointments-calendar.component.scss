@@ -14,4 +14,79 @@ full-calendar {
   border-radius: 12px;
   padding: 1rem;
   box-shadow: 0 10px 30px rgba(22, 28, 45, 0.05);
+  width: 100%;
+  min-height: 640px;
+}
+
+:host {
+  display: block;
+}
+
+:host ::ng-deep .fc {
+  font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif;
+  color: #1d2433;
+}
+
+:host ::ng-deep .fc .fc-toolbar.fc-header-toolbar {
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+:host ::ng-deep .fc .fc-toolbar-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+:host ::ng-deep .fc .fc-button-primary {
+  background-color: #eef2ff;
+  border-color: transparent;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+:host ::ng-deep .fc .fc-button-primary:not(:disabled):hover {
+  background-color: #dbeafe;
+  color: #0f172a;
+}
+
+:host ::ng-deep .fc-theme-standard th,
+:host ::ng-deep .fc-theme-standard td {
+  border-color: #e5e7eb;
+}
+
+:host ::ng-deep .fc .fc-col-header-cell-cushion {
+  color: #64748b;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+:host ::ng-deep .fc .fc-daygrid-day-number {
+  color: #0f172a;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+:host ::ng-deep .fc .fc-daygrid-day {
+  min-height: 110px;
+}
+
+:host ::ng-deep .fc .fc-daygrid-day.fc-day-today {
+  background-color: #fdf2f8;
+}
+
+:host ::ng-deep .fc .fc-daygrid-event {
+  border-radius: 8px;
+  margin: 0.2rem 0;
+  padding: 0.1rem 0.35rem;
+}
+
+:host ::ng-deep .fc .fc-event-main {
+  color: #111827;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+:host ::ng-deep .fc .fc-list-table {
+  font-size: 0.95rem;
 }

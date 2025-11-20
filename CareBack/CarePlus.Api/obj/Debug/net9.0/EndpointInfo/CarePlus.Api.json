@@ -1176,13 +1176,30 @@
           },
           "patientId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
           },
           "patientName": {
             "type": "string",
             "nullable": true
           },
           "patientEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "prospectFirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "prospectLastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "prospectPhoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "prospectEmail": {
             "type": "string",
             "nullable": true
           },
@@ -1679,11 +1696,28 @@
           },
           "patientId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
           },
           "doctorId": {
             "type": "string",
             "format": "uuid",
+            "nullable": true
+          },
+          "prospectFirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "prospectLastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "prospectPhoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "prospectEmail": {
+            "type": "string",
             "nullable": true
           },
           "title": {
@@ -1728,11 +1762,28 @@
           },
           "patientId": {
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "nullable": true
           },
           "doctorId": {
             "type": "string",
             "format": "uuid",
+            "nullable": true
+          },
+          "prospectFirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "prospectLastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "prospectPhoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "prospectEmail": {
+            "type": "string",
             "nullable": true
           },
           "title": {

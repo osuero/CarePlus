@@ -60,17 +60,17 @@
 
           <div class="table-container" *ngIf="appointments().length; else emptyState">
             <table mat-table [dataSource]="appointments()" class="appointments-table">
-              <ng-container matColumnDef="patient">
-                <th mat-header-cell *matHeaderCellDef>
-                  {{ 'APPOINTMENTS.TABLE.PATIENT' | translate }}
-                </th>
-                <td mat-cell *matCellDef="let appointment">
-                  <div class="cell-main">{{ appointment.patientName || '-' }}</div>
-                  <div class="cell-secondary" *ngIf="appointment.patientEmail">
-                    {{ appointment.patientEmail }}
-                  </div>
-                </td>
-              </ng-container>
+      <ng-container matColumnDef="patient">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ 'APPOINTMENTS.TABLE.PATIENT' | translate }}
+        </th>
+        <td mat-cell *matCellDef="let appointment">
+          <div class="cell-main">{{ getPatientDisplayName(appointment) }}</div>
+          <div class="cell-secondary" *ngIf="getPatientContact(appointment) as contact">
+            {{ contact }}
+          </div>
+        </td>
+      </ng-container>
 
               <ng-container matColumnDef="doctor">
                 <th mat-header-cell *matHeaderCellDef>
@@ -113,8 +113,8 @@
                   {{ 'APPOINTMENTS.TABLE.STATUS' | translate }}
                 </th>
                 <td mat-cell *matCellDef="let appointment">
-                  <span class="status-chip" [class]="appointment.status | lowercase">
-                    {{ ('APPOINTMENTS.STATUS.' + appointment.status) | translate }}
+                  <span class="status-chip" [class]="getStatusCssClass(appointment.status)">
+                    {{ getStatusTranslationKey(appointment.status) | translate }}
                   </span>
                 </td>
               </ng-container>

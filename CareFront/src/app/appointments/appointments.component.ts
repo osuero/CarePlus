@@ -39,6 +39,10 @@ import {
   AppointmentsDetailDialogComponent,
   AppointmentsDetailDialogData,
 } from './appointments.detail-dialog.component';
+import {
+  mapAppointmentStatusToCssClass,
+  mapAppointmentStatusToTranslationKey,
+} from './appointment-status.utils';
 
 interface AppointmentQueryState {
   page: number;
@@ -370,5 +374,23 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
     const title = this.translate.instant('APPOINTMENTS.MESSAGES.ERROR_TITLE');
     const fallback = this.translate.instant('APPOINTMENTS.MESSAGES.ERROR_BODY');
     Swal.fire(title, error.message || fallback, 'error');
+  }
+
+  getPatientDisplayName(appointment: Appointment): string {
+    const prospectName = `${appointment.prospectFirstName ?? ''} ${appointment.prospectLastName ?? ''}`.trim();
+    const name = appointment.patientName ?? (prospectName.length > 0 ? prospectName : null);
+    return name && name.length > 0 ? name : '-';
+  }
+
+  getPatientContact(appointment: Appointment): string | null {
+    return appointment.prospectPhoneNumber ?? appointment.patientEmail ?? appointment.prospectEmail ?? null;
+  }
+
+  getStatusTranslationKey(status: Appointment['status']): string {
+    return mapAppointmentStatusToTranslationKey(status);
+  }
+
+  getStatusCssClass(status: Appointment['status']): string {
+    return mapAppointmentStatusToCssClass(status);
   }
 }

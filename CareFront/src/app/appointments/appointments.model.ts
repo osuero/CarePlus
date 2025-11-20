@@ -5,12 +5,18 @@ export type AppointmentStatus =
   | 'Cancelled'
   | 'NoShow';
 
+export type AppointmentStatusValue = AppointmentStatus | number;
+
 export interface Appointment {
   id: string;
   tenantId: string;
-  patientId: string;
+  patientId?: string | null;
   patientName?: string | null;
   patientEmail?: string | null;
+  prospectFirstName?: string | null;
+  prospectLastName?: string | null;
+  prospectPhoneNumber?: string | null;
+  prospectEmail?: string | null;
   doctorId?: string | null;
   doctorName?: string | null;
   title: string;
@@ -18,7 +24,7 @@ export interface Appointment {
   location?: string | null;
   startsAtUtc: string;
   endsAtUtc: string;
-  status: AppointmentStatus;
+  status: AppointmentStatusValue;
   notes?: string | null;
   createdAtUtc: string;
   updatedAtUtc: string;
@@ -47,8 +53,12 @@ export interface AppointmentMetadata {
 
 export interface SaveAppointmentRequest {
   tenantId?: string | null;
-  patientId: string;
+  patientId?: string | null;
   doctorId?: string | null;
+  prospectFirstName?: string | null;
+  prospectLastName?: string | null;
+  prospectPhoneNumber?: string | null;
+  prospectEmail?: string | null;
   title: string;
   description?: string | null;
   location?: string | null;

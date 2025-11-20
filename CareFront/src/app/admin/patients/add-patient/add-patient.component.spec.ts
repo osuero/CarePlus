@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
-
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { AddPatientComponent } from "./add-patient.component";
 
 describe("AddPatientComponent", () => {
@@ -9,7 +9,7 @@ describe("AddPatientComponent", () => {
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-    imports: [AddPatientComponent],
+    imports: [AddPatientComponent, HttpClientTestingModule],
 }).compileComponents();
     })
   );

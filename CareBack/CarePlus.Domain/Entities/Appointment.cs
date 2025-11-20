@@ -6,7 +6,7 @@ namespace CarePlus.Domain.Entities;
 
 public class Appointment : TenantEntity
 {
-    public required Guid PatientId { get; set; }
+    public Guid? PatientId { get; set; }
     public Patient? Patient { get; set; }
 
     public Guid? DoctorId { get; set; }
@@ -25,4 +25,8 @@ public class Appointment : TenantEntity
 
     public string? DoctorNameSnapshot { get; set; }
     public string? PatientNameSnapshot { get; set; }
+    public string? ProspectFirstName { get; set; }
+    public string? ProspectLastName { get; set; }
+    public string? ProspectPhoneNumber { get; set; }
+    public string? ProspectEmail { get; set; }
 }

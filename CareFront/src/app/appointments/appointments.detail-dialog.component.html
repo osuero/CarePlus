@@ -6,9 +6,9 @@
   <div class="details-grid">
     <div class="detail-item">
       <span class="detail-label">{{ 'APPOINTMENTS.TABLE.PATIENT' | translate }}</span>
-      <span class="detail-value">{{ data.appointment.patientName || '-' }}</span>
-      <span class="detail-hint" *ngIf="data.appointment.patientEmail">
-        {{ data.appointment.patientEmail }}
+      <span class="detail-value">{{ getPatientDisplayName(data.appointment) }}</span>
+      <span class="detail-hint" *ngIf="getPatientContact(data.appointment) as contact">
+        {{ contact }}
       </span>
     </div>
 
@@ -40,7 +40,7 @@
     <div class="detail-item">
       <span class="detail-label">{{ 'APPOINTMENTS.TABLE.STATUS' | translate }}</span>
       <span class="detail-chip">
-        {{ ('APPOINTMENTS.STATUS.' + data.appointment.status) | translate }}
+        {{ getStatusTranslationKey(data.appointment.status) | translate }}
       </span>
     </div>
 

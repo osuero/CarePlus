@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CarePlus.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d09db76239538d10ccd19cdcf243a5c91e4be84e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c25d2d86d39d4c4cad0f6d423f3f4f0b9857490")]
 [assembly: System.Reflection.AssemblyProductAttribute("CarePlus.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CarePlus.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

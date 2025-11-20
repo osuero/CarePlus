@@ -501,7 +501,7 @@
       "DOCTOR": "Médico",
       "TITLE": "Título",
       "DESCRIPTION": "Descripción",
-      "LOCATION": "Ubicación",
+      "LOCATION": "Ubicaci?n",
       "START": "Fecha de inicio",
       "END": "Fecha de fin",
       "STATUS": "Estado",
@@ -511,8 +511,18 @@
         "PATIENT_REQUIRED": "El paciente es obligatorio.",
         "TITLE_REQUIRED": "El título es obligatorio.",
         "START_REQUIRED": "La fecha de inicio es obligatoria.",
-        "END_REQUIRED": "La fecha de fin es obligatoria."
-      }
+        "END_REQUIRED": "La fecha de fin es obligatoria.",
+        "PROSPECT_FIRST_NAME_REQUIRED": "El nombre del paciente es obligatorio.",
+        "PROSPECT_LAST_NAME_REQUIRED": "El apellido del paciente es obligatorio.",
+        "PROSPECT_PHONE_REQUIRED": "El tel?fono de contacto es obligatorio.",
+        "PROSPECT_EMAIL_INVALID": "Debes ingresar un correo electr?nico v?lido."
+      },
+      "NEW_PATIENT_OPTION": "Definir m?s tarde",
+      "CREATE_FOR_NEW_PATIENT": "Agendar para un paciente nuevo",
+      "PROSPECT_FIRST_NAME": "Nombre del paciente",
+      "PROSPECT_LAST_NAME": "Apellido del paciente",
+      "PROSPECT_PHONE": "Tel?fono de contacto",
+      "PROSPECT_EMAIL": "Correo de contacto (opcional)"
     },
     "DIALOGS": {
       "CREATE_TITLE": "Programar cita",

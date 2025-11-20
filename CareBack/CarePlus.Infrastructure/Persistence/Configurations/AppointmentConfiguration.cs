@@ -32,6 +32,18 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
         builder.Property(appointment => appointment.PatientNameSnapshot)
             .HasMaxLength(200);
 
+        builder.Property(appointment => appointment.ProspectFirstName)
+            .HasMaxLength(100);
+
+        builder.Property(appointment => appointment.ProspectLastName)
+            .HasMaxLength(100);
+
+        builder.Property(appointment => appointment.ProspectPhoneNumber)
+            .HasMaxLength(50);
+
+        builder.Property(appointment => appointment.ProspectEmail)
+            .HasMaxLength(150);
+
         builder.Property(appointment => appointment.DoctorNameSnapshot)
             .HasMaxLength(200);
 

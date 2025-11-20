@@ -502,6 +502,12 @@
       "TITLE": "Title",
       "DESCRIPTION": "Description",
       "LOCATION": "Location",
+      "NEW_PATIENT_OPTION": "Select later",
+      "CREATE_FOR_NEW_PATIENT": "Schedule for a new patient",
+      "PROSPECT_FIRST_NAME": "Patient first name",
+      "PROSPECT_LAST_NAME": "Patient last name",
+      "PROSPECT_PHONE": "Contact phone",
+      "PROSPECT_EMAIL": "Contact email (optional)",
       "START": "Start date",
       "END": "End date",
       "STATUS": "Status",
@@ -511,7 +517,11 @@
         "PATIENT_REQUIRED": "Patient is required.",
         "TITLE_REQUIRED": "Title is required.",
         "START_REQUIRED": "Start date is required.",
-        "END_REQUIRED": "End date is required."
+        "END_REQUIRED": "End date is required.",
+        "PROSPECT_FIRST_NAME_REQUIRED": "The patient's first name is required.",
+        "PROSPECT_LAST_NAME_REQUIRED": "The patient's last name is required.",
+        "PROSPECT_PHONE_REQUIRED": "A contact phone is required.",
+        "PROSPECT_EMAIL_INVALID": "Provide a valid email address."
       }
     },
     "DIALOGS": {
