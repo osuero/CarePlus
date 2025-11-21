@@ -52,6 +52,14 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
             .HasMaxLength(20)
             .IsRequired();
 
+        builder.Property(appointment => appointment.ConsultationFee)
+            .HasPrecision(18, 2)
+            .HasDefaultValue(0);
+
+        builder.Property(appointment => appointment.Currency)
+            .HasMaxLength(16)
+            .HasDefaultValue("USD");
+
         builder.HasIndex(appointment => new { appointment.TenantId, appointment.StartsAtUtc });
         builder.HasIndex(appointment => new { appointment.TenantId, appointment.PatientId });
         builder.HasIndex(appointment => new { appointment.TenantId, appointment.DoctorId });

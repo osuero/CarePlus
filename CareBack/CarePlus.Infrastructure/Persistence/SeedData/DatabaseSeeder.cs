@@ -48,6 +48,8 @@ public static class DatabaseSeeder
         {
             logger?.LogWarning("No se encontro un IPasswordHasher<User> registrado; se omitio la creacion del administrador por defecto.");
         }
+
+        await SeedInsuranceProvidersAsync(context, logger, cancellationToken);
     }
 
     private static async Task ResetRolesAsync(ApplicationDbContext context, ILogger? logger, CancellationToken cancellationToken)
@@ -180,5 +182,29 @@ public static class DatabaseSeeder
         await context.SaveChangesAsync(cancellationToken);
 
         logger?.LogInformation("Administrador por defecto asegurado con el correo {Email}.", adminEmail);
+    }
+
+    private static async Task SeedInsuranceProvidersAsync(ApplicationDbContext context, ILogger? logger, CancellationToken cancellationToken)
+    {
+        var existing = await context.InsuranceProviders
+            .Where(provider => provider.TenantId == TenantConstants.DefaultTenantId)
+            .CountAsync(cancellationToken);
+
+        if (existing > 0)
+        {
+            return;
+        }
+
+        var providers = new[]
+        {
+            new InsuranceProvider { TenantId = TenantConstants.DefaultTenantId, Name = "Seguro Universal" },
+            new InsuranceProvider { TenantId = TenantConstants.DefaultTenantId, Name = "HealthPlus" },
+            new InsuranceProvider { TenantId = TenantConstants.DefaultTenantId, Name = "Care Insurance" }
+        };
+
+        await context.InsuranceProviders.AddRangeAsync(providers, cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
+
+        logger?.LogInformation("Seeded {Count} insurance providers for tenant {TenantId}.", providers.Length, TenantConstants.DefaultTenantId);
     }
 }

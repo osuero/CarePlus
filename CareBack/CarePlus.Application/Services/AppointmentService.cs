@@ -62,7 +62,11 @@ public class AppointmentService : IAppointmentService
             StartsAtUtc = request.StartsAtUtc!.Value,
             EndsAtUtc = request.EndsAtUtc!.Value,
             Status = MapStatus(request.Status),
-            Notes = string.IsNullOrWhiteSpace(request.Notes) ? null : request.Notes.Trim()
+            Notes = string.IsNullOrWhiteSpace(request.Notes) ? null : request.Notes.Trim(),
+            ConsultationFee = request.ConsultationFee ?? 0,
+            Currency = string.IsNullOrWhiteSpace(request.Currency)
+                ? "USD"
+                : request.Currency!.Trim().ToUpperInvariant()
         };
 
         appointment = await _appointmentRepository.AddAsync(appointment, cancellationToken);
@@ -115,6 +119,10 @@ public class AppointmentService : IAppointmentService
         appointment.EndsAtUtc = request.EndsAtUtc!.Value;
         appointment.Status = MapStatus(request.Status);
         appointment.Notes = string.IsNullOrWhiteSpace(request.Notes) ? null : request.Notes.Trim();
+        appointment.ConsultationFee = request.ConsultationFee ?? 0;
+        appointment.Currency = string.IsNullOrWhiteSpace(request.Currency)
+            ? appointment.Currency
+            : request.Currency!.Trim().ToUpperInvariant();
         appointment.Touch();
 
         appointment = await _appointmentRepository.UpdateAsync(appointment, cancellationToken);
@@ -229,6 +237,16 @@ public class AppointmentService : IAppointmentService
         if (request.EndsAtUtc <= request.StartsAtUtc)
         {
             return Result<(Patient?, User?)>.Failure("validation.endsAt.beforeStart", "La fecha de finalizacion debe ser posterior a la fecha de inicio.");
+        }
+
+        if (request.ConsultationFee.HasValue && request.ConsultationFee.Value < 0)
+        {
+            return Result<(Patient?, User?)>.Failure("validation.consultation.amount", "El costo de la consulta no puede ser negativo.");
+        }
+
+        if (!string.IsNullOrWhiteSpace(request.Currency) && request.Currency!.Trim().Length > 16)
+        {
+            return Result<(Patient?, User?)>.Failure("validation.consultation.currency", "La moneda es demasiado larga.");
         }
 
         User? doctor = null;

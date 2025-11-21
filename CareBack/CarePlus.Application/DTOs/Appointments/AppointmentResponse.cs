@@ -23,6 +23,8 @@ public class AppointmentResponse
     public DateTime EndsAtUtc { get; init; }
     public AppointmentStatus Status { get; init; }
     public string? Notes { get; init; }
+    public decimal ConsultationFee { get; init; }
+    public string Currency { get; init; } = "USD";
     public DateTime CreatedAtUtc { get; init; }
     public DateTime UpdatedAtUtc { get; init; }
 }

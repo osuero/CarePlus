@@ -18,4 +18,6 @@ public class ScheduleAppointmentRequest
     public DateTime? EndsAtUtc { get; set; }
     public string? Notes { get; set; }
     public string? Status { get; set; }
+    public decimal? ConsultationFee { get; set; }
+    public string? Currency { get; set; }
 }
