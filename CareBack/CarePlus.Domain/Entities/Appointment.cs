@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using CarePlus.Domain.Base;
 using CarePlus.Domain.Enums;
 
@@ -29,4 +30,10 @@ public class Appointment : TenantEntity
     public string? ProspectLastName { get; set; }
     public string? ProspectPhoneNumber { get; set; }
     public string? ProspectEmail { get; set; }
+
+    [Range(0, double.MaxValue)]
+    public decimal ConsultationFee { get; set; }
+
+    [MaxLength(16)]
+    public string Currency { get; set; } = "USD";
 }

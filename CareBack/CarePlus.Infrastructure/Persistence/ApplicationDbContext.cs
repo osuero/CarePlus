@@ -12,6 +12,8 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<Patient> Patients => Set<Patient>();
     public DbSet<Role> Roles => Set<Role>();
     public DbSet<Appointment> Appointments => Set<Appointment>();
+    public DbSet<Billing> Billings => Set<Billing>();
+    public DbSet<InsuranceProvider> InsuranceProviders => Set<InsuranceProvider>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

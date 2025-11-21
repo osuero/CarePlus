@@ -33,6 +33,8 @@ public static class AppointmentMapper
             EndsAtUtc = appointment.EndsAtUtc,
             Status = appointment.Status,
             Notes = appointment.Notes,
+            ConsultationFee = appointment.ConsultationFee,
+            Currency = appointment.Currency,
             CreatedAtUtc = appointment.CreatedAtUtc,
             UpdatedAtUtc = appointment.UpdatedAtUtc
         };
