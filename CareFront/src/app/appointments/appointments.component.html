@@ -144,6 +144,14 @@
                       <mat-icon>event_busy</mat-icon>
                       {{ 'APPOINTMENTS.ACTIONS.CANCEL' | translate }}
                     </button>
+                    <button
+                      mat-menu-item
+                      (click)="openBillingDialog(appointment)"
+                      [disabled]="!canCreateBilling(appointment)"
+                    >
+                      <mat-icon>payments</mat-icon>
+                      {{ 'APPOINTMENTS.ACTIONS.BILL' | translate }}
+                    </button>
                     <button mat-menu-item (click)="confirmDelete(appointment)">
                       <mat-icon>delete</mat-icon>
                       {{ 'APPOINTMENTS.ACTIONS.DELETE' | translate }}

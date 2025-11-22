@@ -47,15 +47,15 @@ public static class BillingEndpoints
 
         if (!result.IsSuccess)
         {
-            var status = string.Equals(result.ErrorCode, "billing.appointment.notFound", StringComparison.OrdinalIgnoreCase)
-                ? Results.NotFound
-                : Results.BadRequest;
-
-            return status(new
+            var payload = new
             {
                 error = result.ErrorCode,
                 message = result.ErrorMessage
-            });
+            };
+
+            return string.Equals(result.ErrorCode, "billing.appointment.notFound", StringComparison.OrdinalIgnoreCase)
+                ? Results.NotFound(payload)
+                : Results.BadRequest(payload);
         }
 
         return Results.Created($"/api/v1/billing/{result.Value!.Id}", result.Value);

@@ -458,7 +458,8 @@
       "VIEW": "Ver detalles",
       "EDIT": "Editar cita",
       "CANCEL": "Cancelar cita",
-      "DELETE": "Eliminar cita"
+      "DELETE": "Eliminar cita",
+      "BILL": "Registrar cobro"
     },
     "TABLE": {
       "PATIENT": "Paciente",
@@ -493,8 +494,44 @@
       "DELETE_CONFIRM": "¿Seguro que deseas eliminar \"{{title}}\"?",
       "DELETE_CONFIRM_BUTTON": "Sí, eliminar",
       "DELETE_CANCEL_BUTTON": "Cancelar",
+      "BILLING_CREATED": "El cobro se registró correctamente.",
       "ERROR_TITLE": "Ocurrió un error",
       "ERROR_BODY": "No pudimos completar la solicitud. Intenta nuevamente."
+    },
+    "BILLING": {
+      "DIALOG_TITLE": "Cobrar cita",
+      "PATIENT": "Paciente",
+      "DOCTOR": "Doctor",
+      "DATE": "Fecha de la cita",
+      "AMOUNT": "Monto de la consulta",
+      "CURRENCY": "Moneda",
+      "PAYMENT_METHOD": "Método de pago",
+      "USES_INSURANCE": "Usa seguro",
+      "INSURANCE_PROVIDER": "Aseguradora",
+      "POLICY_NUMBER": "Número de póliza",
+      "COVERAGE_PERCENTAGE": "Cobertura (%)",
+      "COPAY": "Copago",
+      "PATIENT_AMOUNT": "Monto pagado por el paciente",
+      "INSURANCE_AMOUNT": "Monto facturado al seguro",
+      "SUBMIT": "Registrar cobro",
+      "CANCEL": "Cancelar",
+      "NO_PROVIDERS": "No hay aseguradoras disponibles.",
+      "LOADING_PROVIDERS": "Cargando aseguradoras...",
+      "PAYMENT_METHODS": {
+        "CASH": "Efectivo",
+        "CREDIT_CARD": "Tarjeta de crédito",
+        "DEBIT_CARD": "Tarjeta de débito",
+        "BANK_TRANSFER": "Transferencia bancaria",
+        "INSURANCE_ONLY": "Solo seguro",
+        "MIXED": "Mixto"
+      },
+      "ERRORS": {
+        "AMOUNT_REQUIRED": "Ingresa el monto de la consulta.",
+        "AMOUNT_MIN": "El monto debe ser mayor a cero.",
+        "CURRENCY_REQUIRED": "La moneda es obligatoria.",
+        "PROVIDER_REQUIRED": "Selecciona una aseguradora.",
+        "POLICY_REQUIRED": "Ingresa el número de póliza."
+      }
     },
     "FORM": {
       "PATIENT": "Paciente",

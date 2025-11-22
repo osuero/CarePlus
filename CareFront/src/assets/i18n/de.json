@@ -324,7 +324,8 @@
       "VIEW": "Details anzeigen",
       "EDIT": "Termin bearbeiten",
       "CANCEL": "Termin absagen",
-      "DELETE": "Termin löschen"
+      "DELETE": "Termin löschen",
+      "BILL": "Abrechnung erstellen"
     },
     "TABLE": {
       "PATIENT": "Patient",
@@ -359,8 +360,44 @@
       "DELETE_CONFIRM": "Möchtest du \"{{title}}\" wirklich löschen?",
       "DELETE_CONFIRM_BUTTON": "Ja, löschen",
       "DELETE_CANCEL_BUTTON": "Abbrechen",
+      "BILLING_CREATED": "Die Abrechnung wurde erfolgreich erstellt.",
       "ERROR_TITLE": "Etwas ist schiefgelaufen",
       "ERROR_BODY": "Die Anfrage konnte nicht abgeschlossen werden. Bitte versuche es erneut."
+    },
+    "BILLING": {
+      "DIALOG_TITLE": "Termin abrechnen",
+      "PATIENT": "Patient",
+      "DOCTOR": "Arzt",
+      "DATE": "Termindatum",
+      "AMOUNT": "Behandlungsbetrag",
+      "CURRENCY": "Währung",
+      "PAYMENT_METHOD": "Zahlungsmethode",
+      "USES_INSURANCE": "Versicherung verwenden",
+      "INSURANCE_PROVIDER": "Versicherer",
+      "POLICY_NUMBER": "Policennummer",
+      "COVERAGE_PERCENTAGE": "Abdeckung (%)",
+      "COPAY": "Eigenanteil",
+      "PATIENT_AMOUNT": "Vom Patienten gezahlt",
+      "INSURANCE_AMOUNT": "An Versicherung berechnet",
+      "SUBMIT": "Abrechnung speichern",
+      "CANCEL": "Abbrechen",
+      "NO_PROVIDERS": "Keine Versicherer verfügbar.",
+      "LOADING_PROVIDERS": "Versicherer werden geladen...",
+      "PAYMENT_METHODS": {
+        "CASH": "Bar",
+        "CREDIT_CARD": "Kreditkarte",
+        "DEBIT_CARD": "Debitkarte",
+        "BANK_TRANSFER": "Überweisung",
+        "INSURANCE_ONLY": "Nur Versicherung",
+        "MIXED": "Gemischt"
+      },
+      "ERRORS": {
+        "AMOUNT_REQUIRED": "Bitte den Betrag eingeben.",
+        "AMOUNT_MIN": "Der Betrag muss größer als null sein.",
+        "CURRENCY_REQUIRED": "Die Währung ist erforderlich.",
+        "PROVIDER_REQUIRED": "Bitte einen Versicherer auswählen.",
+        "POLICY_REQUIRED": "Bitte die Policennummer eingeben."
+      }
     },
     "FORM": {
       "PATIENT": "Patient",

@@ -42,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 14,
           "Children": [
             {
               "$type": "Bookmark",
@@ -82,7 +82,15 @@
             },
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
               "$type": "Document",
@@ -94,7 +102,8 @@
               "RelativeToolTip": "CarePlus.Application\\Services\\UserService.cs",
               "ViewState": "AgIAAPkAAAAAAAAAAAAhwAEBAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-14T07:59:23.428Z"
+              "WhenOpened": "2025-10-14T07:59:23.428Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -106,7 +115,8 @@
               "RelativeToolTip": "CarePlus.Api\\appsettings.Development.json",
               "ViewState": "AgIAACAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-18T22:21:51.197Z"
+              "WhenOpened": "2025-10-18T22:21:51.197Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -122,14 +132,6 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "appsettings.json",
@@ -139,7 +141,8 @@
               "RelativeToolTip": "CarePlus.Api\\appsettings.json",
               "ViewState": "AgIAAB0AAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-18T22:21:45.959Z"
+              "WhenOpened": "2025-10-18T22:21:45.959Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -164,7 +167,8 @@
               "RelativeToolTip": "CarePlus.Application\\Interfaces\\Services\\IEmailService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T09:38:53.532Z"
+              "WhenOpened": "2025-10-22T09:38:53.532Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -176,7 +180,8 @@
               "RelativeToolTip": "CarePlus.Api\\GraphQL\\UserQueries.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-14T07:59:06.916Z"
+              "WhenOpened": "2025-10-14T07:59:06.916Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -188,7 +193,8 @@
               "RelativeToolTip": "CarePlus.Application\\DTOs\\Patients\\PatientResponse.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAIA5wBMAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-19T16:53:51.389Z"
+              "WhenOpened": "2025-10-19T16:53:51.389Z",
+              "EditorCaption": ""
             }
           ]
         }

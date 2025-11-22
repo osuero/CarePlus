@@ -40,6 +40,11 @@ import {
   AppointmentsDetailDialogData,
 } from './appointments.detail-dialog.component';
 import {
+  AppointmentsBillingDialogComponent,
+  AppointmentsBillingDialogData,
+} from './appointments.billing-dialog.component';
+import { BillingRecord } from '../billing/billing.model';
+import {
   mapAppointmentStatusToCssClass,
   mapAppointmentStatusToTranslationKey,
 } from './appointment-status.utils';
@@ -293,6 +298,30 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
     });
   }
 
+  openBillingDialog(appointment: Appointment): void {
+    const dialogRef = this.dialog.open<
+      AppointmentsBillingDialogComponent,
+      AppointmentsBillingDialogData,
+      BillingRecord | undefined
+    >(AppointmentsBillingDialogComponent, {
+      width: '520px',
+      data: { appointment },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((result) => {
+        if (result) {
+          this.showSuccessMessage('APPOINTMENTS.MESSAGES.BILLING_CREATED');
+        }
+      });
+  }
+
+  canCreateBilling(appointment: Appointment): boolean {
+    return this.isCompletedStatus(appointment.status);
+  }
+
   private loadAppointments(page: number): void {
     const tenantId = this.tenantControl.value ?? this.defaultTenant;
     this.page.set(page);
@@ -392,5 +421,12 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
 
   getStatusCssClass(status: Appointment['status']): string {
     return mapAppointmentStatusToCssClass(status);
+  }
+
+  private isCompletedStatus(status: Appointment['status']): boolean {
+    if (typeof status === 'number') {
+      return status === 2;
+    }
+    return status.toString().toLowerCase() === 'completed';
   }
 }

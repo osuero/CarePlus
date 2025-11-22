@@ -1,197 +1,113 @@
 <section class="content">
   <div class="content-block">
     <div class="block-header">
-      <!-- breadcrumb -->
       <app-breadcrumb [title]="'Billing'" [items]="[]" [active_item]="'Billing'"></app-breadcrumb>
     </div>
     <div class="row clearfix">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="card">
-          <div class="header">
+          <div class="header header-with-actions">
             <h2>Billing</h2>
-
+            <button mat-icon-button (click)="reload()" [disabled]="isLoading()">
+              <mat-icon>refresh</mat-icon>
+            </button>
           </div>
-          <div class="body">
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-hover ">
-                  <thead>
-                    <tr>
-                      <th>Invoice No</th>
-                      <th>Doctor Name</th>
-                      <th>Date</th>
-                      <th>Amount</th>
-                      <th>Tax</th>
-                      <th>Discount</th>
-                      <th>Total</th>
-                      <th>Actions </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>#A348</td>
-                      <td><a href="mailto:test@gmail.com"> Dr.Jacob Ryan </a></td>
-                      <td>04/03/2016 </td>
-                      <td>$40</td>
-                      <td>10%</td>
-                      <td>$5</td>
-                      <td>$39</td>
-                      <td>
-                        <button mat-icon-button>
-                          <mat-icon class="col-purple">cloud_download</mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                          <mat-icon class="col-green">visibility</mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                          <mat-icon class="col-blue">print</mat-icon>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#A645</td>
-                      <td><a href="mailto:test@gmail.com"> Dr.Rajesh </a></td>
-                      <td>11/04/2016 </td>
-                      <td>$25</td>
-                      <td>10%</td>
-                      <td>$5</td>
-                      <td>$22</td>
-                      <td>
-                        <button mat-icon-button>
-                          <mat-icon class="col-purple">cloud_download</mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                          <mat-icon class="col-green">visibility</mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                          <mat-icon class="col-blue">print</mat-icon>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#A873</td>
-                      <td><a href="mailto:test@gmail.com"> Dr.Jay Soni </a></td>
-                      <td>18/04/2016 </td>
-                      <td>$50</td>
-                      <td>10%</td>
-                      <td>$5</td>
-                      <td>$47</td>
-                      <td>
-                        <button mat-icon-button>
-                          <mat-icon class="col-purple">cloud_download</mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                          <mat-icon class="col-green">visibility</mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                          <mat-icon class="col-blue">print</mat-icon>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#A927</td>
-                      <td><a href="mailto:test@gmail.com"> Dr.John Deo </a></td>
-                      <td>22/05/2016 </td>
-                      <td>$45</td>
-                      <td>10%</td>
-                      <td>$5</td>
-                      <td>$42</td>
-                      <td>
-                        <button mat-icon-button>
-                          <mat-icon class="col-purple">cloud_download</mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                          <mat-icon class="col-green">visibility</mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                          <mat-icon class="col-blue">print</mat-icon>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#A228</td>
-                      <td><a href="mailto:test@gmail.com"> Dr.Megha Trivedi </a></td>
-                      <td>09/07/2016 </td>
-                      <td>$62</td>
-                      <td>10%</td>
-                      <td>$5</td>
-                      <td>$57</td>
-                      <td>
-                        <button mat-icon-button>
-                          <mat-icon class="col-purple">cloud_download</mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                          <mat-icon class="col-green">visibility</mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                          <mat-icon class="col-blue">print</mat-icon>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#A345</td>
-                      <td><a href="mailto:test@gmail.com"> Dr.Sarah Smith </a></td>
-                      <td>14/07/2016 </td>
-                      <td>$60</td>
-                      <td>10%</td>
-                      <td>$5</td>
-                      <td>$56</td>
-                      <td>
-                        <button mat-icon-button>
-                          <mat-icon class="col-purple">cloud_download</mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                          <mat-icon class="col-green">visibility</mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                          <mat-icon class="col-blue">print</mat-icon>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#A765</td>
-                      <td><a href="mailto:test@gmail.com"> Dr.Jacob Ryan </a></td>
-                      <td>22/06/2016 </td>
-                      <td>$40</td>
-                      <td>10%</td>
-                      <td>$5</td>
-                      <td>$39</td>
-                      <td>
-                        <button mat-icon-button>
-                          <mat-icon class="col-purple">cloud_download</mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                          <mat-icon class="col-green">visibility</mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                          <mat-icon class="col-blue">print</mat-icon>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>#A125</td>
-                      <td><a href="mailto:test@gmail.com"> Dr.Rajesh </a></td>
-                      <td>23/06/2016 </td>
-                      <td>$30</td>
-                      <td>10%</td>
-                      <td>$5</td>
-                      <td>$29</td>
-                      <td>
-                        <button mat-icon-button>
-                          <mat-icon class="col-purple">cloud_download</mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                          <mat-icon class="col-green">visibility</mat-icon>
-                        </button>
-                        <button mat-icon-button>
-                          <mat-icon class="col-blue">print</mat-icon>
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+          <div class="body billing-body">
+            <div class="loading-state" *ngIf="isLoading()">
+              <mat-spinner diameter="36"></mat-spinner>
+              <span>Loading billing records...</span>
             </div>
+
+            <div class="error-state" *ngIf="!isLoading() && errorMessage() as error">
+              <p>{{ error }}</p>
+              <button mat-flat-button color="primary" (click)="reload()">Retry</button>
+            </div>
+
+            <div class="empty-state" *ngIf="!isLoading() && !errorMessage() && bills().length === 0">
+              <mat-icon>receipt_long</mat-icon>
+              <p>No billing records found.</p>
+              <span>Create a billing entry from the admin portal to populate this list.</span>
+            </div>
+
+            <div class="table-responsive" *ngIf="hasResults()">
+              <table class="table table-hover billing-table">
+                <thead>
+                  <tr>
+                    <th>Billing ID</th>
+                    <th>Patient</th>
+                    <th>Doctor</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                    <th>Insurance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (billing of bills(); track trackByBillingId) {
+                  <tr>
+                    <td>
+                      <div class="id-cell">
+                        <span>{{ billing.id | slice: 0:8 }}</span>
+                        <button mat-icon-button matTooltip="Copy identifier" (click)="copyBillingId(billing.id)" aria-label="Copy billing identifier">
+                          <mat-icon>content_copy</mat-icon>
+                        </button>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="text-strong">{{ billing.patientName || 'Unassigned' }}</div>
+                      <span class="text-muted" *ngIf="billing.patientId">ID: {{ billing.patientId }}</span>
+                    </td>
+                    <td>
+                      <div class="text-strong">{{ billing.doctorName || 'Unassigned' }}</div>
+                      <span class="text-muted" *ngIf="billing.doctorId">ID: {{ billing.doctorId }}</span>
+                    </td>
+                    <td>
+                      <div>{{ billing.appointmentStartsAtUtc | date: 'medium' }}</div>
+                      <span class="text-muted">Created {{ billing.createdAtUtc | date: 'short' }}</span>
+                    </td>
+                    <td>
+                      <div class="text-strong">
+                        {{ billing.consultationAmount | currency: billing.currency:'symbol':'1.2-2' }}
+                      </div>
+                      <span class="text-muted" *ngIf="billing.amountPaidByPatient">
+                        Patient paid: {{ billing.amountPaidByPatient | currency: billing.currency:'symbol':'1.2-2' }}
+                      </span>
+                      <span class="text-muted" *ngIf="billing.amountBilledToInsurance">
+                        Insurance: {{ billing.amountBilledToInsurance | currency: billing.currency:'symbol':'1.2-2' }}
+                      </span>
+                    </td>
+                    <td>
+                      <div>{{ getPaymentMethodLabel(billing.paymentMethod) }}</div>
+                      <span class="text-muted" *ngIf="billing.usesInsurance">Insurance used</span>
+                    </td>
+                    <td>
+                      <mat-chip-set aria-label="Billing status">
+                        <mat-chip [ngClass]="getStatusClass(billing.status)">
+                          {{ getStatusLabel(billing.status) }}
+                        </mat-chip>
+                      </mat-chip-set>
+                    </td>
+                    <td>
+                      <div>{{ billing.insuranceProviderName || 'N/A' }}</div>
+                      <span class="text-muted" *ngIf="billing.insurancePolicyNumber">
+                        Policy: {{ billing.insurancePolicyNumber }}
+                      </span>
+                    </td>
+                  </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+
+            <mat-paginator
+              *ngIf="hasResults()"
+              [length]="totalCount()"
+              [pageSize]="pageSize()"
+              [pageIndex]="page() - 1"
+              [pageSizeOptions]="[5, 10, 20, 50]"
+              (page)="onPageChange($event)"
+            ></mat-paginator>
           </div>
         </div>
       </div>

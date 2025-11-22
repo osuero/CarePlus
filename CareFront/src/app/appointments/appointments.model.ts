@@ -26,6 +26,8 @@ export interface Appointment {
   endsAtUtc: string;
   status: AppointmentStatusValue;
   notes?: string | null;
+  consultationFee: number;
+  currency: string;
   createdAtUtc: string;
   updatedAtUtc: string;
 }

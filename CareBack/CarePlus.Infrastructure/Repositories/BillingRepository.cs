@@ -70,7 +70,7 @@ public class BillingRepository(ApplicationDbContext context) : IBillingRepositor
         return billing;
     }
 
-    private IQueryable<Billing> BuildQuery(
+    private IQueryable<Billing> BuildQuery(Microsoft.EntityFrameworkCore.DbUpdateException: 'An error occurred while saving the entity changes. See the inner exception 
         string tenantId,
         DateTime? dateFromUtc,
         DateTime? dateToUtc,

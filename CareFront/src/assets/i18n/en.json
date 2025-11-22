@@ -458,7 +458,8 @@
       "VIEW": "View details",
       "EDIT": "Edit appointment",
       "CANCEL": "Cancel appointment",
-      "DELETE": "Delete appointment"
+      "DELETE": "Delete appointment",
+      "BILL": "Create billing"
     },
     "TABLE": {
       "PATIENT": "Patient",
@@ -493,8 +494,44 @@
       "DELETE_CONFIRM": "Are you sure you want to delete \"{{title}}\"?",
       "DELETE_CONFIRM_BUTTON": "Yes, delete",
       "DELETE_CANCEL_BUTTON": "Cancel",
+      "BILLING_CREATED": "The billing record was created successfully.",
       "ERROR_TITLE": "Something went wrong",
       "ERROR_BODY": "We couldn't complete the request. Please try again."
+    },
+    "BILLING": {
+      "DIALOG_TITLE": "Bill appointment",
+      "PATIENT": "Patient",
+      "DOCTOR": "Doctor",
+      "DATE": "Appointment date",
+      "AMOUNT": "Consultation amount",
+      "CURRENCY": "Currency",
+      "PAYMENT_METHOD": "Payment method",
+      "USES_INSURANCE": "Uses insurance",
+      "INSURANCE_PROVIDER": "Insurance provider",
+      "POLICY_NUMBER": "Policy number",
+      "COVERAGE_PERCENTAGE": "Coverage (%)",
+      "COPAY": "Copay amount",
+      "PATIENT_AMOUNT": "Amount paid by patient",
+      "INSURANCE_AMOUNT": "Amount billed to insurance",
+      "SUBMIT": "Register billing",
+      "CANCEL": "Cancel",
+      "NO_PROVIDERS": "No insurance providers available.",
+      "LOADING_PROVIDERS": "Loading providers...",
+      "PAYMENT_METHODS": {
+        "CASH": "Cash",
+        "CREDIT_CARD": "Credit card",
+        "DEBIT_CARD": "Debit card",
+        "BANK_TRANSFER": "Bank transfer",
+        "INSURANCE_ONLY": "Insurance only",
+        "MIXED": "Mixed"
+      },
+      "ERRORS": {
+        "AMOUNT_REQUIRED": "Enter the consultation amount.",
+        "AMOUNT_MIN": "Amount must be greater than zero.",
+        "CURRENCY_REQUIRED": "Currency is required.",
+        "PROVIDER_REQUIRED": "Select an insurance provider.",
+        "POLICY_REQUIRED": "Enter the policy number."
+      }
     },
     "FORM": {
       "PATIENT": "Patient",

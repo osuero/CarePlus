@@ -1,0 +1,186 @@
+<h2 mat-dialog-title>
+  {{ 'APPOINTMENTS.BILLING.DIALOG_TITLE' | translate }}
+</h2>
+
+<mat-dialog-content>
+  <div class="appointment-summary">
+    <div>
+      <span class="summary-label">
+        {{ 'APPOINTMENTS.BILLING.PATIENT' | translate }}
+      </span>
+      <span>{{ appointment.patientName || '-' }}</span>
+    </div>
+    <div>
+      <span class="summary-label">
+        {{ 'APPOINTMENTS.BILLING.DOCTOR' | translate }}
+      </span>
+      <span>{{ appointment.doctorName || '-' }}</span>
+    </div>
+    <div>
+      <span class="summary-label">
+        {{ 'APPOINTMENTS.BILLING.DATE' | translate }}
+      </span>
+      <span>{{ appointment.startsAtUtc | date: 'medium' }}</span>
+    </div>
+  </div>
+
+  <form [formGroup]="form" class="billing-form">
+    <div class="form-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'APPOINTMENTS.BILLING.AMOUNT' | translate }}</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="consultationAmount"
+          min="0"
+          step="0.01"
+        />
+        <mat-error *ngIf="form.get('consultationAmount')?.hasError('required')">
+          {{ 'APPOINTMENTS.BILLING.ERRORS.AMOUNT_REQUIRED' | translate }}
+        </mat-error>
+        <mat-error *ngIf="form.get('consultationAmount')?.hasError('min')">
+          {{ 'APPOINTMENTS.BILLING.ERRORS.AMOUNT_MIN' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'APPOINTMENTS.BILLING.CURRENCY' | translate }}</mat-label>
+        <input matInput formControlName="currency" maxlength="16" />
+        <mat-error *ngIf="form.get('currency')?.hasError('required')">
+          {{ 'APPOINTMENTS.BILLING.ERRORS.CURRENCY_REQUIRED' | translate }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'APPOINTMENTS.BILLING.PAYMENT_METHOD' | translate }}</mat-label>
+      <mat-select formControlName="paymentMethod">
+        <mat-option
+          *ngFor="let option of paymentMethodOptions"
+          [value]="option.value"
+        >
+          {{ option.label | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-slide-toggle formControlName="usesInsurance">
+      {{ 'APPOINTMENTS.BILLING.USES_INSURANCE' | translate }}
+    </mat-slide-toggle>
+
+    <mat-divider></mat-divider>
+
+    <div class="insurance-section" *ngIf="form.get('usesInsurance')?.value">
+      <div class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>
+            {{ 'APPOINTMENTS.BILLING.INSURANCE_PROVIDER' | translate }}
+          </mat-label>
+          <mat-select formControlName="insuranceProviderId">
+            <mat-option *ngIf="isLoadingProviders()" [disabled]="true">
+              <mat-progress-spinner diameter="18" mode="indeterminate"></mat-progress-spinner>
+              <span class="spinner-label">
+                {{ 'APPOINTMENTS.BILLING.LOADING_PROVIDERS' | translate }}
+              </span>
+            </mat-option>
+            <mat-option
+              *ngFor="let provider of filteredProviders()"
+              [value]="provider.id"
+            >
+              {{ provider.name }}
+            </mat-option>
+          </mat-select>
+          <mat-hint *ngIf="!isLoadingProviders() && providers().length === 0">
+            {{ 'APPOINTMENTS.BILLING.NO_PROVIDERS' | translate }}
+          </mat-hint>
+          <mat-error *ngIf="form.get('insuranceProviderId')?.hasError('required')">
+            {{ 'APPOINTMENTS.BILLING.ERRORS.PROVIDER_REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>
+            {{ 'APPOINTMENTS.BILLING.POLICY_NUMBER' | translate }}
+          </mat-label>
+          <input matInput formControlName="insurancePolicyNumber" />
+          <mat-error *ngIf="form.get('insurancePolicyNumber')?.hasError('required')">
+            {{ 'APPOINTMENTS.BILLING.ERRORS.POLICY_REQUIRED' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>
+            {{ 'APPOINTMENTS.BILLING.COVERAGE_PERCENTAGE' | translate }}
+          </mat-label>
+          <input
+            matInput
+            type="number"
+            min="0"
+            max="100"
+            step="1"
+            formControlName="coveragePercentage"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'APPOINTMENTS.BILLING.COPAY' | translate }}</mat-label>
+          <input
+            matInput
+            type="number"
+            min="0"
+            step="0.01"
+            formControlName="copayAmount"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="form-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>
+            {{ 'APPOINTMENTS.BILLING.PATIENT_AMOUNT' | translate }}
+          </mat-label>
+          <input
+            matInput
+            type="number"
+            min="0"
+            step="0.01"
+            formControlName="amountPaidByPatient"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>
+            {{ 'APPOINTMENTS.BILLING.INSURANCE_AMOUNT' | translate }}
+          </mat-label>
+          <input
+            matInput
+            type="number"
+            min="0"
+            step="0.01"
+            formControlName="amountBilledToInsurance"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-error" *ngIf="formError()">
+      {{ formError() }}
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">
+    {{ 'APPOINTMENTS.BILLING.CANCEL' | translate }}
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="submit()"
+    [disabled]="form.invalid || isSubmitting()"
+  >
+    {{ 'APPOINTMENTS.BILLING.SUBMIT' | translate }}
+  </button>
+</mat-dialog-actions>

@@ -535,6 +535,184 @@
         }
       }
     },
+    "/api/v1/billing": {
+      "post": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "CreateBilling",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBillingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillingResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "SearchBilling",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "patientId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "doctorId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "paymentMethod",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "insuranceProviderId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedBillingResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/billing/{id}": {
+      "get": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "GetBillingById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillingResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/billing/providers": {
+      "get": {
+        "tags": [
+          "Billing"
+        ],
+        "operationId": "ListInsuranceProviders",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InsuranceProviderResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/patients/register": {
       "post": {
         "tags": [
@@ -1239,6 +1417,14 @@
             "type": "string",
             "nullable": true
           },
+          "consultationFee": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
           "createdAtUtc": {
             "type": "string",
             "format": "date-time"
@@ -1257,6 +1443,118 @@
           2,
           3,
           4
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "BillingResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tenantId": {
+            "type": "string",
+            "nullable": true
+          },
+          "appointmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointmentStartsAtUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "patientName": {
+            "type": "string",
+            "nullable": true
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "doctorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "doctorId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "serviceDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "consultationAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "paymentMethod": {
+            "$ref": "#/components/schemas/PaymentMethod"
+          },
+          "usesInsurance": {
+            "type": "boolean"
+          },
+          "insuranceProviderId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "insuranceProviderName": {
+            "type": "string",
+            "nullable": true
+          },
+          "insurancePolicyNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "coveragePercentage": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "copayAmount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "amountPaidByPatient": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "amountBilledToInsurance": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/BillingStatus"
+          },
+          "createdAtUtc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAtUtc": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BillingStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
         ],
         "type": "integer",
         "format": "int32"
@@ -1298,6 +1596,85 @@
           "code": {
             "type": "string",
             "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateBillingRequest": {
+        "type": "object",
+        "properties": {
+          "tenantId": {
+            "type": "string",
+            "nullable": true
+          },
+          "appointmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "consultationAmount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "paymentMethod": {
+            "$ref": "#/components/schemas/PaymentMethod"
+          },
+          "usesInsurance": {
+            "type": "boolean"
+          },
+          "insuranceProviderId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "insurancePolicyNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "coveragePercentage": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "copayAmount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "amountPaidByPatient": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "amountBilledToInsurance": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/BillingStatus"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InsuranceProviderResponse": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
           },
           "name": {
             "type": "string",
@@ -1368,6 +1745,50 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AppointmentResponse"
+            },
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasNextPage": {
+            "type": "boolean"
+          },
+          "hasPreviousPage": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PagedBillingResponse": {
+        "required": [
+          "hasNextPage",
+          "hasPreviousPage",
+          "nodes",
+          "page",
+          "pageSize",
+          "totalCount",
+          "totalPages"
+        ],
+        "type": "object",
+        "properties": {
+          "nodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BillingResponse"
             },
             "nullable": true
           },
@@ -1531,6 +1952,18 @@
           }
         },
         "additionalProperties": false
+      },
+      "PaymentMethod": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "ProblemDetails": {
         "type": "object",
@@ -1749,6 +2182,15 @@
           "status": {
             "type": "string",
             "nullable": true
+          },
+          "consultationFee": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1813,6 +2255,15 @@
             "nullable": true
           },
           "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "consultationFee": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currency": {
             "type": "string",
             "nullable": true
           }
