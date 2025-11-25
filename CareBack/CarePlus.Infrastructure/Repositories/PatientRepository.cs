@@ -67,6 +67,8 @@ public class PatientRepository(ApplicationDbContext context) : IPatientRepositor
 
     public async Task<Patient> AddAsync(Patient patient, CancellationToken cancellationToken = default)
     {
+        patient.Id = await EnsureUniqueIdAsync(patient.Id, cancellationToken);
+
         await _context.Patients.AddAsync(patient, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
         return patient;
@@ -117,5 +119,19 @@ public class PatientRepository(ApplicationDbContext context) : IPatientRepositor
         }
 
         return query;
+    }
+
+    private async Task<Guid> EnsureUniqueIdAsync(Guid currentId, CancellationToken cancellationToken)
+    {
+        var candidateId = currentId == Guid.Empty ? Guid.NewGuid() : currentId;
+
+        while (await _context.Patients
+            .IgnoreQueryFilters()
+            .AnyAsync(patient => patient.Id == candidateId, cancellationToken))
+        {
+            candidateId = Guid.NewGuid();
+        }
+
+        return candidateId;
     }
 }
