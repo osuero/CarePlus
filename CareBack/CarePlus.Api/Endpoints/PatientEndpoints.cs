@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CarePlus.Application.DTOs.Countries;
@@ -12,12 +13,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CarePlus.Api.Endpoints;
 
-public static class PatientEndpoints
-{
-    public static IEndpointRouteBuilder MapPatientEndpoints(this IEndpointRouteBuilder endpoints)
+    public static class PatientEndpoints
     {
-        var group = endpoints.MapGroup("/api/patients")
-            .WithTags("Patients");
+        public static IEndpointRouteBuilder MapPatientEndpoints(this IEndpointRouteBuilder endpoints)
+        {
+            var group = endpoints.MapGroup("/api/v1/patients")
+                .WithTags("Patients");
 
         group.MapPost("/register", RegisterAsync)
             .WithName("RegisterPatient")
@@ -41,6 +42,11 @@ public static class PatientEndpoints
             .Produces<PatientResponse>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status400BadRequest)
             .Produces(StatusCodes.Status404NotFound)
+            .ProducesProblem(StatusCodes.Status500InternalServerError);
+
+        group.MapGet("/{id:guid}/invoices", GetInvoicesAsync)
+            .WithName("GetPatientInvoices")
+            .Produces<PatientInvoiceCollectionDto>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status500InternalServerError);
 
         group.MapDelete("/{id:guid}", DeleteAsync)
@@ -185,6 +191,50 @@ public static class PatientEndpoints
         }
 
         return Results.NoContent();
+    }
+
+    private static async Task<IResult> GetInvoicesAsync(
+        Guid id,
+        [FromQuery] int page,
+        [FromQuery] int pageSize,
+        [FromQuery] DateOnly? dateFrom,
+        [FromQuery] DateOnly? dateTo,
+        ITenantProvider tenantProvider,
+        IBillingQueryService billingQueryService,
+        CancellationToken cancellationToken)
+    {
+        var tenantId = tenantProvider.GetTenantId();
+        var result = await billingQueryService.SearchAsync(
+            tenantId,
+            page <= 0 ? 1 : page,
+            pageSize <= 0 ? 10 : pageSize,
+            dateFrom?.ToDateTime(TimeOnly.MinValue).ToUniversalTime(),
+            dateTo?.ToDateTime(TimeOnly.MaxValue).ToUniversalTime(),
+            id,
+            null,
+            null,
+            null,
+            cancellationToken);
+
+        var payload = new PatientInvoiceCollectionDto
+        {
+            Items = result.Items.Select(item => new PatientInvoiceDto
+            {
+                Id = item.Id,
+                PatientId = item.PatientId,
+                AppointmentId = item.AppointmentId,
+                Date = item.AppointmentStartsAtUtc,
+                TotalAmount = item.ConsultationAmount,
+                PaymentMethod = item.PaymentMethod.ToString(),
+                InsuranceProviderName = item.InsuranceProviderName,
+                Status = item.Status.ToString()
+            }).ToList(),
+            Page = result.Page,
+            PageSize = result.PageSize,
+            TotalCount = result.TotalCount
+        };
+
+        return Results.Ok(payload);
     }
 
     private static async Task<IResult> SearchCountriesAsync(
