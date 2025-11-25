@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using CarePlus.Domain.Base;
 using CarePlus.Domain.Enums;
 
@@ -19,6 +20,8 @@ public class Patient : TenantEntity
     public string? AssignedDoctorName { get; set; }
 
     public int Age => CalculateAge(DateOfBirth, DateTime.UtcNow.Date);
+
+    public ICollection<Consultation> Consultations { get; set; } = new List<Consultation>();
 
     private static int CalculateAge(DateOnly birthDate, DateTime today)
     {
