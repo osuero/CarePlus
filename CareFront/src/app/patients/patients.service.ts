@@ -45,10 +45,22 @@ interface UserCollectionResponse {
 export class PatientsService {
   private readonly baseUrl = environment.apiUrl.replace(/\/$/, '');
   private readonly patientsUrl = `${this.baseUrl}/api/patients`;
+  private readonly patientsV1Url = `${this.baseUrl}/api/v1/patients`;
   private readonly graphqlUrl = `${this.baseUrl}/graphql`;
   private readonly defaultTenant = environment.tenantId ?? 'default';
 
   constructor(private readonly http: HttpClient) {}
+
+  getPatientById(
+    id: string,
+    tenantId: string = this.defaultTenant
+  ): Observable<Patient> {
+    return this.http
+      .get<Patient>(`${this.patientsV1Url}/${id}`, {
+        headers: this.createHeaders(true, tenantId),
+      })
+      .pipe(catchError((error) => this.handleError(error)));
+  }
 
   getPatients(
     page: number,

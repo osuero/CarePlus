@@ -1,0 +1,91 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header d-flex justify-content-between align-items-center">
+      <app-breadcrumb [title]="'Perfil de paciente'" [items]="['Pacientes']" [active_item]="patient?.firstName"></app-breadcrumb>
+      <button mat-stroked-button color="primary" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        Volver
+      </button>
+    </div>
+
+    <mat-card *ngIf="patient" class="mb-3">
+      <mat-card-title>
+        {{ patient.firstName }} {{ patient.lastName }}
+      </mat-card-title>
+      <mat-card-content>
+        <div class="patient-grid">
+          <div><strong>Email:</strong> {{ patient.email }}</div>
+          <div><strong>Documento:</strong> {{ patient.identification || 'N/D' }}</div>
+          <div><strong>Teléfono:</strong> {{ patient.phoneNumber || 'N/D' }}</div>
+          <div><strong>País:</strong> {{ patient.country || 'N/D' }}</div>
+          <div><strong>Género:</strong> {{ patient.gender }}</div>
+          <div><strong>Fecha de nacimiento:</strong> {{ patient.dateOfBirth | date }}</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title class="d-flex justify-content-between align-items-center">
+        <span>Consultas</span>
+        <button mat-flat-button color="primary" (click)="newConsultation()" [disabled]="!patient || loadingConsultations">
+          <mat-icon>add</mat-icon>
+          Nueva consulta
+        </button>
+      </mat-card-title>
+      <mat-card-content>
+        <div *ngIf="loadingConsultations">Cargando consultas...</div>
+        <div *ngIf="!loadingConsultations && consultations.length === 0">
+          No hay consultas registradas.
+        </div>
+        <div class="table-responsive" *ngIf="consultations.length > 0">
+          <table mat-table [dataSource]="consultations" class="mat-elevation-z1 w-100">
+            <ng-container matColumnDef="consultationDateTime">
+              <th mat-header-cell *matHeaderCellDef>Fecha</th>
+              <td mat-cell *matCellDef="let item">{{ item.consultationDateTime | date: 'short' }}</td>
+            </ng-container>
+            <ng-container matColumnDef="doctorName">
+              <th mat-header-cell *matHeaderCellDef>Médico</th>
+              <td mat-cell *matCellDef="let item">{{ item.doctorName || 'N/D' }}</td>
+            </ng-container>
+            <ng-container matColumnDef="reason">
+              <th mat-header-cell *matHeaderCellDef>Motivo</th>
+              <td mat-cell *matCellDef="let item">{{ item.reasonForVisit }}</td>
+            </ng-container>
+            <ng-container matColumnDef="symptomSummary">
+              <th mat-header-cell *matHeaderCellDef>Síntomas</th>
+              <td mat-cell *matCellDef="let item">{{ item.symptomSummary || 'Sin síntomas' }}</td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let item" class="text-end">
+                <button mat-icon-button color="primary" (click)="viewConsultation(item)">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-3" *ngIf="consultations.length > 0">
+          <button mat-stroked-button type="button" (click)="previousPage()" [disabled]="page === 1 || loadingConsultations">
+            <mat-icon>chevron_left</mat-icon>
+            Anterior
+          </button>
+          <div>Página {{ totalCount === 0 ? 0 : page }} • Total {{ totalCount }}</div>
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="nextPage()"
+            [disabled]="page * pageSize >= totalCount || loadingConsultations"
+          >
+            Siguiente
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>

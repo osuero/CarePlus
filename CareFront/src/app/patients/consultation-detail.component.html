@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>Consulta</h2>
+<div mat-dialog-content>
+  <ng-container *ngIf="loading">Cargando...</ng-container>
+  <ng-container *ngIf="!loading && consultation">
+    <div class="detail-grid">
+      <div><strong>Paciente:</strong> {{ data.patientName }}</div>
+      <div><strong>Médico:</strong> {{ consultation.doctorName }}</div>
+      <div>
+        <strong>Fecha:</strong>
+        {{ consultation.consultationDateTime | date: 'short' }}
+      </div>
+      <div><strong>Motivo:</strong> {{ consultation.reasonForVisit }}</div>
+      <div><strong>Notas:</strong> {{ consultation.notes || 'Sin notas' }}</div>
+    </div>
+
+    <h3>Síntomas</h3>
+    <div class="symptom-card" *ngFor="let symptom of consultation.symptoms">
+      <div><strong>Descripción:</strong> {{ symptom.description }}</div>
+      <div *ngIf="symptom.onsetDate">
+        <strong>Inicio:</strong> {{ symptom.onsetDate | date: 'shortDate' }}
+      </div>
+      <div *ngIf="symptom.severity !== null && symptom.severity !== undefined">
+        <strong>Severidad:</strong> {{ symptom.severity }}
+      </div>
+      <div *ngIf="symptom.additionalNotes">
+        <strong>Notas:</strong> {{ symptom.additionalNotes }}
+      </div>
+    </div>
+  </ng-container>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="close()">Cerrar</button>
+  <button mat-flat-button color="primary" type="button" (click)="edit()" [disabled]="loading">
+    Editar
+  </button>
+</div>
