@@ -1,0 +1,37 @@
+.consultation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.symptoms-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.symptom {
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.symptom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.error {
+  color: #b71c1c;
+  margin-top: 0.5rem;
+}

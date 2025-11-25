@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.12.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="Moq" Version="4.20.70" />
+    <PackageReference Include="xunit" Version="2.5.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CarePlus.Application\CarePlus.Application.csproj" />
+    <ProjectReference Include="..\CarePlus.Infrastructure\CarePlus.Infrastructure.csproj" />
+    <ProjectReference Include="..\CarePlus.Domain\CarePlus.Domain.csproj" />
+  </ItemGroup>
+</Project>

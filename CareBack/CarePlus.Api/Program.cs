@@ -111,6 +111,7 @@ app.MapAuthEndpoints();
 app.MapUserEndpoints();
 app.MapPatientEndpoints();
 app.MapAppointmentEndpoints();
+app.MapConsultationEndpoints();
 app.MapBillingEndpoints();
 app.MapGraphQL();
 

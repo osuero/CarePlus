@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -72,7 +73,8 @@ export class PatientsComponent implements OnInit, OnDestroy {
   constructor(
     private readonly patientsService: PatientsService,
     private readonly translate: TranslateService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {
@@ -192,6 +194,10 @@ export class PatientsComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  viewDetails(patient: Patient): void {
+    this.router.navigate(['/patients', patient.id]);
   }
 
   changePageSize(event: Event): void {

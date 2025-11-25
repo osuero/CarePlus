@@ -177,6 +177,16 @@
                   <button
                     mat-icon-button
                     type="button"
+                    color="primary"
+                    (click)="viewDetails(patient)"
+                    [disabled]="loadingPatients"
+                    title="Ver detalles"
+                  >
+                    <mat-icon>visibility</mat-icon>
+                  </button>
+                  <button
+                    mat-icon-button
+                    type="button"
                     (click)="openEditDialog(patient)"
                     [disabled]="loadingPatients"
                     [title]="'PATIENTS.EDIT.TITLE' | translate"

@@ -17,6 +17,8 @@ public static class DependencyInjection
         services.AddScoped<IRoleQueryService, RoleQueryService>();
         services.AddScoped<IPatientService, PatientService>();
         services.AddScoped<IPatientQueryService, PatientQueryService>();
+        services.AddScoped<IConsultationService, ConsultationService>();
+        services.AddScoped<IConsultationQueryService, ConsultationQueryService>();
         services.AddScoped<IAppointmentService, AppointmentService>();
         services.AddScoped<IAppointmentQueryService, AppointmentQueryService>();
         services.AddScoped<IBillingService, BillingService>();
