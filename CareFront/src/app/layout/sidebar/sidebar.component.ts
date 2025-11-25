@@ -171,6 +171,7 @@ export class SidebarComponent
     const allowedPaths = new Set([
       '/doctor/appointments',
       '/doctor/patient-registration',
+      '/doctor/billing',
     ]);
 
     const filterRecursive = (items: RouteInfo[]): RouteInfo[] =>

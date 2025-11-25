@@ -144,6 +144,7 @@
       "APPOINTMENTS": "Citas",
       "DOCTORS": "Médicos",
       "PATIENTS": "Pacientes",
+      "BILLING": "Facturación",
       "SETTINGS": "Configuraciones",
       "CHAT": "Chat"
     },
@@ -517,13 +518,63 @@
       "CANCEL": "Cancelar",
       "NO_PROVIDERS": "No hay aseguradoras disponibles.",
       "LOADING_PROVIDERS": "Cargando aseguradoras...",
+      "LOADING": "Cargando registros de facturación...",
+      "RETRY": "Reintentar",
+      "EMPTY_DOCTOR_TITLE": "Aún no hay cobros",
+      "EMPTY_DOCTOR_SUBTITLE": "Completa una consulta y registra el pago para verlo aquí.",
+      "CLOSE": "Cerrar",
+      "PRINT": "Imprimir PDF",
+      "YES": "Sí",
+      "NO": "No",
       "PAYMENT_METHODS": {
         "CASH": "Efectivo",
         "CREDIT_CARD": "Tarjeta de crédito",
         "DEBIT_CARD": "Tarjeta de débito",
         "BANK_TRANSFER": "Transferencia bancaria",
         "INSURANCE_ONLY": "Solo seguro",
-        "MIXED": "Mixto"
+        "MIXED": "Mixto",
+        "UNKNOWN": "Método desconocido"
+      },
+      "STATUS": {
+        "PENDING": "Pendiente",
+        "PAID": "Pagado",
+        "PARTIAL": "Parcialmente pagado",
+        "CANCELLED": "Cancelado",
+        "UNKNOWN": "Desconocido"
+      },
+      "TABLE": {
+        "PATIENT": "Paciente",
+        "DOCTOR": "Doctor",
+        "DATE": "Fecha",
+        "AMOUNT": "Monto",
+        "PAYMENT": "Pago",
+        "STATUS": "Estado",
+        "INSURANCE": "Seguro",
+        "ACTIONS": "Acciones",
+        "UNASSIGNED": "Sin asignar",
+        "CREATED": "Creado",
+        "PATIENT_AMOUNT": "Paciente",
+        "INSURANCE_AMOUNT": "Seguro",
+        "INSURANCE_USED": "Usó seguro",
+        "NOT_AVAILABLE": "N/D",
+        "POLICY": "Póliza"
+      },
+      "DETAIL": {
+        "TITLE": "Detalle del cobro",
+        "APPOINTMENT": "Cita",
+        "PAYMENT": "Pago",
+        "INSURANCE": "Seguro",
+        "METADATA": "Metadatos",
+        "UPDATED": "Última actualización"
+      },
+      "FILTERS": {
+        "PATIENT": "Paciente",
+        "DOCTOR": "Doctor",
+        "INSURANCE": "Seguro",
+        "DATE_FROM": "Desde",
+        "DATE_TO": "Hasta",
+        "CLEAR": "Limpiar filtros",
+        "ALL": "Todos"
       },
       "ERRORS": {
         "AMOUNT_REQUIRED": "Ingresa el monto de la consulta.",

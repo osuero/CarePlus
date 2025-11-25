@@ -3,7 +3,7 @@ import { of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { BillingService } from '../../billing/billing.service';
 import { AppointmentsService } from '../../appointments/appointments.service';
-import { BillingComponent } from './billing.component';
+import { DoctorBillingComponent } from './billing.component';
 
 class BillingServiceStub {
   searchBilling() {
@@ -35,14 +35,14 @@ class MatDialogStub {
   }
 }
 
-describe('BillingComponent', () => {
-  let component: BillingComponent;
-  let fixture: ComponentFixture<BillingComponent>;
+describe('DoctorBillingComponent', () => {
+  let component: DoctorBillingComponent;
+  let fixture: ComponentFixture<DoctorBillingComponent>;
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [BillingComponent],
+        imports: [DoctorBillingComponent],
         providers: [
           { provide: BillingService, useClass: BillingServiceStub },
            { provide: AppointmentsService, useClass: AppointmentsServiceStub },
@@ -53,7 +53,7 @@ describe('BillingComponent', () => {
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BillingComponent);
+    fixture = TestBed.createComponent(DoctorBillingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

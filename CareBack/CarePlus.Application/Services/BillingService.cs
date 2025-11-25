@@ -98,16 +98,13 @@ public class BillingService(
             AppointmentId = appointment.Id,
             AppointmentStartsAtUtc = appointment.StartsAtUtc,
             PatientId = appointment.PatientId,
-            Patient = appointment.Patient,
             DoctorId = appointment.DoctorId,
-            Doctor = appointment.Doctor,
             ServiceDescription = appointment.Title,
             ConsultationAmount = consultationAmount,
             Currency = targetCurrency,
             PaymentMethod = request.PaymentMethod,
             UsesInsurance = request.UsesInsurance,
-            InsuranceProviderId = request.InsuranceProviderId,
-            InsuranceProvider = insuranceProvider,
+            InsuranceProviderId = insuranceProvider?.Id ?? request.InsuranceProviderId,
             InsurancePolicyNumber = string.IsNullOrWhiteSpace(request.InsurancePolicyNumber)
                 ? null
                 : request.InsurancePolicyNumber.Trim(),
@@ -119,8 +116,9 @@ public class BillingService(
         };
 
         billing = await _billingRepository.AddAsync(billing, cancellationToken);
+        var persisted = await _billingRepository.GetByIdAsync(tenantId, billing.Id, cancellationToken);
 
-        return Result<BillingResponse>.Success(BillingMapper.ToResponse(billing));
+        return Result<BillingResponse>.Success(BillingMapper.ToResponse(persisted ?? billing));
     }
 
     private async Task<Result<InsuranceProvider?>> ValidateInsuranceAsync(

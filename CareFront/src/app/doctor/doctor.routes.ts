@@ -5,6 +5,7 @@ import { PatientsComponent } from './patients/patients.component';
 import { Page404Component } from '../authentication/page404/page404.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AddPatientComponent } from '../admin/patients/add-patient/add-patient.component';
+import { DoctorBillingComponent } from './billing/billing.component';
 export const DOCTOR_ROUTE: Route[] = [
   {
     path: 'dashboard',
@@ -24,6 +25,10 @@ export const DOCTOR_ROUTE: Route[] = [
   {
     path: 'patients',
     component: PatientsComponent,
+  },
+  {
+    path: 'billing',
+    component: DoctorBillingComponent,
   },
   {
     path: 'patient-registration',

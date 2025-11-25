@@ -1,13 +1,17 @@
 <section class="content">
   <div class="content-block">
     <div class="block-header">
-      <app-breadcrumb [title]="'Billing'" [items]="[]" [active_item]="'Billing'"></app-breadcrumb>
+      <app-breadcrumb
+        [title]="'MENUITEMS.DOCTOR.BILLING' | translate"
+        [items]="[]"
+        [active_item]="'MENUITEMS.DOCTOR.BILLING' | translate"
+      ></app-breadcrumb>
     </div>
     <div class="row clearfix">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="card">
           <div class="header header-with-actions">
-            <h2>Billing</h2>
+            <h2>{{ 'MENUITEMS.DOCTOR.BILLING' | translate }}</h2>
             <button mat-icon-button (click)="reload()" [disabled]="isLoading()">
               <mat-icon>refresh</mat-icon>
             </button>
@@ -106,34 +110,35 @@
                 {{ 'APPOINTMENTS.BILLING.FILTERS.CLEAR' | translate }}
               </button>
             </div>
-
             <div class="loading-state" *ngIf="isLoading()">
               <mat-spinner diameter="36"></mat-spinner>
-              <span>Loading billing records...</span>
+              <span>{{ 'APPOINTMENTS.BILLING.LOADING' | translate }}</span>
             </div>
 
             <div class="error-state" *ngIf="!isLoading() && errorMessage() as error">
               <p>{{ error }}</p>
-              <button mat-flat-button color="primary" (click)="reload()">Retry</button>
+              <button mat-flat-button color="primary" (click)="reload()">
+                {{ 'APPOINTMENTS.BILLING.RETRY' | translate }}
+              </button>
             </div>
 
             <div class="empty-state" *ngIf="!isLoading() && !errorMessage() && bills().length === 0">
               <mat-icon>receipt_long</mat-icon>
-              <p>No billing records found.</p>
-              <span>Create a billing entry from the admin portal to populate this list.</span>
+              <p>{{ 'APPOINTMENTS.BILLING.EMPTY_DOCTOR_TITLE' | translate }}</p>
+              <span>{{ 'APPOINTMENTS.BILLING.EMPTY_DOCTOR_SUBTITLE' | translate }}</span>
             </div>
 
             <div class="table-responsive" *ngIf="hasResults()">
               <table class="table table-hover billing-table">
                 <thead>
                   <tr>
-                    <th>Patient</th>
-                    <th>Doctor</th>
-                    <th>Date</th>
-                    <th>Amount</th>
-                    <th>Payment</th>
-                    <th>Status</th>
-                    <th>Insurance</th>
+                    <th>{{ 'APPOINTMENTS.BILLING.TABLE.PATIENT' | translate }}</th>
+                    <th>{{ 'APPOINTMENTS.BILLING.TABLE.DOCTOR' | translate }}</th>
+                    <th>{{ 'APPOINTMENTS.BILLING.TABLE.DATE' | translate }}</th>
+                    <th>{{ 'APPOINTMENTS.BILLING.TABLE.AMOUNT' | translate }}</th>
+                    <th>{{ 'APPOINTMENTS.BILLING.TABLE.PAYMENT' | translate }}</th>
+                    <th>{{ 'APPOINTMENTS.BILLING.TABLE.STATUS' | translate }}</th>
+                    <th>{{ 'APPOINTMENTS.BILLING.TABLE.INSURANCE' | translate }}</th>
                     <th>{{ 'APPOINTMENTS.BILLING.TABLE.ACTIONS' | translate }}</th>
                   </tr>
                 </thead>
@@ -141,43 +146,57 @@
                   @for (billing of bills(); track trackByBillingId($index, billing)) {
                   <tr>
                     <td>
-                      <div class="text-strong">{{ billing.patientName || 'Unassigned' }}</div>
-                      <span class="text-muted" *ngIf="billing.patientId">ID: {{ billing.patientId }}</span>
+                      <div class="text-strong">
+                        {{ billing.patientName || ('APPOINTMENTS.BILLING.TABLE.UNASSIGNED' | translate) }}
+                      </div>
+                      <span class="text-muted" *ngIf="billing.patientId">
+                        ID: {{ billing.patientId }}
+                      </span>
                     </td>
                     <td>
-                      <div class="text-strong">{{ billing.doctorName || 'Unassigned' }}</div>
-                      <span class="text-muted" *ngIf="billing.doctorId">ID: {{ billing.doctorId }}</span>
+                      <div class="text-strong">
+                        {{ billing.doctorName || ('APPOINTMENTS.BILLING.TABLE.UNASSIGNED' | translate) }}
+                      </div>
+                      <span class="text-muted" *ngIf="billing.doctorId">
+                        ID: {{ billing.doctorId }}
+                      </span>
                     </td>
                     <td>
                       <div>{{ billing.appointmentStartsAtUtc | date: 'medium' }}</div>
-                      <span class="text-muted">Created {{ billing.createdAtUtc | date: 'short' }}</span>
+                      <span class="text-muted">
+                        {{ 'APPOINTMENTS.BILLING.TABLE.CREATED' | translate }} {{ billing.createdAtUtc | date: 'short' }}
+                      </span>
                     </td>
                     <td>
                       <div class="text-strong">
                         {{ billing.consultationAmount | currency: billing.currency:'symbol':'1.2-2' }}
                       </div>
                       <span class="text-muted" *ngIf="billing.amountPaidByPatient">
-                        Patient paid: {{ billing.amountPaidByPatient | currency: billing.currency:'symbol':'1.2-2' }}
+                        {{ 'APPOINTMENTS.BILLING.TABLE.PATIENT_AMOUNT' | translate }}:
+                        {{ billing.amountPaidByPatient | currency: billing.currency:'symbol':'1.2-2' }}
                       </span>
                       <span class="text-muted" *ngIf="billing.amountBilledToInsurance">
-                        Insurance: {{ billing.amountBilledToInsurance | currency: billing.currency:'symbol':'1.2-2' }}
+                        {{ 'APPOINTMENTS.BILLING.TABLE.INSURANCE_AMOUNT' | translate }}:
+                        {{ billing.amountBilledToInsurance | currency: billing.currency:'symbol':'1.2-2' }}
                       </span>
                     </td>
                     <td>
-                      <div>{{ getPaymentMethodLabel(billing.paymentMethod) }}</div>
-                      <span class="text-muted" *ngIf="billing.usesInsurance">Insurance used</span>
+                      <div>{{ getPaymentMethodLabel(billing.paymentMethod) | translate }}</div>
+                      <span class="text-muted" *ngIf="billing.usesInsurance">
+                        {{ 'APPOINTMENTS.BILLING.TABLE.INSURANCE_USED' | translate }}
+                      </span>
                     </td>
                     <td>
                       <mat-chip-set aria-label="Billing status">
                         <mat-chip [ngClass]="getStatusClass(billing.status)">
-                          {{ getStatusLabel(billing.status) }}
+                          {{ getStatusLabel(billing.status) | translate }}
                         </mat-chip>
                       </mat-chip-set>
                     </td>
                     <td>
-                      <div>{{ billing.insuranceProviderName || 'N/A' }}</div>
+                      <div>{{ billing.insuranceProviderName || ('APPOINTMENTS.BILLING.TABLE.NOT_AVAILABLE' | translate) }}</div>
                       <span class="text-muted" *ngIf="billing.insurancePolicyNumber">
-                        Policy: {{ billing.insurancePolicyNumber }}
+                        {{ 'APPOINTMENTS.BILLING.TABLE.POLICY' | translate }}: {{ billing.insurancePolicyNumber }}
                       </span>
                     </td>
                     <td>

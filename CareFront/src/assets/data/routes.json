@@ -979,6 +979,18 @@
       "submenu": []
     },
     {
+      "path": "/doctor/billing",
+      "title": "MENUITEMS.DOCTOR.BILLING",
+      "iconType": "material-icons-outlined",
+      "icon": "payments",
+      "class": "",
+      "groupTitle": false,
+      "badge": "",
+      "badgeClass": "",
+      "role": ["DOCTOR"],
+      "submenu": []
+    },
+    {
       "path": "/doctor/settings",
       "title": "MENUITEMS.DOCTOR.SETTINGS",
       "iconType": "material-icons-outlined",

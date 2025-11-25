@@ -11,12 +11,12 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslateModule } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
 import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
-import { TranslateModule } from '@ngx-translate/core';
 import {
   BillingRecord,
   BillingStatus,
@@ -44,7 +44,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
-  selector: 'app-billing',
+  selector: 'app-doctor-billing',
+  standalone: true,
   templateUrl: './billing.component.html',
   styleUrls: ['./billing.component.scss'],
   imports: [
@@ -57,8 +58,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatPaginatorModule,
     MatChipsModule,
     MatTooltipModule,
-    ReactiveFormsModule,
     MatAutocompleteModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
@@ -66,7 +67,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatNativeDateModule,
   ],
 })
-export class BillingComponent implements OnInit, OnDestroy {
+export class DoctorBillingComponent implements OnInit, OnDestroy {
   readonly isLoading = signal(true);
   readonly bills = signal<BillingRecord[]>([]);
   readonly totalCount = signal(0);
@@ -101,19 +102,19 @@ export class BillingComponent implements OnInit, OnDestroy {
   readonly doctorFilter = new FormControl<string | null>(null);
   readonly insuranceFilter = new FormControl<string | null>(null);
   private readonly statusLabels: Record<BillingStatus, string> = {
-    [BillingStatus.Pending]: 'Pending',
-    [BillingStatus.Paid]: 'Paid',
-    [BillingStatus.PartiallyPaid]: 'Partially paid',
-    [BillingStatus.Cancelled]: 'Cancelled',
+    [BillingStatus.Pending]: 'APPOINTMENTS.BILLING.STATUS.PENDING',
+    [BillingStatus.Paid]: 'APPOINTMENTS.BILLING.STATUS.PAID',
+    [BillingStatus.PartiallyPaid]: 'APPOINTMENTS.BILLING.STATUS.PARTIAL',
+    [BillingStatus.Cancelled]: 'APPOINTMENTS.BILLING.STATUS.CANCELLED',
   };
 
   private readonly paymentLabels: Record<PaymentMethod, string> = {
-    [PaymentMethod.Cash]: 'Cash',
-    [PaymentMethod.CreditCard]: 'Credit card',
-    [PaymentMethod.DebitCard]: 'Debit card',
-    [PaymentMethod.BankTransfer]: 'Bank transfer',
-    [PaymentMethod.InsuranceOnly]: 'Insurance only',
-    [PaymentMethod.Mixed]: 'Mixed',
+    [PaymentMethod.Cash]: 'APPOINTMENTS.BILLING.PAYMENT_METHODS.CASH',
+    [PaymentMethod.CreditCard]: 'APPOINTMENTS.BILLING.PAYMENT_METHODS.CREDIT_CARD',
+    [PaymentMethod.DebitCard]: 'APPOINTMENTS.BILLING.PAYMENT_METHODS.DEBIT_CARD',
+    [PaymentMethod.BankTransfer]: 'APPOINTMENTS.BILLING.PAYMENT_METHODS.BANK_TRANSFER',
+    [PaymentMethod.InsuranceOnly]: 'APPOINTMENTS.BILLING.PAYMENT_METHODS.INSURANCE_ONLY',
+    [PaymentMethod.Mixed]: 'APPOINTMENTS.BILLING.PAYMENT_METHODS.MIXED',
   };
 
   constructor(
@@ -144,11 +145,11 @@ export class BillingComponent implements OnInit, OnDestroy {
   }
 
   getStatusLabel(status: BillingStatus): string {
-    return this.statusLabels[status] ?? 'Unknown';
+    return this.statusLabels[status] ?? 'APPOINTMENTS.BILLING.STATUS.UNKNOWN';
   }
 
   getPaymentMethodLabel(method: PaymentMethod): string {
-    return this.paymentLabels[method] ?? 'Unknown';
+    return this.paymentLabels[method] ?? 'APPOINTMENTS.BILLING.PAYMENT_METHODS.UNKNOWN';
   }
 
   getStatusClass(status: BillingStatus): string {
@@ -225,7 +226,7 @@ export class BillingComponent implements OnInit, OnDestroy {
         error: (error: Error) => {
           this.errorMessage.set(
             error.message ||
-              'No fue posible obtener la informacion de facturacion.'
+              'No fue posible obtener la información de facturación.'
           );
         },
       });

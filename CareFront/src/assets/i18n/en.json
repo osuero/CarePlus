@@ -144,6 +144,7 @@
       "APPOINTMENTS": "Appointments",
       "DOCTORS": "Doctors",
       "PATIENTS": "Patients",
+      "BILLING": "Billing",
       "SETTINGS": "Settings",
       "CHAT": "Chat"
     },
@@ -517,13 +518,63 @@
       "CANCEL": "Cancel",
       "NO_PROVIDERS": "No insurance providers available.",
       "LOADING_PROVIDERS": "Loading providers...",
+      "LOADING": "Loading billing records...",
+      "RETRY": "Retry",
+      "EMPTY_DOCTOR_TITLE": "No billing records yet",
+      "EMPTY_DOCTOR_SUBTITLE": "Complete a consultation and register the payment to see it here.",
+      "CLOSE": "Close",
+      "PRINT": "Print PDF",
+      "YES": "Yes",
+      "NO": "No",
       "PAYMENT_METHODS": {
         "CASH": "Cash",
         "CREDIT_CARD": "Credit card",
         "DEBIT_CARD": "Debit card",
         "BANK_TRANSFER": "Bank transfer",
         "INSURANCE_ONLY": "Insurance only",
-        "MIXED": "Mixed"
+        "MIXED": "Mixed",
+        "UNKNOWN": "Unknown method"
+      },
+      "STATUS": {
+        "PENDING": "Pending",
+        "PAID": "Paid",
+        "PARTIAL": "Partially paid",
+        "CANCELLED": "Cancelled",
+        "UNKNOWN": "Unknown"
+      },
+      "TABLE": {
+        "PATIENT": "Patient",
+        "DOCTOR": "Doctor",
+        "DATE": "Date",
+        "AMOUNT": "Amount",
+        "PAYMENT": "Payment",
+        "STATUS": "Status",
+        "INSURANCE": "Insurance",
+        "ACTIONS": "Actions",
+        "UNASSIGNED": "Unassigned",
+        "CREATED": "Created",
+        "PATIENT_AMOUNT": "Patient",
+        "INSURANCE_AMOUNT": "Insurance",
+        "INSURANCE_USED": "Insurance used",
+        "NOT_AVAILABLE": "N/A",
+        "POLICY": "Policy"
+      },
+      "DETAIL": {
+        "TITLE": "Billing details",
+        "APPOINTMENT": "Appointment",
+        "PAYMENT": "Payment",
+        "INSURANCE": "Insurance",
+        "METADATA": "Metadata",
+        "UPDATED": "Last updated"
+      },
+      "FILTERS": {
+        "PATIENT": "Patient",
+        "DOCTOR": "Doctor",
+        "INSURANCE": "Insurance",
+        "DATE_FROM": "From date",
+        "DATE_TO": "To date",
+        "CLEAR": "Clear filters",
+        "ALL": "All"
       },
       "ERRORS": {
         "AMOUNT_REQUIRED": "Enter the consultation amount.",

@@ -1,0 +1,56 @@
+.detail-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 360px;
+}
+
+.detail-section {
+  h3 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #546e7a;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0;
+    border-top: 1px solid #eceff1;
+  }
+}
+
+.label {
+  font-size: 11px;
+  color: #90a4ae;
+  text-transform: uppercase;
+  margin-bottom: 0.1rem;
+}
+
+mat-chip.status-pending {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+mat-chip.status-paid {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+mat-chip.status-partial {
+  background: #fffde7;
+  color: #f9a825;
+}
+
+mat-chip.status-cancelled {
+  background: #ffebee;
+  color: #c62828;
+}

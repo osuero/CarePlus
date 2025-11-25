@@ -144,6 +144,7 @@
       "APPOINTMENTS": "Termine",
       "DOCTORS": "Ärzte",
       "PATIENTS": "Patienten",
+      "BILLING": "Abrechnung",
       "SETTINGS": "Einstellungen",
       "CHAT": "Chat"
     },
@@ -383,13 +384,63 @@
       "CANCEL": "Abbrechen",
       "NO_PROVIDERS": "Keine Versicherer verfügbar.",
       "LOADING_PROVIDERS": "Versicherer werden geladen...",
+      "LOADING": "Abrechnungen werden geladen...",
+      "RETRY": "Erneut versuchen",
+      "EMPTY_DOCTOR_TITLE": "Noch keine Abrechnungen",
+      "EMPTY_DOCTOR_SUBTITLE": "Schließe eine Konsultation ab und erfasse den Zahlungsvorgang, um ihn hier zu sehen.",
+      "CLOSE": "Schließen",
+      "PRINT": "Als PDF drucken",
+      "YES": "Ja",
+      "NO": "Nein",
       "PAYMENT_METHODS": {
         "CASH": "Bar",
         "CREDIT_CARD": "Kreditkarte",
         "DEBIT_CARD": "Debitkarte",
         "BANK_TRANSFER": "Überweisung",
         "INSURANCE_ONLY": "Nur Versicherung",
-        "MIXED": "Gemischt"
+        "MIXED": "Gemischt",
+        "UNKNOWN": "Unbekannte Methode"
+      },
+      "STATUS": {
+        "PENDING": "Ausstehend",
+        "PAID": "Bezahlt",
+        "PARTIAL": "Teilweise bezahlt",
+        "CANCELLED": "Storniert",
+        "UNKNOWN": "Unbekannt"
+      },
+      "TABLE": {
+        "PATIENT": "Patient",
+        "DOCTOR": "Arzt",
+        "DATE": "Datum",
+        "AMOUNT": "Betrag",
+        "PAYMENT": "Zahlung",
+        "STATUS": "Status",
+        "INSURANCE": "Versicherung",
+        "ACTIONS": "Aktionen",
+        "UNASSIGNED": "Nicht zugewiesen",
+        "CREATED": "Erstellt",
+        "PATIENT_AMOUNT": "Patient",
+        "INSURANCE_AMOUNT": "Versicherung",
+        "INSURANCE_USED": "Versicherung genutzt",
+        "NOT_AVAILABLE": "k. A.",
+        "POLICY": "Police"
+      },
+      "DETAIL": {
+        "TITLE": "Abrechnungsdetails",
+        "APPOINTMENT": "Termin",
+        "PAYMENT": "Zahlung",
+        "INSURANCE": "Versicherung",
+        "METADATA": "Metadaten",
+        "UPDATED": "Zuletzt aktualisiert"
+      },
+      "FILTERS": {
+        "PATIENT": "Patient",
+        "DOCTOR": "Arzt",
+        "INSURANCE": "Versicherung",
+        "DATE_FROM": "Von Datum",
+        "DATE_TO": "Bis Datum",
+        "CLEAR": "Filter zurücksetzen",
+        "ALL": "Alle"
       },
       "ERRORS": {
         "AMOUNT_REQUIRED": "Bitte den Betrag eingeben.",

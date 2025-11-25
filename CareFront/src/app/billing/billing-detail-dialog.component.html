@@ -1,0 +1,123 @@
+<h2 mat-dialog-title>
+  {{ 'APPOINTMENTS.BILLING.DETAIL.TITLE' | translate }}
+</h2>
+
+<mat-dialog-content class="detail-dialog">
+  <section class="detail-section">
+    <h3>{{ 'APPOINTMENTS.BILLING.DETAIL.APPOINTMENT' | translate }}</h3>
+    <div class="detail-grid">
+      <div>
+        <span class="label">{{ 'APPOINTMENTS.BILLING.PATIENT' | translate }}</span>
+        <span>{{ data.billing.patientName || ('APPOINTMENTS.BILLING.TABLE.UNASSIGNED' | translate) }}</span>
+      </div>
+      <div>
+        <span class="label">{{ 'APPOINTMENTS.BILLING.DOCTOR' | translate }}</span>
+        <span>{{ data.billing.doctorName || ('APPOINTMENTS.BILLING.TABLE.UNASSIGNED' | translate) }}</span>
+      </div>
+      <div>
+        <span class="label">{{ 'APPOINTMENTS.BILLING.DATE' | translate }}</span>
+        <span>{{ data.billing.appointmentStartsAtUtc | date: 'fullDate' }} {{ data.billing.appointmentStartsAtUtc | date: 'shortTime' }}</span>
+      </div>
+      <div>
+        <span class="label">{{ 'APPOINTMENTS.BILLING.TABLE.STATUS' | translate }}</span>
+        <mat-chip-set>
+          <mat-chip [ngClass]="getStatusCssClass(data.billing.status)">
+            {{ getStatusTranslationKey(data.billing.status) | translate }}
+          </mat-chip>
+        </mat-chip-set>
+      </div>
+    </div>
+  </section>
+
+  <section class="detail-section">
+    <h3>{{ 'APPOINTMENTS.BILLING.DETAIL.PAYMENT' | translate }}</h3>
+    <div class="detail-grid">
+      <div>
+        <span class="label">{{ 'APPOINTMENTS.BILLING.AMOUNT' | translate }}</span>
+        <span>{{ data.billing.consultationAmount | currency: data.billing.currency:'symbol':'1.2-2' }}</span>
+      </div>
+      <div>
+        <span class="label">{{ 'APPOINTMENTS.BILLING.PAYMENT_METHOD' | translate }}</span>
+        <span>{{ getPaymentMethodTranslationKey(data.billing.paymentMethod) | translate }}</span>
+      </div>
+      <div>
+        <span class="label">{{ 'APPOINTMENTS.BILLING.TABLE.PATIENT_AMOUNT' | translate }}</span>
+        <span>
+          {{
+            (data.billing.amountPaidByPatient ?? 0)
+              | currency: data.billing.currency:'symbol':'1.2-2'
+          }}
+        </span>
+      </div>
+      <div>
+        <span class="label">{{ 'APPOINTMENTS.BILLING.TABLE.INSURANCE_AMOUNT' | translate }}</span>
+        <span>
+          {{
+            (data.billing.amountBilledToInsurance ?? 0)
+              | currency: data.billing.currency:'symbol':'1.2-2'
+          }}
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="detail-section" *ngIf="data.billing.usesInsurance">
+    <h3>{{ 'APPOINTMENTS.BILLING.DETAIL.INSURANCE' | translate }}</h3>
+    <div class="detail-grid">
+      <div>
+        <span class="label">{{ 'APPOINTMENTS.BILLING.INSURANCE_PROVIDER' | translate }}</span>
+        <span>{{ data.billing.insuranceProviderName || ('APPOINTMENTS.BILLING.TABLE.NOT_AVAILABLE' | translate) }}</span>
+      </div>
+      <div>
+        <span class="label">{{ 'APPOINTMENTS.BILLING.POLICY_NUMBER' | translate }}</span>
+        <span>{{ data.billing.insurancePolicyNumber || ('APPOINTMENTS.BILLING.TABLE.NOT_AVAILABLE' | translate) }}</span>
+      </div>
+      <div>
+        <span class="label">{{ 'APPOINTMENTS.BILLING.COVERAGE_PERCENTAGE' | translate }}</span>
+        <span>{{ data.billing.coveragePercentage ?? 0 }}%</span>
+      </div>
+      <div>
+        <span class="label">{{ 'APPOINTMENTS.BILLING.COPAY' | translate }}</span>
+        <span>
+          {{
+            (data.billing.copayAmount ?? 0)
+              | currency: data.billing.currency:'symbol':'1.2-2'
+          }}
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="detail-section">
+    <h3>{{ 'APPOINTMENTS.BILLING.DETAIL.METADATA' | translate }}</h3>
+    <div class="detail-grid">
+      <div>
+        <span class="label">{{ 'APPOINTMENTS.BILLING.TABLE.CREATED' | translate }}</span>
+        <span>{{ data.billing.createdAtUtc | date: 'medium' }}</span>
+      </div>
+      <div>
+        <span class="label">{{ 'APPOINTMENTS.BILLING.DETAIL.UPDATED' | translate }}</span>
+        <span>{{ data.billing.updatedAtUtc | date: 'medium' }}</span>
+      </div>
+      <div>
+        <span class="label">{{ 'APPOINTMENTS.BILLING.TABLE.INSURANCE_USED' | translate }}</span>
+        <span>
+          {{
+            data.billing.usesInsurance
+              ? ('APPOINTMENTS.BILLING.YES' | translate)
+              : ('APPOINTMENTS.BILLING.NO' | translate)
+          }}
+        </span>
+      </div>
+    </div>
+  </section>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="print()">
+    {{ 'APPOINTMENTS.BILLING.PRINT' | translate }}
+  </button>
+  <button mat-flat-button mat-dialog-close color="primary">
+    {{ 'APPOINTMENTS.BILLING.CLOSE' | translate }}
+  </button>
+</mat-dialog-actions>
