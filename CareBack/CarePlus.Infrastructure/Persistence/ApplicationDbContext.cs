@@ -14,6 +14,12 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<Appointment> Appointments => Set<Appointment>();
     public DbSet<Billing> Billings => Set<Billing>();
     public DbSet<InsuranceProvider> InsuranceProviders => Set<InsuranceProvider>();
+    public DbSet<Consultation> Consultations => Set<Consultation>();
+    public DbSet<SymptomEntry> SymptomEntries => Set<SymptomEntry>();
+    public DbSet<Prescription> Prescriptions => Set<Prescription>();
+    public DbSet<PrescriptionItem> PrescriptionItems => Set<PrescriptionItem>();
+    public DbSet<LabRequisition> LabRequisitions => Set<LabRequisition>();
+    public DbSet<LabRequisitionItem> LabRequisitionItems => Set<LabRequisitionItem>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
