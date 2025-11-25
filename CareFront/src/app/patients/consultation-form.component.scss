@@ -4,6 +4,42 @@
   gap: 1rem;
 }
 
+.patient-banner {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #f5f7fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 12px;
+
+  .banner-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    mat-icon {
+      color: #1976d2;
+    }
+
+    .label {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #6b7280;
+    }
+
+    .value {
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #4b5563;
+    }
+  }
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

@@ -1,5 +1,27 @@
 <h2 mat-dialog-title>{{ editing ? 'Editar consulta' : 'Nueva consulta' }}</h2>
 <div mat-dialog-content>
+  <div class="patient-banner" *ngIf="data.patientName || data.appointmentContext">
+    <div class="banner-item" *ngIf="data.patientName">
+      <mat-icon>person</mat-icon>
+      <div>
+        <div class="label">Paciente</div>
+        <div class="value">{{ data.patientName }}</div>
+      </div>
+    </div>
+    <div class="banner-item" *ngIf="data.appointmentContext">
+      <mat-icon>event</mat-icon>
+      <div>
+        <div class="label">Cita médica</div>
+        <div class="value">{{ data.appointmentContext?.title || 'Consulta médica' }}</div>
+        <div class="hint" *ngIf="data.appointmentContext?.startsAtUtc">
+          {{ data.appointmentContext?.startsAtUtc | date: 'medium' }}
+        </div>
+        <div class="hint" *ngIf="data.appointmentContext?.doctorName">
+          {{ data.appointmentContext?.doctorName }}
+        </div>
+      </div>
+    </div>
+  </div>
   <form [formGroup]="form" class="consultation-form" (ngSubmit)="save()">
     <div class="form-grid">
       <mat-form-field appearance="fill" *ngIf="!editing">

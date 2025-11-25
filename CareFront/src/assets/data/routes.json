@@ -313,7 +313,7 @@
       "groupTitle": false,
       "badge": "",
       "badgeClass": "",
-      "role": ["ADMIN"],
+      "role": ["ADMIN", "DOCTOR"],
       "submenu": [
         {
           "path": "/patients",

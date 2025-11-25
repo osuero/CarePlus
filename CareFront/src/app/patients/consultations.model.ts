@@ -23,6 +23,7 @@ export interface ConsultationDetail {
   reasonForVisit: string;
   notes?: string | null;
   symptoms: SymptomEntryDto[];
+  appointmentId?: string | null;
 }
 
 export interface PagedConsultationResponse {
@@ -39,6 +40,7 @@ export interface CreateConsultationRequest {
   reasonForVisit: string;
   notes?: string | null;
   symptoms: SymptomEntryDto[];
+  appointmentId?: string | null;
 }
 
 export interface UpdateConsultationRequest {

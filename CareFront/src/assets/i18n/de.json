@@ -326,7 +326,8 @@
       "EDIT": "Termin bearbeiten",
       "CANCEL": "Termin absagen",
       "DELETE": "Termin löschen",
-      "BILL": "Abrechnung erstellen"
+      "BILL": "Abrechnung erstellen",
+      "START_CONSULTATION": "Konsultation starten"
     },
     "TABLE": {
       "PATIENT": "Patient",
@@ -362,6 +363,7 @@
       "DELETE_CONFIRM_BUTTON": "Ja, löschen",
       "DELETE_CANCEL_BUTTON": "Abbrechen",
       "BILLING_CREATED": "Die Abrechnung wurde erfolgreich erstellt.",
+      "CONSULTATION_REQUIRES_PATIENT": "Diese Aktion ist nur für Termine mit zugewiesenem Patienten verfügbar.",
       "ERROR_TITLE": "Etwas ist schiefgelaufen",
       "ERROR_BODY": "Die Anfrage konnte nicht abgeschlossen werden. Bitte versuche es erneut."
     },

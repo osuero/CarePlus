@@ -460,7 +460,8 @@
       "EDIT": "Editar cita",
       "CANCEL": "Cancelar cita",
       "DELETE": "Eliminar cita",
-      "BILL": "Registrar cobro"
+      "BILL": "Registrar cobro",
+      "START_CONSULTATION": "Registrar consulta"
     },
     "TABLE": {
       "PATIENT": "Paciente",
@@ -496,6 +497,7 @@
       "DELETE_CONFIRM_BUTTON": "Sí, eliminar",
       "DELETE_CANCEL_BUTTON": "Cancelar",
       "BILLING_CREATED": "El cobro se registró correctamente.",
+      "CONSULTATION_REQUIRES_PATIENT": "Esta acción solo está disponible para citas con paciente asignado.",
       "ERROR_TITLE": "Ocurrió un error",
       "ERROR_BODY": "No pudimos completar la solicitud. Intenta nuevamente."
     },
