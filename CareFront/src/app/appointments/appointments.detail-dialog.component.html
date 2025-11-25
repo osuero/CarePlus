@@ -62,6 +62,10 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
+  <button mat-stroked-button color="primary" (click)="startConsultation()" [disabled]="!data.appointment.patientId">
+    <mat-icon>medical_information</mat-icon>
+    {{ 'APPOINTMENTS.ACTIONS.START_CONSULTATION' | translate }}
+  </button>
   <button mat-button mat-dialog-close>
     {{ 'APPOINTMENTS.DIALOGS.CLOSE' | translate }}
   </button>

@@ -25,10 +25,20 @@ import {
 } from './consultations.model';
 import { DoctorSummary } from './patients.model';
 
+export interface ConsultationAppointmentContext {
+  appointmentId: string;
+  title?: string | null;
+  startsAtUtc?: string | null;
+  doctorId?: string | null;
+  doctorName?: string | null;
+}
+
 export interface ConsultationFormData {
   patientId: string;
+  patientName?: string;
   doctors: DoctorSummary[];
   consultation?: ConsultationDetail;
+  appointmentContext?: ConsultationAppointmentContext;
 }
 
 export interface ConsultationFormResult {
@@ -70,21 +80,30 @@ export class ConsultationFormComponent {
     @Inject(MAT_DIALOG_DATA) public data: ConsultationFormData
   ) {
     this.editing = !!data.consultation;
+    const initialDate = data.consultation?.consultationDateTime
+      ? new Date(data.consultation.consultationDateTime)
+      : data.appointmentContext?.startsAtUtc
+        ? new Date(data.appointmentContext.startsAtUtc)
+        : '';
+    const initialDoctorId =
+      data.consultation?.doctorId ?? data.appointmentContext?.doctorId ?? '';
+    const initialReason =
+      data.consultation?.reasonForVisit ?? data.appointmentContext?.title ?? '';
+
     this.form = this.fb.group({
-      consultationDateTime: new FormControl(
-        data.consultation?.consultationDateTime
-          ? new Date(data.consultation.consultationDateTime)
-          : '',
-        { validators: this.editing ? [] : [Validators.required] }
-      ),
+      consultationDateTime: new FormControl(initialDate, {
+        validators: this.editing ? [] : [Validators.required],
+      }),
       doctorId: new FormControl(
-        data.consultation?.doctorId ?? '',
-        this.editing ? [] : [Validators.required]
+        initialDoctorId,
+        this.editing || data.appointmentContext?.doctorId
+          ? []
+          : [Validators.required]
       ),
-      reasonForVisit: new FormControl(
-        data.consultation?.reasonForVisit ?? '',
-        [Validators.required, Validators.maxLength(512)]
-      ),
+      reasonForVisit: new FormControl(initialReason, [
+        Validators.required,
+        Validators.maxLength(512),
+      ]),
       notes: new FormControl(data.consultation?.notes ?? ''),
       symptoms: this.fb.array<FormGroup>([]),
     });
@@ -95,8 +114,11 @@ export class ConsultationFormComponent {
       this.addSymptom();
     }
 
-    if (this.editing) {
+    if (this.editing || data.appointmentContext?.doctorId) {
       this.form.get('doctorId')?.disable();
+    }
+
+    if (this.editing) {
       this.form.get('consultationDateTime')?.disable();
     }
   }
@@ -127,6 +149,7 @@ export class ConsultationFormComponent {
     }
 
     this.saving = true;
+    const formValue = this.form.getRawValue();
     const payloadSymptoms = this.symptoms.value
       .filter((symptom) => (symptom?.description ?? '').toString().trim().length > 0)
       .map<SymptomEntryDto>((symptom) => ({
@@ -135,6 +158,21 @@ export class ConsultationFormComponent {
         severity: symptom.severity === null ? null : Number(symptom.severity),
         additionalNotes: symptom.additionalNotes?.toString().trim() || null,
       }));
+
+    const doctorId =
+      formValue.doctorId?.toString().trim() ||
+      this.data.appointmentContext?.doctorId ||
+      '';
+    const consultationDateValue =
+      formValue.consultationDateTime ||
+      this.data.appointmentContext?.startsAtUtc ||
+      '';
+
+    if (!doctorId || !consultationDateValue) {
+      this.errorMessage = 'Faltan datos de la cita para registrar la consulta.';
+      this.saving = false;
+      return;
+    }
 
     if (this.editing && this.data.consultation) {
       const request: UpdateConsultationRequest = {
@@ -160,13 +198,12 @@ export class ConsultationFormComponent {
 
     const request: CreateConsultationRequest = {
       patientId: this.data.patientId,
-      doctorId: this.form.get('doctorId')?.value,
-      consultationDateTime: new Date(
-        this.form.get('consultationDateTime')?.value
-      ).toISOString(),
+      doctorId,
+      consultationDateTime: new Date(consultationDateValue).toISOString(),
       reasonForVisit: this.form.get('reasonForVisit')?.value?.toString().trim() ?? '',
       notes: this.form.get('notes')?.value?.toString().trim() || null,
       symptoms: payloadSymptoms,
+      appointmentId: this.data.appointmentContext?.appointmentId ?? null,
     };
 
     this.consultationsApi.create(request).subscribe({

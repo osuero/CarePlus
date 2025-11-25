@@ -152,6 +152,14 @@
                       <mat-icon>payments</mat-icon>
                       {{ 'APPOINTMENTS.ACTIONS.BILL' | translate }}
                     </button>
+                    <button
+                      mat-menu-item
+                      (click)="startConsultation(appointment)"
+                      [disabled]="!appointment.patientId"
+                    >
+                      <mat-icon>medical_information</mat-icon>
+                      {{ 'APPOINTMENTS.ACTIONS.START_CONSULTATION' | translate }}
+                    </button>
                     <button mat-menu-item (click)="confirmDelete(appointment)">
                       <mat-icon>delete</mat-icon>
                       {{ 'APPOINTMENTS.ACTIONS.DELETE' | translate }}

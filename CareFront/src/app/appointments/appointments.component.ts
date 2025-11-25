@@ -48,6 +48,7 @@ import {
   mapAppointmentStatusToCssClass,
   mapAppointmentStatusToTranslationKey,
 } from './appointment-status.utils';
+import { Router } from '@angular/router';
 
 interface AppointmentQueryState {
   page: number;
@@ -84,6 +85,7 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
   private readonly appointmentsService = inject(AppointmentsService);
   private readonly translate = inject(TranslateService);
   private readonly dialog = inject(MatDialog);
+  private readonly router = inject(Router);
   private readonly destroy$ = new Subject<void>();
 
   readonly searchControl = new FormControl<string>('', { nonNullable: true });
@@ -320,6 +322,23 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
 
   canCreateBilling(appointment: Appointment): boolean {
     return this.isCompletedStatus(appointment.status);
+  }
+
+  startConsultation(appointment: Appointment): void {
+    if (!appointment.patientId) {
+      this.showErrorMessage(
+        new Error(
+          this.translate.instant(
+            'APPOINTMENTS.MESSAGES.CONSULTATION_REQUIRES_PATIENT'
+          )
+        )
+      );
+      return;
+    }
+
+    this.router.navigate(['/patients', appointment.patientId], {
+      queryParams: { appointmentId: appointment.id },
+    });
   }
 
   private loadAppointments(page: number): void {

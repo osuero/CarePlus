@@ -460,7 +460,8 @@
       "EDIT": "Edit appointment",
       "CANCEL": "Cancel appointment",
       "DELETE": "Delete appointment",
-      "BILL": "Create billing"
+      "BILL": "Create billing",
+      "START_CONSULTATION": "Start consultation"
     },
     "TABLE": {
       "PATIENT": "Patient",
@@ -496,6 +497,7 @@
       "DELETE_CONFIRM_BUTTON": "Yes, delete",
       "DELETE_CANCEL_BUTTON": "Cancel",
       "BILLING_CREATED": "The billing record was created successfully.",
+      "CONSULTATION_REQUIRES_PATIENT": "This action is only available for appointments linked to a patient.",
       "ERROR_TITLE": "Something went wrong",
       "ERROR_BODY": "We couldn't complete the request. Please try again."
     },
