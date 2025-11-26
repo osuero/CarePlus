@@ -14,4 +14,6 @@ public class ConsultationDetailDto
     public string ReasonForVisit { get; init; } = string.Empty;
     public string? Notes { get; init; }
     public List<SymptomEntryDto> Symptoms { get; init; } = new();
+    public LabRequisitionDto? LabRequisition { get; init; }
+    public PrescriptionDto? Prescription { get; init; }
 }

@@ -484,5 +484,55 @@
       "TITLE": "Keine Termine",
       "DESCRIPTION": "Erstelle einen neuen Termin, um zu starten."
     }
+  },
+  "CONSULTATION": {
+    "FORM": {
+      "TITLE_EDIT": "Konsultation bearbeiten",
+      "TITLE_NEW": "Neue Konsultation",
+      "PATIENT_LABEL": "Patient",
+      "APPOINTMENT_LABEL": "Termin",
+      "APPOINTMENT_DEFAULT_TITLE": "Ärztliche Konsultation",
+      "DOCTOR_LABEL": "Arzt",
+      "DOCTOR_REQUIRED": "Bitte Arzt auswählen.",
+      "REASON_LABEL": "Grund",
+      "REASON_REQUIRED": "Grund ist erforderlich.",
+      "NOTES_LABEL": "Notizen",
+      "SYMPTOMS_TITLE": "Symptome",
+      "ADD_SYMPTOM": "Symptom hinzufügen",
+      "SYMPTOM_ITEM_TITLE": "Symptom {{index}}",
+      "DESCRIPTION_LABEL": "Beschreibung",
+      "DESCRIPTION_REQUIRED": "Beschreibung ist erforderlich.",
+      "ONSET_LABEL": "Startdatum",
+      "SEVERITY_LABEL": "Schweregrad",
+      "ADDITIONAL_NOTES_LABEL": "Zusätzliche Notizen",
+      "CANCEL": "Abbrechen",
+      "SAVE": "Speichern",
+      "SAVING": "Speichern..."
+    }
+  },
+  "PATIENT_DETAIL": {
+    "TITLE": "Patientenprofil",
+    "BREADCRUMB_PARENT": "Patienten",
+    "BACK": "Zur?ck",
+    "EMAIL": "E-Mail",
+    "DOCUMENT": "Dokument",
+    "PHONE": "Telefon",
+    "COUNTRY": "Land",
+    "GENDER": "Geschlecht",
+    "BIRTHDATE": "Geburtsdatum",
+    "CONSULTATIONS_TITLE": "Konsultationen",
+    "NEW_CONSULTATION": "Neue Konsultation",
+    "LOADING": "Konsultationen werden geladen...",
+    "EMPTY": "Keine Konsultationen vorhanden.",
+    "PREVIOUS": "Zur?ck",
+    "NEXT": "Weiter",
+    "PAGE_INFO": "Seite {{page}} ? Gesamt {{total}}",
+    "TABLE": {
+      "DATE": "Datum",
+      "DOCTOR": "Arzt",
+      "REASON": "Grund",
+      "SYMPTOMS": "Symptome",
+      "NO_SYMPTOMS": "Keine Symptome"
+    }
   }
 }

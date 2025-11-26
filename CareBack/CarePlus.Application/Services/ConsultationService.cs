@@ -46,7 +46,27 @@ public class ConsultationService(
         };
 
         var symptoms = BuildSymptoms(tenantId, request.Symptoms);
-        consultation = await _consultationRepository.AddAsync(consultation, symptoms, cancellationToken);
+        var labPayload = BuildLabRequisition(
+            tenantId,
+            consultation.PatientId,
+            consultation.DoctorId,
+            consultation.MedicalCenterId,
+            request.LabRequisition);
+        var prescriptionPayload = BuildPrescription(
+            tenantId,
+            consultation.PatientId,
+            consultation.DoctorId,
+            consultation.MedicalCenterId,
+            request.Prescription);
+
+        consultation = await _consultationRepository.AddAsync(
+            consultation,
+            symptoms,
+            labPayload.Requisition,
+            labPayload.Items,
+            prescriptionPayload.Prescription,
+            prescriptionPayload.Items,
+            cancellationToken);
 
         var persisted = await _consultationRepository.GetByIdWithSymptomsAsync(tenantId, consultation.Id, cancellationToken)
             ?? consultation;
@@ -76,7 +96,27 @@ public class ConsultationService(
         consultation.Touch();
 
         var symptoms = BuildSymptoms(tenantId, request.Symptoms);
-        await _consultationRepository.UpdateAsync(consultation, symptoms, cancellationToken);
+        var labPayload = BuildLabRequisition(
+            tenantId,
+            consultation.PatientId,
+            consultation.DoctorId,
+            consultation.MedicalCenterId,
+            request.LabRequisition);
+        var prescriptionPayload = BuildPrescription(
+            tenantId,
+            consultation.PatientId,
+            consultation.DoctorId,
+            consultation.MedicalCenterId,
+            request.Prescription);
+
+        await _consultationRepository.UpdateAsync(
+            consultation,
+            symptoms,
+            labPayload.Requisition,
+            labPayload.Items,
+            prescriptionPayload.Prescription,
+            prescriptionPayload.Items,
+            cancellationToken);
 
         var refreshed = await _consultationRepository.GetByIdWithSymptomsAsync(tenantId, id, cancellationToken)
             ?? consultation;
@@ -130,5 +170,86 @@ public class ConsultationService(
                     : symptom.AdditionalNotes!.Trim()
             })
             .ToList();
+    }
+
+    private static (LabRequisition? Requisition, List<LabRequisitionItem> Items) BuildLabRequisition(
+        string tenantId,
+        Guid patientId,
+        Guid doctorId,
+        Guid medicalCenterId,
+        LabRequisitionDto? request)
+    {
+        if (request is null)
+        {
+            return (null, new List<LabRequisitionItem>());
+        }
+
+        var requisition = new LabRequisition
+        {
+            TenantId = tenantId,
+            PatientId = patientId,
+            DoctorId = doctorId,
+            MedicalCenterId = medicalCenterId,
+            RequisitionDate = request.RequisitionDate ?? DateTime.UtcNow,
+            Notes = string.IsNullOrWhiteSpace(request.Notes) ? null : request.Notes.Trim()
+        };
+
+        var items = request.Items
+            .Where(item => !string.IsNullOrWhiteSpace(item.TestName))
+            .Select(item => new LabRequisitionItem
+            {
+                TenantId = tenantId,
+                TestName = item.TestName!.Trim(),
+                TestCode = string.IsNullOrWhiteSpace(item.TestCode) ? null : item.TestCode!.Trim(),
+                Instructions = string.IsNullOrWhiteSpace(item.Instructions) ? null : item.Instructions!.Trim()
+            })
+            .ToList();
+
+        return (requisition, items);
+    }
+
+    private static (Prescription? Prescription, List<PrescriptionItem> Items) BuildPrescription(
+        string tenantId,
+        Guid patientId,
+        Guid doctorId,
+        Guid medicalCenterId,
+        PrescriptionDto? request)
+    {
+        if (request is null)
+        {
+            return (null, new List<PrescriptionItem>());
+        }
+
+        var prescription = new Prescription
+        {
+            TenantId = tenantId,
+            PatientId = patientId,
+            DoctorId = doctorId,
+            MedicalCenterId = medicalCenterId,
+            PrescriptionDate = request.PrescriptionDate ?? DateTime.UtcNow,
+            DoctorName = string.IsNullOrWhiteSpace(request.DoctorName) ? string.Empty : request.DoctorName.Trim(),
+            DoctorCode = string.IsNullOrWhiteSpace(request.DoctorCode) ? string.Empty : request.DoctorCode.Trim(),
+            MedicalCenterName = string.IsNullOrWhiteSpace(request.MedicalCenterName)
+                ? string.Empty
+                : request.MedicalCenterName.Trim(),
+            Notes = string.IsNullOrWhiteSpace(request.Notes) ? null : request.Notes.Trim(),
+            CreatedAt = DateTime.UtcNow
+        };
+
+        var items = request.Items
+            .Where(item => !string.IsNullOrWhiteSpace(item.DrugName))
+            .Select(item => new PrescriptionItem
+            {
+                TenantId = tenantId,
+                DrugName = item.DrugName!.Trim(),
+                Dosage = item.Dosage?.Trim() ?? string.Empty,
+                Frequency = item.Frequency?.Trim() ?? string.Empty,
+                Route = item.Route?.Trim() ?? string.Empty,
+                Duration = item.Duration?.Trim() ?? string.Empty,
+                Instructions = string.IsNullOrWhiteSpace(item.Instructions) ? null : item.Instructions!.Trim()
+            })
+            .ToList();
+
+        return (prescription, items);
     }
 }

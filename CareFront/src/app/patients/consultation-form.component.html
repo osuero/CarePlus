@@ -1,107 +1,117 @@
-<h2 mat-dialog-title>{{ editing ? 'Editar consulta' : 'Nueva consulta' }}</h2>
+<h2 mat-dialog-title>
+  {{ editing ? ('CONSULTATION.FORM.TITLE_EDIT' | translate) : ('CONSULTATION.FORM.TITLE_NEW' | translate) }}
+</h2>
+
 <div mat-dialog-content>
   <div class="patient-banner" *ngIf="data.patientName || data.appointmentContext">
     <div class="banner-item" *ngIf="data.patientName">
       <mat-icon>person</mat-icon>
       <div>
-        <div class="label">Paciente</div>
+        <div class="label">{{ 'CONSULTATION.FORM.PATIENT_LABEL' | translate }}</div>
         <div class="value">{{ data.patientName }}</div>
       </div>
     </div>
+
     <div class="banner-item" *ngIf="data.appointmentContext">
       <mat-icon>event</mat-icon>
       <div>
-        <div class="label">Cita médica</div>
-        <div class="value">{{ data.appointmentContext?.title || 'Consulta médica' }}</div>
-        <div class="hint" *ngIf="data.appointmentContext?.startsAtUtc">
-          {{ data.appointmentContext?.startsAtUtc | date: 'medium' }}
+        <div class="label">{{ 'CONSULTATION.FORM.APPOINTMENT_LABEL' | translate }}</div>
+        <div class="value">
+          {{ data.appointmentContext.title || ('CONSULTATION.FORM.APPOINTMENT_DEFAULT_TITLE' | translate) }}
         </div>
-        <div class="hint" *ngIf="data.appointmentContext?.doctorName">
-          {{ data.appointmentContext?.doctorName }}
+        <div class="hint" *ngIf="data.appointmentContext.startsAtUtc">
+          {{ data.appointmentContext.startsAtUtc | date: 'medium' }}
+        </div>
+        <div class="hint" *ngIf="data.appointmentContext.doctorName">
+          {{ data.appointmentContext.doctorName }}
         </div>
       </div>
     </div>
   </div>
+
   <form [formGroup]="form" class="consultation-form" (ngSubmit)="save()">
     <div class="form-grid">
       <mat-form-field appearance="fill" *ngIf="!editing">
-        <mat-label>Fecha de consulta</mat-label>
-        <input matInput type="datetime-local" formControlName="consultationDateTime" />
-        <mat-error *ngIf="form.get('consultationDateTime')?.hasError('required')">
-          La fecha es obligatoria.
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill" *ngIf="!editing">
-        <mat-label>Médico</mat-label>
+        <mat-label>{{ 'CONSULTATION.FORM.DOCTOR_LABEL' | translate }}</mat-label>
         <mat-select formControlName="doctorId">
           <mat-option *ngFor="let doctor of data.doctors" [value]="doctor.id">
             {{ doctor.fullName }}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="form.get('doctorId')?.hasError('required')">
-          Selecciona un médico.
+          {{ 'CONSULTATION.FORM.DOCTOR_REQUIRED' | translate }}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Motivo</mat-label>
+        <mat-label>{{ 'CONSULTATION.FORM.REASON_LABEL' | translate }}</mat-label>
         <input matInput formControlName="reasonForVisit" />
         <mat-error *ngIf="form.get('reasonForVisit')?.hasError('required')">
-          El motivo es obligatorio.
+          {{ 'CONSULTATION.FORM.REASON_REQUIRED' | translate }}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Notas</mat-label>
+        <mat-label>{{ 'CONSULTATION.FORM.NOTES_LABEL' | translate }}</mat-label>
         <textarea matInput rows="3" formControlName="notes"></textarea>
       </mat-form-field>
     </div>
 
     <div class="symptoms-header">
-      <h3>Síntomas</h3>
+      <h3>{{ 'CONSULTATION.FORM.SYMPTOMS_TITLE' | translate }}</h3>
       <button mat-stroked-button color="primary" type="button" (click)="addSymptom()">
         <mat-icon>add</mat-icon>
-        Agregar síntoma
+        {{ 'CONSULTATION.FORM.ADD_SYMPTOM' | translate }}
       </button>
     </div>
 
-    <div class="symptom" *ngFor="let symptom of symptoms.controls; index as i">
-      <div class="symptom-header">
-        <strong>Síntoma {{ i + 1 }}</strong>
-        <button mat-icon-button type="button" (click)="removeSymptom(i)" [disabled]="symptoms.length === 1">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-      <div class="form-grid">
-        <mat-form-field appearance="fill">
-          <mat-label>Descripción</mat-label>
-          <input matInput [formControlName]="'description'" />
-          <mat-error *ngIf="symptom.get('description')?.hasError('required')">
-            La descripción es obligatoria.
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Fecha de inicio</mat-label>
-          <input matInput type="date" [formControlName]="'onsetDate'" />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Severidad</mat-label>
-          <input matInput type="number" min="0" max="10" [formControlName]="'severity'" />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Notas adicionales</mat-label>
-          <textarea matInput rows="2" [formControlName]="'additionalNotes'"></textarea>
-        </mat-form-field>
+    <div formArrayName="symptoms">
+      <div class="symptom" *ngFor="let symptom of symptoms.controls; index as i" [formGroupName]="i">
+        <div class="symptom-header">
+          <strong>
+            {{ 'CONSULTATION.FORM.SYMPTOM_ITEM_TITLE' | translate: { index: i + 1 } }}
+          </strong>
+          <button mat-icon-button type="button" (click)="removeSymptom(i)" [disabled]="symptoms.length === 1">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+        <div class="form-grid">
+          <mat-form-field appearance="fill">
+            <mat-label>{{ 'CONSULTATION.FORM.DESCRIPTION_LABEL' | translate }}</mat-label>
+            <input matInput formControlName="description" />
+            <mat-error *ngIf="symptom.get('description')?.hasError('required')">
+              {{ 'CONSULTATION.FORM.DESCRIPTION_REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>{{ 'CONSULTATION.FORM.ONSET_LABEL' | translate }}</mat-label>
+            <input matInput type="date" formControlName="onsetDate" />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>{{ 'CONSULTATION.FORM.SEVERITY_LABEL' | translate }}</mat-label>
+            <input matInput type="number" min="0" max="10" formControlName="severity" />
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>{{ 'CONSULTATION.FORM.ADDITIONAL_NOTES_LABEL' | translate }}</mat-label>
+            <textarea matInput rows="2" formControlName="additionalNotes"></textarea>
+          </mat-form-field>
+        </div>
       </div>
     </div>
   </form>
 
   <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
 </div>
+
 <div mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close [disabled]="saving">Cancelar</button>
+  <button mat-button mat-dialog-close [disabled]="saving">
+    {{ 'CONSULTATION.FORM.CANCEL' | translate }}
+  </button>
   <button mat-flat-button color="primary" (click)="save()" [disabled]="saving">
-    {{ saving ? 'Guardando...' : 'Guardar' }}
+    {{ saving ? ('CONSULTATION.FORM.SAVING' | translate) : ('CONSULTATION.FORM.SAVE' | translate) }}
   </button>
 </div>

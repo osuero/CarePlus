@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { ConsultationsApiService } from './consultations-api.service';
 import {
   ConsultationDetail,
@@ -59,6 +60,7 @@ export interface ConsultationFormResult {
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    TranslateModule,
   ],
   templateUrl: './consultation-form.component.html',
   styleUrls: ['./consultation-form.component.scss'],
@@ -82,18 +84,14 @@ export class ConsultationFormComponent {
     this.editing = !!data.consultation;
     const initialDate = data.consultation?.consultationDateTime
       ? new Date(data.consultation.consultationDateTime)
-      : data.appointmentContext?.startsAtUtc
-        ? new Date(data.appointmentContext.startsAtUtc)
-        : '';
+      : new Date();
     const initialDoctorId =
       data.consultation?.doctorId ?? data.appointmentContext?.doctorId ?? '';
     const initialReason =
       data.consultation?.reasonForVisit ?? data.appointmentContext?.title ?? '';
 
     this.form = this.fb.group({
-      consultationDateTime: new FormControl(initialDate, {
-        validators: this.editing ? [] : [Validators.required],
-      }),
+      consultationDateTime: new FormControl(initialDate),
       doctorId: new FormControl(
         initialDoctorId,
         this.editing || data.appointmentContext?.doctorId
@@ -164,9 +162,7 @@ export class ConsultationFormComponent {
       this.data.appointmentContext?.doctorId ||
       '';
     const consultationDateValue =
-      formValue.consultationDateTime ||
-      this.data.appointmentContext?.startsAtUtc ||
-      '';
+      formValue.consultationDateTime || new Date();
 
     if (!doctorId || !consultationDateValue) {
       this.errorMessage = 'Faltan datos de la cita para registrar la consulta.';

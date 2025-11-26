@@ -51,4 +51,33 @@ public class ConsultationQueryService(IConsultationRepository consultationReposi
         var consultation = await _consultationRepository.GetByIdWithSymptomsAsync(tenantId, id, cancellationToken);
         return consultation is null ? null : ConsultationMapper.ToDetail(consultation);
     }
+
+    public async Task<PagedResult<ConsultationListItemDto>> SearchAsync(
+        string tenantId,
+        ConsultationSearchFilters filters,
+        int page,
+        int pageSize,
+        CancellationToken cancellationToken = default)
+    {
+        page = Math.Max(page, 1);
+        pageSize = Math.Clamp(pageSize, 1, 100);
+        var skip = (page - 1) * pageSize;
+
+        var consultations = await _consultationRepository.SearchAsync(
+            tenantId,
+            filters,
+            skip,
+            pageSize,
+            cancellationToken);
+
+        var totalCount = await _consultationRepository.CountAsync(tenantId, filters, cancellationToken);
+
+        return new PagedResult<ConsultationListItemDto>
+        {
+            Items = consultations.Select(ConsultationMapper.ToListItem).ToList(),
+            TotalCount = totalCount,
+            Page = page,
+            PageSize = pageSize
+        };
+    }
 }

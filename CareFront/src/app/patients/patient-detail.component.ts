@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
+import { TranslateModule } from '@ngx-translate/core';
 import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
 import { PatientsService } from './patients.service';
 import { Patient, DoctorSummary } from './patients.model';
@@ -29,6 +30,7 @@ import { AppointmentsService } from '../appointments/appointments.service';
     MatDialogModule,
     MatCardModule,
     BreadcrumbComponent,
+    TranslateModule,
   ],
   templateUrl: './patient-detail.component.html',
   styleUrls: ['./patient-detail.component.scss'],

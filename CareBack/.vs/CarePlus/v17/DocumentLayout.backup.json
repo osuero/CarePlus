@@ -104,35 +104,9 @@
               "RelativeDocumentMoniker": "CarePlus.Infrastructure\\Repositories\\BillingRepository.cs",
               "ToolTip": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Infrastructure\\Repositories\\BillingRepository.cs",
               "RelativeToolTip": "CarePlus.Infrastructure\\Repositories\\BillingRepository.cs",
-              "ViewState": "AgIAAD0AAAAAAAAAAIAzwEoAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAD0AAAAAAAAAAIAzwEQAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-22T11:18:40.468Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Application\\Services\\UserService.cs",
-              "RelativeDocumentMoniker": "CarePlus.Application\\Services\\UserService.cs",
-              "ToolTip": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Application\\Services\\UserService.cs",
-              "RelativeToolTip": "CarePlus.Application\\Services\\UserService.cs",
-              "ViewState": "AgIAAPkAAAAAAAAAAAAhwAEBAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-14T07:59:23.428Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "appsettings.Development.json",
-              "DocumentMoniker": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\appsettings.Development.json",
-              "RelativeDocumentMoniker": "CarePlus.Api\\appsettings.Development.json",
-              "ToolTip": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\appsettings.Development.json",
-              "RelativeToolTip": "CarePlus.Api\\appsettings.Development.json",
-              "ViewState": "AgIAACAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-18T22:21:51.197Z",
               "EditorCaption": ""
             },
             {
@@ -145,8 +119,7 @@
               "RelativeToolTip": "CarePlus.Api\\Endpoints\\UserEndpoints.cs",
               "ViewState": "AgIAADsAAAAAAAAAAAAAAEEAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-12T23:37:26.286Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-12T23:37:26.286Z"
             },
             {
               "$type": "Document",
@@ -158,8 +131,31 @@
               "RelativeToolTip": "CarePlus.Api\\appsettings.json",
               "ViewState": "AgIAAB0AAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-18T22:21:45.959Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-18T22:21:45.959Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Application\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "CarePlus.Application\\Services\\UserService.cs",
+              "ToolTip": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Application\\Services\\UserService.cs",
+              "RelativeToolTip": "CarePlus.Application\\Services\\UserService.cs",
+              "ViewState": "AgIAAPkAAAAAAAAAAAAhwAEBAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T07:59:23.428Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "CarePlus.Api\\appsettings.Development.json",
+              "ToolTip": "C:\\CarePlus\\CarePlus\\CareBack\\CarePlus.Api\\appsettings.Development.json",
+              "RelativeToolTip": "CarePlus.Api\\appsettings.Development.json",
+              "ViewState": "AgIAACAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-18T22:21:51.197Z"
             },
             {
               "$type": "Document",
@@ -171,8 +167,7 @@
               "RelativeToolTip": "CarePlus.Api\\Endpoints\\AuthEndpoints.cs",
               "ViewState": "AgIAAEYAAAAAAAAAAAAkwDAAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T09:51:56.682Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T09:51:56.682Z"
             },
             {
               "$type": "Document",
@@ -184,8 +179,7 @@
               "RelativeToolTip": "CarePlus.Application\\Interfaces\\Services\\IEmailService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T09:38:53.532Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-22T09:38:53.532Z"
             },
             {
               "$type": "Document",
@@ -197,8 +191,7 @@
               "RelativeToolTip": "CarePlus.Api\\GraphQL\\UserQueries.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-14T07:59:06.916Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-14T07:59:06.916Z"
             },
             {
               "$type": "Document",
@@ -210,8 +203,7 @@
               "RelativeToolTip": "CarePlus.Application\\DTOs\\Patients\\PatientResponse.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAIA5wBMAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-19T16:53:51.389Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-19T16:53:51.389Z"
             }
           ]
         }

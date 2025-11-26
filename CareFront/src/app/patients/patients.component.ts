@@ -47,6 +47,12 @@ export class PatientsComponent implements OnInit, OnDestroy {
   readonly searchControl = new FormControl<string>('', { nonNullable: true });
   readonly genderControl = new FormControl<string>('ALL', { nonNullable: true });
   readonly countryControl = new FormControl<string>('', { nonNullable: true });
+  readonly identificationControl = new FormControl<string>('', {
+    nonNullable: true,
+  });
+  readonly firstNameControl = new FormControl<string>('', { nonNullable: true });
+  readonly lastNameControl = new FormControl<string>('', { nonNullable: true });
+  readonly dateControl = new FormControl<string>('', { nonNullable: true });
 
   patients: Patient[] = [];
 
@@ -261,6 +267,30 @@ export class PatientsComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.loadPatients(1);
       });
+
+    this.identificationControl.valueChanges
+      .pipe(debounceTime(400), distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.loadPatients(1);
+      });
+
+    this.firstNameControl.valueChanges
+      .pipe(debounceTime(400), distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.loadPatients(1);
+      });
+
+    this.lastNameControl.valueChanges
+      .pipe(debounceTime(400), distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.loadPatients(1);
+      });
+
+    this.dateControl.valueChanges
+      .pipe(debounceTime(400), distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.loadPatients(1);
+      });
   }
 
   private loadPatients(page: number): void {
@@ -268,11 +298,25 @@ export class PatientsComponent implements OnInit, OnDestroy {
     const genderSelection = this.genderControl.value;
     const gender = genderSelection === 'ALL' ? null : genderSelection;
     const country = this.countryControl.value?.trim() || null;
+    const identification = this.identificationControl.value?.trim() || null;
+    const firstName = this.firstNameControl.value?.trim() || null;
+    const lastName = this.lastNameControl.value?.trim() || null;
+    const createdDate = this.dateControl.value || null;
 
     this.loadingPatients = true;
 
     this.patientsService
-      .getPatients(page, this.pageSize, search, gender, country)
+      .getPatients(
+        page,
+        this.pageSize,
+        search,
+        gender,
+        country,
+        identification,
+        firstName,
+        lastName,
+        createdDate
+      )
       .pipe(
         takeUntil(this.destroy$),
         finalize(() => {

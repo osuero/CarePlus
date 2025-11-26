@@ -15,6 +15,13 @@ public interface IConsultationQueryService
         int pageSize,
         CancellationToken cancellationToken = default);
 
+    Task<PagedResult<ConsultationListItemDto>> SearchAsync(
+        string tenantId,
+        ConsultationSearchFilters filters,
+        int page,
+        int pageSize,
+        CancellationToken cancellationToken = default);
+
     Task<ConsultationDetailDto?> GetDetailAsync(
         string tenantId,
         Guid id,

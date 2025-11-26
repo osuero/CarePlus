@@ -12,4 +12,6 @@ public class UpdateConsultationRequest
     public string? Notes { get; set; }
 
     public List<SymptomEntryDto> Symptoms { get; set; } = new();
+    public LabRequisitionDto? LabRequisition { get; set; }
+    public PrescriptionDto? Prescription { get; set; }
 }

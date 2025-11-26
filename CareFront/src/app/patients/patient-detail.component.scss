@@ -7,3 +7,30 @@
 .table-responsive {
   overflow-x: auto;
 }
+
+.patient-header {
+  padding: 16px 24px;
+  margin-bottom: 12px;
+}
+
+.card-title-padded {
+  padding: 16px 24px 0 24px;
+}
+
+.card-content-padded {
+  padding: 0 24px 16px 24px;
+}
+
+.consultations-card,
+.patient-card {
+  padding: 0;
+}
+
+.consultations-table th,
+.consultations-table td {
+  padding: 12px 16px;
+}
+
+.consultations-table th {
+  font-weight: 600;
+}

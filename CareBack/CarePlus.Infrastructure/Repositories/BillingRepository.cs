@@ -3,6 +3,7 @@ using CarePlus.Domain.Entities;
 using CarePlus.Domain.Enums;
 using CarePlus.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace CarePlus.Infrastructure.Repositories;
 

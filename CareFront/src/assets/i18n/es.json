@@ -628,5 +628,55 @@
       "TITLE": "No hay citas",
       "DESCRIPTION": "Crea una nueva cita para comenzar."
     }
+  },
+  "CONSULTATION": {
+    "FORM": {
+      "TITLE_EDIT": "Editar consulta",
+      "TITLE_NEW": "Nueva consulta",
+      "PATIENT_LABEL": "Paciente",
+      "APPOINTMENT_LABEL": "Cita médica",
+      "APPOINTMENT_DEFAULT_TITLE": "Consulta médica",
+      "DOCTOR_LABEL": "Médico",
+      "DOCTOR_REQUIRED": "Selecciona un médico.",
+      "REASON_LABEL": "Motivo",
+      "REASON_REQUIRED": "El motivo es obligatorio.",
+      "NOTES_LABEL": "Notas",
+      "SYMPTOMS_TITLE": "Síntomas",
+      "ADD_SYMPTOM": "Agregar síntoma",
+      "SYMPTOM_ITEM_TITLE": "Síntoma {{index}}",
+      "DESCRIPTION_LABEL": "Descripción",
+      "DESCRIPTION_REQUIRED": "La descripción es obligatoria.",
+      "ONSET_LABEL": "Fecha de inicio",
+      "SEVERITY_LABEL": "Severidad",
+      "ADDITIONAL_NOTES_LABEL": "Notas adicionales",
+      "CANCEL": "Cancelar",
+      "SAVE": "Guardar",
+      "SAVING": "Guardando..."
+    }
+  },
+  "PATIENT_DETAIL": {
+    "TITLE": "Perfil de paciente",
+    "BREADCRUMB_PARENT": "Pacientes",
+    "BACK": "Volver",
+    "EMAIL": "Email",
+    "DOCUMENT": "Documento",
+    "PHONE": "Teléfono",
+    "COUNTRY": "País",
+    "GENDER": "Género",
+    "BIRTHDATE": "Fecha de nacimiento",
+    "CONSULTATIONS_TITLE": "Consultas",
+    "NEW_CONSULTATION": "Nueva consulta",
+    "LOADING": "Cargando consultas...",
+    "EMPTY": "No hay consultas registradas.",
+    "PREVIOUS": "Anterior",
+    "NEXT": "Siguiente",
+    "PAGE_INFO": "Página {{page}} • Total {{total}}",
+    "TABLE": {
+      "DATE": "Fecha",
+      "DOCTOR": "Médico",
+      "REASON": "Motivo",
+      "SYMPTOMS": "Síntomas",
+      "NO_SYMPTOMS": "Sin s?ntomas"
+    }
   }
 }

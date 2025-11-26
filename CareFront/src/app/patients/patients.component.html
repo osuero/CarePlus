@@ -101,6 +101,43 @@
           </div>
         </div>
 
+        <div class="row g-2 align-items-center mb-3">
+          <div class="col-lg-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Cedula"
+              [formControl]="identificationControl"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-lg-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Nombre"
+              [formControl]="firstNameControl"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-lg-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Apellido"
+              [formControl]="lastNameControl"
+              autocomplete="off"
+            />
+          </div>
+          <div class="col-lg-3">
+            <input
+              type="date"
+              class="form-control"
+              [formControl]="dateControl"
+            />
+          </div>
+        </div>
+
         <div class="table-responsive">
           <table class="table table-hover align-middle mb-0">
             <thead>

@@ -628,5 +628,55 @@
       "TITLE": "No appointments",
       "DESCRIPTION": "Create a new appointment to get started."
     }
+  },
+  "CONSULTATION": {
+    "FORM": {
+      "TITLE_EDIT": "Edit consultation",
+      "TITLE_NEW": "New consultation",
+      "PATIENT_LABEL": "Patient",
+      "APPOINTMENT_LABEL": "Appointment",
+      "APPOINTMENT_DEFAULT_TITLE": "Medical consultation",
+      "DOCTOR_LABEL": "Doctor",
+      "DOCTOR_REQUIRED": "Select a doctor.",
+      "REASON_LABEL": "Reason",
+      "REASON_REQUIRED": "Reason is required.",
+      "NOTES_LABEL": "Notes",
+      "SYMPTOMS_TITLE": "Symptoms",
+      "ADD_SYMPTOM": "Add symptom",
+      "SYMPTOM_ITEM_TITLE": "Symptom {{index}}",
+      "DESCRIPTION_LABEL": "Description",
+      "DESCRIPTION_REQUIRED": "Description is required.",
+      "ONSET_LABEL": "Start date",
+      "SEVERITY_LABEL": "Severity",
+      "ADDITIONAL_NOTES_LABEL": "Additional notes",
+      "CANCEL": "Cancel",
+      "SAVE": "Save",
+      "SAVING": "Saving..."
+    }
+  },
+  "PATIENT_DETAIL": {
+    "TITLE": "Patient profile",
+    "BREADCRUMB_PARENT": "Patients",
+    "BACK": "Back",
+    "EMAIL": "Email",
+    "DOCUMENT": "Document",
+    "PHONE": "Phone",
+    "COUNTRY": "Country",
+    "GENDER": "Gender",
+    "BIRTHDATE": "Date of birth",
+    "CONSULTATIONS_TITLE": "Consultations",
+    "NEW_CONSULTATION": "New consultation",
+    "LOADING": "Loading consultations...",
+    "EMPTY": "No consultations registered.",
+    "PREVIOUS": "Previous",
+    "NEXT": "Next",
+    "PAGE_INFO": "Page {{page}} ? Total {{total}}",
+    "TABLE": {
+      "DATE": "Date",
+      "DOCTOR": "Doctor",
+      "REASON": "Reason",
+      "SYMPTOMS": "Symptoms",
+      "NO_SYMPTOMS": "No symptoms"
+    }
   }
 }

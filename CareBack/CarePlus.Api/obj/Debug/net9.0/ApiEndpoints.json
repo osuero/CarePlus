@@ -488,269 +488,6 @@
     "EndpointName": "CompletePasswordSetup"
   },
   {
-    "ContainingType": "CarePlus.Api.Endpoints.PatientEndpoints",
-    "Method": "ListAsync",
-    "RelativePath": "api/patients/",
-    "HttpMethod": "GET",
-    "IsController": false,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "page",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "pageSize",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "search",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "gender",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "country",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "CarePlus.Api.Endpoints.PatientEndpoints\u002BPatientCollectionDto",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/problem\u002Bjson"
-        ],
-        "StatusCode": 500
-      }
-    ],
-    "Tags": [
-      "Patients"
-    ],
-    "EndpointName": "ListPatients"
-  },
-  {
-    "ContainingType": "CarePlus.Api.Endpoints.PatientEndpoints",
-    "Method": "GetAsync",
-    "RelativePath": "api/patients/{id:guid}",
-    "HttpMethod": "GET",
-    "IsController": false,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "CarePlus.Application.DTOs.Patients.PatientResponse",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 200
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 404
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/problem\u002Bjson"
-        ],
-        "StatusCode": 500
-      }
-    ],
-    "Tags": [
-      "Patients"
-    ],
-    "EndpointName": "GetPatientById"
-  },
-  {
-    "ContainingType": "CarePlus.Api.Endpoints.PatientEndpoints",
-    "Method": "UpdateAsync",
-    "RelativePath": "api/patients/{id:guid}",
-    "HttpMethod": "PUT",
-    "IsController": false,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      },
-      {
-        "Name": "request",
-        "Type": "CarePlus.Application.DTOs.Patients.UpdatePatientRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "CarePlus.Application.DTOs.Patients.PatientResponse",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 200
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 400
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 404
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/problem\u002Bjson"
-        ],
-        "StatusCode": 500
-      }
-    ],
-    "Tags": [
-      "Patients"
-    ],
-    "EndpointName": "UpdatePatient"
-  },
-  {
-    "ContainingType": "CarePlus.Api.Endpoints.PatientEndpoints",
-    "Method": "DeleteAsync",
-    "RelativePath": "api/patients/{id:guid}",
-    "HttpMethod": "DELETE",
-    "IsController": false,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 204
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 404
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 400
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/problem\u002Bjson"
-        ],
-        "StatusCode": 500
-      }
-    ],
-    "Tags": [
-      "Patients"
-    ],
-    "EndpointName": "DeletePatient"
-  },
-  {
-    "ContainingType": "CarePlus.Api.Endpoints.PatientEndpoints",
-    "Method": "SearchCountriesAsync",
-    "RelativePath": "api/patients/countries",
-    "HttpMethod": "GET",
-    "IsController": false,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "search",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IReadOnlyList\u00601[[CarePlus.Application.DTOs.Countries.CountryResponse, CarePlus.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 200
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/problem\u002Bjson"
-        ],
-        "StatusCode": 500
-      }
-    ],
-    "Tags": [
-      "Patients"
-    ],
-    "EndpointName": "SearchPatientCountries"
-  },
-  {
-    "ContainingType": "CarePlus.Api.Endpoints.PatientEndpoints",
-    "Method": "RegisterAsync",
-    "RelativePath": "api/patients/register",
-    "HttpMethod": "POST",
-    "IsController": false,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "CarePlus.Application.DTOs.Patients.RegisterPatientRequest",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "CarePlus.Application.DTOs.Patients.PatientResponse",
-        "MediaTypes": [
-          "application/json"
-        ],
-        "StatusCode": 201
-      },
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 400
-      },
-      {
-        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
-        "MediaTypes": [
-          "application/problem\u002Bjson"
-        ],
-        "StatusCode": 500
-      }
-    ],
-    "Tags": [
-      "Patients"
-    ],
-    "EndpointName": "RegisterPatient"
-  },
-  {
     "ContainingType": "CarePlus.Api.Endpoints.UserEndpoints",
     "Method": "ListAsync",
     "RelativePath": "api/users/",
@@ -1163,5 +900,481 @@
       "Billing"
     ],
     "EndpointName": "ListInsuranceProviders"
+  },
+  {
+    "ContainingType": "CarePlus.Api.Endpoints.ConsultationEndpoints",
+    "Method": "CreateAsync",
+    "RelativePath": "api/v1/consultations/",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "CarePlus.Application.DTOs.Consultations.CreateConsultationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "CarePlus.Application.DTOs.Consultations.ConsultationDetailDto",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 201
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 400
+      }
+    ],
+    "Tags": [
+      "Consultations"
+    ],
+    "EndpointName": "CreateConsultation"
+  },
+  {
+    "ContainingType": "CarePlus.Api.Endpoints.ConsultationEndpoints",
+    "Method": "GetByPatientAsync",
+    "RelativePath": "api/v1/consultations/",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "CarePlus.Application.DTOs.Consultations.PagedConsultationResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 400
+      }
+    ],
+    "Tags": [
+      "Consultations"
+    ],
+    "EndpointName": "GetConsultationsByPatient"
+  },
+  {
+    "ContainingType": "CarePlus.Api.Endpoints.ConsultationEndpoints",
+    "Method": "GetDetailAsync",
+    "RelativePath": "api/v1/consultations/{id:guid}",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "CarePlus.Application.DTOs.Consultations.ConsultationDetailDto",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 404
+      }
+    ],
+    "Tags": [
+      "Consultations"
+    ],
+    "EndpointName": "GetConsultationDetail"
+  },
+  {
+    "ContainingType": "CarePlus.Api.Endpoints.ConsultationEndpoints",
+    "Method": "UpdateAsync",
+    "RelativePath": "api/v1/consultations/{id:guid}",
+    "HttpMethod": "PUT",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "CarePlus.Application.DTOs.Consultations.UpdateConsultationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "CarePlus.Application.DTOs.Consultations.ConsultationDetailDto",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 404
+      }
+    ],
+    "Tags": [
+      "Consultations"
+    ],
+    "EndpointName": "UpdateConsultation"
+  },
+  {
+    "ContainingType": "CarePlus.Api.Endpoints.PatientEndpoints",
+    "Method": "ListAsync",
+    "RelativePath": "api/v1/patients/",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "search",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "gender",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "country",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "CarePlus.Api.Endpoints.PatientEndpoints\u002BPatientCollectionDto",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Patients"
+    ],
+    "EndpointName": "ListPatients"
+  },
+  {
+    "ContainingType": "CarePlus.Api.Endpoints.PatientEndpoints",
+    "Method": "GetAsync",
+    "RelativePath": "api/v1/patients/{id:guid}",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "CarePlus.Application.DTOs.Patients.PatientResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Patients"
+    ],
+    "EndpointName": "GetPatientById"
+  },
+  {
+    "ContainingType": "CarePlus.Api.Endpoints.PatientEndpoints",
+    "Method": "UpdateAsync",
+    "RelativePath": "api/v1/patients/{id:guid}",
+    "HttpMethod": "PUT",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "CarePlus.Application.DTOs.Patients.UpdatePatientRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "CarePlus.Application.DTOs.Patients.PatientResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 400
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 404
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Patients"
+    ],
+    "EndpointName": "UpdatePatient"
+  },
+  {
+    "ContainingType": "CarePlus.Api.Endpoints.PatientEndpoints",
+    "Method": "DeleteAsync",
+    "RelativePath": "api/v1/patients/{id:guid}",
+    "HttpMethod": "DELETE",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 204
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 404
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Patients"
+    ],
+    "EndpointName": "DeletePatient"
+  },
+  {
+    "ContainingType": "CarePlus.Api.Endpoints.PatientEndpoints",
+    "Method": "GetInvoicesAsync",
+    "RelativePath": "api/v1/patients/{id:guid}/invoices",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dateFrom",
+        "Type": "System.Nullable\u00601[[System.DateOnly, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "dateTo",
+        "Type": "System.Nullable\u00601[[System.DateOnly, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "CarePlus.Application.DTOs.Patients.PatientInvoiceCollectionDto",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Patients"
+    ],
+    "EndpointName": "GetPatientInvoices"
+  },
+  {
+    "ContainingType": "CarePlus.Api.Endpoints.PatientEndpoints",
+    "Method": "SearchCountriesAsync",
+    "RelativePath": "api/v1/patients/countries",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "search",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IReadOnlyList\u00601[[CarePlus.Application.DTOs.Countries.CountryResponse, CarePlus.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Patients"
+    ],
+    "EndpointName": "SearchPatientCountries"
+  },
+  {
+    "ContainingType": "CarePlus.Api.Endpoints.PatientEndpoints",
+    "Method": "RegisterAsync",
+    "RelativePath": "api/v1/patients/register",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "CarePlus.Application.DTOs.Patients.RegisterPatientRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "CarePlus.Application.DTOs.Patients.PatientResponse",
+        "MediaTypes": [
+          "application/json"
+        ],
+        "StatusCode": 201
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 500
+      }
+    ],
+    "Tags": [
+      "Patients"
+    ],
+    "EndpointName": "RegisterPatient"
   }
 ]
