@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation, inject } from '@angular/core';
 import {
   ChartComponent,
   ApexAxisChartSeries,
@@ -10,33 +10,26 @@ import {
   ApexPlotOptions,
   ApexStroke,
   ApexLegend,
-  ApexNonAxisChartSeries,
   ApexFill,
   ApexGrid,
+  ApexOptions,
   NgApexchartsModule,
 } from 'ng-apexcharts';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
-import { NgScrollbar } from 'ngx-scrollbar';
 import { MatButtonModule } from '@angular/material/button';
 import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { TodaysAppointmentComponent } from '@shared/components/todays-appointment/todays-appointment.component';
-import { TodoWidgetComponent } from '@shared/components/todo-widget/todo-widget.component';
 import { DocWelcomeCardComponent } from '@shared/components/doc-welcome-card/doc-welcome-card.component';
-import { EmpStatusComponent } from '@shared/components/emp-status/emp-status.component';
-import { AppointmentWidgetComponent } from '@shared/components/appointment-widget/appointment-widget.component';
 import { MiniCalendarComponent } from '@shared/components/mini-calendar/mini-calendar.component';
-import { ProjectHoursComponent } from '@shared/components/project-hours/project-hours.component';
 import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
-import {
-  FeedbackData,
-  FeedbackWidgetComponent,
-} from '@shared/components/feedback-widget/feedback-widget.component';
-import { EmergencyListComponent } from '@shared/components/emergency-list/emergency-list.component';
+import { AuthService } from '@core';
+import { PatientsService } from '../../patients/patients.service';
+import { AppointmentsService } from '../../appointments/appointments.service';
+import { Appointment } from '../../appointments/appointments.model';
 export type areaChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -65,24 +58,6 @@ export type linechartOptions = {
   colors: string[];
 };
 
-export type radialChartOptions = {
-  series: ApexNonAxisChartSeries;
-  chart: ApexChart;
-  labels: string[];
-  colors: string[];
-  plotOptions: ApexPlotOptions;
-};
-
-export type chartOptions = {
-  series: ApexNonAxisChartSeries;
-  chart: ApexChart;
-  plotOptions: ApexPlotOptions;
-  labels: string[];
-  fill: ApexFill;
-  stroke: ApexStroke;
-  colors: string[];
-};
-
 export type donutChartOptions = {
   series: number[];
   chart: ApexChart;
@@ -91,25 +66,6 @@ export type donutChartOptions = {
   legend: ApexLegend;
   dataLabels: ApexDataLabels;
 };
-
-interface Todo {
-  title: string;
-  done: boolean;
-  priority: 'Low' | 'Normal' | 'High';
-}
-
-// Surgery interface
-interface Surgery {
-  patientName: string;
-  patientId: string;
-  patientImg: string;
-  surgeryType: string;
-  date: string;
-  time: string;
-  doctor: string;
-  status: string;
-  statusClass: string;
-}
 
 @Component({
   selector: 'app-dashboard',
@@ -123,205 +79,87 @@ interface Surgery {
     MatCardModule,
     MatMenuModule,
     CommonModule,
-    NgScrollbar,
     MatIconModule,
-    MatTableModule,
     MatCheckboxModule,
     MatTooltipModule,
     TodaysAppointmentComponent,
-    TodoWidgetComponent,
     DocWelcomeCardComponent,
-    EmpStatusComponent,
-    AppointmentWidgetComponent,
     MiniCalendarComponent,
-    ProjectHoursComponent,
-    FeedbackWidgetComponent,
-    EmergencyListComponent,
   ],
 })
 export class DashboardComponent implements OnInit {
   @ViewChild('chart')
   chart!: ChartComponent;
   public areaChartOptions!: Partial<areaChartOptions>;
-  public radialChartOptions!: Partial<radialChartOptions>;
   public linechartOptions!: Partial<linechartOptions>;
-  public chartOptions!: Partial<chartOptions>;
   public performanceChartOptions!: Partial<linechartOptions>;
-  public revenueChartOptions!: Partial<areaChartOptions>;
+  public revenueChartOptions!: Partial<ApexOptions>;
   public appointmentsChartOptions!: Partial<donutChartOptions>;
+  confirmedAppointmentsCount = 0;
+  appointmentStatusBreakdown: Array<{ status: string; count: number }> = [];
+  todayInsuranceTotal = 0;
+  todayCashTotal = 0;
+  todayRevenueTotal = 0;
+  doctorName = '';
+  doctorSpecialty = '';
+  patientCount = 0;
+  calendarAppointments: Appointment[] = [];
+  todayAppointments: Appointment[] = [];
+
+  private readonly appointmentsService = inject(AppointmentsService);
+  private revenueEntries: Array<{
+    amount: number;
+    date: string;
+    hasInsurance: boolean;
+  }> = [
+    {
+      amount: 1250,
+      date: new Date().toISOString(),
+      hasInsurance: true,
+    },
+    {
+      amount: 600,
+      date: new Date().toISOString(),
+      hasInsurance: false,
+    },
+    {
+      amount: 900,
+      date: new Date().toISOString(),
+      hasInsurance: true,
+    },
+    {
+      amount: 400,
+      date: new Date().toISOString(),
+      hasInsurance: false,
+    },
+    // Older entry to ensure only today's items are counted
+    {
+      amount: 700,
+      date: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+      hasInsurance: true,
+    },
+  ];
+  private readonly auth = inject(AuthService);
+  private readonly patientsService = inject(PatientsService);
+
   constructor() {}
 
   ngOnInit() {
     this.chart1();
-    this.chart2();
     this.chart3();
-    this.chart4();
+    this.doctorName = this.auth.currentUserValue?.name ?? 'Doctor';
+    this.doctorSpecialty =
+      this.auth.currentUserValue?.roles?.[0]?.name ?? 'Medical Specialist';
+    this.computeAppointmentStatusCounts();
     this.initAppointmentsChart();
+    this.computeTodayRevenueTotals();
     this.initPerformanceChart();
     this.initRevenueChart();
+    this.fetchPatientCount();
+    this.fetchCalendarAppointments();
   }
 
-  // Surgery table columns
-  surgeryDisplayedColumns: string[] = [
-    'patient',
-    'surgeryType',
-    'date',
-    'doctor',
-    'status',
-  ];
-
-  // Upcoming surgeries data
-  upcomingSurgeries: Surgery[] = [
-    {
-      patientName: 'John Smith',
-      patientId: 'PT-0025',
-      patientImg: 'assets/images/user/user1.jpg',
-      surgeryType: 'Cardiac Bypass',
-      date: '15 June 2024',
-      time: '09:00-11:30',
-      doctor: 'Dr. Sarah Johnson',
-      status: 'Scheduled',
-      statusClass: 'status-scheduled',
-    },
-    {
-      patientName: 'Emily Davis',
-      patientId: 'PT-0078',
-      patientImg: 'assets/images/user/user2.jpg',
-      surgeryType: 'Appendectomy',
-      date: '15 June 2024',
-      time: '13:00-14:30',
-      doctor: 'Dr. Michael Chen',
-      status: 'Urgent',
-      statusClass: 'status-urgent',
-    },
-    {
-      patientName: 'Robert Wilson',
-      patientId: 'PT-0036',
-      patientImg: 'assets/images/user/user3.jpg',
-      surgeryType: 'Knee Replacement',
-      date: '16 June 2024',
-      time: '10:00-12:30',
-      doctor: 'Dr. James Miller',
-      status: 'Scheduled',
-      statusClass: 'status-scheduled',
-    },
-    {
-      patientName: 'Maria Garcia',
-      patientId: 'PT-0042',
-      patientImg: 'assets/images/user/user4.jpg',
-      surgeryType: 'Cataract Removal',
-      date: '16 June 2024',
-      time: '14:00-15:00',
-      doctor: 'Dr. Lisa Wong',
-      status: 'Delayed',
-      statusClass: 'status-delayed',
-    },
-    {
-      patientName: 'Daniel Thompson',
-      patientId: 'PT-0084',
-      patientImg: 'assets/images/user/user5.jpg',
-      surgeryType: 'Hip Replacement',
-      date: '17 June 2024',
-      time: '08:30-11:00',
-      doctor: 'Dr. Angela Roberts',
-      status: 'Scheduled',
-      statusClass: 'status-scheduled',
-    },
-    {
-      patientName: 'Sophia Martinez',
-      patientId: 'PT-0092',
-      patientImg: 'assets/images/user/user6.jpg',
-      surgeryType: 'Tonsillectomy',
-      date: '17 June 2024',
-      time: '12:00-13:00',
-      doctor: 'Dr. Kevin Patel',
-      status: 'Urgent',
-      statusClass: 'status-urgent',
-    },
-    {
-      patientName: 'William Anderson',
-      patientId: 'PT-0067',
-      patientImg: 'assets/images/user/user7.jpg',
-      surgeryType: 'Spinal Fusion',
-      date: '18 June 2024',
-      time: '09:00-12:00',
-      doctor: 'Dr. Rachel Green',
-      status: 'Scheduled',
-      statusClass: 'status-scheduled',
-    },
-    {
-      patientName: 'Olivia Brown',
-      patientId: 'PT-0055',
-      patientImg: 'assets/images/user/user8.jpg',
-      surgeryType: 'Gallbladder Removal',
-      date: '18 June 2024',
-      time: '13:30-15:00',
-      doctor: 'Dr. Henry Liu',
-      status: 'Delayed',
-      statusClass: 'status-delayed',
-    },
-    {
-      patientName: 'Liam Walker',
-      patientId: 'PT-0101',
-      patientImg: 'assets/images/user/user9.jpg',
-      surgeryType: 'Hernia Repair',
-      date: '19 June 2024',
-      time: '10:00-11:30',
-      doctor: 'Dr. Emily Turner',
-      status: 'Scheduled',
-      statusClass: 'status-scheduled',
-    },
-  ];
-
   // TODO start
-  tasks: Todo[] = [
-    { title: 'Review patient charts', done: false, priority: 'High' },
-    { title: 'Complete patient prescriptions', done: false, priority: 'High' },
-    {
-      title: 'Follow-up with patients for test results',
-      done: false,
-      priority: 'Normal',
-    },
-    {
-      title: 'Consult with specialists on patient cases',
-      done: false,
-      priority: 'High',
-    },
-    { title: 'Organize medical supplies', done: false, priority: 'Low' },
-    {
-      title: 'Check and update patient schedules',
-      done: false,
-      priority: 'High',
-    },
-    {
-      title: 'Prepare for medical conference',
-      done: false,
-      priority: 'Normal',
-    },
-    {
-      title: 'Answer patient queries via email or phone',
-      done: false,
-      priority: 'Normal',
-    },
-    { title: 'Attend medical staff meeting', done: false, priority: 'High' },
-    {
-      title: 'Update medical records for patients',
-      done: false,
-      priority: 'High',
-    },
-    {
-      title: 'Plan continuing medical education (CME)',
-      done: false,
-      priority: 'Low',
-    },
-    { title: 'Review latest medical research', done: false, priority: 'Low' },
-    {
-      title: 'Check in with medical assistant/nurses',
-      done: false,
-      priority: 'Normal',
-    },
-    { title: 'Schedule surgery or procedures', done: false, priority: 'High' },
-  ];
 
   onTodoToggled(todo: any) {
     console.log('Todo toggled:', todo);
@@ -395,37 +233,6 @@ export class DashboardComponent implements OnInit {
       },
     };
   }
-  private chart2() {
-    this.radialChartOptions = {
-      series: [44, 55, 67],
-      chart: {
-        height: 280,
-        type: 'radialBar',
-      },
-      plotOptions: {
-        radialBar: {
-          dataLabels: {
-            name: {
-              fontSize: '22px',
-            },
-            value: {
-              fontSize: '16px',
-            },
-            total: {
-              show: true,
-              label: 'Total',
-              formatter: function () {
-                return '249';
-              },
-            },
-          },
-        },
-      },
-      colors: ['#ffc107', '#3f51b5', '#8bc34a'],
-
-      labels: ['Face TO Face', 'E-Consult', 'Available'],
-    };
-  }
   private chart3() {
     this.linechartOptions = {
       series: [
@@ -494,57 +301,19 @@ export class DashboardComponent implements OnInit {
     };
   }
 
-  private chart4() {
-    this.chartOptions = {
-      series: [60],
-      chart: {
-        type: 'radialBar',
-        height: 80,
-        width: 80,
-        sparkline: {
-          enabled: true,
-        },
-      },
-      plotOptions: {
-        radialBar: {
-          hollow: {
-            size: '50%',
-          },
-          dataLabels: {
-            show: true,
-            name: {
-              show: false, // Hide the name (e.g., "Patients")
-            },
-            value: {
-              show: true, // Show the number (e.g., 60)
-              fontSize: '16px',
-              fontWeight: 600,
-              color: '#FF4D4F',
-              offsetY: 5,
-            },
-          },
-        },
-      },
-      fill: {
-        type: 'solid',
-      },
-      stroke: {
-        lineCap: 'round',
-      },
-      labels: [''],
-      colors: ['#FF4D4F'],
-    };
-  }
-
   private initAppointmentsChart() {
+    const breakdown = this.appointmentStatusBreakdown.length
+      ? this.appointmentStatusBreakdown
+      : [{ status: 'Scheduled', count: 0 }];
+
     this.appointmentsChartOptions = {
-      series: [28, 24, 4],
+      series: breakdown.map((item) => item.count),
       chart: {
         type: 'donut',
         height: 130,
       },
-      labels: ['Scheduled', 'Completed', 'Cancelled'],
-      colors: ['#42A5F5', '#66BB6A', '#EF5350'],
+      labels: breakdown.map((item) => item.status),
+      colors: breakdown.map((item) => this.getStatusColor(item.status)),
       legend: {
         show: false,
       },
@@ -598,124 +367,167 @@ export class DashboardComponent implements OnInit {
     this.revenueChartOptions = {
       series: [
         {
-          name: 'Walk-ins',
-          data: [31, 40, 28, 51, 42, 40, 30],
+          name: 'Con seguro',
+          data: [this.todayInsuranceTotal],
         },
         {
-          name: 'Follow-ups',
-          data: [25, 32, 30, 35, 40, 25, 30],
-        },
-        {
-          name: 'Online Consults',
-          data: [15, 25, 20, 25, 30, 20, 15],
+          name: 'Sin seguro',
+          data: [this.todayCashTotal],
         },
       ],
       chart: {
-        height: 120,
-        type: 'area',
+        height: 140,
+        type: 'bar',
+        stacked: true,
         toolbar: {
           show: false,
         },
-        sparkline: {
-          enabled: true,
+      },
+      plotOptions: {
+        bar: {
+          columnWidth: '45%',
+          borderRadius: 3,
         },
       },
-      colors: ['#4CAF50', '#2196F3', '#9C27B0'],
+      colors: ['#4CAF50', '#2196F3'],
+      dataLabels: {
+        enabled: true,
+        formatter: (val: number) => `$${Math.round(val)}`,
+        style: {
+          colors: ['#fff'],
+        },
+      },
       stroke: {
-        curve: 'smooth',
-        width: 2,
+        show: true,
+        width: 1,
+        colors: ['#fff'],
       },
       xaxis: {
-        categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        categories: ['Hoy'],
         labels: {
           show: false,
         },
+        axisBorder: {
+          show: false,
+        },
+        axisTicks: {
+          show: false,
+        },
+      },
+      yaxis: {
+        show: false,
+      },
+      legend: {
+        show: false,
+      },
+      grid: {
+        show: false,
       },
     };
   }
-  // appointment list
-  appointmentList = [
-    {
-      name: 'Cara Stevens',
-      diseases: 'Fever',
-      date: "12 June '20",
-      time: '09:00-10:00',
-      imageUrl: 'assets/images/user/user21.jpg',
-    },
-    {
-      name: 'Airi Satou',
-      diseases: 'Cholera',
-      date: "13 June '20",
-      time: '11:00-12:00',
-      imageUrl: 'assets/images/user/user12.jpg',
-    },
-    {
-      name: 'Jens Brincker',
-      diseases: 'Jaundice',
-      date: "15 June '20",
-      time: '09:30-10:30',
-      imageUrl: 'assets/images/user/user13.jpg',
-    },
-    {
-      name: 'Angelica Ramos',
-      diseases: 'Typhoid',
-      date: "16 June '20",
-      time: '14:00-15:00',
-      imageUrl: 'assets/images/user/user14.jpg',
-    },
-    {
-      name: 'Cara Stevens',
-      diseases: 'Malaria',
-      date: "18 June '20",
-      time: '11:00-12:30',
-      imageUrl: 'assets/images/user/user15.jpg',
-    },
-    {
-      name: 'Jacob Ryan',
-      diseases: 'Infection',
-      date: "22 June '20",
-      time: '13:00-14:15',
-      imageUrl: 'assets/images/user/user16.jpg',
-    },
-  ];
 
-  patientFeedback: FeedbackData = {
-    score: 4.8,
-    series: [68, 24, 8],
-    labels: ['Excellent', 'Good', 'Poor'],
-    colors: ['#4CAF50', '#FFC107', '#F44336'],
-  };
+  private computeTodayRevenueTotals(): void {
+    const now = new Date();
+    const isSameDay = (date: Date) =>
+      date.getFullYear() === now.getFullYear() &&
+      date.getMonth() === now.getMonth() &&
+      date.getDate() === now.getDate();
 
-  emergencyCases = [
-    {
-      patientName: 'John Doe',
-      caseType: 'critical',
-      caseDescription: 'Cardiac Arrest',
-      timeAgo: '10 min ago',
-    },
-    {
-      patientName: 'Sarah Smith',
-      caseType: 'urgent',
-      caseDescription: 'Severe Trauma',
-      timeAgo: '25 min ago',
-    },
-    {
-      patientName: 'Mike Johnson',
-      caseType: 'critical',
-      caseDescription: 'Stroke',
-      timeAgo: '45 min ago',
-    },
-    {
-      patientName: 'Emily Davis',
-      caseType: 'urgent',
-      caseDescription: 'Severe Burns',
-      timeAgo: '1 hr ago',
-    },
-    {
-      patientName: 'David Wilson',
-      caseType: 'critical',
-      caseDescription: 'Multiple Fractures',
-      timeAgo: '1 hr 20 min ago',
-    },
-  ];
+    const todaysEntries = this.revenueEntries.filter((entry) =>
+      isSameDay(new Date(entry.date))
+    );
+
+    this.todayInsuranceTotal = todaysEntries
+      .filter((entry) => entry.hasInsurance)
+      .reduce((sum, entry) => sum + entry.amount, 0);
+
+    this.todayCashTotal = todaysEntries
+      .filter((entry) => !entry.hasInsurance)
+      .reduce((sum, entry) => sum + entry.amount, 0);
+
+    this.todayRevenueTotal = this.todayInsuranceTotal + this.todayCashTotal;
+  }
+
+  private fetchPatientCount(): void {
+    this.patientsService
+      .getPatients(1, 1)
+      .subscribe({
+        next: (collection) => {
+          this.patientCount = collection.totalCount ?? 0;
+        },
+        error: () => {
+          this.patientCount = 0;
+        },
+      });
+  }
+
+  private fetchCalendarAppointments(): void {
+    const now = new Date();
+    const startOfMonth = new Date(Date.UTC(now.getFullYear(), now.getMonth(), 1)).toISOString();
+    const endOfMonth = new Date(
+      Date.UTC(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59)
+    ).toISOString();
+
+    this.appointmentsService.getAppointmentsForRange(startOfMonth, endOfMonth).subscribe({
+      next: (appointments) => {
+        this.calendarAppointments = appointments ?? [];
+        this.computeAppointmentStatusCounts();
+        this.confirmedAppointmentsCount = this.calendarAppointments.filter(
+          (appointment) => appointment.status?.toString().toLowerCase() === 'confirmed'
+        ).length;
+        this.initAppointmentsChart();
+        this.todayAppointments = (appointments ?? []).filter((appt) => {
+          const date = new Date(appt.startsAtUtc);
+          const today = new Date();
+          return (
+            date.getFullYear() === today.getFullYear() &&
+            date.getMonth() === today.getMonth() &&
+            date.getDate() === today.getDate()
+          );
+        });
+      },
+      error: () => {
+        this.calendarAppointments = [];
+        this.todayAppointments = [];
+        this.appointmentStatusBreakdown = [];
+        this.confirmedAppointmentsCount = 0;
+        this.initAppointmentsChart();
+      },
+    });
+  }
+
+  private computeAppointmentStatusCounts(): void {
+    const statusOrder = ['Scheduled', 'Confirmed', 'Completed', 'Cancelled', 'NoShow'];
+    const counts = new Map<string, number>();
+
+    this.calendarAppointments.forEach((appointment) => {
+      const status = appointment.status?.toString() ?? 'Scheduled';
+      counts.set(status, (counts.get(status) ?? 0) + 1);
+    });
+
+    this.appointmentStatusBreakdown = statusOrder
+      .map((status) => ({
+        status,
+        count: counts.get(status) ?? 0,
+      }))
+      .filter((item) => item.count > 0);
+  }
+
+  getStatusColor(status: string): string {
+    switch (status) {
+      case 'Scheduled':
+        return '#42A5F5';
+      case 'Confirmed':
+        return '#9C27B0';
+      case 'Completed':
+        return '#66BB6A';
+      case 'Cancelled':
+        return '#EF5350';
+      case 'NoShow':
+        return '#FFA726';
+      default:
+        return '#78909C';
+    }
+  }
+
 }

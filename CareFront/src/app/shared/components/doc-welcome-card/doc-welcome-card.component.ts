@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
+import { AuthService } from '@core';
 
 @Component({
     selector: 'app-doc-welcome-card',
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
     styleUrl: './doc-welcome-card.component.scss'
 })
 export class DocWelcomeCardComponent {
-
+    private readonly auth = inject(AuthService);
+    readonly displayName = this.auth.currentUserValue?.name ?? 'Doctor';
+    @Input() appointmentsCount = 0;
 }

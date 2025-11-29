@@ -17,6 +17,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
@@ -55,6 +57,8 @@ interface AppointmentQueryState {
   pageSize: number;
   search?: string;
   status?: AppointmentStatus | 'ALL';
+  fromDate?: Date | null;
+  toDate?: Date | null;
 }
 
 @Component({
@@ -76,6 +80,8 @@ interface AppointmentQueryState {
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     DatePipe,
     RouterModule,
   ],
@@ -92,6 +98,8 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
   readonly statusControl = new FormControl<AppointmentStatus | 'ALL'>('ALL', {
     nonNullable: true,
   });
+  readonly fromDateControl = new FormControl<Date | null>(null);
+  readonly toDateControl = new FormControl<Date | null>(null);
 
   readonly tenants =
     Array.isArray(environment.tenants) && environment.tenants.length > 0
@@ -151,12 +159,15 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
     pageSize: 10,
     status: 'ALL',
     search: '',
+    fromDate: null,
+    toDate: null,
   };
 
   ngOnInit(): void {
     this.watchSearchChanges();
     this.watchStatusChanges();
     this.watchTenantChanges();
+    this.watchDateChanges();
     this.loadAppointments(1);
   }
 
@@ -350,12 +361,18 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
       .searchAppointments(page, this.currentQuery.pageSize, {
         search: this.currentQuery.search,
         status: this.currentQuery.status,
+        fromUtc: this.toIsoOrNull(this.currentQuery.fromDate),
+        toUtc: this.toIsoOrNull(this.currentQuery.toDate),
         tenantId,
       })
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (collection: AppointmentCollection) => {
-          this.appointments.set(collection.nodes);
+          const sorted = [...collection.nodes].sort(
+            (a, b) =>
+              new Date(b.startsAtUtc).getTime() - new Date(a.startsAtUtc).getTime()
+          );
+          this.appointments.set(sorted);
           this.totalCount.set(collection.totalCount);
           this.page.set(collection.page);
           this.pageSize.set(collection.pageSize);
@@ -397,6 +414,30 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
         this.currentQuery = {
           ...this.currentQuery,
           page: 1,
+        };
+        this.loadAppointments(1);
+      });
+  }
+
+  private watchDateChanges(): void {
+    this.fromDateControl.valueChanges
+      .pipe(distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.currentQuery = {
+          ...this.currentQuery,
+          page: 1,
+          fromDate: value,
+        };
+        this.loadAppointments(1);
+      });
+
+    this.toDateControl.valueChanges
+      .pipe(distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.currentQuery = {
+          ...this.currentQuery,
+          page: 1,
+          toDate: value,
         };
         this.loadAppointments(1);
       });
@@ -447,5 +488,12 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
       return status === 2;
     }
     return status.toString().toLowerCase() === 'completed';
+  }
+
+  private toIsoOrNull(date: Date | null | undefined): string | null {
+    if (!date) {
+      return null;
+    }
+    return new Date(date).toISOString();
   }
 }

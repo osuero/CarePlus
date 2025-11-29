@@ -58,6 +58,7 @@ export class HeaderComponent
 {
   public config!: InConfiguration;
   userImg?: string;
+  userName = '';
   homePage?: string;
   isNavbarCollapsed = true;
   flagvalue: string | string[] | undefined;
@@ -147,9 +148,10 @@ export class HeaderComponent
   ];
   ngOnInit() {
     this.config = this.configService.configData;
-    const userRole = this.authService.currentUserValue.roles?.[0]?.name;
-    this.userImg =
-      './assets/images/user/' + this.authService.currentUserValue.avatar;
+    const user = this.authService.currentUserValue;
+    const userRole = user.roles?.[0]?.name;
+    this.userImg = './assets/images/user/' + user.avatar;
+    this.userName = user.name ?? '';
     this.docElement = document.documentElement;
 
     if (userRole === Role.Admin) {

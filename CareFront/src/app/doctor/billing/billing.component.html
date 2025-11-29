@@ -149,17 +149,11 @@
                       <div class="text-strong">
                         {{ billing.patientName || ('APPOINTMENTS.BILLING.TABLE.UNASSIGNED' | translate) }}
                       </div>
-                      <span class="text-muted" *ngIf="billing.patientId">
-                        ID: {{ billing.patientId }}
-                      </span>
                     </td>
                     <td>
                       <div class="text-strong">
                         {{ billing.doctorName || ('APPOINTMENTS.BILLING.TABLE.UNASSIGNED' | translate) }}
                       </div>
-                      <span class="text-muted" *ngIf="billing.doctorId">
-                        ID: {{ billing.doctorId }}
-                      </span>
                     </td>
                     <td>
                       <div>{{ billing.appointmentStartsAtUtc | date: 'medium' }}</div>

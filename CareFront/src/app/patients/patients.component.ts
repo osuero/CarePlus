@@ -52,7 +52,7 @@ export class PatientsComponent implements OnInit, OnDestroy {
   });
   readonly firstNameControl = new FormControl<string>('', { nonNullable: true });
   readonly lastNameControl = new FormControl<string>('', { nonNullable: true });
-  readonly dateControl = new FormControl<string>('', { nonNullable: true });
+  readonly emailControl = new FormControl<string>('', { nonNullable: true });
 
   patients: Patient[] = [];
 
@@ -286,22 +286,30 @@ export class PatientsComponent implements OnInit, OnDestroy {
         this.loadPatients(1);
       });
 
-    this.dateControl.valueChanges
+    this.emailControl.valueChanges
       .pipe(debounceTime(400), distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe(() => {
         this.loadPatients(1);
       });
+
   }
 
   private loadPatients(page: number): void {
-    const search = this.searchControl.value?.trim() || null;
+    const searchTerms = [
+      this.searchControl.value?.trim(),
+      this.identificationControl.value?.trim(),
+      this.firstNameControl.value?.trim(),
+      this.lastNameControl.value?.trim(),
+      this.emailControl.value?.trim(),
+    ]
+      .filter((term) => term && term.length > 0)
+      .join(' ')
+      .trim();
+
+    const search = searchTerms.length > 0 ? searchTerms : null;
     const genderSelection = this.genderControl.value;
     const gender = genderSelection === 'ALL' ? null : genderSelection;
     const country = this.countryControl.value?.trim() || null;
-    const identification = this.identificationControl.value?.trim() || null;
-    const firstName = this.firstNameControl.value?.trim() || null;
-    const lastName = this.lastNameControl.value?.trim() || null;
-    const createdDate = this.dateControl.value || null;
 
     this.loadingPatients = true;
 
@@ -311,11 +319,7 @@ export class PatientsComponent implements OnInit, OnDestroy {
         this.pageSize,
         search,
         gender,
-        country,
-        identification,
-        firstName,
-        lastName,
-        createdDate
+        country
       )
       .pipe(
         takeUntil(this.destroy$),

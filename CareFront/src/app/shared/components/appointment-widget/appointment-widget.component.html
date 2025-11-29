@@ -4,7 +4,9 @@
     <img alt="image" class="msr-3 rounded-circle" width="40" [src]="appointment.imageUrl">
     <div class="">
       <div class="media-title font-14 font-b-500">{{ appointment.name }}</div>
-      <div class="text-job text-muted mb-0 font-12">{{ appointment.diseases }}</div>
+      <div class="text-job text-muted mb-0 font-12">
+        Confirmadas: {{ totalConfirmed }}
+      </div>
     </div>
     <div class="ms-auto">
       <div class="media-title font-14 font-b-500">{{ appointment.date }}</div>

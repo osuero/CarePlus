@@ -340,7 +340,11 @@
       "NO_COUNTRY": "Not specified",
       "NO_DOCTOR": "No doctor assigned",
       "PREVIOUS": "Previous",
-      "NEXT": "Next"
+      "NEXT": "Next",
+      "ID_FILTER": "ID number",
+      "NAME_FILTER": "First name",
+      "LASTNAME_FILTER": "Last name",
+      "EMAIL_FILTER": "Email"
     },
     "FORM": {
       "TITLE": "Register patient",
@@ -447,9 +451,11 @@
       }
     },
     "FILTERS": {
-      "SEARCH": "Search appointments",
+      "SEARCH": "Search by name",
       "STATUS": "Status",
-      "TENANT": "Tenant"
+      "TENANT": "Tenant",
+      "FROM": "From date",
+      "TO": "To date"
     },
     "ACTIONS": {
       "NEW": "New appointment",

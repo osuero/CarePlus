@@ -170,8 +170,8 @@ export class SidebarComponent
   private filterRoutesForDoctor(routes: RouteInfo[]): RouteInfo[] {
     const allowedPaths = new Set([
       '/doctor/appointments',
-      '/doctor/patient-registration',
       '/doctor/billing',
+      '/patients',
     ]);
 
     const filterRecursive = (items: RouteInfo[]): RouteInfo[] =>

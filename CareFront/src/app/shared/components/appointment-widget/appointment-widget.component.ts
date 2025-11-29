@@ -6,6 +6,7 @@ interface Appointment {
   date: string;
   time: string;
   imageUrl: string;
+  status?: string;
 }
 
 @Component({
@@ -16,4 +17,18 @@ interface Appointment {
 })
 export class AppointmentWidgetComponent {
   readonly appointments = input<Appointment[]>([]);
+  readonly confirmedCount = input<number | null>(null);
+
+  get totalConfirmed(): number {
+    const provided = this.confirmedCount();
+    if (provided !== null && provided !== undefined) {
+      return provided;
+    }
+
+    const fromStatuses = this.appointments().filter((a) =>
+      a.status?.toLowerCase() === 'confirmed'
+    ).length;
+
+    return fromStatuses > 0 ? fromStatuses : this.appointments().length;
+  }
 }

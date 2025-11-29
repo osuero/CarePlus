@@ -36,6 +36,30 @@
                 </mat-select>
               </mat-form-field>
 
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'APPOINTMENTS.FILTERS.FROM' | translate }}</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="fromPicker"
+                  [formControl]="fromDateControl"
+                  placeholder="yyyy-mm-dd"
+                />
+                <mat-datepicker-toggle matIconSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                <mat-datepicker #fromPicker></mat-datepicker>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>{{ 'APPOINTMENTS.FILTERS.TO' | translate }}</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="toPicker"
+                  [formControl]="toDateControl"
+                  placeholder="yyyy-mm-dd"
+                />
+                <mat-datepicker-toggle matIconSuffix [for]="toPicker"></mat-datepicker-toggle>
+                <mat-datepicker #toPicker></mat-datepicker>
+              </mat-form-field>
+
               <mat-form-field *ngIf="tenants && tenants.length > 1" appearance="outline">
                 <mat-label>{{ 'APPOINTMENTS.FILTERS.TENANT' | translate }}</mat-label>
                 <mat-select [formControl]="tenantControl">

@@ -68,10 +68,6 @@ export class PatientsService {
     search?: string | null,
     gender?: string | null,
     country?: string | null,
-    identification?: string | null,
-    firstName?: string | null,
-    lastName?: string | null,
-    createdDate?: string | null,
     tenantId: string = this.defaultTenant
   ): Observable<PatientCollection> {
     const query = `
@@ -80,22 +76,14 @@ export class PatientsService {
         $pageSize: Int!,
         $search: String,
         $gender: String,
-        $country: String,
-        $identification: String,
-        $firstName: String,
-        $lastName: String,
-        $createdDate: String
+        $country: String
       ) {
         getPatients(
           page: $page,
           pageSize: $pageSize,
           search: $search,
           gender: $gender,
-          country: $country,
-          identification: $identification,
-          firstName: $firstName,
-          lastName: $lastName,
-          createdDate: $createdDate
+          country: $country
         ) {
           nodes {
             id
@@ -130,10 +118,6 @@ export class PatientsService {
       search: search?.trim() || null,
       gender: gender?.trim() || null,
       country: country?.trim() || null,
-      identification: identification?.trim() || null,
-      firstName: firstName?.trim() || null,
-      lastName: lastName?.trim() || null,
-      createdDate: createdDate?.trim() || null,
     };
 
     return this.http

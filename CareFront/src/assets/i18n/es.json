@@ -340,7 +340,11 @@
       "NO_COUNTRY": "No definido",
       "NO_DOCTOR": "Sin doctor asignado",
       "PREVIOUS": "Anterior",
-      "NEXT": "Siguiente"
+      "NEXT": "Siguiente",
+      "ID_FILTER": "Cédula",
+      "NAME_FILTER": "Nombre",
+      "LASTNAME_FILTER": "Apellido",
+      "EMAIL_FILTER": "Correo electrónico"
     },
     "FORM": {
       "TITLE": "Registrar paciente",
@@ -447,9 +451,11 @@
       }
     },
     "FILTERS": {
-      "SEARCH": "Buscar citas",
+      "SEARCH": "Buscar por nombre",
       "STATUS": "Estado",
-      "TENANT": "Tenant"
+      "TENANT": "Tenant",
+      "FROM": "Desde",
+      "TO": "Hasta"
     },
     "ACTIONS": {
       "NEW": "Nueva cita",

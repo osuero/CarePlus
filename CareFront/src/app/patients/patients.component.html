@@ -106,7 +106,7 @@
             <input
               type="text"
               class="form-control"
-              placeholder="Cedula"
+              placeholder="{{ 'PATIENTS.TABLE.ID_FILTER' | translate }}"
               [formControl]="identificationControl"
               autocomplete="off"
             />
@@ -115,7 +115,7 @@
             <input
               type="text"
               class="form-control"
-              placeholder="Nombre"
+              placeholder="{{ 'PATIENTS.TABLE.NAME_FILTER' | translate }}"
               [formControl]="firstNameControl"
               autocomplete="off"
             />
@@ -124,16 +124,18 @@
             <input
               type="text"
               class="form-control"
-              placeholder="Apellido"
+              placeholder="{{ 'PATIENTS.TABLE.LASTNAME_FILTER' | translate }}"
               [formControl]="lastNameControl"
               autocomplete="off"
             />
           </div>
           <div class="col-lg-3">
             <input
-              type="date"
+              type="text"
               class="form-control"
-              [formControl]="dateControl"
+              placeholder="{{ 'PATIENTS.TABLE.EMAIL_FILTER' | translate }}"
+              [formControl]="emailControl"
+              autocomplete="off"
             />
           </div>
         </div>

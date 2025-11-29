@@ -3,13 +3,16 @@ import {
   Component,
   ChangeDetectorRef,
   ViewChild,
-  ElementRef,
   ViewEncapsulation,
   AfterViewChecked,
+  Input,
+  OnChanges,
+  SimpleChanges,
 } from '@angular/core';
 import { MatCalendar, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
+import { Appointment } from '../../../appointments/appointments.model';
 
 @Component({
   selector: 'app-mini-calendar',
@@ -19,51 +22,17 @@ import { MatCardModule } from '@angular/material/card';
   standalone: true,
   encapsulation: ViewEncapsulation.None,
 })
-export class MiniCalendarComponent implements AfterViewInit, AfterViewChecked {
+export class MiniCalendarComponent
+  implements AfterViewInit, AfterViewChecked, OnChanges
+{
   @ViewChild(MatCalendar) calendar!: MatCalendar<Date>;
+  @Input() appointments: Appointment[] = [];
   selectedDate: Date | null = null;
 
   // Event data - using current date format
   eventMap = new Map<string, { type: string; label: string }[]>();
 
-  constructor(private cdr: ChangeDetectorRef) {
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    const currentMonth = now.getMonth(); // 0-indexed
-    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-
-    const eventTypes = [
-      { type: 'surgery', label: 'Surgery' },
-      { type: 'polyclinic', label: 'Polyclinic Visit' },
-      { type: 'evaluation', label: 'Evaluation' },
-      { type: 'follow_up', label: 'Follow-Up Appointment' },
-      { type: 'ward_round', label: 'Ward Round' },
-      { type: 'consultation', label: 'Consultation' },
-    ];
-
-    const usedDays = new Set<number>();
-
-    // Generate 10 unique random days for this month
-    while (usedDays.size < 10) {
-      const randomDay = Math.floor(Math.random() * daysInMonth) + 1;
-      usedDays.add(randomDay);
-    }
-
-    Array.from(usedDays).forEach((day) => {
-      const dateKey = this.formatDate(new Date(currentYear, currentMonth, day));
-      const numberOfEvents = Math.floor(Math.random() * 2) + 1; // 1 or 2 events
-
-      const events = Array.from({ length: numberOfEvents }).map(() => {
-        const event = eventTypes[Math.floor(Math.random() * eventTypes.length)];
-        return {
-          type: event.type,
-          label: `${event.label}`,
-        };
-      });
-
-      this.eventMap.set(dateKey, events);
-    });
-  }
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -88,6 +57,34 @@ export class MiniCalendarComponent implements AfterViewInit, AfterViewChecked {
     if (existingDots.length === 0) {
       this.injectDots();
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['appointments']) {
+      this.buildEventMap();
+      setTimeout(() => this.injectDots(), 50);
+    }
+  }
+
+  private buildEventMap(): void {
+    this.eventMap.clear();
+    this.appointments.forEach((appointment) => {
+      const key = this.formatDate(new Date(appointment.startsAtUtc));
+      const status =
+        (typeof appointment.status === 'string'
+          ? appointment.status
+          : appointment.status?.toString()) ?? 'Scheduled';
+      const label =
+        appointment.title ||
+        `${appointment.patientName ?? 'Appointment'} with ${appointment.doctorName ?? ''}`.trim();
+
+      const existing = this.eventMap.get(key) ?? [];
+      existing.push({
+        type: status.toLowerCase(),
+        label: label.length > 0 ? label : 'Appointment',
+      });
+      this.eventMap.set(key, existing);
+    });
   }
 
   injectDots() {
@@ -160,28 +157,8 @@ export class MiniCalendarComponent implements AfterViewInit, AfterViewChecked {
       `;
 
         // Set background color
-        switch (event.type) {
-          case 'surgery':
-            span.style.backgroundColor = '#4a6cf7';
-            break;
-          case 'polyclinic':
-            span.style.backgroundColor = '#e74c3c';
-            break;
-          case 'evaluation':
-            span.style.backgroundColor = '#27ae60';
-            break;
-          case 'follow_up':
-            span.style.backgroundColor = '#d40ee6ff';
-            break;
-          case 'ward_round':
-            span.style.backgroundColor = '#d8f423ff';
-            break;
-          case 'consultation':
-            span.style.backgroundColor = '#9e007eff';
-            break;
-          default:
-            span.style.backgroundColor = '#cccccc';
-        }
+        const type = event.type.toLowerCase();
+        span.style.backgroundColor = this.getStatusColor(type);
 
         // Create custom tooltip
         const tooltip = document.createElement('div') as HTMLElement;
@@ -229,5 +206,22 @@ export class MiniCalendarComponent implements AfterViewInit, AfterViewChecked {
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
+  }
+
+  private getStatusColor(status: string): string {
+    switch (status) {
+      case 'scheduled':
+        return '#42A5F5';
+      case 'confirmed':
+        return '#9C27B0';
+      case 'completed':
+        return '#66BB6A';
+      case 'cancelled':
+        return '#EF5350';
+      case 'noshow':
+        return '#FFA726';
+      default:
+        return '#cccccc';
+    }
   }
 }
