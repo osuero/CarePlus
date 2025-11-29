@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CarePlus.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+82e938109391464c8dc8a1f015d34857f709264c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8c8b45cc8f1fbf12d0dd66dd271661ef4b493f49")]
 [assembly: System.Reflection.AssemblyProductAttribute("CarePlus.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CarePlus.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
