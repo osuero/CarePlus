@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using CarePlus.Application.Interfaces.Repositories;
+using CarePlus.Application.Models;
 using CarePlus.Domain.Entities;
 using CarePlus.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -131,5 +127,25 @@ public class ConsultationRepository(ApplicationDbContext context) : IConsultatio
         return await _context.Consultations
             .Where(consultation => consultation.TenantId == tenantId && consultation.PatientId == patientId)
             .CountAsync(cancellationToken);
+    }
+
+    public Task<Consultation> AddAsync(Consultation consultation, IEnumerable<SymptomEntry> symptoms, LabRequisition? labRequisition, IEnumerable<LabRequisitionItem> labItems, Prescription? prescription, IEnumerable<PrescriptionItem> prescriptionItems, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Consultation> UpdateAsync(Consultation consultation, IEnumerable<SymptomEntry> symptoms, LabRequisition? labRequisition, IEnumerable<LabRequisitionItem> labItems, Prescription? prescription, IEnumerable<PrescriptionItem> prescriptionItems, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IReadOnlyList<Consultation>> SearchAsync(string tenantId, ConsultationSearchFilters filters, int skip, int take, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<int> CountAsync(string tenantId, ConsultationSearchFilters filters, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
     }
 }

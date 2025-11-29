@@ -1,12 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "2N7csUagP8AgjsUtSG7cF28nulP5yUBJh4GqiLy7lkc=",
-  "Source": "CarePlus.Api",
-  "BasePath": "_content/CarePlus.Api",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
-}
+{"Version":1,"Hash":"KNdHd0fEuSmq9ITRHGhpZZAeBk4yrH9LGkCOlTnouSw=","Source":"CarePlus.Api","BasePath":"/","Mode":"Root","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}

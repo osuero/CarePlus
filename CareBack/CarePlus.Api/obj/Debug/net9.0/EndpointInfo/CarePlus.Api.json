@@ -1889,6 +1889,12 @@
               "$ref": "#/components/schemas/SymptomEntryDto"
             },
             "nullable": true
+          },
+          "labRequisition": {
+            "$ref": "#/components/schemas/LabRequisitionDto"
+          },
+          "prescription": {
+            "$ref": "#/components/schemas/PrescriptionDto"
           }
         },
         "additionalProperties": false
@@ -1899,6 +1905,14 @@
           "id": {
             "type": "string",
             "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientFullName": {
+            "type": "string",
+            "nullable": true
           },
           "consultationDateTime": {
             "type": "string",
@@ -2031,6 +2045,12 @@
               "$ref": "#/components/schemas/SymptomEntryDto"
             },
             "nullable": true
+          },
+          "labRequisition": {
+            "$ref": "#/components/schemas/LabRequisitionDto"
+          },
+          "prescription": {
+            "$ref": "#/components/schemas/PrescriptionDto"
           }
         },
         "additionalProperties": false
@@ -2047,6 +2067,63 @@
             "format": "uuid"
           },
           "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LabRequisitionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "requisitionDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "notes": {
+            "maxLength": 1000,
+            "type": "string",
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LabRequisitionItemDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LabRequisitionItemDto": {
+        "required": [
+          "testName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "testName": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "testCode": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": true
+          },
+          "instructions": {
+            "maxLength": 512,
             "type": "string",
             "nullable": true
           }
@@ -2427,6 +2504,93 @@
         "type": "integer",
         "format": "int32"
       },
+      "PrescriptionDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "prescriptionDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "doctorName": {
+            "maxLength": 256,
+            "type": "string",
+            "nullable": true
+          },
+          "doctorCode": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": true
+          },
+          "medicalCenterName": {
+            "maxLength": 256,
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "maxLength": 1000,
+            "type": "string",
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PrescriptionItemDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PrescriptionItemDto": {
+        "required": [
+          "drugName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "drugName": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "dosage": {
+            "maxLength": 128,
+            "type": "string",
+            "nullable": true
+          },
+          "frequency": {
+            "maxLength": 128,
+            "type": "string",
+            "nullable": true
+          },
+          "route": {
+            "maxLength": 128,
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "maxLength": 128,
+            "type": "string",
+            "nullable": true
+          },
+          "instructions": {
+            "maxLength": 512,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ProblemDetails": {
         "type": "object",
         "properties": {
@@ -2783,6 +2947,12 @@
               "$ref": "#/components/schemas/SymptomEntryDto"
             },
             "nullable": true
+          },
+          "labRequisition": {
+            "$ref": "#/components/schemas/LabRequisitionDto"
+          },
+          "prescription": {
+            "$ref": "#/components/schemas/PrescriptionDto"
           }
         },
         "additionalProperties": false

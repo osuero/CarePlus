@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CarePlus.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b749617751d8213d512f13b0c7ee9892f4e8362e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+82e938109391464c8dc8a1f015d34857f709264c")]
 [assembly: System.Reflection.AssemblyProductAttribute("CarePlus.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CarePlus.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
